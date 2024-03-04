@@ -53,8 +53,24 @@ function renderMenu() {
             goToPage(target);
         }
     });
-}
+    Ajax.get({
+        url: '/me',
+        callback: (status, responseString) => {
+            const isAuthorized = status === 200;
 
+            if (isAuthorized) {
+                menu.state.menuElements.logout.style.display = 'block';
+                menu.state.menuElements.login.style.display = 'none';
+                menu.state.menuElements.signup.style.display = 'none';
+
+            } else {
+                menu.state.menuElements.logout.style.display = 'none';
+                menu.state.menuElements.login.style.display = 'block';
+                menu.state.menuElements.signup.style.display = 'block';
+            }
+        }
+    });
+}
 function createInput(type, text, name) {
     const input = document.createElement('input');
     input.type = type;
@@ -91,6 +107,9 @@ function renderLogin() {
             body: {password, email},
             callback: (status) => {
                 if (status === 200) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
                     goToPage(menu.state.menuElements.profile);
                     return;
                 }
@@ -127,12 +146,15 @@ function renderSignup() {
         const email = emailInput.value.trim();
         const password = passwordInput.value;
         const passw_conf = passwConfInput.value;
-
+        // menu.state.menuElements.logout.style.display = 'block';
         Ajax.post({
             url: '/signup',
             body: {password, passw_conf, email},
             callback: (status) => {
                 if (status === 201) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
                     goToPage(menu.state.menuElements.profile);
                     return;
                 }
@@ -217,18 +239,18 @@ function renderProfile() {
                 return;
             }
 
-            const {email, age, images} = JSON.parse(responseString);
+            const {email, images} = JSON.parse(responseString);
 
             const span = document.createElement('span');
-            span.textContent = `${email} ${age} лет`;
+            span.textContent = `${email}`;
             profileElement.appendChild(span);
 
             if (images && Array.isArray(images)) {
                 const div = document.createElement('div');
                 profileElement.appendChild(div);
 
-                images.forEach(({src, likes}) => {
-                    div.innerHTML += `<img src="${src}" width="500" alt=""/><div>${likes} лайков</div>`
+                images.forEach(({src}) => {
+                    div.innerHTML += `<img src="${src}" width="500" alt=""/>`
                 });
             }
         }
@@ -243,12 +265,13 @@ function renderLogout() {
     Ajax.post({
         url: '/logout',
         callback: (status, responseString) => {
-
-
             const {email} = JSON.parse(responseString);
 
             const span = document.createElement('span');
-            span.textContent = 'Вышло';
+            menu.state.menuElements.logout.style.display = 'none';
+            menu.state.menuElements.login.style.display = 'block';
+            menu.state.menuElements.signup.style.display = 'block';
+            goToPage(menu.state.menuElements.login)
             profileElement.appendChild(span);
         }
     });

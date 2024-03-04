@@ -16,7 +16,7 @@ templates['Menu.hbs'] = template({"1":function(container,depth0,helpers,partials
     + alias2(alias1((depth0 != null ? lookupProperty(depth0,"key") : depth0), depth0))
     + "\">"
     + alias2(alias1((depth0 != null ? lookupProperty(depth0,"text") : depth0), depth0))
-    + "</a>\n";
+    + "</a>\r\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
