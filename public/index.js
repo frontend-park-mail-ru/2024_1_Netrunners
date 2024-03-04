@@ -32,6 +32,11 @@ const config = {
             text: safe('Профиль'),
             render: renderProfile,
         },
+        logout: {
+            href: '/logout',
+            text: 'Выйти',
+            render: renderLogout
+        }
     }
 };
 
@@ -61,11 +66,13 @@ function createInput(type, text, name) {
 
 function renderLogin() {
     const form = document.createElement('form');
+    form.classList.add('form-section');
 
     const emailInput = createInput('email', 'Емайл', 'email');
     const passwordInput = createInput('password', 'Пароль', 'password');
 
     const submitBtn = document.createElement('input');
+    submitBtn.classList.add('submit-button');
     submitBtn.type = 'submit';
     submitBtn.value = 'Войти!';
 
@@ -98,19 +105,42 @@ function renderLogin() {
 
 function renderSignup() {
     const form = document.createElement('form');
+    form.classList.add('form-section');
 
     const emailInput = createInput('email', 'Емайл', 'email');
     const passwordInput = createInput('password', 'Пароль', 'password');
-    const ageInput = createInput('number', 'Возраст', 'age');
+    const passwConfInput = createInput('password', 'Подтвердить пароль', 'passw_conf');
 
     const submitBtn = document.createElement('input');
+    submitBtn.classList.add('submit-button');
     submitBtn.type = 'submit';
     submitBtn.value = 'Зарегистрироваться!';
 
     form.appendChild(emailInput);
     form.appendChild(passwordInput);
-    form.appendChild(ageInput);
+    form.appendChild(passwConfInput);
     form.appendChild(submitBtn);
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        const passw_conf = passwConfInput.value;
+
+        Ajax.post({
+            url: '/signup',
+            body: {password, passw_conf, email},
+            callback: (status) => {
+                if (status === 201) {
+                    goToPage(menu.state.menuElements.profile);
+                    return;
+                }
+
+                alert('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ при реге');
+            }
+        });
+    })
 
     return form;
 }
@@ -201,6 +231,25 @@ function renderProfile() {
                     div.innerHTML += `<img src="${src}" width="500" alt=""/><div>${likes} лайков</div>`
                 });
             }
+        }
+    });
+
+    return profileElement;
+}
+
+function renderLogout() {
+    const profileElement = document.createElement('div');
+
+    Ajax.post({
+        url: '/logout',
+        callback: (status, responseString) => {
+
+
+            const {email} = JSON.parse(responseString);
+
+            const span = document.createElement('span');
+            span.textContent = 'Вышло';
+            profileElement.appendChild(span);
         }
     });
 
