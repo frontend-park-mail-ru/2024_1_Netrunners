@@ -312,8 +312,9 @@ function renderProfile() {
 
 function renderLogout() {
     const profileElement = document.createElement('div');
+    const url = 'http://94.139.247.246:8081/auth/logout';
 
-    fetchRequest('/auth/logout', 'POST')
+    fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
                 menu.state.menuElements.logout.style.display = 'none';
