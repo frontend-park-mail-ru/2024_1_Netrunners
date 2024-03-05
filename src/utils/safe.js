@@ -1,7 +1,3 @@
-// Это слабый пример санитайзинга. Всегда лучше использовать проверенные решения.
-// Если вставлять через textContent — браузер не пустит XSS
-// Если нужно через innerHTML, в реальных проектах можно использовать DOMPurify
-
 const BLACKLIST_TAGS = ['script', 'iframe'];
 const WHITELIST_ATTRS = ['src', 'alt'];
 

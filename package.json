@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run compile:templates",
     "start": "node server",
-    "compile:templates": "handlebars public/components/Menu/Menu.hbs -f public/components/Menu/Menu.precompiled.js"
+    "compile:templates": "handlebars src/components/Menu/Menu.hbs -f src/components/Menu/Menu.precompiled.js"
   },
   "author": "",
   "license": "ISC",

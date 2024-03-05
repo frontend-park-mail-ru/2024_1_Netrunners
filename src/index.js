@@ -1,5 +1,6 @@
 import {Menu} from "./components/Menu/Menu.js";
 import {safe} from "./utils/safe.js";
+import {fetchRequest} from "./modules/fetch.js";
 
 const rootElement = document.getElementById('root');
 const logoElement = document.createElement('div');
@@ -53,23 +54,28 @@ function renderMenu() {
             goToPage(target);
         }
     });
-    Ajax.get({
-        url: '/me',
-        callback: (status, responseString) => {
-            const isAuthorized = status === 200;
-
-            if (isAuthorized) {
-                menu.state.menuElements.logout.style.display = 'block';
-                menu.state.menuElements.login.style.display = 'none';
-                menu.state.menuElements.signup.style.display = 'none';
-
+    let isAuthorized = false
+    fetchRequest('/me')
+        .then((response) => {
+            if (response.ok) {
+                isAuthorized = true
+                return response.text();
             } else {
-                menu.state.menuElements.logout.style.display = 'none';
-                menu.state.menuElements.login.style.display = 'block';
-                menu.state.menuElements.signup.style.display = 'block';
+                if (isAuthorized) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
+                } else {
+                    menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.login.style.display = 'block';
+                    menu.state.menuElements.signup.style.display = 'block';
+                }
+                throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
-        }
-    });
+        })
+        .catch(function (error) {
+            console.error('Произошла ошибка:', error.message);
+        });
 }
 function createInput(type, text, name) {
     const input = document.createElement('input');
@@ -102,21 +108,27 @@ function renderLogin() {
         const email = emailInput.value.trim();
         const password = passwordInput.value;
 
-        Ajax.post({
-            url: '/login',
-            body: {password, email},
-            callback: (status) => {
-                if (status === 200) {
+        const user = {email: email, password: password};
+        // const url = 'http://94.139.247.246:8000/auth/login';
+
+        fetchRequest('/login', 'POST', user)
+            .then((response) => {
+                if (response.ok) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
-                    goToPage(menu.state.menuElements.profile);
-                    return;
+                    return response.json();
+                } else {
+                    throw new Error('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
                 }
-
-                alert('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
-            }
-        });
+            })
+            .then((result) => {
+                document.cookie = `jwt_token=${result.token}`;
+                goToPage(menu.state.menuElements.profile);
+            })
+            .catch(function (error) {
+                console.error('Произошла ошибка:', error.message);
+            });
     })
 
     return form;
@@ -146,22 +158,24 @@ function renderSignup() {
         const email = emailInput.value.trim();
         const password = passwordInput.value;
         const passw_conf = passwConfInput.value;
-        // menu.state.menuElements.logout.style.display = 'block';
-        Ajax.post({
-            url: '/signup',
-            body: {password, passw_conf, email},
-            callback: (status) => {
-                if (status === 201) {
+        const user = { password, passw_conf, email };
+
+        fetchRequest('/signup','POST', user)
+            .then((response) => {
+                if (response.status === 201) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                     goToPage(menu.state.menuElements.profile);
-                    return;
+                } else if (response.status === 400) {
+                    throw new Error('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ при регистрации');
+                } else {
+                    throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
                 }
-
-                alert('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ при реге');
-            }
-        });
+            })
+            .catch(function (error) {
+                console.error('Произошла ошибка:', error.message);
+            });
     })
 
     return form;
@@ -181,11 +195,15 @@ function renderFilms() {
     filmsSection.appendChild(popularNowTitle);
     filmsSection.appendChild(filmsContainer);
 
-    Ajax.get({
-        url: '/films',
-        callback: (status, responseString) => {
-            const films = JSON.parse(responseString);
-
+    fetchRequest('/films')
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+            }
+        })
+        .then((films) => {
             films.forEach((film) => {
                 const filmCard = document.createElement('div');
                 filmCard.classList.add('film-card');
@@ -207,8 +225,10 @@ function renderFilms() {
 
                 filmsContainer.appendChild(filmCard);
             });
-        }
-    });
+        })
+        .catch(function (error) {
+            console.error('Произошла ошибка:', error.message);
+        });
 
     return filmsSection;
 }
@@ -228,19 +248,18 @@ function goToPage(menuLinkElement) {
 function renderProfile() {
     const profileElement = document.createElement('div');
 
-    Ajax.get({
-        url: '/me',
-        callback: (status, responseString) => {
-            const isAuthorized = status === 200;
-
-            if (!isAuthorized) {
-                alert('АХТУНГ! нет авторизации');
+    fetchRequest('/me')
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 401) {
                 goToPage(menu.state.menuElements.login);
-                return;
+                throw new Error('Unauthorized');
+            } else {
+                throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
-
-            const {email, images} = JSON.parse(responseString);
-
+        })
+        .then(({ email, images }) => {
             const span = document.createElement('span');
             span.textContent = `${email}`;
             profileElement.appendChild(span);
@@ -249,12 +268,14 @@ function renderProfile() {
                 const div = document.createElement('div');
                 profileElement.appendChild(div);
 
-                images.forEach(({src}) => {
-                    div.innerHTML += `<img src="${src}" width="500" alt=""/>`
+                images.forEach(({ src }) => {
+                    div.innerHTML += `<img src="${src}" width="500" alt=""/>`;
                 });
             }
-        }
-    });
+        })
+        .catch(function (error) {
+            console.error('Произошла ошибка:', error.message);
+        });
 
     return profileElement;
 }
@@ -262,19 +283,25 @@ function renderProfile() {
 function renderLogout() {
     const profileElement = document.createElement('div');
 
-    Ajax.post({
-        url: '/logout',
-        callback: (status, responseString) => {
-            const {email} = JSON.parse(responseString);
-
+    fetchRequest('/logout', 'POST')
+        .then((response) => {
+            if (response.ok) {
+                menu.state.menuElements.logout.style.display = 'none';
+                menu.state.menuElements.login.style.display = 'block';
+                menu.state.menuElements.signup.style.display = 'block';
+                return response.json();
+            } else {
+                throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+            }
+        })
+        .then(() => {
             const span = document.createElement('span');
-            menu.state.menuElements.logout.style.display = 'none';
-            menu.state.menuElements.login.style.display = 'block';
-            menu.state.menuElements.signup.style.display = 'block';
-            goToPage(menu.state.menuElements.login)
+            goToPage(menu.state.menuElements.login);
             profileElement.appendChild(span);
-        }
-    });
+        })
+        .catch(function (error) {
+            console.error('Произошла ошибка:', error.message);
+        });
 
     return profileElement;
 }
