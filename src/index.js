@@ -61,7 +61,7 @@ function renderMenu() {
     });
     let isAuthorized = false
     const url = 'http://94.139.247.246:8081/auth/check';
-    fetchRequest(url)
+    fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
                 isAuthorized = true
@@ -223,34 +223,35 @@ function renderFilms() {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
         })
-        .then((films) => {
-            films.forEach((film) => {
-                const filmCard = document.createElement('div');
-                filmCard.classList.add('film-card');
+        .then((data) => {
+            if (data && data.films && Array.isArray(data.films)) {
+                data.films.forEach((film) => {
+                    const uuid = film.uuid;
+                    const previewData = film.preview_data;
 
-                const filmImage = document.createElement('div');
-                filmImage.classList.add('film-image');
-                filmImage.style.backgroundImage = `url('${film.preview_data}')`;
-                filmImage.setAttribute('src', "data:/image/jpg:base64," + films.preview_data)
-                const filmContent = document.createElement('div');
-                filmContent.classList.add('film-content');
+                    const filmCard = document.createElement('div');
+                    filmCard.classList.add('film-card');
 
-                const filmTime = document.createElement('div');
-                filmTime.classList.add('film-time');
-                const durationInSeconds = film.duration;
-                const hours = Math.floor(durationInSeconds / 3600);
-                const minutes = Math.floor((durationInSeconds % 3600) / 60);
-                const formattedTime = `${hours}ч ${minutes}м`;
+                    const filmImage = document.createElement('div');
+                    filmImage.classList.add('film-image');
+                    filmImage.style.backgroundImage = `url('${previewData}')`;
 
-                filmTime.classList.add('film-time');
-                filmTime.textContent = formattedTime;
+                    const filmContent = document.createElement('div');
+                    filmContent.classList.add('film-content');
 
-                filmContent.appendChild(filmTime);
-                filmCard.appendChild(filmImage);
-                filmCard.appendChild(filmContent);
+                    const filmTime = document.createElement('div');
+                    filmTime.classList.add('film-time');
+                    filmTime.textContent = `UUID: ${uuid}`;
 
-                filmsContainer.appendChild(filmCard);
-            });
+                    filmContent.appendChild(filmTime);
+                    filmCard.appendChild(filmImage);
+                    filmCard.appendChild(filmContent);
+
+                    filmsContainer.appendChild(filmCard);
+                });
+            } else {
+                console.error('Ошибка: ответ не содержит массив фильмов', data);
+            }
         })
         .catch(function (error) {
             console.error('Произошла ошибка:', error.message);
