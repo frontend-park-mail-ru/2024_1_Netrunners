@@ -1,6 +1,6 @@
 import {Menu} from "./components/Menu/Menu.js";
 import {safe} from "./utils/safe.js";
-import {fetchRequest} from "./modules/fetch.js";
+import {fetchRequest} from "./api/fetch.js";
 
 const rootElement = document.getElementById('root');
 const logoElement = document.createElement('div');
@@ -55,7 +55,8 @@ function renderMenu() {
         }
     });
     let isAuthorized = false
-    fetchRequest('/me')
+    const url = 'http://94.139.247.246:8000/auth/check';
+    fetchRequest(url)
         .then((response) => {
             if (response.ok) {
                 isAuthorized = true
@@ -90,7 +91,7 @@ function renderLogin() {
     const form = document.createElement('form');
     form.classList.add('form-section');
 
-    const emailInput = createInput('email', 'Емайл', 'email');
+    const emailInput = createInput('email', 'Почта', 'email');
     const passwordInput = createInput('password', 'Пароль', 'password');
 
     const submitBtn = document.createElement('input');
@@ -105,13 +106,13 @@ function renderLogin() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const email = emailInput.value.trim();
+        const login = emailInput.value.trim();
         const password = passwordInput.value;
 
-        const user = {email: email, password: password};
-        // const url = 'http://94.139.247.246:8000/auth/login';
+        const user = {login: login, password: password};
+        const url = 'http://94.139.247.246:8000/auth/login';
 
-        fetchRequest('/login', 'POST', user)
+        fetchRequest(url, 'POST', user)
             .then((response) => {
                 if (response.ok) {
                     menu.state.menuElements.logout.style.display = 'block';
@@ -119,7 +120,7 @@ function renderLogin() {
                     menu.state.menuElements.signup.style.display = 'none';
                     return response.json();
                 } else {
-                    throw new Error('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ');
+                    throw new Error('Неверная почта и пароль');
                 }
             })
             .then((result) => {
@@ -138,7 +139,7 @@ function renderSignup() {
     const form = document.createElement('form');
     form.classList.add('form-section');
 
-    const emailInput = createInput('email', 'Емайл', 'email');
+    const emailInput = createInput('email', 'Почта', 'email');
     const passwordInput = createInput('password', 'Пароль', 'password');
     const passwConfInput = createInput('password', 'Подтвердить пароль', 'passw_conf');
 
@@ -159,16 +160,16 @@ function renderSignup() {
         const password = passwordInput.value;
         const passw_conf = passwConfInput.value;
         const user = { password, passw_conf, email };
-
-        fetchRequest('/signup','POST', user)
+        const url = 'http://94.139.247.246:8000/auth/signup';
+        fetchRequest(url,'POST', user)
             .then((response) => {
-                if (response.status === 201) {
+                if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                     goToPage(menu.state.menuElements.profile);
                 } else if (response.status === 400) {
-                    throw new Error('НЕВЕРНЫЙ ЕМЕЙЛ ИЛИ ПАРОЛЬ при регистрации');
+                    throw new Error('Неверная почта или пароль при регистрации');
                 } else {
                     throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
                 }
@@ -194,8 +195,8 @@ function renderFilms() {
 
     filmsSection.appendChild(popularNowTitle);
     filmsSection.appendChild(filmsContainer);
-
-    fetchRequest('/films')
+    const url = 'http://94.139.247.246:8000/films/all';
+    fetchRequest(url)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -210,14 +211,20 @@ function renderFilms() {
 
                 const filmImage = document.createElement('div');
                 filmImage.classList.add('film-image');
-                filmImage.style.backgroundImage = `url('${film.poster}')`;
-
+                filmImage.style.backgroundImage = `url('${film.preview_data}')`;
+                filmImage.setAttribute('src', "data:/image/jpg:base64," + films.preview_data)
                 const filmContent = document.createElement('div');
                 filmContent.classList.add('film-content');
 
                 const filmTime = document.createElement('div');
                 filmTime.classList.add('film-time');
-                filmTime.textContent = film.duration;
+                const durationInSeconds = film.duration;
+                const hours = Math.floor(durationInSeconds / 3600);
+                const minutes = Math.floor((durationInSeconds % 3600) / 60);
+                const formattedTime = `${hours}ч ${minutes}м`;
+
+                filmTime.classList.add('film-time');
+                filmTime.textContent = formattedTime;
 
                 filmContent.appendChild(filmTime);
                 filmCard.appendChild(filmImage);
@@ -248,7 +255,8 @@ function goToPage(menuLinkElement) {
 function renderProfile() {
     const profileElement = document.createElement('div');
 
-    fetchRequest('/me')
+    const url = 'http://94.139.247.246:8000/auth/check';
+    fetchRequest(url)
         .then((response) => {
             if (response.ok) {
                 return response.json();
