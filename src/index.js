@@ -214,7 +214,7 @@ function renderFilms() {
 
     filmsSection.appendChild(popularNowTitle);
     filmsSection.appendChild(filmsContainer);
-    const url = 'http://94.139.247.246:8081/films/all';
+    const url = 'http://94.139.247.246:8081/films';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
