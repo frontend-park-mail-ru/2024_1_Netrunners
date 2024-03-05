@@ -1,7 +1,7 @@
 import {Menu} from "./components/Menu/Menu.js";
 import {safe} from "./utils/safe.js";
 import {fetchRequest} from "./api/fetch.js";
-import {validators} from "./utils/validate";
+import {validators} from "./utils/validate.js";
 
 /*export const createRegistation = () => {
     renderSignup();
