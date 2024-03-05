@@ -226,30 +226,33 @@ function renderFilms() {
         .then((data) => {
             if (data && data.films && Array.isArray(data.films)) {
                 data.films.forEach((film) => {
-                    const uuid = film.uuid;
-                    const previewData = film.preview_data;
-
                     const filmCard = document.createElement('div');
                     filmCard.classList.add('film-card');
 
                     const filmImage = document.createElement('div');
                     filmImage.classList.add('film-image');
-                    filmImage.style.backgroundImage = `url('${previewData}')`;
-
+                    filmImage.style.backgroundImage = `url('${film.preview_data}')`;
+                    filmImage.setAttribute('src', "data:image;base6," + films.preview_data)
                     const filmContent = document.createElement('div');
                     filmContent.classList.add('film-content');
 
                     const filmTime = document.createElement('div');
                     filmTime.classList.add('film-time');
-                    filmTime.textContent = `UUID: ${uuid}`;
+                    const durationInSeconds = film.duration;
+                    const hours = Math.floor(durationInSeconds / 3600);
+                    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+                    const formattedTime = `${hours}ч ${minutes}м`;
+
+                    filmTime.classList.add('film-time');
+                    filmTime.textContent = formattedTime;
 
                     filmContent.appendChild(filmTime);
                     filmCard.appendChild(filmImage);
                     filmCard.appendChild(filmContent);
 
                     filmsContainer.appendChild(filmCard);
-                });
-            } else {
+            });
+        } else {
                 console.error('Ошибка: ответ не содержит массив фильмов', data);
             }
         })
