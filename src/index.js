@@ -60,7 +60,7 @@ function renderMenu() {
         }
     });
     let isAuthorized = false
-    const url = 'http://94.139.247.246:3000/auth/check';
+    const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
@@ -115,7 +115,7 @@ function renderLogin() {
         const password = passwordInput.value;
 
         const user = {login: login, password: password};
-        const url = 'http://94.139.247.246:3000/auth/login';
+        const url = 'http://94.139.247.246:8081/auth/login';
 
         fetchRequest(url, 'POST', user)
             .then((response) => {
@@ -168,7 +168,7 @@ function renderSignup() {
         const passw_conf = passwConfInput.value;
         const username = usernameInput.value;
         const user = { password, passw_conf, login, username };
-        const url = 'http://94.139.247.246:3000/auth/signup';
+        const url = 'http://94.139.247.246:8081/auth/signup';
         if (!validators.username(username)){
             alert("Имя пользователя слишком короткое");
         }
@@ -214,7 +214,7 @@ function renderFilms() {
 
     filmsSection.appendChild(popularNowTitle);
     filmsSection.appendChild(filmsContainer);
-    const url = 'http://94.139.247.246:3000/films/all';
+    const url = 'http://94.139.247.246:8081/films/all';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
@@ -279,7 +279,7 @@ function goToPage(menuLinkElement) {
 function renderProfile() {
     const profileElement = document.createElement('div');
 
-    const url = 'http://94.139.247.246:3000/auth/check';
+    const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
