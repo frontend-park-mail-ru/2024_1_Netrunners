@@ -231,7 +231,7 @@ function renderFilms() {
 
                     const filmImage = document.createElement('img');
                     filmImage.classList.add('film-image');
-                    filmImage.setAttribute('src', "data:image;base64," + film.preview_data)
+                    filmImage.setAttribute('src', "data:image/png;base64," + film.preview_data)
                     const filmContent = document.createElement('div');
                     filmContent.classList.add('film-content');
 
@@ -278,7 +278,7 @@ function renderProfile() {
     const profileElement = document.createElement('div');
 
     const url = 'http://94.139.247.246:8081/auth/check';
-    fetchRequest(url)
+    fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -313,7 +313,7 @@ function renderProfile() {
 function renderLogout() {
     const profileElement = document.createElement('div');
 
-    fetchRequest('/logout', 'POST')
+    fetchRequest('/auth/logout', 'POST')
         .then((response) => {
             if (response.ok) {
                 menu.state.menuElements.logout.style.display = 'none';
