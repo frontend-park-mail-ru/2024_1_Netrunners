@@ -231,7 +231,7 @@ function renderFilms() {
 
                     const filmImage = document.createElement('img');
                     filmImage.classList.add('film-image');
-                    filmImage.setAttribute('src', "data:image;base6," + film.preview_data)
+                    filmImage.setAttribute('src', "data:image;base64," + film.preview_data)
                     const filmContent = document.createElement('div');
                     filmContent.classList.add('film-content');
 
