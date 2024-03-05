@@ -232,7 +232,7 @@ function renderFilms() {
                     const filmImage = document.createElement('div');
                     filmImage.classList.add('film-image');
                     filmImage.style.backgroundImage = `url('${film.preview_data}')`;
-                    filmImage.setAttribute('src', "data:image;base6," + films.preview_data)
+                    filmImage.setAttribute('src', "data:image;base6," + film.preview_data)
                     const filmContent = document.createElement('div');
                     filmContent.classList.add('film-content');
 
