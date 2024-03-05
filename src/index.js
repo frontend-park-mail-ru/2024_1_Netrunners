@@ -223,37 +223,42 @@ function renderFilms() {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
         })
-        .then((films) => {
-            films.forEach((film) => {
-                const filmCard = document.createElement('div');
-                filmCard.classList.add('film-card');
+        .then((response) => {
+            if (response.status === 200 && Array.isArray(response.films)) {
+                response.films.forEach((film) => {
+                    const filmCard = document.createElement('div');
+                    filmCard.classList.add('film-card');
 
-                const filmImage = document.createElement('div');
-                filmImage.classList.add('film-image');
-                filmImage.style.backgroundImage = `url('${film.preview_data}')`;
-                filmImage.setAttribute('src', "data:/image/jpg:base64," + films.preview_data)
-                const filmContent = document.createElement('div');
-                filmContent.classList.add('film-content');
+                    const filmImage = document.createElement('div');
+                    filmImage.classList.add('film-image');
+                    filmImage.style.backgroundImage = `url('${film.preview_data}')`;
+                    filmImage.setAttribute('src', "data:/image/jpg:base64," + film.preview_data);
 
-                const filmTime = document.createElement('div');
-                filmTime.classList.add('film-time');
-                const durationInSeconds = film.duration;
-                const hours = Math.floor(durationInSeconds / 3600);
-                const minutes = Math.floor((durationInSeconds % 3600) / 60);
-                const formattedTime = `${hours}ч ${minutes}м`;
+                    const filmContent = document.createElement('div');
+                    filmContent.classList.add('film-content');
 
-                filmTime.classList.add('film-time');
-                filmTime.textContent = formattedTime;
+                    const filmTime = document.createElement('div');
+                    filmTime.classList.add('film-time');
 
-                filmContent.appendChild(filmTime);
-                filmCard.appendChild(filmImage);
-                filmCard.appendChild(filmContent);
+                    const durationInSeconds = film.duration;
+                    const hours = Math.floor(durationInSeconds / 3600);
+                    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+                    const formattedTime = `${hours}ч ${minutes}м`;
 
-                filmsContainer.appendChild(filmCard);
-            });
+                    filmTime.textContent = formattedTime;
+
+                    filmContent.appendChild(filmTime);
+                    filmCard.appendChild(filmImage);
+                    filmCard.appendChild(filmContent);
+
+                    filmsContainer.appendChild(filmCard);
+                });
+            } else {
+                console.error('Ошибка: Неверный формат данных в ответе');
+            }
         })
-        .catch(function (error) {
-            console.error('Произошла ошибка:', error.message);
+        .catch((error) => {
+            console.error('Произошла ошибка при получении данных:', error);
         });
 
     return filmsSection;
