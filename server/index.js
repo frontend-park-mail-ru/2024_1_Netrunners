@@ -18,8 +18,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8082;
+const ipAddress = '94.139.247.246';
 
-app.listen(port, function () {
-    console.log(`Server listening port ${port}`);
+app.listen(port, ipAddress, function () {
+    console.log(`Server listening at http://${ipAddress}:${port}`);
 });
+

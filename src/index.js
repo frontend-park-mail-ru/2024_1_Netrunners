@@ -1,6 +1,11 @@
 import {Menu} from "./components/Menu/Menu.js";
 import {safe} from "./utils/safe.js";
 import {fetchRequest} from "./api/fetch.js";
+import {validators} from "./utils/validate";
+
+/*export const createRegistation = () => {
+    renderSignup();
+};*/
 
 const rootElement = document.getElementById('root');
 const logoElement = document.createElement('div');
@@ -55,7 +60,7 @@ function renderMenu() {
         }
     });
     let isAuthorized = false
-    const url = 'http://94.139.247.246:8000/auth/check';
+    const url = 'http://94.139.247.246:3000/auth/check';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
@@ -110,7 +115,7 @@ function renderLogin() {
         const password = passwordInput.value;
 
         const user = {login: login, password: password};
-        const url = 'http://94.139.247.246:8000/auth/login';
+        const url = 'http://94.139.247.246:3000/auth/login';
 
         fetchRequest(url, 'POST', user)
             .then((response) => {
@@ -140,6 +145,7 @@ function renderSignup() {
     form.classList.add('form-section');
 
     const emailInput = createInput('email', 'Почта', 'email');
+    const usernameInput = createInput('string', 'логин', 'username');
     const passwordInput = createInput('password', 'Пароль', 'password');
     const passwConfInput = createInput('password', 'Подтвердить пароль', 'passw_conf');
 
@@ -149,6 +155,7 @@ function renderSignup() {
     submitBtn.value = 'Зарегистрироваться!';
 
     form.appendChild(emailInput);
+    form.appendChild(usernameInput)
     form.appendChild(passwordInput);
     form.appendChild(passwConfInput);
     form.appendChild(submitBtn);
@@ -156,11 +163,23 @@ function renderSignup() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const email = emailInput.value.trim();
+        const login = emailInput.value.trim();
         const password = passwordInput.value;
         const passw_conf = passwConfInput.value;
-        const user = { password, passw_conf, email };
-        const url = 'http://94.139.247.246:8000/auth/signup';
+        const username = usernameInput.value;
+        const user = { password, passw_conf, login, username };
+        const url = 'http://94.139.247.246:3000/auth/signup';
+        if (!validators.username(username)){
+            alert("Имя пользователя слишком короткое");
+        }
+        if (!validators.login(login)) {
+            alert("Поле почта введено некорректно");
+        }
+        if (!validators.password(password, passw_conf)){
+            alert("Пароли не совпадают");
+            throw new Error('Пароли не совпадают');
+        }
+        // Все ошибки должны отображаться на алертом, а элементом на странице
         fetchRequest(url,'POST', user)
             .then((response) => {
                 if (response.status === 200) {
@@ -195,7 +214,7 @@ function renderFilms() {
 
     filmsSection.appendChild(popularNowTitle);
     filmsSection.appendChild(filmsContainer);
-    const url = 'http://94.139.247.246:8000/films/all';
+    const url = 'http://94.139.247.246:3000/films/all';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
@@ -255,7 +274,7 @@ function goToPage(menuLinkElement) {
 function renderProfile() {
     const profileElement = document.createElement('div');
 
-    const url = 'http://94.139.247.246:8000/auth/check';
+    const url = 'http://94.139.247.246:3000/auth/check';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
