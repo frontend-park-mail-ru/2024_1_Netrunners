@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-const port = process.env.PORT || 8082;
+const port = process.env.PORT || 8080;
 const ipAddress = '94.139.247.246';
 
 app.listen(port, ipAddress, function () {
