@@ -262,6 +262,7 @@ function renderFilms() {
                     const minutes = Math.floor((durationInSeconds % 3600) / 60);
                     filmTime.textContent = `${hours}ч ${minutes}м`;
 
+                    filmContent.appendChild(filmTitle);
                     filmContent.appendChild(filmTime);
                     filmCard.appendChild(filmImage);
                     filmCard.appendChild(filmContent);
