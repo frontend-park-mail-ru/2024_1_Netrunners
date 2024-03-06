@@ -74,6 +74,7 @@ function renderMenu() {
                 menu.state.menuElements.logout.style.display = 'none';
                 menu.state.menuElements.login.style.display = 'block';
                 menu.state.menuElements.signup.style.display = 'block';
+                menu.state.menuElements.profile.style.display = 'none';
             }
         })
         .catch(function (error) {
@@ -289,7 +290,7 @@ function renderProfile() {
     const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url, 'POST')
         .then((response) => {
-            if (response.status === 200) {
+            if (response.ok) {
                 return response.json();
             } else if (response.status === 401) {
                 goToPage(menu.state.menuElements.login);
