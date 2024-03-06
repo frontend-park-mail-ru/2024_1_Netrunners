@@ -13,6 +13,8 @@ rootElement.appendChild(logoElement);
 rootElement.appendChild(menuElement);
 rootElement.appendChild(pageElement);
 
+let token;
+
 const config = {
     menu: {
         films: {
