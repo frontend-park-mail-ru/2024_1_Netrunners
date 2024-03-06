@@ -307,7 +307,7 @@ function renderProfile() {
     fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                return response.json();
+                return response;
             } else if (response.status === 401) {
                 goToPage(menu.state.menuElements.login);
                 throw new Error('Unauthorized');
@@ -347,7 +347,7 @@ function renderLogout() {
         .catch(function (error) {
             console.error('Произошла ошибка:', error.message);
         });
-
+    renderMenu();
     return profileElement;
 }
 
