@@ -198,6 +198,7 @@ function renderSignup() {
                 }
             })
             .then((response) =>  {
+                console.log(response);
                 if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.profile.style.display = 'block';
