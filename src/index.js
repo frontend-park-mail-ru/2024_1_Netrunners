@@ -57,6 +57,7 @@ function renderMenu() {
         }
     });
     window.localStorage.getItem(token);
+    document.cookie = `refresh = ${token}`;
     const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url, 'POST')
         .then((response) => {
