@@ -132,6 +132,7 @@ function renderLogin() {
                     menu.state.menuElements.signup.style.display = 'none';
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.none.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'block';
                     menu.state.menuElements.signup.style.display = 'block';
                 }
@@ -175,9 +176,11 @@ function renderSignup() {
         const url = 'http://94.139.247.246:8081/auth/signup';
         if (!validators.username(username)){
             alert("Имя пользователя слишком короткое");
+            throw new Error('Имя пользователя слишком короткое');
         }
         if (!validators.login(login)) {
             alert("Поле почта введено некорректно");
+            throw new Error('Почта введена некорректно');
         }
         if (!validators.password(password, passw_conf)){
             alert("Пароли не совпадают");
@@ -243,7 +246,7 @@ function renderFilms() {
 
                     const filmImage = document.createElement('img');
                     filmImage.classList.add('film-image');
-                    filmImage.setAttribute('src', "data:image/png;base64," + film.preview_data)
+                    filmImage.setAttribute('src', film.preview_data)
                     const filmContent = document.createElement('div');
                     filmContent.classList.add('film-content');
 
