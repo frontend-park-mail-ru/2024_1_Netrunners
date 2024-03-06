@@ -92,7 +92,7 @@ input:focus{
 .film-content {
   display: flex;
   align-items: center;
-  justify-content: center; /* Центрирование по горизонтали */
+  justify-content: center;
   padding-top: 13px;
   padding-left: 15px;
 }
@@ -110,7 +110,7 @@ input:focus{
   background: var(--card-background) center;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрирование по вертикали внутри film-content */
+  align-items: center;
 }
 
 .film-image {
@@ -122,13 +122,16 @@ input:focus{
 }
 
 .film-time {
-  font-size: 14px;
+  font-size: 12px;
   width: 20%;
   background-color: var(--background-color);
   color: #999999;
   padding: 7px;
   border-radius: 15px;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .film-title {
@@ -136,4 +139,7 @@ input:focus{
   margin-right: 10px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
