@@ -116,18 +116,22 @@ function renderLogin() {
 
         fetchRequest(url, 'POST', user)
             .then((response) => {
-                if (response.status === 200) {
-                    menu.state.menuElements.logout.style.display = 'block';
-                    menu.state.menuElements.login.style.display = 'none';
-                    menu.state.menuElements.signup.style.display = 'none';
+                if (response.ok) {
                     return response.json();
                 } else {
                     throw new Error('Неверная почта и пароль');
                 }
             })
-            .then((result) => {
-                document.cookie = `jwt_token=${result.token}`;
-                goToPage(menu.state.menuElements.profile);
+            .then((response) => {
+                if (response.status === 200) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
+                } else {
+                    menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.login.style.display = 'block';
+                    menu.state.menuElements.signup.style.display = 'block';
+                }
             })
             .catch(function (error) {
                 console.error('Произошла ошибка:', error.message);
@@ -179,15 +183,23 @@ function renderSignup() {
         // Все ошибки должны отображаться на алертом, а элементом на странице
         fetchRequest(url,'POST', user)
             .then((response) => {
-                if (response.status === 200) {
-                    menu.state.menuElements.logout.style.display = 'block';
-                    menu.state.menuElements.login.style.display = 'none';
-                    menu.state.menuElements.signup.style.display = 'none';
+                if (response.ok) {
                     goToPage(menu.state.menuElements.profile);
                 } else if (response.status === 400) {
                     throw new Error('Неверная почта или пароль при регистрации');
                 } else {
                     throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+                }
+            })
+            .then((response) =>  {
+                if (response.status === 200) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
+                } else {
+                    menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.login.style.display = 'block';
+                    menu.state.menuElements.signup.style.display = 'block';
                 }
             })
             .catch(function (error) {
@@ -314,9 +326,6 @@ function renderLogout() {
     fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                menu.state.menuElements.logout.style.display = 'none';
-                menu.state.menuElements.login.style.display = 'block';
-                menu.state.menuElements.signup.style.display = 'block';
                 return response.json();
             } else {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
