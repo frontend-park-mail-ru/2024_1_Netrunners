@@ -139,6 +139,7 @@ function renderLogin() {
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                     window.localStorage.setItem('refresh', token);
+                    goToPage(menu.state.menuElements.films);
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
                     menu.state.menuElements.profile.style.display = 'none';
@@ -159,7 +160,7 @@ function renderSignup() {
     form.classList.add('form-section');
 
     const emailInput = createInput('email', 'Почта', 'email');
-    const usernameInput = createInput('string', 'логин', 'username');
+    const usernameInput = createInput('string', 'Логин', 'username');
     const passwordInput = createInput('password', 'Пароль', 'password');
     const passwConfInput = createInput('password', 'Подтвердить пароль', 'passw_conf');
 
@@ -199,8 +200,8 @@ function renderSignup() {
         fetchRequest(url,'POST', user)
             .then((response) => {
                 if (response.ok) {
-                    return response;
-                } else if (response.status === 400) {
+                    return response.json();
+                } else if (response.status === 400) { // перенести ошибку в следующий then
                     throw new Error('Неверная почта или пароль при регистрации');
                 } else {
                     throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
@@ -213,7 +214,7 @@ function renderSignup() {
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                     window.localStorage.setItem('refresh', token);
-                    goToPage(menu.state.menuElements.profile);
+                    goToPage(menu.state.menuElements.films);
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
                     menu.state.menuElements.profile.style.display = 'none';
@@ -312,17 +313,16 @@ function renderProfile() {
     fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                return response;
-            } else if (response.status === 401) {
-                goToPage(menu.state.menuElements.login);
-                throw new Error('Unauthorized');
+                return response.json();
             } else {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
         })
         .then((response) => {
             if (response.status === 200) {
-                console.log('чек - удача')
+            } else if (response.status === 401) {
+                goToPage(menu.state.menuElements.login);
+                throw new Error('Unauthorized');
             }
         })
         .catch(function (error) {
@@ -345,14 +345,12 @@ function renderLogout() {
             }
         })
         .then(() => {
-            const span = document.createElement('span');
-            goToPage(menu.state.menuElements.login);
-            profileElement.appendChild(span);
+            menu.state.menuElements.films.classList.remove('active')
+            window.location.reload();
         })
         .catch(function (error) {
             console.error('Произошла ошибка:', error.message);
-        });
-    renderMenu();
+        })
     return profileElement;
 }
 
