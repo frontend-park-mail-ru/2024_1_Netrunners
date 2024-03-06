@@ -250,15 +250,17 @@ function renderFilms() {
                     const filmContent = document.createElement('div');
                     filmContent.classList.add('film-content');
 
+                    const filmTitle = document.createElement('div');
+                    filmTitle.classList.add('film-title');
+
+                    filmTitle.textContent = film.name;
+
                     const filmTime = document.createElement('div');
                     filmTime.classList.add('film-time');
                     const durationInSeconds = film.duration;
                     const hours = Math.floor(durationInSeconds / 3600);
                     const minutes = Math.floor((durationInSeconds % 3600) / 60);
-                    const formattedTime = `${hours}ч ${minutes}м`;
-
-                    filmTime.classList.add('film-time');
-                    filmTime.textContent = formattedTime;
+                    filmTime.textContent = `${hours}ч ${minutes}м`;
 
                     filmContent.appendChild(filmTime);
                     filmCard.appendChild(filmImage);
