@@ -199,7 +199,6 @@ function renderSignup() {
         fetchRequest(url,'POST', user)
             .then((response) => {
                 if (response.ok) {
-                    goToPage(menu.state.menuElements.profile);
                     return response;
                 } else if (response.status === 400) {
                     throw new Error('Неверная почта или пароль при регистрации');
@@ -208,13 +207,13 @@ function renderSignup() {
                 }
             })
             .then((response) =>  {
-                console.log(response);
                 if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.profile.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                     window.localStorage.setItem('refresh', token);
+                    goToPage(menu.state.menuElements.profile);
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
                     menu.state.menuElements.profile.style.display = 'none';
