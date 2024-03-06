@@ -66,7 +66,7 @@ function renderMenu() {
             }
         })
         .then((response) => {
-            if (response.status === 200) {
+            if (response.status !== 200) {
                 menu.state.menuElements.logout.style.display = 'block';
                 menu.state.menuElements.login.style.display = 'none';
                 menu.state.menuElements.signup.style.display = 'none';
