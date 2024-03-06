@@ -70,6 +70,7 @@ function renderMenu() {
                 menu.state.menuElements.logout.style.display = 'block';
                 menu.state.menuElements.login.style.display = 'none';
                 menu.state.menuElements.signup.style.display = 'none';
+                menu.state.menuElements.profile.style.display = 'block';
             } else {
                 menu.state.menuElements.logout.style.display = 'none';
                 menu.state.menuElements.login.style.display = 'block';
@@ -126,6 +127,7 @@ function renderLogin() {
             .then((response) => {
                 if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.profile.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                 } else {
