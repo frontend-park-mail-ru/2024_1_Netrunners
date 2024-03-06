@@ -5,6 +5,7 @@ export const fetchRequest = (url, method = 'GET', body = null, headers = {}) => 
             'Content-Type': 'application/json',
             ...headers,
         },
+        credentials: "include",
     };
 
     if (body !== null) {

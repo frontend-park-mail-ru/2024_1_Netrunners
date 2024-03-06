@@ -5,6 +5,7 @@ export const validators = {
 };
 
 const   MIN_USERNAME_LENGTH = 4;
+const   MIN_PASSW_LENGTH = 6;
 
 const loginRegular = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -17,5 +18,5 @@ const validateUsername = (username) => {
 };
 
 const validatePassword = (password, passw_conf) => {
-    return password === passw_conf;
+    return password === passw_conf && password >= MIN_PASSW_LENGTH;
 };
