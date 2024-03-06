@@ -265,8 +265,8 @@ function renderFilms() {
                     filmCard.appendChild(filmContent);
 
                     filmsContainer.appendChild(filmCard);
-            });
-        } else {
+                });
+            } else {
                 console.error('Ошибка: ответ не содержит массив фильмов', data);
             }
         })
