@@ -18,5 +18,5 @@ const validateUsername = (username) => {
 };
 
 const validatePassword = (password, passw_conf) => {
-    return password === passw_conf && password >= MIN_PASSW_LENGTH;
+    return password === passw_conf && password.length >= MIN_PASSW_LENGTH;
 };
