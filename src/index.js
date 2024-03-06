@@ -68,13 +68,13 @@ function renderMenu() {
         .then((response) => {
             if (response.status === 200) {
                 menu.state.menuElements.logout.style.display = 'block';
+                menu.state.menuElements.profile.style.display = 'block';
                 menu.state.menuElements.login.style.display = 'none';
                 menu.state.menuElements.signup.style.display = 'none';
-                menu.state.menuElements.profile.style.display = 'block';
             } else {
-                menu.state.menuElements.logout.style.display = 'none';
                 menu.state.menuElements.login.style.display = 'block';
                 menu.state.menuElements.signup.style.display = 'block';
+                menu.state.menuElements.logout.style.display = 'none';
                 menu.state.menuElements.profile.style.display = 'none';
             }
         })
@@ -132,7 +132,7 @@ function renderLogin() {
                     menu.state.menuElements.signup.style.display = 'none';
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
-                    menu.state.menuElements.none.style.display = 'block';
+                    menu.state.menuElements.profile.style.display = 'none';
                     menu.state.menuElements.login.style.display = 'block';
                     menu.state.menuElements.signup.style.display = 'block';
                 }
@@ -200,10 +200,12 @@ function renderSignup() {
             .then((response) =>  {
                 if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.profile.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.profile.style.display = 'none';
                     menu.state.menuElements.login.style.display = 'block';
                     menu.state.menuElements.signup.style.display = 'block';
                 }

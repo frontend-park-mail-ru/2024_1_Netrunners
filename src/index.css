@@ -57,9 +57,7 @@ input:focus{
 .submit-button{
   margin-top: 30px;
   background: none;
-  outline-color: var(--netfunner-color);
-  outline-style: solid;
-  outline-width: medium;
+  outline: var(--netfunner-color) solid medium;
 }
 
 .submit-button:hover{
@@ -67,35 +65,6 @@ input:focus{
   background-color: #1A1A1A;
 }
 
-
-.films-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
-}
-
-.film-card {
-  width: 280px;
-  height: 360px;
-  margin: 10px;
-  background-size: cover;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  background: var(--card-background) center;
-}
-
-.film-card:hover {
-  transform: scale(1.05);
-}
-
-.film-content {
-  padding-top: 13px;
-  padding-left: 15px;
-}
 
 .popular-now-title {
   font-size: 30px;
@@ -107,25 +76,69 @@ input:focus{
   width: 100%;
 }
 
+.films-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.film-card:hover {
+  transform: scale(1.05);
+}
+
+.film-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 13px;
+  padding-left: 15px;
+}
+
+.film-card {
+  width: 230px;
+  height: 360px;
+  margin: 16px;
+  background-size: cover;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  background: var(--card-background) center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .film-image {
   width: auto;
-  height: 80%;
-  margin-top: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
+  height: 85%;
   background-size: cover;
   background-position: center;
   border-radius: 15px;
+  margin-top: 15px;
 }
 
 .film-time {
-  font-size: 14px;
+  font-size: 12px;
   width: 20%;
   background-color: var(--background-color);
   color: #999999;
   padding: 7px;
   border-radius: 15px;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.film-title {
+  color: #ffffff;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .films-section {
@@ -135,9 +148,3 @@ input:focus{
   margin-top: 20px;
 }
 
-.form-section {
-  border: 2px solid #262626;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
