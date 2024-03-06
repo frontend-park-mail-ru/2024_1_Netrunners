@@ -57,9 +57,7 @@ input:focus{
 .submit-button{
   margin-top: 30px;
   background: none;
-  outline-color: var(--netfunner-color);
-  outline-style: solid;
-  outline-width: medium;
+  outline: var(--netfunner-color) solid medium;
 }
 
 .submit-button:hover{
@@ -141,3 +139,11 @@ input:focus{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.films-section {
+  border: 2px solid #262626;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
