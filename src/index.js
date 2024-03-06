@@ -60,7 +60,7 @@ function renderMenu() {
     fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                return response.json();
+                return response;
             } else {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
