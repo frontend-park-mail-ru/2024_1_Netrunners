@@ -62,16 +62,18 @@ function renderMenu() {
             if (response.ok) {
                 return response.text();
             } else {
-                if (response.status === 200) {
-                    menu.state.menuElements.logout.style.display = 'block';
-                    menu.state.menuElements.login.style.display = 'none';
-                    menu.state.menuElements.signup.style.display = 'none';
-                } else {
-                    menu.state.menuElements.logout.style.display = 'none';
-                    menu.state.menuElements.login.style.display = 'block';
-                    menu.state.menuElements.signup.style.display = 'block';
-                }
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+            }
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                menu.state.menuElements.logout.style.display = 'block';
+                menu.state.menuElements.login.style.display = 'none';
+                menu.state.menuElements.signup.style.display = 'none';
+            } else {
+                menu.state.menuElements.logout.style.display = 'none';
+                menu.state.menuElements.login.style.display = 'block';
+                menu.state.menuElements.signup.style.display = 'block';
             }
         })
         .catch(function (error) {
