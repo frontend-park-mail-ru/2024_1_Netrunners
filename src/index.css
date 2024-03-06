@@ -68,11 +68,33 @@ input:focus{
 }
 
 
+.popular-now-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  width: 100%;
+}
+
 .films-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px;
+}
+
+.film-card:hover {
+  transform: scale(1.05);
+}
+
+.film-content {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Центрирование по горизонтали */
+  padding-top: 13px;
+  padding-left: 15px;
 }
 
 .film-card {
@@ -86,33 +108,14 @@ input:focus{
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   background: var(--card-background) center;
-}
-
-.film-card:hover {
-  transform: scale(1.05);
-}
-
-.film-content {
-  padding-top: 13px;
-  padding-left: 15px;
-}
-
-.popular-now-title {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding-left: 50px;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: left;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрирование по вертикали внутри film-content */
 }
 
 .film-image {
   width: auto;
   height: 80%;
-  margin-top: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
   background-size: cover;
   background-position: center;
   border-radius: 15px;
@@ -128,20 +131,9 @@ input:focus{
   text-align: center;
 }
 
-.films-section {
-  border: 2px solid #262626;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-.form-section {
-  border: 2px solid #262626;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
 .film-title {
   color: #ffffff;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
 }
