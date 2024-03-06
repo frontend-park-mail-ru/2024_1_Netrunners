@@ -172,7 +172,7 @@ function renderSignup() {
         const password = passwordInput.value;
         const passw_conf = passwConfInput.value;
         const username = usernameInput.value;
-        const user = { password, passw_conf, login, username };
+        const user = { password, login, username };
         const url = 'http://94.139.247.246:8081/auth/signup';
         if (!validators.username(username)){
             alert("Имя пользователя слишком короткое");
