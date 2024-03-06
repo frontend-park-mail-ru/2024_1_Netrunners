@@ -1,5 +1,3 @@
-
-
 export const validators = {
     login: (login= '') => validateEmail(login),
     username: (username) => validateUsername(username),
@@ -8,7 +6,7 @@ export const validators = {
 
 const   MIN_USERNAME_LENGTH = 4;
 
-const loginRegular = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const loginRegular = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const validateEmail = (email = '') => {
     return loginRegular.test(email);

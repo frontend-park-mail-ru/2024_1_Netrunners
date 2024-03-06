@@ -1,11 +1,8 @@
 import {Menu} from "./components/Menu/Menu.js";
 import {safe} from "./utils/safe.js";
 import {fetchRequest} from "./api/fetch.js";
-import {validators} from "./utils/validate";
+import {validators} from "./utils/validate.js";
 
-/*export const createRegistation = () => {
-    renderSignup();
-};*/
 
 const rootElement = document.getElementById('root');
 const logoElement = document.createElement('div');
@@ -59,24 +56,26 @@ function renderMenu() {
             goToPage(target);
         }
     });
-    let isAuthorized = false
-    const url = 'http://94.139.247.246:3000/auth/check';
-    fetchRequest(url)
+    const url = 'http://94.139.247.246:8081/auth/check';
+    fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                isAuthorized = true
                 return response.text();
             } else {
-                if (isAuthorized) {
-                    menu.state.menuElements.logout.style.display = 'block';
-                    menu.state.menuElements.login.style.display = 'none';
-                    menu.state.menuElements.signup.style.display = 'none';
-                } else {
-                    menu.state.menuElements.logout.style.display = 'none';
-                    menu.state.menuElements.login.style.display = 'block';
-                    menu.state.menuElements.signup.style.display = 'block';
-                }
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+            }
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                menu.state.menuElements.logout.style.display = 'block';
+                menu.state.menuElements.login.style.display = 'none';
+                menu.state.menuElements.signup.style.display = 'none';
+                menu.state.menuElements.profile.style.display = 'block';
+            } else {
+                menu.state.menuElements.logout.style.display = 'none';
+                menu.state.menuElements.login.style.display = 'block';
+                menu.state.menuElements.signup.style.display = 'block';
+                menu.state.menuElements.profile.style.display = 'none';
             }
         })
         .catch(function (error) {
@@ -115,22 +114,28 @@ function renderLogin() {
         const password = passwordInput.value;
 
         const user = {login: login, password: password};
-        const url = 'http://94.139.247.246:3000/auth/login';
+        const url = 'http://94.139.247.246:8081/auth/login';
 
         fetchRequest(url, 'POST', user)
             .then((response) => {
                 if (response.ok) {
-                    menu.state.menuElements.logout.style.display = 'block';
-                    menu.state.menuElements.login.style.display = 'none';
-                    menu.state.menuElements.signup.style.display = 'none';
                     return response.json();
                 } else {
                     throw new Error('Неверная почта и пароль');
                 }
             })
-            .then((result) => {
-                document.cookie = `jwt_token=${result.token}`;
-                goToPage(menu.state.menuElements.profile);
+            .then((response) => {
+                if (response.status === 200) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.profile.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
+                } else {
+                    menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.none.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'block';
+                    menu.state.menuElements.signup.style.display = 'block';
+                }
             })
             .catch(function (error) {
                 console.error('Произошла ошибка:', error.message);
@@ -168,12 +173,14 @@ function renderSignup() {
         const passw_conf = passwConfInput.value;
         const username = usernameInput.value;
         const user = { password, passw_conf, login, username };
-        const url = 'http://94.139.247.246:3000/auth/signup';
+        const url = 'http://94.139.247.246:8081/auth/signup';
         if (!validators.username(username)){
             alert("Имя пользователя слишком короткое");
+            throw new Error('Имя пользователя слишком короткое');
         }
         if (!validators.login(login)) {
             alert("Поле почта введено некорректно");
+            throw new Error('Почта введена некорректно');
         }
         if (!validators.password(password, passw_conf)){
             alert("Пароли не совпадают");
@@ -182,15 +189,23 @@ function renderSignup() {
         // Все ошибки должны отображаться на алертом, а элементом на странице
         fetchRequest(url,'POST', user)
             .then((response) => {
-                if (response.status === 200) {
-                    menu.state.menuElements.logout.style.display = 'block';
-                    menu.state.menuElements.login.style.display = 'none';
-                    menu.state.menuElements.signup.style.display = 'none';
+                if (response.ok) {
                     goToPage(menu.state.menuElements.profile);
                 } else if (response.status === 400) {
                     throw new Error('Неверная почта или пароль при регистрации');
                 } else {
                     throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+                }
+            })
+            .then((response) =>  {
+                if (response.status === 200) {
+                    menu.state.menuElements.logout.style.display = 'block';
+                    menu.state.menuElements.login.style.display = 'none';
+                    menu.state.menuElements.signup.style.display = 'none';
+                } else {
+                    menu.state.menuElements.logout.style.display = 'none';
+                    menu.state.menuElements.login.style.display = 'block';
+                    menu.state.menuElements.signup.style.display = 'block';
                 }
             })
             .catch(function (error) {
@@ -214,7 +229,7 @@ function renderFilms() {
 
     filmsSection.appendChild(popularNowTitle);
     filmsSection.appendChild(filmsContainer);
-    const url = 'http://94.139.247.246:3000/films/all';
+    const url = 'http://94.139.247.246:8081/films';
     fetchRequest(url)
         .then((response) => {
             if (response.ok) {
@@ -223,34 +238,37 @@ function renderFilms() {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
         })
-        .then((films) => {
-            films.forEach((film) => {
-                const filmCard = document.createElement('div');
-                filmCard.classList.add('film-card');
+        .then((data) => {
+            if (data && data.films && Array.isArray(data.films)) {
+                data.films.forEach((film) => {
+                    const filmCard = document.createElement('div');
+                    filmCard.classList.add('film-card');
 
-                const filmImage = document.createElement('div');
-                filmImage.classList.add('film-image');
-                filmImage.style.backgroundImage = `url('${film.preview_data}')`;
-                filmImage.setAttribute('src', "data:/image/jpg:base64," + films.preview_data)
-                const filmContent = document.createElement('div');
-                filmContent.classList.add('film-content');
+                    const filmImage = document.createElement('img');
+                    filmImage.classList.add('film-image');
+                    filmImage.setAttribute('src', film.preview_data)
+                    const filmContent = document.createElement('div');
+                    filmContent.classList.add('film-content');
 
-                const filmTime = document.createElement('div');
-                filmTime.classList.add('film-time');
-                const durationInSeconds = film.duration;
-                const hours = Math.floor(durationInSeconds / 3600);
-                const minutes = Math.floor((durationInSeconds % 3600) / 60);
-                const formattedTime = `${hours}ч ${minutes}м`;
+                    const filmTime = document.createElement('div');
+                    filmTime.classList.add('film-time');
+                    const durationInSeconds = film.duration;
+                    const hours = Math.floor(durationInSeconds / 3600);
+                    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+                    const formattedTime = `${hours}ч ${minutes}м`;
 
-                filmTime.classList.add('film-time');
-                filmTime.textContent = formattedTime;
+                    filmTime.classList.add('film-time');
+                    filmTime.textContent = formattedTime;
 
-                filmContent.appendChild(filmTime);
-                filmCard.appendChild(filmImage);
-                filmCard.appendChild(filmContent);
+                    filmContent.appendChild(filmTime);
+                    filmCard.appendChild(filmImage);
+                    filmCard.appendChild(filmContent);
 
-                filmsContainer.appendChild(filmCard);
+                    filmsContainer.appendChild(filmCard);
             });
+        } else {
+                console.error('Ошибка: ответ не содержит массив фильмов', data);
+            }
         })
         .catch(function (error) {
             console.error('Произошла ошибка:', error.message);
@@ -274,8 +292,8 @@ function goToPage(menuLinkElement) {
 function renderProfile() {
     const profileElement = document.createElement('div');
 
-    const url = 'http://94.139.247.246:3000/auth/check';
-    fetchRequest(url)
+    const url = 'http://94.139.247.246:8081/auth/check';
+    fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -309,13 +327,11 @@ function renderProfile() {
 
 function renderLogout() {
     const profileElement = document.createElement('div');
+    const url = 'http://94.139.247.246:8081/auth/logout';
 
-    fetchRequest('/logout', 'POST')
+    fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                menu.state.menuElements.logout.style.display = 'none';
-                menu.state.menuElements.login.style.display = 'block';
-                menu.state.menuElements.signup.style.display = 'block';
                 return response.json();
             } else {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
