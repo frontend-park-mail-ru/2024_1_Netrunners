@@ -310,18 +310,9 @@ function renderProfile() {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
         })
-        .then(({ email, images }) => {
-            const span = document.createElement('span');
-            span.textContent = `${email}`;
-            profileElement.appendChild(span);
-
-            if (images && Array.isArray(images)) {
-                const div = document.createElement('div');
-                profileElement.appendChild(div);
-
-                images.forEach(({ src }) => {
-                    div.innerHTML += `<img src="${src}" width="500" alt=""/>`;
-                });
+        .then((response) => {
+            if (response.status === 200) {
+                console.log('чек - удача')
             }
         })
         .catch(function (error) {
