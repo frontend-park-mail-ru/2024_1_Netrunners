@@ -141,3 +141,7 @@ input:focus{
   border-radius: 10px;
   margin-top: 20px;
 }
+
+.film-title {
+  color: #ffffff;
+}
