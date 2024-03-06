@@ -115,6 +115,10 @@ function renderLogin() {
 
         const user = {login: login, password: password};
         const url = 'http://94.139.247.246:8081/auth/login';
+        if (!validators.login(login)) {
+            alert("Поле почта введено некорректно");
+            throw new Error('Почта введена некорректно');
+        }
 
         fetchRequest(url, 'POST', user)
             .then((response) => {
@@ -191,6 +195,7 @@ function renderSignup() {
             .then((response) => {
                 if (response.ok) {
                     goToPage(menu.state.menuElements.profile);
+                    return response;
                 } else if (response.status === 400) {
                     throw new Error('Неверная почта или пароль при регистрации');
                 } else {
