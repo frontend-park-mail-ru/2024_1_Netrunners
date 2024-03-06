@@ -3,9 +3,6 @@ import {safe} from "./utils/safe.js";
 import {fetchRequest} from "./api/fetch.js";
 import {validators} from "./utils/validate.js";
 
-/*export const createRegistation = () => {
-    renderSignup();
-};*/
 
 const rootElement = document.getElementById('root');
 const logoElement = document.createElement('div');
@@ -59,15 +56,13 @@ function renderMenu() {
             goToPage(target);
         }
     });
-    let isAuthorized = false
     const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                isAuthorized = true
                 return response.text();
             } else {
-                if (isAuthorized) {
+                if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
@@ -119,7 +114,7 @@ function renderLogin() {
 
         fetchRequest(url, 'POST', user)
             .then((response) => {
-                if (response.ok) {
+                if (response.status === 200) {
                     menu.state.menuElements.logout.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
@@ -280,7 +275,7 @@ function renderProfile() {
     const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url, 'POST')
         .then((response) => {
-            if (response.ok) {
+            if (response.status === 200) {
                 return response.json();
             } else if (response.status === 401) {
                 goToPage(menu.state.menuElements.login);
