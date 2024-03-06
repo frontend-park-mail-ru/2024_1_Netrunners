@@ -56,11 +56,12 @@ function renderMenu() {
             goToPage(target);
         }
     });
+    window.localStorage.getItem(token);
     const url = 'http://94.139.247.246:8081/auth/check';
     fetchRequest(url, 'POST')
         .then((response) => {
             if (response.ok) {
-                return response;
+                return response.json();
             } else {
                 throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
             }
@@ -134,6 +135,7 @@ function renderLogin() {
                     menu.state.menuElements.profile.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
+                    window.localStorage.setItem('refresh', token);
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
                     menu.state.menuElements.profile.style.display = 'none';
@@ -209,6 +211,7 @@ function renderSignup() {
                     menu.state.menuElements.profile.style.display = 'block';
                     menu.state.menuElements.login.style.display = 'none';
                     menu.state.menuElements.signup.style.display = 'none';
+                    window.localStorage.setItem('refresh', token);
                 } else {
                     menu.state.menuElements.logout.style.display = 'none';
                     menu.state.menuElements.profile.style.display = 'none';
