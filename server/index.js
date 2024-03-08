@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
 
 const port = process.env.PORT || 8080;
 const ipAddress = '94.139.247.246';
+const localHost = '127.0.0.1'
 
-app.listen(port, ipAddress, function () {
-    console.log(`Server listening at http://${ipAddress}:${port}`);
+app.listen(port, localHost, function () {
+    console.log(`Server listening at http://${localHost}:${port}`);
 });
