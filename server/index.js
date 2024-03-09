@@ -18,13 +18,13 @@ app.use(cookie());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 const port = process.env.PORT || 8080;
 const ipAddress = '94.139.247.246';
-const localHost = '127.0.0.1'
+const localHost = '127.0.0.1';
 
-app.listen(port, localHost, function () {
-    console.log(`Server listening at http://${localHost}:${port}`);
+app.listen(port, localHost, function() {
+  console.log(`Server listening at http://${localHost}:${port}`);
 });
