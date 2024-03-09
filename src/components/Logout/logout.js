@@ -1,5 +1,5 @@
 import * as authApi from '../../api/auth.js';
-import {menu} from '../../index.js';
+import {goToPage, menu, renderMenu} from '../../index.js';
 
 export function renderLogout() {
   const profileElement = document.createElement('div');
@@ -13,8 +13,8 @@ export function renderLogout() {
         }
       })
       .then(() => {
-        menu.state.menuElements.films.classList.remove('active');
-        window.location.reload();
+          renderMenu();
+          goToPage(menu.state.menuElements.films);
       })
       .catch(function(error) {
         console.error('Произошла ошибка:', error.message);

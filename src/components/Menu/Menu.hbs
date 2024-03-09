@@ -1,3 +1,16 @@
-{{#each items}}
-    <a class="{{this.className}}" href="{{this.href}}" data-section="{{this.key}}">{{this.text}}</a>
-{{/each}}
+<div class="container">
+    <div class="logo">
+        <img src="../../img/logo/logo.svg" alt="Логотип">
+    </div>
+    <div class="menu">
+        {{#each items}}
+            <a class="{{this.className}}" href="{{this.href}}" data-section="{{this.key}}">{{this.text}}</a>
+        {{/each}}
+    </div>
+    <div class="nav-icon">
+        <img src="../../img/menu/search.svg" alt="Логотип">
+    </div>
+    <div class="nav-icon">
+        <img src="../../img/menu/notifications.svg" alt="Логотип">
+    </div>
+</div>

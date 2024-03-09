@@ -11,13 +11,8 @@ export function createInput(type, text, name) {
 
 export function updateMenuDisplay(responseStatus) {
   const showLoggedIn = responseStatus === 200;
-
   menu.state.menuElements.logout.style.display = showLoggedIn ? 'block':'none';
   menu.state.menuElements.profile.style.display = showLoggedIn ? 'block':'none';
   menu.state.menuElements.login.style.display = showLoggedIn ? 'none':'block';
   menu.state.menuElements.signup.style.display = showLoggedIn ? 'none':'block';
-
-  if (showLoggedIn) {
-    goToPage(menu.state.menuElements.films);
-  }
 }

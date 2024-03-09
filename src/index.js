@@ -10,12 +10,10 @@ import {renderLogout} from './components/Logout/logout.js';
 
 
 const rootElement = document.getElementById('root');
-const logoElement = document.createElement('div');
 const menuElement = document.createElement('aside');
 const pageElement = document.createElement('main');
 
 
-rootElement.appendChild(logoElement);
 rootElement.appendChild(menuElement);
 rootElement.appendChild(pageElement);
 
@@ -51,7 +49,7 @@ const config = {
 
 export const menu = new Menu(menuElement, config);
 
-function renderMenu() {
+export function renderMenu() {
   menu.render();
   menuElement.addEventListener('click', (e) => {
     const {target} = e;
@@ -72,7 +70,7 @@ function renderMenu() {
       .then((response) => {
         updateMenuDisplay(response.status, menu);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error('Произошла ошибка:', error.message);
       });
 }
