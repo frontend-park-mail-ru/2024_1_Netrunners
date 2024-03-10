@@ -1,7 +1,7 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {createInput, updateMenuDisplay} from '../../utils/displayHelper.js';
-import {goToPage, menu, renderMenu} from '../../index.js';
+import {goToPage, menu} from '../../index.js';
 
 export function renderSignup() {
   const form = document.createElement('form');
@@ -54,7 +54,7 @@ export function renderSignup() {
           }
         })
         .then((response) => {
-          renderMenu();
+          updateMenuDisplay(response.status)
           if (response.status === 200) {
             goToPage(menu.state.menuElements.films);
           } else if (response.status === 400) {

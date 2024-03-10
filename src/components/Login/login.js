@@ -40,7 +40,7 @@ export function renderLogin() {
           }
         })
         .then((response) => {
-          renderMenu();
+          updateMenuDisplay(response.status);
           if (response.status === 200) goToPage(menu.state.menuElements.films);
         })
         .catch(function(error) {

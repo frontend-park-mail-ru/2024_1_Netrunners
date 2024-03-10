@@ -1,5 +1,4 @@
 import {Menu} from './components/Menu/Menu.js';
-import {safe} from './utils/safe.js';
 import {updateMenuDisplay} from './utils/displayHelper.js';
 import * as authApi from './api/auth.js';
 import {renderFilms} from './components/Films/films.js';
@@ -36,7 +35,7 @@ const config = {
     },
     profile: {
       href: '/profile',
-      text: safe('Профиль'),
+      text: 'Профиль',
       render: renderProfile,
     },
     logout: {
@@ -68,7 +67,7 @@ export function renderMenu() {
         }
       })
       .then((response) => {
-        updateMenuDisplay(response.status, menu);
+        updateMenuDisplay(response.status);
       })
       .catch(function (error) {
         console.error('Произошла ошибка:', error.message);
