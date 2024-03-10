@@ -1,4 +1,21 @@
 @import "components/Menu/Menu.css";
+@import "components/Films/films.css";
+@import "components/Login/auth.css";
+
+:root {
+  --neon-main: #ff06b5;
+  --neon-secondary: #ff80d7;
+  --neutral-dark: #0F0F0F;
+  --neutral-main: #141414;
+  --shadow-color: #0000004C;
+  --hover-color: #1A1A1A;
+  --neutral-light: #212121;
+  --border-color: #262626;
+  --input-background: #FFFFFF33;
+  --text-secondary: #999999;
+  --input-font: 'Roboto', sans-serif;
+  --main-font: Helvetica, Arial, sans-serif;
+}
 
 #root {
   display: flex;
@@ -6,150 +23,13 @@
   align-items: center;
 }
 
-.logo > img {
-  margin-right: 32px;
-  margin-top: 20px;
-  width: 300px;
-}
-
-.nav-icon > img {
-  margin-left: 32px;
-  margin-top: 20px;
-  width: 25px;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 body {
-  --netfunner-color: #ff06b5;
-  --background-color: #141414;
-  --card-background: #212121;
-  --aside-background: #0F0F0F;
-  font-family: Helvetica, Arial, sans-serif;
-  background-color: var(--background-color);
+  font-family: var(--main-font);
+  background-color: var(--neutral-main);
   margin: 0;
   padding: 0;
 }
 
 main {
-  padding: 0 40px 40px;
+  padding: 0 32px 48px;
 }
-
-input {
-  height: 60px;
-  font-size: 40px;
-  margin-bottom: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  padding: 0 15px;
-  border-width: 0;
-  line-height: 40px;
-  border-radius: 20px;
-  color: white;
-  background: rgba(255, 255, 255, .2);
-  font-family: 'Roboto', sans-serif;
-}
-
-input:focus{
-  outline: white solid thin;
-}
-
-.submit-button{
-  margin-top: 30px;
-  background: none;
-  outline: var(--netfunner-color) solid medium;
-}
-
-.submit-button:hover{
-  color: #ff80d7;
-  background-color: #1A1A1A;
-}
-
-
-.popular-now-title {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding-left: 50px;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: left;
-  width: 100%;
-}
-
-.films-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
-}
-
-.film-card:hover {
-  transform: scale(1.05);
-}
-
-.film-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 13px;
-  padding-left: 15px;
-}
-
-.film-card {
-  width: 230px;
-  height: 360px;
-  margin: 16px;
-  background-size: cover;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  background: var(--card-background) center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.film-image {
-  width: auto;
-  height: 80%;
-  background-size: cover;
-  background-position: center;
-  border-radius: 15px;
-  margin-top: 15px;
-}
-
-.film-time {
-  font-size: 12px;
-  width: 20%;
-  background-color: var(--background-color);
-  color: #999999;
-  padding: 7px;
-  border-radius: 15px;
-  text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.film-title {
-  color: #ffffff;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.films-section {
-  border: 2px solid #262626;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-

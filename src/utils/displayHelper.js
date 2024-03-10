@@ -1,4 +1,4 @@
-import {goToPage, menu} from '../index.js';
+import {menu} from '../index.js';
 
 export function createInput(type, text, name) {
   const input = document.createElement('input');
