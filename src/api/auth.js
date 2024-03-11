@@ -1,21 +1,21 @@
-import {fetchRequest, LOCAL_IP} from './fetch.js';
+import {fetchRequest, IP} from './fetch.js';
 
 export function check() {
-  const url = LOCAL_IP + 'auth/check';
+  const url = IP + 'auth/check';
   return fetchRequest(url, 'POST');
 }
 
 export function login(user) {
-  const url = LOCAL_IP + 'auth/login';
+  const url = IP + 'auth/login';
   return fetchRequest(url, 'POST', user);
 }
 
 export function signup(user) {
-  const url = LOCAL_IP + 'auth/signup';
+  const url = IP + 'auth/signup';
   return fetchRequest(url, 'POST', user);
 }
 
 export function logout() {
-  const url = LOCAL_IP + 'auth/logout';
+  const url = IP + 'auth/logout';
   return fetchRequest(url, 'POST');
 }
