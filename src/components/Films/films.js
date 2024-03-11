@@ -1,19 +1,9 @@
+import {timeConvert}   from "../../utils/timeConvert.js";
 import * as filmsApi from '../../api/films.js';
 
 export function renderFilms() {
-  const filmsSection = document.createElement('div');
-  filmsSection.classList.add('films-section');
-
-  const filmsContainer = document.createElement('div');
-  filmsContainer.classList.add('films-container');
-
-  const popularNowTitle = document.createElement('div');
-  popularNowTitle.classList.add('popular-now-title');
-  popularNowTitle.textContent = 'Популярно сейчас';
-
-  filmsSection.appendChild(popularNowTitle);
-  filmsSection.appendChild(filmsContainer);
-
+    const filmsSection = document.getElementsByClassName('films-section');
+  const template = Handlebars.templates['Films.hbs'];
   filmsApi.getAll()
       .then((response) => {
         if (response.ok) {
@@ -24,42 +14,22 @@ export function renderFilms() {
       })
       .then((data) => {
         if (data && data.films && Array.isArray(data.films)) {
-          data.films.forEach((film) => {
-            const filmCard = document.createElement('div');
-            filmCard.classList.add('film-card');
-
-            const filmImage = document.createElement('img');
-            filmImage.classList.add('film-image');
-            filmImage.setAttribute('src', film.preview_data);
-            const filmContent = document.createElement('div');
-            filmContent.classList.add('film-content');
-
-            const filmTitle = document.createElement('div');
-            filmTitle.classList.add('film-title');
-
-            filmTitle.textContent = film.name;
-
-            const filmTime = document.createElement('div');
-            filmTime.classList.add('film-time');
-            const durationInSeconds = film.duration;
-            const hours = Math.floor(durationInSeconds / 3600);
-            const minutes = Math.floor((durationInSeconds % 3600) / 60);
-            filmTime.textContent = `${hours}ч ${minutes}м`;
-
-            filmContent.appendChild(filmTitle);
-            filmContent.appendChild(filmTime);
-            filmCard.appendChild(filmImage);
-            filmCard.appendChild(filmContent);
-
-            filmsContainer.appendChild(filmCard);
-          });
+          const filmsWithHours = data.films.map(film => ({
+            ...film,
+            duration: timeConvert.timeIntoText(film.duration)
+          }))
+            document.querySelector('main').innerHTML = template({filmsWithHours});
+            console.log(filmsSection);
+            console.log(filmsSection[0]);
+          return filmsSection[0];
         } else {
           console.error('Ошибка: ответ не содержит массив фильмов', data);
+          throw new Error('Ошибка: ответ не содержит массив фильмов');
         }
       })
       .catch(function(error) {
         console.error('Произошла ошибка:', error.message);
       });
-
-  return filmsSection;
+  //console.log(filmsSection);
+  return filmsSection[0];
 }

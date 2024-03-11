@@ -1,27 +1,16 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {createInput, updateMenuDisplay} from '../../utils/displayHelper.js';
-import {goToPage, menu} from '../../index.js';
+import {goToPage, menu, renderMenu} from '../../index.js';
 
 export function renderSignup() {
-  const form = document.createElement('form');
-  form.classList.add('form-section');
-
-  const emailInput = createInput('email', 'Почта', 'email');
-  const usernameInput = createInput('string', 'Логин', 'username');
-  const passwordInput = createInput('password', 'Пароль', 'password');
-  const passConfInput = createInput('password', 'Подтвердить пароль', 'passConf');
-
-  const submitBtn = document.createElement('input');
-  submitBtn.classList.add('submit-button');
-  submitBtn.type = 'submit';
-  submitBtn.value = 'Зарегистрироваться!';
-
-  form.appendChild(emailInput);
-  form.appendChild(usernameInput);
-  form.appendChild(passwordInput);
-  form.appendChild(passConfInput);
-  form.appendChild(submitBtn);
+  const template = Handlebars.templates['Signup.hbs'];
+  document.querySelector('main').innerHTML = template();
+  const form = document.getElementsByClassName('form-section')[0];
+  const emailInput = document.getElementsByName('email')[0];
+  const usernameInput = document.getElementsByName('username')[0];
+  const passConfInput = document.getElementsByName('passConf')[0];
+  const passwordInput = document.getElementsByName('password')[0];
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -54,7 +43,7 @@ export function renderSignup() {
           }
         })
         .then((response) => {
-          updateMenuDisplay(response.status)
+          renderMenu();
           if (response.status === 200) {
             goToPage(menu.state.menuElements.films);
           } else if (response.status === 400) {

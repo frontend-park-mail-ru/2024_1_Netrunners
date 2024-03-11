@@ -4,22 +4,12 @@ import {createInput, updateMenuDisplay} from '../../utils/displayHelper.js';
 import {goToPage, menu, renderMenu} from '../../index.js';
 
 export function renderLogin() {
-  const form = document.createElement('form');
-  form.classList.add('form-section');
-
-  const emailInput = createInput('email', 'Почта', 'email');
-  const passwordInput = createInput('password', 'Пароль', 'password');
-
-  const submitBtn = document.createElement('input');
-  submitBtn.classList.add('submit-button');
-  submitBtn.type = 'submit';
-  submitBtn.value = 'Войти!';
-
-  form.appendChild(emailInput);
-  form.appendChild(passwordInput);
-  form.appendChild(submitBtn);
-
-  form.addEventListener('submit', (e) => {
+    const template = Handlebars.templates['Login.hbs'];
+    document.querySelector('main').innerHTML = template();
+    const form = document.getElementsByClassName('form-section');
+    const emailInput = document.querySelector('input[type="email"]');
+    const passwordInput = document.querySelector('input[type="password"]');
+    form[0].addEventListener('submit', (e) => {
     e.preventDefault();
 
     const login = emailInput.value.trim();
@@ -34,19 +24,22 @@ export function renderLogin() {
     authApi.login(user)
         .then((response) => {
           if (response.ok) {
-            return response.json();
+              return response.json();
           } else {
-            throw new Error('Неверная почта и пароль');
+              //var loginError =
+              throw new Error('Неверная почта и пароль');
+
           }
         })
         .then((response) => {
-          updateMenuDisplay(response.status);
-          if (response.status === 200) goToPage(menu.state.menuElements.films);
+            renderMenu();
+            if (response.status === 200) goToPage(menu.state.menuElements.films);
         })
-        .catch(function(error) {
-          console.error('Произошла ошибка:', error.message);
+        .catch(function (error) {
+            console.error('Произошла ошибка:', error.message);
         });
-  });
+    });
+    console.log(form[0]);
+    return form[0]
 
-  return form;
 }
