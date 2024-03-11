@@ -1,8 +1,7 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {createInput, updateMenuDisplay} from '../../utils/displayHelper.js';
-import {goToPage, menu, renderMenu} from '../../index.js';
-
+import {updateMenuDisplay} from '../../utils/displayHelper.js';
+import {goToPage, menu} from '../../index.js';
 export function renderSignup() {
   const template = Handlebars.templates['Signup.hbs'];
   document.querySelector('main').innerHTML = template();
@@ -22,15 +21,20 @@ export function renderSignup() {
     const user = {password, login, username};
 
     if (!validators.username(username)) {
-      alert('Имя пользователя слишком короткое');
+      const errorField = document.getElementById('signup-errors');
+      errorField.innerText = 'Имя пользователя слишком короткое';
       throw new Error('Имя пользователя слишком короткое');
     }
+
     if (!validators.login(login)) {
-      alert('Поле почта введено некорректно');
+      const errorField = document.getElementById('signup-errors');
+      errorField.innerText = 'Поле почта введено некорректно';
       throw new Error('Почта введена некорректно');
     }
+
     if (!validators.password(password, passConf)) {
-      alert('Пароли не совпадают');
+      const errorField = document.getElementById('signup-errors');
+      errorField.innerText = 'Пароли не совпадают';
       throw new Error('Пароли не совпадают');
     }
 
@@ -38,22 +42,20 @@ export function renderSignup() {
         .then((response) => {
           if (response.ok) {
             return response.json();
-          } else {
-            throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
           }
+          throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
         })
         .then((response) => {
-          renderMenu();
-          if (response.status === 200) {
-            goToPage(menu.state.menuElements.films);
-          } else if (response.status === 400) {
-            throw new Error('Неверная почта или пароль при регистрации');
+          updateMenuDisplay(response.status);
+          if (response.status === 400) {
+            const errorField = document.getElementById('signup-errors');
+            errorField.innerText = 'Такой пользователь уже существует';
+            throw new Error('Такой пользователь уже существует');
           }
+          goToPage(menu.state.menuElements.films);
         })
         .catch(function(error) {
           console.error('Произошла ошибка:', error.message);
         });
   });
-
-  return form;
 }

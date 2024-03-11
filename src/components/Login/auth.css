@@ -34,3 +34,10 @@ input:focus {
     color: var(--neon-secondary);
     background-color: var(--hover-color);
 }
+
+.error-login {
+    color: red;
+    font-size: 16px;
+    margin-top: 8px;
+    padding: 8px;
+}

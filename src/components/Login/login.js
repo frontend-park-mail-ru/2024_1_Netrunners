@@ -1,15 +1,15 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {createInput, updateMenuDisplay} from '../../utils/displayHelper.js';
-import {goToPage, menu, renderMenu} from '../../index.js';
+import {updateMenuDisplay} from '../../utils/displayHelper.js';
+import {goToPage, menu} from '../../index.js';
 
 export function renderLogin() {
-    const template = Handlebars.templates['Login.hbs'];
-    document.querySelector('main').innerHTML = template();
-    const form = document.getElementsByClassName('form-section');
-    const emailInput = document.querySelector('input[type="email"]');
-    const passwordInput = document.querySelector('input[type="password"]');
-    form[0].addEventListener('submit', (e) => {
+  const template = Handlebars.templates['Login.hbs'];
+  document.querySelector('main').innerHTML = template();
+  const form = document.getElementsByClassName('form-section');
+  const emailInput = document.querySelector('input[type="email"]');
+  const passwordInput = document.querySelector('input[type="password"]');
+  form[0].addEventListener('submit', (e) => {
     e.preventDefault();
 
     const login = emailInput.value.trim();
@@ -17,29 +17,29 @@ export function renderLogin() {
     const user = {login: login, password: password};
 
     if (!validators.login(login)) {
-      alert('Поле почта введено некорректно');
+      const errorField = document.getElementById('login-errors');
+      errorField.innerText = 'Поле почта введено некорректно';
       throw new Error('Почта введена некорректно');
     }
 
     authApi.login(user)
         .then((response) => {
           if (response.ok) {
-              return response.json();
-          } else {
-              //var loginError =
-              throw new Error('Неверная почта и пароль');
-
+            return response.json();
           }
         })
         .then((response) => {
-            renderMenu();
-            if (response.status === 200) goToPage(menu.state.menuElements.films);
+          updateMenuDisplay(response.status);
+          if (response.status === 200) {
+            goToPage(menu.state.menuElements.films);
+            return;
+          }
+          const errorField = document.getElementById('login-errors');
+          errorField.innerText = 'Неверная почта или пароль';
+          throw new Error('Неверная почта или пароль');
         })
-        .catch(function (error) {
-            console.error('Произошла ошибка:', error.message);
+        .catch(function(error) {
+          console.error('Произошла ошибка:', error.message);
         });
-    });
-    console.log(form[0]);
-    return form[0]
-
+  });
 }

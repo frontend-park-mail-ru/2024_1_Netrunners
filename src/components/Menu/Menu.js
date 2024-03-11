@@ -27,7 +27,7 @@ export class Menu {
     const template = Handlebars.templates['Menu.hbs'];
     const items = this.items.map(([key, {href, text}], index) => {
       let className = 'menu-item';
-      if (index === 0) {
+      if (!index) {
         className += ' active';
       }
       return {key, href, text, className};

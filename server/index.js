@@ -6,6 +6,7 @@ const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const {LOCAL_IP} = require("../src/api/fetch");
 
 const app = express();
 
@@ -22,9 +23,8 @@ app.get('/', (req, res) => {
 });
 
 const port = process.env.PORT || 8080;
-const ipAddress = '94.139.247.246';
-const localHost = '127.0.0.1';
 
-app.listen(port, localHost, function() {
-  console.log(`Server listening at http://${localHost}:${port}`);
+
+app.listen(port, LOCAL_IP, function() {
+  console.log(`Server listening at http://${LOCAL_IP}:${port}`);
 });

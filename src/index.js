@@ -62,14 +62,13 @@ export function renderMenu() {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
-          throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
         }
+        throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
       })
       .then((response) => {
         updateMenuDisplay(response.status);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error('Произошла ошибка:', error.message);
       });
 }
@@ -81,9 +80,7 @@ export function goToPage(menuLinkElement) {
   menuLinkElement.classList.add('active');
   menu.state.activeMenuLink = menuLinkElement;
 
-  const element = config.menu[menuLinkElement.dataset.section].render();
-
-  pageElement.appendChild(element);
+  config.menu[menuLinkElement.dataset.section].render();
 }
 
 renderMenu();
