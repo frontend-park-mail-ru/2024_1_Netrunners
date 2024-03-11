@@ -2,6 +2,13 @@ import * as authApi from '../../api/auth.js';
 import {goToPage, menu} from '../../index.js';
 import {updateMenuDisplay} from '../../utils/displayHelper.js';
 
+/**
+ * Отправляет запрос на сервер для выхода из аккаунта,
+ * обновляет отображение меню и перенаправляет
+ * на страницу фильмов при успешном выходе.
+ * @function
+ * @return {void}
+ */
 export function renderLogout() {
   authApi.logout()
       .then((response) => {

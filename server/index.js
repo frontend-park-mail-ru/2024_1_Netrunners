@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 const port = process.env.PORT || 8080;
-const IP = '127.0.0.1'
+const IP = '127.0.0.1';
 
 app.listen(port, IP, function() {
   console.log(`Server listening at http://${IP}:${port}`);

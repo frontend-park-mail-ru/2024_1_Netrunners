@@ -1,5 +1,14 @@
 export const IP = 'http://127.0.0.1:8081/';
 
+
+/**
+ * @function
+ * @param {string} url - URL запроса
+ * @param {string} method - метод запроса
+ * @param {Object} body - тело запроса (при наличии)
+ * @param {Object} headers - Заголовки запроса (при наличии)
+ * @return {Promise} promise - Объект запроса
+ */
 export const fetchRequest = (url, method = 'GET', body = null, headers = {})=>{
   const options = {
     method: method,

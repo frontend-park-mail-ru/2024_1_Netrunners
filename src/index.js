@@ -48,12 +48,19 @@ const config = {
 
 export const menu = new Menu(menuElement, config);
 
+/**
+ * Рендерит меню, добавляет обработчик событий для навигации,
+ * проверяет статус аутентификации пользователя и
+ * соответственно обновляет отображение меню.
+ * @function
+ * @return {void}
+ */
 export function renderMenu() {
   menu.render();
   menuElement.addEventListener('click', (e) => {
     const {target} = e;
 
-    if (target.tagName.toLowerCase() === 'a' || target instanceof HTMLAnchorElement) {
+    if (target.tagName.toLowerCase() === 'a') {
       e.preventDefault();
       goToPage(target);
     }
@@ -73,6 +80,14 @@ export function renderMenu() {
       });
 }
 
+/**
+ * Переходит на указанную страницу, очищает содержимое элемента страницы,
+ * обновляет стили активного пункта меню,
+ * и отображает соответствующую секцию страницы.
+ * @function
+ * @param {HTMLAnchorElement} menuLinkElement
+ * @return {void}
+ */
 export function goToPage(menuLinkElement) {
   pageElement.innerHTML = '';
 

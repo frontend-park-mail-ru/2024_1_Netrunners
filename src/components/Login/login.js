@@ -3,6 +3,13 @@ import * as authApi from '../../api/auth.js';
 import {updateMenuDisplay} from '../../utils/displayHelper.js';
 import {goToPage, menu} from '../../index.js';
 
+/**
+ * Рендерит страницу входа в систему, обрабатывает событие отправки формы,
+ * валидирует введенные данные и отправляет запрос
+ * на сервер для аутентификации пользователя.
+ * @function
+ * @return {void}
+ */
 export function renderLogin() {
   const template = Handlebars.templates['Login.hbs'];
   document.querySelector('main').innerHTML = template();

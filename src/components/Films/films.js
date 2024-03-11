@@ -1,6 +1,12 @@
 import {timeConvert} from '../../utils/timeConvert.js';
 import * as filmsApi from '../../api/films.js';
 
+/**
+ * Рендерит страницу фильмов, получает данные о фильмах с сервера,
+ * преобразует данные и отображает список фильмов на странице.
+ * @function
+ * @return {void}
+ */
 export function renderFilms() {
   const filmsSection = document.getElementsByClassName('films-section');
   const template = Handlebars.templates['Films.hbs'];

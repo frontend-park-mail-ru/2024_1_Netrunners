@@ -1,6 +1,13 @@
 import * as authApi from '../../api/auth.js';
 import {goToPage, menu} from '../../index.js';
 
+/**
+ * Рендерит страницу профиля пользователя, проверяет статус аутентификации,
+ * и в зависимости от статуса отображает профиль пользователя
+ * или перенаправляет на страницу входа.
+ * @function
+ * @return {void}
+ */
 export function renderProfile() {
   authApi.check()
       .then((response) => {

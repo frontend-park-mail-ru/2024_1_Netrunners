@@ -1,14 +1,12 @@
 import {menu} from '../index.js';
 
-export function createInput(type, text, name) {
-  const input = document.createElement('input');
-  input.type = type;
-  input.name = name;
-  input.placeholder = text;
-
-  return input;
-}
-
+/**
+ * Обновляет отображение элементов меню
+ * в зависимости от статуса аутентификации пользователя.
+ * @function
+ * @param {number} responseStatus - Статус ответа от сервера.
+ * @return {void}
+ */
 export function updateMenuDisplay(responseStatus) {
   const showLoggedIn = responseStatus === 200;
   menu.state.menuElements.logout.style.display = showLoggedIn ? 'block':'none';

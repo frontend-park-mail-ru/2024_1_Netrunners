@@ -2,6 +2,14 @@ import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {updateMenuDisplay} from '../../utils/displayHelper.js';
 import {goToPage, menu} from '../../index.js';
+
+/**
+ * Рендерит страницу регистрации, обрабатывает событие отправки формы,
+ * валидирует введенные данные и отправляет запрос
+ * на сервер для регистрации пользователя.
+ * @function
+ * @return {void}
+ */
 export function renderSignup() {
   const template = Handlebars.templates['Signup.hbs'];
   document.querySelector('main').innerHTML = template();
@@ -32,7 +40,13 @@ export function renderSignup() {
       throw new Error('Почта введена некорректно');
     }
 
-    if (!validators.password(password, passConf)) {
+    if (!validators.password(password)) {
+      const errorField = document.getElementById('signup-errors');
+      errorField.innerText = 'Пароль слишком короткий';
+      throw new Error('Пароль слишком короткий');
+    }
+
+    if (!validators.passwordConf(password, passConf)) {
       const errorField = document.getElementById('signup-errors');
       errorField.innerText = 'Пароли не совпадают';
       throw new Error('Пароли не совпадают');
