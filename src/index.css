@@ -1,0 +1,36 @@
+@import "components/Menu/Menu.css";
+@import "components/Films/films.css";
+@import "components/Login/auth.css";
+@import "components/Signup/signup.css";
+
+:root {
+  --neon-main: #ff06b5;
+  --neon-secondary: #ff80d7;
+  --neutral-dark: #0F0F0F;
+  --neutral-main: #141414;
+  --shadow-color: #0000004C;
+  --hover-color: #1A1A1A;
+  --neutral-light: #212121;
+  --border-color: #262626;
+  --input-background: #FFFFFF33;
+  --text-secondary: #999999;
+  --input-font: 'Roboto', sans-serif;
+  --main-font: Helvetica, Arial, sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  font-family: var(--main-font);
+  background-color: var(--neutral-main);
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 0 32px 48px;
+}

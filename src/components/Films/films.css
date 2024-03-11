@@ -1,0 +1,82 @@
+
+.popular-now-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    padding-left: 32px;
+    color: white;
+    text-align: left;
+    width: 100%;
+}
+
+.films-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 32px;
+}
+
+.film-card:hover {
+    transform: scale(1.05);
+}
+
+.film-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 16px;
+    padding-left: 16px;
+}
+
+.film-card {
+    width: 230px;
+    height: 360px;
+    margin: 16px;
+    background-size: cover;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px var(--shadow-color);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    background: var(--neutral-light) center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.film-image {
+    width: auto;
+    height: 80%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    margin-top: 16px;
+}
+
+.film-time {
+    font-size: 12px;
+    width: 20%;
+    background-color: var(--neutral-main);
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: 16px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.film-title {
+    color: white;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.films-section {
+    border: 2px solid var(--border-color);
+    padding: 32px;
+    border-radius: 16px;
+    margin-top: 32px;
+}
