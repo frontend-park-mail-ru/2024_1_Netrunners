@@ -1,5 +1,4 @@
 import {Menu} from './components/Menu/Menu.js';
-import {updateMenuDisplay} from './utils/displayHelper.js';
 import * as authApi from './api/auth.js';
 import {renderFilms} from './components/Films/films.js';
 import {renderLogin} from './components/Login/login.js';
@@ -9,7 +8,7 @@ import {renderLogout} from './components/Logout/logout.js';
 
 
 const rootElement = document.getElementById('root');
-const menuElement = document.createElement('aside');
+const menuElement = document.createElement('nav');
 const pageElement = document.createElement('main');
 
 
@@ -18,21 +17,28 @@ rootElement.appendChild(pageElement);
 
 const config = {
   menu: {
-    films: {
-      href: '/films',
-      text: 'Фильмы',
+    home: {
+      href: '/home',
+      text: 'Главная',
       render: renderFilms,
     },
-    login: {
-      href: '/login',
-      text: 'Авторизоваться',
-      render: renderLogin,
+    films: {
+      href: '/films',
+      text: 'Фильмы и сериалы',
+      render: renderFilms,
     },
-    signup: {
-      href: '/signup',
-      text: 'Регистрация',
-      render: renderSignup,
+    support: {
+      href: '/support',
+      text: 'Поддержка',
+      render: renderFilms,
     },
+    subscription: {
+      href: '/subscription',
+      text: 'Подписки',
+      render: renderFilms,
+    },
+  },
+  authElements: {
     profile: {
       href: '/profile',
       text: 'Профиль',
@@ -42,6 +48,18 @@ const config = {
       href: '/logout',
       text: 'Выйти',
       render: renderLogout,
+    },
+  },
+  noAuthElements: {
+    login: {
+      href: '/login',
+      text: 'Авторизоваться',
+      render: renderLogin,
+    },
+    signup: {
+      href: '/signup',
+      text: 'Регистрация',
+      render: renderSignup,
     },
   },
 };
@@ -73,7 +91,8 @@ export function renderMenu() {
         throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
       })
       .then((response) => {
-        updateMenuDisplay(response.status);
+        const isAuthorized = response.status === 200;
+        menu.renderAuth(isAuthorized);
       })
       .catch(function(error) {
         console.error('Произошла ошибка:', error.message);
@@ -95,7 +114,32 @@ export function goToPage(menuLinkElement) {
   menuLinkElement.classList.add('active');
   menu.state.activeMenuLink = menuLinkElement;
 
-  config.menu[menuLinkElement.dataset.section].render();
+  const section = menuLinkElement.dataset.section;
+  const category = getCategory(section);
+
+  if (config[category] && config[category][section]) {
+    config[category][section].render();
+  } else {
+    console.error(`Cannot find render function for section: ${section}`);
+  }
+}
+
+/**
+ * Возвращает категорию элемента по его секции.
+ * @param {string} section - Секция элемента.
+ * @return {string|null} Категория элемента.
+ */
+function getCategory(section) {
+  if (config.menu[section]) {
+    return 'menu';
+  }
+  if (config.authElements[section]) {
+    return 'authElements';
+  }
+  if (config.noAuthElements[section]) {
+    return 'noAuthElements';
+  }
+  return null;
 }
 
 renderMenu();

@@ -1,7 +1,7 @@
 .menu {
     display: flex;
     align-items: flex-start;
-    font-size: 15px;
+    font-size: var(--main-text);
     align-self: center;
     padding: 8px;
     margin-top: 32px;
@@ -10,7 +10,8 @@
 }
 
 .menu-item {
-    color: grey;
+    white-space: nowrap;
+    color: var(--grey-secondary);
     padding: 16px;
     display: block;
     text-decoration: none;
@@ -21,17 +22,28 @@
     padding: 16px;
 }
 
+.auth-item {
+    white-space: nowrap;
+    color: var(--grey-secondary);
+    padding: 16px;
+    display: block;
+    text-decoration: none;
+}
+
 .active {
     color: white;
     border: 1px solid var(--neon-main);
-    border-radius: 16px;
+    border-radius: 8px;
     background-color: var(--hover-color);
 }
 
 .logo > img {
     margin-right: 32px;
+    width: 328px;
+}
+
+.logo {
     margin-top: 32px;
-    width: 300px;
 }
 
 .nav-icon > img {
@@ -44,4 +56,72 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.no-auth-elements {
+    display: flex;
+    align-items: flex-start;
+    font-size: var(--main-text);
+    align-self: center;
+    padding: 8px;
+    margin-left: 16px;
+    margin-top: 32px;
+    background-color: var(--neutral-dark);
+    border-radius: 16px;
+}
+
+.auth-elements {
+    display: flex;
+    align-items: flex-start;
+    font-size: var(--main-text);
+    align-self: center;
+    padding: 8px;
+    margin-left: 16px;
+    margin-top: 32px;
+}
+
+.auth-item:hover {
+    color: var(--neon-secondary);
+    padding: 16px;
+}
+
+.avatar {
+    object-fit: cover;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dropdown {
+    position: relative;
+    padding-top: 16px;
+    padding-left: 8px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--neutral-dark);
+    min-width: 120px;
+    padding: 10px;
+    border-radius: 5px;
+    right: -10px;
+    top: 30px;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 5;
+}
+
+.auth-menu {
+    margin-left: 10px;
+}
+
+.icons {
+    display: flex;
+    margin-left: 64px;
 }

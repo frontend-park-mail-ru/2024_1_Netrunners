@@ -10,5 +10,6 @@
     },
     "ignorePatterns": ["*.precompiled.js"],
     "rules": {
+        "linebreak-style": "off"
     }
 }

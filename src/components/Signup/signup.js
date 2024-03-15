@@ -1,6 +1,5 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {updateMenuDisplay} from '../../utils/displayHelper.js';
 import {goToPage, menu} from '../../index.js';
 
 /**
@@ -60,7 +59,8 @@ export function renderSignup() {
           throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
         })
         .then((response) => {
-          updateMenuDisplay(response.status);
+          const isAuthorized = response.status === 200;
+          menu.renderAuth(isAuthorized);
           if (response.status === 400) {
             const errorField = document.getElementById('signup-errors');
             errorField.innerText = 'Такой пользователь уже существует';
