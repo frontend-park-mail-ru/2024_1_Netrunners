@@ -1,6 +1,5 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {updateMenuDisplay} from '../../utils/displayHelper.js';
 import {goToPage, menu} from '../../index.js';
 
 /**
@@ -36,7 +35,8 @@ export function renderLogin() {
           }
         })
         .then((response) => {
-          updateMenuDisplay(response.status);
+          const isAuthorized = response.status === 200;
+          menu.renderAuth(isAuthorized);
           if (response.status === 200) {
             goToPage(menu.state.menuElements.films);
             return;

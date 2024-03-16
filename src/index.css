@@ -12,10 +12,13 @@
   --hover-color: #1A1A1A;
   --neutral-light: #212121;
   --border-color: #262626;
-  --input-background: #FFFFFF33;
-  --text-secondary: #999999;
+  --grey-main: #FFFFFF33;
+  --grey-secondary: #999999;
   --input-font: 'Roboto', sans-serif;
   --main-font: Helvetica, Arial, sans-serif;
+  --caption: 12px;
+  --main-text: 15px;
+  --header-300: 30px;
 }
 
 #root {
@@ -32,5 +35,5 @@ body {
 }
 
 main {
-  padding: 0 32px 48px;
+  margin-top: 16px;
 }
