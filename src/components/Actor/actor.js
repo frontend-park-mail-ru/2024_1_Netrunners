@@ -1,14 +1,18 @@
-import {timeConvert} from '../../utils/timeConvert.js';
 import * as filmsApi from '../../api/films.js';
+import * as actorsApi from '../../api/actors.js';
+import {timeConvert} from '../../utils/timeConvert.js';
 
-/**
- * Рендерит страницу фильмов, получает данные о фильмах с сервера,
- * преобразует данные и отображает список фильмов на странице.
- * @function
- * @return {void}
- */
-export function renderFilms() {
-  const template = Handlebars.templates['Films.hbs'];
+export function renderActorPage(actorId) {
+  let actorPageData;
+  actorsApi.getActorData(actorId)
+      .then((data) => {
+        if (data) {
+          actorPageData = data;
+        }
+      });
+  const actorSection = document.createElement('section');
+  actorSection.classList.add('actor-section');
+  const template = Handlebars.templates['actor.hbs'];
   filmsApi.getAll()
       .then((response) => {
         if (response.ok) {
@@ -22,7 +26,8 @@ export function renderFilms() {
             ...film,
             duration: timeConvert.timeIntoText(film.duration),
           }));
-          document.querySelector('main').innerHTML = template({filmsWithHours});
+          Object.assign(actorPageData, {filmsWithHours});
+          document.querySelector('main').innerHTML = template(actorPageData);
           return;
         }
         console.error('Ошибка: ответ не содержит массив фильмов', data);
