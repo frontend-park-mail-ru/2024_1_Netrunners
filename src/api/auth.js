@@ -5,10 +5,17 @@ import {fetchRequest, IP} from './fetch.js';
  * @function
  * @return {Promise}
  */
-export function check() {
-  const url = IP + 'auth/check';
-  return fetchRequest(url, 'POST');
+export async function check() {
+  try {
+    const response = await fetchRequest(IP + 'auth/check', 'POST');
+    const responseData = await response.json();
+
+    return responseData.status === 200;
+  } catch (error) {
+    console.error('Произошла ошибка в check:', error.message);
+  }
 }
+
 
 /**
  * отправка запроса на вход
@@ -16,9 +23,16 @@ export function check() {
  * @param {Object} user - данные пользователя
  * @return {Promise}
  */
-export function login(user) {
-  const url = IP + 'auth/login';
-  return fetchRequest(url, 'POST', user);
+export async function login(user) {
+  try {
+    const url = IP + 'auth/login';
+    const response = await fetchRequest(url, 'POST', user);
+    const responseData = await response.json();
+
+    return responseData.status === 200;
+  } catch (error) {
+    console.error('Произошла ошибка в login:', error.message);
+  }
 }
 
 /**
@@ -27,9 +41,16 @@ export function login(user) {
  * @param {Object} user - данные пользователя
  * @return {Promise}
  */
-export function signup(user) {
-  const url = IP + 'auth/signup';
-  return fetchRequest(url, 'POST', user);
+export async function signup(user) {
+  try {
+    const url = IP + 'auth/signup';
+    const response = await fetchRequest(url, 'POST', user);
+    const responseData = await response.json();
+
+    return responseData.status < 300;
+  } catch (error) {
+    console.error('Произошла ошибка в signup:', error.message);
+  }
 }
 
 /**
@@ -37,7 +58,14 @@ export function signup(user) {
  * @function
  * @return {Promise}
  */
-export function logout() {
-  const url = IP + 'auth/logout';
-  return fetchRequest(url, 'POST');
+export async function logout() {
+  try {
+    const url = IP + 'auth/logout';
+    const response = await fetchRequest(url, 'POST');
+    const responseData = await response.json();
+
+    return responseData.status === 200;
+  } catch (error) {
+    console.error('Произошла ошибка в logout:', error.message);
+  }
 }

@@ -6,11 +6,9 @@ import {renderSignup} from './components/Signup/signup.js';
 import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
 
-
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');
 const pageElement = document.createElement('main');
-
 
 rootElement.appendChild(menuElement);
 rootElement.appendChild(pageElement);
@@ -73,7 +71,7 @@ export const menu = new Menu(menuElement, config);
  * @function
  * @return {void}
  */
-export function renderMenu() {
+export async function renderMenu() {
   menu.render();
   menuElement.addEventListener('click', (e) => {
     const {target} = e;
@@ -83,20 +81,8 @@ export function renderMenu() {
       goToPage(target);
     }
   });
-  authApi.check()
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
-      })
-      .then((response) => {
-        const isAuthorized = response.status === 200;
-        menu.renderAuth(isAuthorized);
-      })
-      .catch(function(error) {
-        console.error('Произошла ошибка:', error.message);
-      });
+  const isAuthorized = await authApi.check();
+  menu.renderAuth(isAuthorized);
 }
 
 /**
