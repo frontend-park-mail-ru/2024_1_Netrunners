@@ -4,32 +4,30 @@ import * as filmsApi from '../../api/films.js';
 /**
  * Рендерит страницу фильмов, получает данные о фильмах с сервера,
  * преобразует данные и отображает список фильмов на странице.
+ * @async
  * @function
  * @return {void}
  */
-export function renderFilms() {
-  const filmsSection = document.getElementsByClassName('films-section');
+export async function renderFilms() {
   const template = Handlebars.templates['Films.hbs'];
-  filmsApi.getAll()
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
-      })
-      .then((data) => {
-        if (data && data.films && Array.isArray(data.films)) {
-          const filmsWithHours = data.films.map((film) => ({
-            ...film,
-            duration: timeConvert.timeIntoText(film.duration),
-          }));
-          document.querySelector('main').innerHTML = template({filmsWithHours});
-          return filmsSection[0];
-        }
-        console.error('Ошибка: ответ не содержит массив фильмов', data);
-        throw new Error('Ошибка: ответ не содержит массив фильмов');
-      })
-      .catch(function(error) {
-        console.error('Произошла ошибка:', error.message);
-      });
+  try {
+    const response = await filmsApi.getAll();
+    if (!response.ok) {
+      throw new Error(`ошибка при выполнении запроса ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (!Array.isArray(data.films)) {
+      throw new Error('ответ не содержит массив фильмов');
+    }
+
+    const filmsWithHours = data.films.map((film) => ({
+      ...film,
+      duration: timeConvert.timeIntoText(film.duration),
+    }));
+
+    document.querySelector('main').innerHTML = template({filmsWithHours});
+  } catch (error) {
+    console.error('Произошла ошибка:', error.message);
+  }
 }

@@ -6,70 +6,65 @@ import {goToPage, menu} from '../../index.js';
  * Рендерит страницу регистрации, обрабатывает событие отправки формы,
  * валидирует введенные данные и отправляет запрос
  * на сервер для регистрации пользователя.
+ * @async
  * @function
  * @return {void}
  */
-export function renderSignup() {
-  const template = Handlebars.templates['Signup.hbs'];
-  document.querySelector('main').innerHTML = template();
-  const form = document.getElementsByClassName('form-section')[0];
-  const emailInput = document.getElementsByName('email')[0];
-  const usernameInput = document.getElementsByName('username')[0];
-  const passConfInput = document.getElementsByName('passConf')[0];
-  const passwordInput = document.getElementsByName('password')[0];
+export async function renderSignup() {
+  try {
+    const template = Handlebars.templates['Signup.hbs'];
+    document.querySelector('main').innerHTML = template();
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    const form = document.querySelector('.form-section');
+    const emailInput = document.querySelector('input[name="email"]');
+    const usernameInput = document.querySelector('input[name="username"]');
+    const passConfInput = document.querySelector('input[name="passConf"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const errorField = document.getElementById('signup-errors');
 
-    const login = emailInput.value.trim();
-    const password = passwordInput.value;
-    const passConf = passConfInput.value;
-    const username = usernameInput.value;
-    const user = {password, login, username};
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    if (!validators.username(username)) {
-      const errorField = document.getElementById('signup-errors');
-      errorField.innerText = 'Имя пользователя слишком короткое';
-      throw new Error('Имя пользователя слишком короткое');
-    }
+      const login = emailInput.value.trim();
+      const password = passwordInput.value;
+      const passConf = passConfInput.value;
+      const username = usernameInput.value;
+      const user = {password, login, username};
 
-    if (!validators.login(login)) {
-      const errorField = document.getElementById('signup-errors');
-      errorField.innerText = 'Поле почта введено некорректно';
-      throw new Error('Почта введена некорректно');
-    }
+      if (!validators.username(username)) {
+        errorField.innerText = 'Имя пользователя слишком короткое';
+        throw new Error('Имя пользователя слишком короткое');
+      }
 
-    if (!validators.password(password)) {
-      const errorField = document.getElementById('signup-errors');
-      errorField.innerText = 'Пароль слишком короткий';
-      throw new Error('Пароль слишком короткий');
-    }
+      if (!validators.login(login)) {
+        errorField.innerText = 'Поле почта введено некорректно';
+        throw new Error('Почта введена некорректно');
+      }
 
-    if (!validators.passwordConf(password, passConf)) {
-      const errorField = document.getElementById('signup-errors');
-      errorField.innerText = 'Пароли не совпадают';
-      throw new Error('Пароли не совпадают');
-    }
+      if (!validators.password(password)) {
+        errorField.innerText = 'Пароль слишком короткий';
+        throw new Error('Пароль слишком короткий');
+      }
 
-    authApi.signup(user)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
-        })
-        .then((response) => {
-          const isAuthorized = response.status === 200;
-          menu.renderAuth(isAuthorized);
-          if (response.status === 400) {
-            const errorField = document.getElementById('signup-errors');
-            errorField.innerText = 'Такой пользователь уже существует';
-            throw new Error('Такой пользователь уже существует');
-          }
-          goToPage(menu.state.menuElements.films);
-        })
-        .catch(function(error) {
-          console.error('Произошла ошибка:', error.message);
-        });
-  });
+      if (!validators.passwordConf(password, passConf)) {
+        errorField.innerText = 'Пароли не совпадают';
+        throw new Error('Пароли не совпадают');
+      }
+
+      const response = await authApi.signup(user);
+
+      if (response.ok) {
+        const isAuthorized = response.status === 200;
+        menu.renderAuth(isAuthorized);
+        goToPage(menu.state.menuElements.films);
+      } else if (response.status === 400) {
+        errorField.innerText = 'Такой пользователь уже существует';
+        throw new Error('Такой пользователь уже существует');
+      } else {
+        throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+      }
+    });
+  } catch (error) {
+    console.error('Произошла ошибка:', error.message);
+  }
 }
