@@ -2,7 +2,7 @@ import {fetchRequest, IP} from './fetch.js';
 
 
 /**
- * Запрос на получене массива с фильмами
+ * Запрос на получение массива с фильмами
  * @function
  * @return {Promise} promise - Объект запроса
  */

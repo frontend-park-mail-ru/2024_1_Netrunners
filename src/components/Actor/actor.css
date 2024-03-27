@@ -1,9 +1,5 @@
 @import "../Films/films.css";
 
-.mt-32 {
-    margin-top: 64px;
-}
-
 .actor-info {
     margin-top: 32px;
     display: flex;
@@ -42,4 +38,8 @@
 
 .actor-name {
     margin-bottom: 96px;
+}
+
+.actor-info + .films-section {
+    padding-top: 64px;
 }

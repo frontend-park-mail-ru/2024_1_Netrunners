@@ -5,25 +5,25 @@ import {goToPage, menu} from '../../index.js';
  * Отправляет запрос на сервер для выхода из аккаунта,
  * обновляет отображение меню и перенаправляет
  * на страницу фильмов при успешном выходе.
+ * @async
  * @function
  * @return {void}
  */
-export function renderLogout() {
-  authApi.logout()
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
-      })
-      .then((response) => {
-        const isAuthorized = response.status !== 200;
-        menu.renderAuth(isAuthorized);
-        if (response.status === 200) {
-          goToPage(menu.state.menuElements.films);
-        }
-      })
-      .catch(function(error) {
-        console.error('Произошла ошибка:', error.message);
-      });
+export async function renderLogout() {
+  try {
+    const response = await authApi.logout();
+    if (!response.ok) {
+      throw new Error(`Ошибка при выполнении запроса: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    const isAuthorized = responseData.status !== 200;
+    menu.renderAuth(isAuthorized);
+
+    if (responseData.status === 200) {
+      goToPage(menu.state.menuElements.films);
+    }
+  } catch (error) {
+    console.error('Произошла ошибка:', error.message);
+  }
 }

@@ -11,6 +11,12 @@ const actorData = {
   actorPhoto: 'https://rustars.tv/wp-content/uploads/2017/07/stanislav-yarushin14.jpg',
 };
 
+/**
+ * Запрос на получение данных об актере
+ * @function
+ * @param {int} actorId - Идентификатор актёра.
+ * @return {Promise} promise - Объект запроса
+ */
 export function getActorData(actorId) {
   return new Promise(function(resolve) {
     resolve(actorData);

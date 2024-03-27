@@ -78,7 +78,9 @@
 }
 
 .films-text {
-    width: 128px;
+    width: fit-content;
+    padding-left: 16px;
+    padding-right: 16px;
     height: 50px;
     border-radius: 8px;
     color: white;
