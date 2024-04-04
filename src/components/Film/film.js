@@ -3,19 +3,15 @@ import {timeConvert} from "../../utils/timeConvert.js   ";
 
 
 export async function renderFilmPage(filmId) {
-    try {
-        const [filmData, filmActors] = await Promise.all([
-            filmApi.getFilmData(filmId),
-            filmApi.getActors(filmId)
-        ]);
-        let filmPageData;
+    const [filmData, filmActors] = await Promise.all([
+        filmApi.getFilmData(filmId),
+        filmApi.getActors(filmId)
+    ]);
+    let filmPageData;
 
-        const template = Handlebars.templates['Film.hbs'];
-        filmData.duration = timeConvert.timeIntoText(filmData.duration);
-        filmPageData = { ...filmData, filmActors };
+    const template = Handlebars.templates['Film.hbs'];
+    filmData.duration = timeConvert.timeIntoText(filmData.duration);
+    filmPageData = { ...filmData, filmActors };
 
-        document.querySelector('main').innerHTML = template(filmPageData);
-    } catch (error) {
-        console.error('Произошла ошибка:', error.message);
-    }
+    document.querySelector('main').innerHTML = template(filmPageData);
 }

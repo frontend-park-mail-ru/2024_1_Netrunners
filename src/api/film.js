@@ -35,13 +35,23 @@ const filmActors = [{
 ;
 
 export async function getFilmData(filmId) {
-    return new Promise(function(resolve) {
-        resolve(filmData);
-    });
+    try {
+        //тело запроса
+        return new Promise(function(resolve) {
+            resolve(filmData);
+        });
+    } catch (error) {
+    console.error('Произошла ошибка:', error.message);
+}
 }
 
 export async function getActors(filmId) {
-    return new Promise(function(resolve) {
-        resolve(filmActors);
-    });
+    try {
+        //тело запроса
+        return new Promise(function(resolve) {
+            resolve(filmActors);
+        });
+    } catch (error) {
+        console.error('Произошла ошибка:', error.message);
+    }
 }
