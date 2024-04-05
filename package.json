@@ -7,12 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run compile:templates",
     "start": "node server",
-    "compile:templates": "npm run compile:Menu && npm run compile:Login && npm run compile:Signup && npm run compile:Films && npm run compile:Actor",
+    "compile:templates": "npm run compile:Menu && npm run compile:Login && npm run compile:Signup && npm run compile:Films && npm run compile:Actor && npm run compile:Player",
     "compile:Menu": "handlebars src/components/Menu/Menu.hbs -f src/components/Menu/Menu.precompiled.js",
     "compile:Login": "handlebars src/components/Login/Login.hbs -f src/components/Login/Login.precompiled.js",
     "compile:Signup": "handlebars src/components/Signup/Signup.hbs -f src/components/Signup/Signup.precompiled.js",
     "compile:Films": "handlebars src/components/Films/Films.hbs -f src/components/Films/Films.precompiled.js",
-    "compile:Actor": "handlebars src/components/Actor/actor.hbs -f src/components/Actor/actor.precompiled.js"
+    "compile:Actor": "handlebars src/components/Actor/Actor.hbs -f src/components/Actor/actor.precompiled.js",
+    "compile:Player": "handlebars src/components/Player/Player.hbs -f src/components/Player/player.precompiled.js"
   },
   "author": "",
   "license": "ISC",
