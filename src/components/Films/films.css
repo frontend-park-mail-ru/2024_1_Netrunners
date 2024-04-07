@@ -1,7 +1,8 @@
 .popular-now-title {
     font-size: var(--header-300);
     font-weight: bold;
-    margin-bottom: 16px;
+    margin-top: 32px;
+    margin-bottom: 32px;
     color: white;
     text-align: left;
     width: 100%;
@@ -10,6 +11,7 @@
 .films-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .film-card:hover {
@@ -18,16 +20,17 @@
 
 .film-content {
     display: flex;
+    gap: 64px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding-top: 16px;
-    padding-left: 16px;
 }
 
 .film-card {
-    width: 230px;
-    height: 360px;
-    margin: 16px 32px 16px 0;
+    max-width: 284px;
+    width: 100%;
+    height: 400px;
+    margin: 16px 0px 16px 0;
     background-size: cover;
     border-radius: 15px;
     overflow: hidden;
@@ -41,22 +44,22 @@
 }
 
 .film-image {
-    width: auto;
+    width: 87%;
     height: 80%;
     background-size: cover;
     background-position: center;
     border-radius: 15px;
-    margin-top: 16px;
+    margin-top: 20px;
+    object-fit: cover;
 }
 
 .film-time {
+    display: flex;
     font-size: var(--caption);
-    width: 20%;
     background-color: var(--neutral-main);
     color: var(--grey-secondary);
-    padding: 8px;
+    padding: 4px 8px;
     border-radius: 16px;
-    text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -72,9 +75,18 @@
 
 .films-section {
     border: 2px solid var(--border-color);
-    padding: 16px 96px 96px;
+    padding: 16px 32px;
     border-radius: 16px;
     margin-top: 32px;
+    width: 1200px;
+}
+
+.series-section {
+    border: 2px solid var(--border-color);
+    padding: 16px 32px 96px;
+    border-radius: 16px;
+    margin-top: 96px;
+    width: 1200px;
 }
 
 .films-text {
@@ -90,4 +102,303 @@
     align-items: center;
     position: relative;
     top: -40px;
+}
+
+.poster-block {
+    margin-top: 32px;
+    align-items: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-div {
+    position: relative;
+}
+
+.poster-image {
+    display: block;
+    width: 1260px;
+    height: 605px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: var(--grey-secondary);
+}
+
+.film-overlay {
+    background-image: linear-gradient(to top, var(--neutral-main), transparent);
+    bottom: 0;
+    content: "";
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+}
+
+.poster-data {
+    z-index: 1;
+    margin-top: calc(-23% + 2.5rem);
+}
+
+.text-data {
+    margin-left: 32px;
+    margin-right: 32px;
+    text-align: center;
+}
+
+.poster-actions {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.accent-button {
+    width: 128px;
+    height: 50px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--neon-main);
+}
+
+.poster-buttons {
+    color: white;
+    border: 1px solid var(--grey-main);
+    border-radius: 8px;
+    padding: 16px;
+    display: block;
+    margin-left: 8px;
+    width: fit-content;
+    background-color: var(--hover-color);
+}
+
+.poster-duration {
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.poster-carousel {
+    height: 48rem;
+    position: relative;
+}
+
+.poster-carousel > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: 200ms opacity ease-in-out;
+    transition-delay: 200ms;
+}
+
+.slide[data-active] {
+    opacity: 1;
+    z-index: 1;
+    transition-delay: 0ms;
+}
+
+
+.poster-carousel-button {
+    position: absolute;
+    top: 38rem;
+    z-index: 2;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 0;
+    background: var(--neutral-dark);
+    transition: transform 0.3s ease;
+}
+
+.poster-carousel-button > img {
+    margin: 12px;
+}
+
+.poster-carousel-button:hover {
+    background-color: var(--neutral-light);
+}
+
+.poster-carousel-button.prev {
+    left: 1rem;
+}
+
+.poster-carousel-button.next {
+    right: 1rem;
+}
+
+.next > img {
+    transform: rotate(180deg);
+}
+
+.film-rating {
+    display: flex;
+    background-color: var(--neutral-main);
+    padding: 4px 8px;
+    border-radius: 16px;
+}
+
+.star {
+    width: 16px;
+}
+
+.star-container {
+    width: 80px;
+    height: 20px;
+    padding: 2px;
+}
+
+.rating-count {
+    margin-left: 2px;
+    color: var(--grey-secondary);
+    font-size: var(--caption);
+}
+
+.time-icon {
+    width: 16px;
+    margin-right: 2px;
+}
+
+.genres-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.genre-card {
+    display: flex;
+    align-content: space-around;
+    width: 220px;
+    height: 300px;
+    margin: 8px 0 8px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--shadow-color);
+    background-color: var(--neutral-light);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.genre-card:hover {
+    transform: scale(1.05);
+}
+
+.genre-images {
+    margin-top: 15px;
+    width: 184px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.genre-image {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    width: 83px;
+    height: 102px;
+    object-fit: cover;
+    transition: 0.3s ease-in-out;
+}
+
+.genre-image:hover {
+    opacity: 0.8;
+}
+
+.genre-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.genre-name {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.genre-images-overlay {
+    width: 178px;
+    position: absolute;
+    bottom: 66px;
+    left: 20px;
+    height: 60%;
+    background-image: linear-gradient(to top, var(--neutral-light), transparent);
+    border-radius: 8px;
+}
+
+.slider-buttons {
+    align-items: center;
+    height: 80px;
+    display: flex;
+    background-color: var(--neutral-dark);
+    border-radius: 8px;
+    width: 258px;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.upper-block {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.first-upper-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.carousel-button {
+    height: 48px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 0;
+    background: var(--neutral-dark);
+    transition: transform 0.3s ease;
+}
+
+.carousel-button > img {
+    border-radius: 8px;
+    background-color: var(--neutral-light);
+    padding: 12px;
+}
+
+.carousel-button:hover {
+    background-color: var(--neutral-light);
+}
+
+.carousel-button.prev {
+    margin-left: 16px;
+}
+
+.carousel-button.next {
+    margin-right: 16px;
+}
+
+.carousel-shapes {
+    display: flex;
+    width: 18px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
 }
