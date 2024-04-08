@@ -37,5 +37,5 @@ const timeIntoText = (durationInSec) => {
   const hours = Math.floor(durationInSec / 3600);
   const minutes = Math.floor((durationInSec % 3600) / 60);
 
-  return `${hours}ч ${minutes}м`;
+  return `${hours}ч ${minutes}мин`;
 };
