@@ -1,6 +1,6 @@
 import * as actorsApi from '../../api/actors.js';
 import * as filmsApi from '../../api/films.js';
-import {actorTemplate} from "./actor.hbs.js";
+import {actorTemplate} from './actor.hbs.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре

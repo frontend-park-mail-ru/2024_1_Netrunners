@@ -37,11 +37,11 @@ const timeIntoText = (durationInSec) => {
   const hours = Math.floor(durationInSec / 3600);
   const minutes = Math.floor((durationInSec % 3600) / 60);
 
-  if (hours === 0) {
+  if (!hours) {
     return `${minutes}м`;
   }
 
-  if (minutes === 0) {
+  if (!minutes) {
     return `${hours}ч`;
   }
 

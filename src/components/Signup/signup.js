@@ -1,7 +1,7 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {goToPage, menu} from '../../index.js';
-import {signupTemplate} from "./Signup.hbs.js";
+import {signupTemplate} from './Signup.hbs.js';
 
 /**
  * Рендерит страницу регистрации, обрабатывает событие отправки формы,

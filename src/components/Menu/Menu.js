@@ -1,5 +1,5 @@
 import {createLink} from '../../utils/createLinks.js';
-import {menuTemplate} from "./Menu.hbs.js";
+import {menuTemplate} from './Menu.hbs.js';
 
 /**
  * Класс, представляющий меню на веб-странице.

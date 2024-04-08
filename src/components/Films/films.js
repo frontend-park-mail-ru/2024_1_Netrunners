@@ -1,5 +1,5 @@
 import * as filmsApi from '../../api/films.js';
-import {filmsTemplate} from "./Films.hbs.js";
+import {filmsTemplate} from './Films.hbs.js';
 
 
 /**

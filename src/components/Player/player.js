@@ -1,16 +1,11 @@
 import {formatTime} from '../../utils/timeConvert.js';
-import {playerTemplate} from "./Player.hbs.js";
+import {playerTemplate} from './Player.hbs.js';
+import * as images from '../../img/imgConstants.js';
 
 export async function renderPlayer(src) {
   const source = src || `../../img/RickRoll.mp4`;
-  const video = { src: source };
+  const video = {src: source};
   const template = Handlebars.compile(playerTemplate);
-  const noSoundImg = '../../img/icons/no-sound.svg';
-  const soundImg = '../../img/icons/sound-max.svg';
-  const pauseImg = '../../img/icons/pause.svg';
-  const playImg = '../../img/icons/play.svg';
-  const fullscreenImg = '../../img/icons/fullscreen.svg';
-  const exitFullscreenImg = '../../img/icons/fullscreen-exit.svg';
 
   document.getElementById('root').innerHTML = template(video);
   const container = document.querySelector('.player-container');
@@ -90,10 +85,10 @@ export async function renderPlayer(src) {
   volumeBtn.addEventListener('click', () => {
     if (mainVideo.volume) {
       mainVideo.volume = 0;
-      volumeBtn.src = noSoundImg;
+      volumeBtn.src = images.NO_SOUND_IMG;
     } else {
       mainVideo.volume = 0.5;
-      volumeBtn.src = soundImg;
+      volumeBtn.src = images.SOUND_IMG;
     }
     volumeSlider.value = mainVideo.volume;
   });
@@ -102,7 +97,7 @@ export async function renderPlayer(src) {
     const volumeValue = parseFloat(e.target.value);
     mainVideo.volume = volumeValue;
 
-    volumeBtn.src = volumeValue === 0 ? noSoundImg : soundImg;
+    volumeBtn.src = volumeValue === 0 ? images.NO_SOUND_IMG : images.SOUND_IMG;
   });
 
   speedOptions.querySelectorAll('li').forEach((option) => {
@@ -121,7 +116,7 @@ export async function renderPlayer(src) {
     if (e.target.className === 'wrapper') {
       mainVideo.paused ? mainVideo.play() : mainVideo.pause();
     }
-  })
+  });
 
   document.addEventListener('click', (e) => {
     if (e.target.tagName !== 'IMG' || e.target.className !== 'speed-img') {
@@ -136,19 +131,19 @@ export async function renderPlayer(src) {
   fullscreenBtn.addEventListener('click', () => {
     container.classList.toggle('fullscreen');
     if (document.fullscreenElement) {
-      fullscreenBtn.src = fullscreenImg;
+      fullscreenBtn.src = images.FULLSCREEN_IMG;
       return document.exitFullscreen();
     }
-    fullscreenBtn.src = exitFullscreenImg;
+    fullscreenBtn.src = images.EXIT_FULLSCREEN_IMG;
     container.requestFullscreen();
   });
 
   previousSeries.addEventListener('click', () => {
-    //TODO переход на предыдущую серию, если это сериал
+    // TODO переход на предыдущую серию, если это сериал
   });
 
   nextSeries.addEventListener('click', () => {
-    //TODO переход на следующую серию, если это сериал
+    // TODO переход на следующую серию, если это сериал
   });
 
   playPauseBtn.addEventListener('click', () => {
@@ -156,10 +151,10 @@ export async function renderPlayer(src) {
   });
 
   mainVideo.addEventListener('play', () => {
-    playPauseBtn.src = pauseImg;
+    playPauseBtn.src = images.PAUSE_IMG;
   });
 
   mainVideo.addEventListener('pause', () => {
-    playPauseBtn.src = playImg;
+    playPauseBtn.src = images.PLAY_IMG;
   });
 }
