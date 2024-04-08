@@ -1,0 +1,19 @@
+export const menuTemplate = `<div class="menu-container">
+    <div class="logo">
+        <img src="../../img/logo/logo.svg" alt="Логотип">
+    </div>
+    <div class="menu">
+        {{#each items}}
+            <a class="{{this.className}}" href="{{this.href}}" data-section="{{this.key}}">{{this.text}}</a>
+        {{/each}}
+    </div>
+    <div class="icons">
+        <div class="nav-icon">
+            <img src="../../img/icons/search.svg" alt="Логотип">
+        </div>
+        <div class="nav-icon">
+            <img src="../../img/icons/notifications.svg" alt="Логотип">
+        </div>
+    </div>
+    <div id="auth"></div>
+</div>`;

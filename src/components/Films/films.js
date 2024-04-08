@@ -1,4 +1,6 @@
 import * as filmsApi from '../../api/films.js';
+import {filmsTemplate} from "./Films.hbs.js";
+
 
 /**
  * Рендерит страницу фильмов, получает данные о фильмах с сервера,
@@ -8,7 +10,7 @@ import * as filmsApi from '../../api/films.js';
  * @return {void}
  */
 export async function renderFilms() {
-  const template = Handlebars.templates['Films.hbs'];
+  const template = Handlebars.compile(filmsTemplate);
   const filmsWithHours = await filmsApi.getAll();
   document.querySelector('main').innerHTML = template({filmsWithHours});
 }

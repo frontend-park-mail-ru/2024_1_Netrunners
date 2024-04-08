@@ -1,4 +1,5 @@
 import {createLink} from '../../utils/createLinks.js';
+import {menuTemplate} from "./Menu.hbs.js";
 
 /**
  * Класс, представляющий меню на веб-странице.
@@ -126,7 +127,7 @@ export class Menu {
    * @return {void}
    */
   renderTemplate() {
-    const template = Handlebars.templates['Menu.hbs'];
+    const template = Handlebars.compile(menuTemplate);
     const items = this.items.map(([key, {href, text}], index) => {
       const className = 'menu-item';
       return {key, href, text, className};

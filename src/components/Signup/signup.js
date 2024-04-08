@@ -1,6 +1,7 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {goToPage, menu} from '../../index.js';
+import {signupTemplate} from "./Signup.hbs.js";
 
 /**
  * Рендерит страницу регистрации, обрабатывает событие отправки формы,
@@ -11,7 +12,7 @@ import {goToPage, menu} from '../../index.js';
  * @return {void}
  */
 export async function renderSignup() {
-  const template = Handlebars.templates['Signup.hbs'];
+  const template = Handlebars.compile(signupTemplate);
   document.querySelector('main').innerHTML = template();
 
   const form = document.querySelector('.form-section');

@@ -1,9 +1,16 @@
 import {formatTime} from '../../utils/timeConvert.js';
+import {playerTemplate} from "./Player.hbs.js";
 
 export async function renderPlayer(src) {
-  const source = src || `https://storage.yandexcloud.net/netrunnerflixfilms/Rick%20Roll.ia.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=YCAJEx_dBaNxFz-NnBFUiED4e/20240402/ru-central1/s3/aws4_request&X-Amz-Date=20240402T114642Z&X-Amz-Expires=2592000&X-Amz-Signature=042A5262889F5AAB6B5CEBEC1B6D6408809DEBA8B5C7A4E6A972D3C8BE078D35&X-Amz-SignedHeaders=host`;
+  const source = src || `../../img/RickRoll.mp4`;
   const video = { src: source };
-  const template = Handlebars.templates['Player.hbs'];
+  const template = Handlebars.compile(playerTemplate);
+  const noSoundImg = '../../img/icons/no-sound.svg';
+  const soundImg = '../../img/icons/sound-max.svg';
+  const pauseImg = '../../img/icons/pause.svg';
+  const playImg = '../../img/icons/play.svg';
+  const fullscreenImg = '../../img/icons/fullscreen.svg';
+  const exitFullscreenImg = '../../img/icons/fullscreen-exit.svg';
 
   document.getElementById('root').innerHTML = template(video);
   const container = document.querySelector('.player-container');
@@ -21,6 +28,7 @@ export async function renderPlayer(src) {
   const speedOptions = container.querySelector('.speed-options');
   const pinInPicBtn = container.querySelector('.pic-in-pic span');
   const fullscreenBtn = container.querySelector('.fullscreen img');
+  const wrapper = container.querySelector('.wrapper');
 
   let timer;
   const hideControls = () => {
@@ -80,12 +88,12 @@ export async function renderPlayer(src) {
   });
 
   volumeBtn.addEventListener('click', () => {
-    if (volumeBtn.src.includes('sound-max.svg')) {
+    if (mainVideo.volume) {
       mainVideo.volume = 0;
-      volumeBtn.src = '../../img/icons/no-sound.svg';
+      volumeBtn.src = noSoundImg;
     } else {
       mainVideo.volume = 0.5;
-      volumeBtn.src = '../../img/icons/sound-max.svg';
+      volumeBtn.src = soundImg;
     }
     volumeSlider.value = mainVideo.volume;
   });
@@ -94,9 +102,8 @@ export async function renderPlayer(src) {
     const volumeValue = parseFloat(e.target.value);
     mainVideo.volume = volumeValue;
 
-    volumeBtn.src = volumeValue === 0 ? '../../img/icons/no-sound.svg' : '../../img/icons/sound-max.svg';
+    volumeBtn.src = volumeValue === 0 ? noSoundImg : soundImg;
   });
-
 
   speedOptions.querySelectorAll('li').forEach((option) => {
     option.addEventListener('click', () => {
@@ -110,10 +117,13 @@ export async function renderPlayer(src) {
     speedOptions.classList.toggle('show');
   });
 
-  document.addEventListener('click', (e) => {
-    if (e.target.tagName === 'VIDEO') {
+  wrapper.addEventListener('click', (e) => {
+    if (e.target.className === 'wrapper') {
       mainVideo.paused ? mainVideo.play() : mainVideo.pause();
     }
+  })
+
+  document.addEventListener('click', (e) => {
     if (e.target.tagName !== 'IMG' || e.target.className !== 'speed-img') {
       speedOptions.classList.remove('show');
     }
@@ -126,10 +136,10 @@ export async function renderPlayer(src) {
   fullscreenBtn.addEventListener('click', () => {
     container.classList.toggle('fullscreen');
     if (document.fullscreenElement) {
-      fullscreenBtn.src = '../../img/icons/fullscreen.svg';
+      fullscreenBtn.src = fullscreenImg;
       return document.exitFullscreen();
     }
-    fullscreenBtn.src = '../../img/icons/fullscreen-exit.svg';
+    fullscreenBtn.src = exitFullscreenImg;
     container.requestFullscreen();
   });
 
@@ -146,10 +156,10 @@ export async function renderPlayer(src) {
   });
 
   mainVideo.addEventListener('play', () => {
-    playPauseBtn.src = '../../img/icons/pause.svg';
+    playPauseBtn.src = pauseImg;
   });
 
   mainVideo.addEventListener('pause', () => {
-    playPauseBtn.src = '../../img/icons/play.svg';
+    playPauseBtn.src = playImg;
   });
 }
