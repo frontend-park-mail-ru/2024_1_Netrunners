@@ -1,0 +1,69 @@
+@import "../Films/films.css";
+
+.profile-info {
+    margin-top: 32px;
+    display: flex;
+    color: var(--white-main);
+}
+
+.profile-photo {
+    margin-right: 32px;
+}
+
+.profile-photo img {
+    margin-left: 32px;
+    object-fit: cover;
+    border-radius: 16px;
+    width: 380px;
+    height: 500px;
+}
+
+.profile-details {
+    margin-left: 32px;
+    color: var(--white-main);
+}
+
+.profile-description ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-description li {
+    margin-top: 16px;
+}
+
+.profile-description {
+    margin-top: 8px;
+}
+
+.profile-top {
+    margin-bottom: 96px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-info + .films-section {
+    padding-top: 64px;
+}
+
+.profile-page-buttons {
+    text-decoration: none;
+    color: var(--white-main);
+    border: 1px solid var(--grey-main);
+    border-radius: 16px;
+    padding: 16px;
+    display: block;
+    margin-left: 8px;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--hover-color);
+}
+
+.profile-page-buttons:hover {
+    color: var(--neon-secondary);
+    padding: 16px;
+}
+
+.form-edit-section {
+
+}
