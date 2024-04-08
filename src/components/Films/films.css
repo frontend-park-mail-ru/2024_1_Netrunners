@@ -2,7 +2,7 @@
     font-size: var(--header-300);
     font-weight: bold;
     margin-bottom: 16px;
-    color: white;
+    color: var(--white-main);
     text-align: left;
     width: 100%;
 }
@@ -62,7 +62,7 @@
 }
 
 .film-title {
-    color: white;
+    color: var(--white-main);
     margin-right: 16px;
     display: flex;
     align-items: center;
@@ -83,7 +83,7 @@
     padding-right: 16px;
     height: 50px;
     border-radius: 8px;
-    color: white;
+    color: var(--white-main);
     background-color: var(--neon-main);
     display: flex;
     justify-content: center;

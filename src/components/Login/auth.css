@@ -9,13 +9,13 @@ input {
     border-width: 0;
     line-height: 40px;
     border-radius: 20px;
-    color: white;
+    color: var(--white-main);
     background: var(--grey-main);
     font-family: var(--input-font);
 }
 
 input:focus {
-    outline: white solid thin;
+    outline: var(--white-main) solid thin;
 }
 
 

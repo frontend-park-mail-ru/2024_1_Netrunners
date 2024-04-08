@@ -1,7 +1,7 @@
 .film-page-poster-block {
     margin-top: 32px;
     align-items: center;
-    color: white;
+    color: var(--white-main);
     display: flex;
     flex-direction: column;
     margin-bottom: calc(10% + 2.5rem);
@@ -27,7 +27,7 @@
 }
 
 .film-page-buttons{
-    color: white;
+    color: var(--white-main);
     border: 1px solid var(--grey-main);
     border-radius: 8px;
     padding: 16px;
@@ -46,7 +46,7 @@
     width: 128px;
     height: 50px;
     border-radius: 8px;
-    color: white;
+    color: var(--white-main);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +66,7 @@
     border: 2px solid var(--border-color);
     padding: 32px;
     border-radius: 16px;
-    color: white;
+    color: var(--white-main);
 }
 
 .film-page-data {
@@ -75,14 +75,14 @@
     border-radius: 16px;
     width: 20vw;
     padding: 32px;
-    color: white;
+    color: var(--white-main);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
 .film-page-data-element {
-    color: white;
+    color: var(--white-main);
     border: 1px solid var(--grey-main);
     border-radius: 8px;
     padding: 16px;
@@ -103,7 +103,7 @@
     padding: 32px;
     border-radius: 16px;
     margin-top: 32px;
-    color: white;
+    color: var(--white-main);
     display: flex;
 }
 
