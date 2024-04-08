@@ -23,6 +23,13 @@ export const timeConvert = {
    * @return {string} - Текстовое представление времени в формате "часы минуты".
    */
   timeIntoText: (durationInSec) => timeIntoText(durationInSec),
+  /**
+   * Форматирует полную дату в год
+   * @private
+   * @param {string} rawDate - Полная дата в виде строки
+   * @return {string} - значение года
+   */
+  dateIntoYear: (rawDate) => dateIntoYear(rawDate)
 };
 
 const intoHours = (durationInSec) => {
@@ -62,3 +69,8 @@ export const formatTime = (time) => {
   }
   return `${hours}:${minutes}:${seconds}`;
 };
+
+const dateIntoYear = (rawDate) =>{
+  return rawDate.substring(0, 4);
+};
+

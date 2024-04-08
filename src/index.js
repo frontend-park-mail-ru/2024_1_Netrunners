@@ -6,6 +6,7 @@ import {renderSignup} from './components/Signup/signup.js';
 import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
 
+
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');
 const pageElement = document.createElement('main');
@@ -34,7 +35,7 @@ const config = {
       href: '/subscription',
       text: 'Подписки',
       render: renderFilms,
-    },
+    }
   },
   authElements: {
     profile: {

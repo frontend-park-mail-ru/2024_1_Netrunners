@@ -3,7 +3,7 @@
     font-weight: bold;
     margin-top: 32px;
     margin-bottom: 32px;
-    color: white;
+    color: var(--white);
     text-align: left;
     width: 100%;
 }
@@ -30,7 +30,7 @@
     max-width: 284px;
     width: 100%;
     height: 400px;
-    margin: 16px 0px 16px 0;
+    margin: 16px 0 16px 0;
     background-size: cover;
     border-radius: 15px;
     overflow: hidden;
@@ -65,7 +65,7 @@
 }
 
 .film-title {
-    color: white;
+    color: var(--white);
     margin-right: 16px;
     display: flex;
     align-items: center;
@@ -95,7 +95,7 @@
     padding-right: 16px;
     height: 50px;
     border-radius: 8px;
-    color: white;
+    color: var(--white);
     background-color: var(--neon-main);
     display: flex;
     justify-content: center;

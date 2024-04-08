@@ -1,4 +1,4 @@
-export const filmsTemplate = `<div class="films-section">
+export const filmsTemplate = `
 <div class="carousel poster-carousel" data-carousel>
     <button class="poster-carousel-button prev" data-carousel-button="prev"><img src="../../img/icons/arrow.svg" alt="">
     </button>
