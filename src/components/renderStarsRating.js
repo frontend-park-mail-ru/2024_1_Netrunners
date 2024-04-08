@@ -15,4 +15,4 @@ export const renderStarsRating = (roundedScore, remainder) => {
     }
   }
   return starsHTML;
-}
+};

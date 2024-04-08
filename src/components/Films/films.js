@@ -1,6 +1,6 @@
 import * as filmsApi from '../../api/films.js';
-import { renderStarsRating } from "../renderStarsRating.js";
-import { renderSlider } from "../renderSlider.js";
+import {renderStarsRating} from '../renderStarsRating.js';
+import {renderSlider} from '../Slider/renderSlider.js';
 
 /**
  * Рендерит страницу фильмов, получает данные о фильмах с сервера,
@@ -14,21 +14,21 @@ export async function renderFilms() {
     const [filmData, topFourFilms, filmsGenres] = await Promise.all([
       filmsApi.getAll(),
       filmsApi.getTopFour(),
-      filmsApi.getGenres()
+      filmsApi.getGenres(),
     ]);
 
-    topFourFilms[0].active = "data-active";
+    topFourFilms[0].active = 'data-active';
 
     Handlebars.registerHelper('stars', function(averageScore) {
       averageScore = 4.4;
       const roundedScore = Math.floor(averageScore);
       const remainder = averageScore - roundedScore;
-      let starsHTML = renderStarsRating(roundedScore, remainder);
+      const starsHTML = renderStarsRating(roundedScore, remainder);
       return new Handlebars.SafeString(starsHTML);
     });
 
     const template = Handlebars.templates['Films.hbs'];
-    document.querySelector('main').innerHTML = template({ filmData, topFourFilms, filmsGenres });
+    document.querySelector('main').innerHTML = template({filmData, topFourFilms, filmsGenres});
 
     renderSlider();
   } catch (error) {
