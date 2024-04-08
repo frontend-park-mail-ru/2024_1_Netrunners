@@ -1,5 +1,6 @@
 import {fetchRequest, IP} from './fetch.js';
 import {timeConvert} from '../utils/timeConvert.js';
+import {toFilmDataWithDuration} from "../utils/transformers/filmDataWithDuration.js";
 
 const topFourFilms = [
   {
@@ -86,15 +87,12 @@ export async function getAll() {
     const url = IP + 'films';
     const response = await fetchRequest(url, 'GET');
 
-    let filmsData = await response.json();
+    const filmsData = await response.json();
     if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
       throw new Error('Ошибка: ответ не содержит массив фильмов');
     }
 
-    return filmsData.films.map((film) => ({
-      ...film,
-      duration: timeConvert.timeIntoText(film.duration),
-    }));
+    return toFilmDataWithDuration(filmsData.films);
   } catch (error) {
     console.error('Произошла ошибка:', error.message);
   }
@@ -103,11 +101,7 @@ export async function getAll() {
 export async function getTopFour() {
   try {
     return new Promise(function (resolve) {
-      let data = topFourFilms.map((film) => ({
-        ...film,
-        duration: timeConvert.timeIntoText(film.duration),
-      }));
-      resolve(data);
+      resolve(toFilmDataWithDuration(topFourFilms));
     });
   } catch (error) {
     console.error('Произошла ошибка:', error.message);
