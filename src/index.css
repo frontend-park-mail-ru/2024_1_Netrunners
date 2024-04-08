@@ -5,11 +5,13 @@
 @import "components/Signup/signup.css";
 @import "components/Actor/actor.css";
 @import "components/Film/film.css";
+@import "components/Player/player.css";
 
 :root {
+  --black: #000000;
   --neon-main: #ff06b5;
   --neon-secondary: #ff80d7;
-  --neutral-dark: #0F0F0F;
+  --neutral-dark: #0f0f0f;
   --neutral-main: #141414;
   --shadow-color: #0000004C;
   --hover-color: #1A1A1A;
@@ -17,7 +19,7 @@
   --border-color: #262626;
   --grey-main: #FFFFFF33;
   --grey-secondary: #999999;
-  --white-main: white;
+  --white: #FFFFFF;
   --input-font: 'Roboto', sans-serif;
   --main-font: Manrope, solid;
   --caption: 12px;

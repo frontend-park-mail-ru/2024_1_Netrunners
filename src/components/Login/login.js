@@ -1,6 +1,7 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {goToPage, menu} from '../../index.js';
+import {loginTemplate} from './Login.hbs.js';
 
 /**
  * Рендерит страницу входа в систему, обрабатывает событие отправки формы,
@@ -10,7 +11,7 @@ import {goToPage, menu} from '../../index.js';
  * @return {void}
  */
 export function renderLogin() {
-  const template = Handlebars.templates['Login.hbs'];
+  const template = Handlebars.compile(loginTemplate);
   document.querySelector('main').innerHTML = template();
 
   const form = document.querySelector('.form-section');

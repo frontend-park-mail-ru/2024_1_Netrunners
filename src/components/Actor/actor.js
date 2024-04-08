@@ -1,5 +1,6 @@
 import * as actorsApi from '../../api/actors.js';
 import * as filmsApi from '../../api/films.js';
+import {actorTemplate} from './actor.hbs.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -18,7 +19,7 @@ export async function renderActorPage(actorId) {
   const actorSection = document.createElement('section');
   actorSection.classList.add('actor-section');
 
-  const template = Handlebars.templates['actor.hbs'];
+  const template = Handlebars.compile(actorTemplate);
   const actorPageData = {...actorData, filmsData};
 
   document.querySelector('main').innerHTML = template(actorPageData);

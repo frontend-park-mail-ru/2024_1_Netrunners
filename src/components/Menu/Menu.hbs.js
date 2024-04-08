@@ -1,4 +1,4 @@
-<div class="container">
+export const menuTemplate = `<div class="menu-container">
     <div class="logo">
         <img src="../../img/logo/logo.svg" alt="Логотип">
     </div>
@@ -16,4 +16,4 @@
         </div>
     </div>
     <div id="auth"></div>
-</div>
+</div>`;
