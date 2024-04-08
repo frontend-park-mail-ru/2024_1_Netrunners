@@ -1,14 +1,15 @@
 import {fetchRequest, IP} from "./fetch.js";
+import {timeConvert} from "../utils/timeConvert.js";
 
 const filmData = {
-        "preview_data": 'https://avatars.mds.yandex.net/get-kinopoisk-image/4774061/0c3af6ba-0d22-441a-b249-6afb327fea15/1920x',
+        "banner": 'https://avatars.mds.yandex.net/get-kinopoisk-image/4774061/0c3af6ba-0d22-441a-b249-6afb327fea15/1920x',
         "title": "Универ 10 лет спустя",
         "director": "Влад Володин",
         "average_score": 4,
-        "scores_count": 20324,
         "duration": 7560,
-        "release_date": "2011-04-11T10:20:30",
-        "film_data": "string example of any sort of information"
+        "published_at": "2011-04-11T10:20:30",
+        "data": "string example of any sort of information",
+        "age_limit": 12
     };
 
 const filmActors = [{
@@ -36,8 +37,17 @@ const filmActors = [{
 
 export async function getFilmData(filmId) {
     try {
-        //тело запроса
+        /*
+        const response = await fetchRequest(`${IP}/films/${filmId}/data`, 'GET');
+        const filmData = await response.json();
+        if (!filmData || typeof filmData !== 'object') {
+            throw new Error('Ошибка: полученные данные не являются объектом');
+        }
+        return filmData;
+        */
         return new Promise(function(resolve) {
+            filmData.published_at = timeConvert.dateIntoYear(filmData.published_at);
+            filmData.duration = timeConvert.timeIntoText(filmData.duration);
             resolve(filmData);
         });
     } catch (error) {
@@ -47,7 +57,14 @@ export async function getFilmData(filmId) {
 
 export async function getActors(filmId) {
     try {
-        //тело запроса
+        /*
+        const response = await fetchRequest(`${IP}/films/${filmId}/actors`, 'GET');
+        const filmActors = await response.json();
+        if (!filmActors || typeof filmActors !== 'object') {
+            throw new Error('Ошибка: полученные данные не являются объектом');
+        }
+        return filmActors;
+        */
         return new Promise(function(resolve) {
             resolve(filmActors);
         });
