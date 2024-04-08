@@ -1,4 +1,5 @@
 import * as filmsApi from '../../api/films.js';
+import {filmsTemplate} from './Films.hbs.js';
 import {renderStarsRating} from '../renderStarsRating.js';
 import {renderSlider} from '../Slider/renderSlider.js';
 
@@ -26,8 +27,7 @@ export async function renderFilms() {
       const starsHTML = renderStarsRating(roundedScore, remainder);
       return new Handlebars.SafeString(starsHTML);
     });
-
-    const template = Handlebars.templates['Films.hbs'];
+    const template = Handlebars.compile(filmsTemplate);
     document.querySelector('main').innerHTML = template({filmData, topFourFilms, filmsGenres});
 
     renderSlider();
