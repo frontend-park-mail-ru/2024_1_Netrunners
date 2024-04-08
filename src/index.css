@@ -4,6 +4,7 @@
 @import "components/Login/auth.css";
 @import "components/Signup/signup.css";
 @import "components/Actor/actor.css";
+@import "components/Film/film.css";
 
 :root {
   --neon-main: #ff06b5;
