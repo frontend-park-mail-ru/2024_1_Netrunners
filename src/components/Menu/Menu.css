@@ -105,7 +105,7 @@
     background-color: var(--neutral-dark);
     min-width: 120px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     right: -10px;
     top: 30px;
     opacity: 0;

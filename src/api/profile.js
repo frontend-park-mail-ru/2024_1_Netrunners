@@ -3,8 +3,8 @@ import {fetchRequest, IP} from './fetch.js';
 const profileData = {
   name: "Мэттью Макконахи",
   email: "ahmed@yandex.ru",
-  signup_at: "2011-04-11T10:20:30",
-  is_admin: false,
+  signUpAt: "2011-04-11T10:20:30",
+  isAdmin: false,
   avatar: 'https://rustars.tv/wp-content/uploads/2017/07/stanislav-yarushin14.jpg'
 };
 
@@ -26,16 +26,16 @@ export async function getProfileData(actorId) {
   });
 }
 
-export async function editProfile(uuid, new_username = 0, new_password = 0, new_avatar = 0){
+export async function editProfile(uuid, editData){
   try {
     // const newData = {new_username, new_password, new_avatar};
     // const url = IP + 'profile/${uuid}/edit';
-    // const response = await fetchRequest(url, 'POST', newData);
+    // const response = await fetchRequest(url, 'POST', editData);
     // const responseData = await response.json();
     //
     // return responseData.status === 200;
     return new Promise(function(resolve) {
-      alert(new_username);
+      alert(editData.action);
       resolve();
     });
   } catch (error) {

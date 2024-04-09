@@ -11,7 +11,7 @@ export const profileTemplate = `<div class="profile-info">
             <h1>О пользователе</h1>
             <ul>
                 <li>Почта: {{ email }}</li>
-                <li>Дата регистрации: {{ signup_at }}</li>
+                <li>Дата регистрации: {{ signUpAt }}</li>
             </ul>
         </div>
     </div>
@@ -22,13 +22,13 @@ export const profileTemplate = `<div class="profile-info">
         <div class="popular-now-title">Любимые фильмы</div>
         {{#each filmsData}}
             <div class="film-card">
-                <img class="film-image" src="{{this.preview_data}}">
+                <img class="film-image" src="{{ this.preview_data }}">
                 <div class="film-content">
                     <div class="film-title">
-                        {{this.name}}
+                        {{ this.name }}
                     </div>
                     <div class="film-time">
-                        {{this.duration}}
+                        {{ this.duration }}
                     </div>
                 </div>
             </div>

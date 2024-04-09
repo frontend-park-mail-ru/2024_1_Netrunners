@@ -19,17 +19,13 @@ export async function renderProfile(profileId) {
     filmsApi.getAll(),
   ]);
 
-  const actorSection = document.createElement('section');
-  actorSection.classList.add('actor-section');
-  let isEditing = false;
   const template = Handlebars.compile(profileTemplate);
-  const actorPageData = {...profileData, filmsData, isEditing};
-  document.querySelector('main').innerHTML = template(actorPageData);
+  const profilePageData = {...profileData, filmsData};
+  document.querySelector('main').innerHTML = template(profilePageData);
 
    document.querySelector('.profile-page-buttons').addEventListener('click', (e) => {
      e.preventDefault();
      renderEditForm(profileId);
-
    });
 
 }
@@ -56,14 +52,25 @@ export async function renderEditForm(profileId) {
       return
     }
 
-    await profileApi.editProfile(profileId, usernameInput.value, 0, 0);
+    let newData = usernameInput.value;
+    let action = 'chUsername';
+
+    await profileApi.editProfile(profileId, {action, newData});
   });
 
   avatarButton.addEventListener('click', async (e) => {
     e.preventDefault();
     const avatarBinary = avatarInput.value;
 
-    await profileApi.editProfile(profileId, 0, 0, avatarBinary);
+    if (!avatarBinary) {
+      document.getElementById('avatar-errors').innerText = 'Файл не выбран';
+      return
+    }
+
+    let newData = avatarInput.value;
+    let action = 'chAvatar';
+
+    await profileApi.editProfile(profileId, {action, newData});
   });
 
   passwordButton.addEventListener('click', async (e) => {
@@ -78,7 +85,10 @@ export async function renderEditForm(profileId) {
       return
     }
 
-    await profileApi.editProfile(profileId, 0, passwordInput.value, 0);
+    let newData = passwordInput.value;
+    let action = 'chPassword';
+
+    await profileApi.editProfile(profileId, {action, newData});
   });
 
   exitButton.addEventListener('click', async (e) => {
