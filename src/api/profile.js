@@ -25,3 +25,21 @@ export async function getProfileData(actorId) {
     resolve(profileData);
   });
 }
+
+export async function editProfile(uuid, new_username = 0, new_password = 0, new_avatar = 0){
+  try {
+    // const newData = {new_username, new_password, new_avatar};
+    // const url = IP + 'profile/${uuid}/edit';
+    // const response = await fetchRequest(url, 'POST', newData);
+    // const responseData = await response.json();
+    //
+    // return responseData.status === 200;
+    return new Promise(function(resolve) {
+      alert(new_username);
+      resolve();
+    });
+  } catch (error) {
+    console.error('Произошла ошибка: ', error.message);
+  }
+}
+

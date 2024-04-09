@@ -1,9 +1,6 @@
 input {
     height: 60px;
     font-size: var(--header-300);
-    margin-bottom: 16px;
-    margin-left: auto;
-    margin-right: auto;
     display: block;
     padding: 0 16px;
     border-width: 0;
@@ -26,6 +23,9 @@ input:focus {
 
 .submit-button {
     margin-top: 32px;
+    margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
     background: none;
     outline: var(--neon-main) solid medium;
 }

@@ -32,18 +32,22 @@ export async function renderSignup() {
 
     if (!validators.username(username)) {
       errorField.innerText = 'Имя пользователя слишком короткое';
+      return
     }
 
     if (!validators.login(login)) {
       errorField.innerText = 'Поле почта введено некорректно';
+      return
     }
 
     if (!validators.password(password)) {
       errorField.innerText = 'Пароль слишком короткий';
+      return
     }
 
     if (!validators.passwordConf(password, passConf)) {
       errorField.innerText = 'Пароли не совпадают';
+      return
     }
 
     const isAuthorized = await authApi.signup(user);

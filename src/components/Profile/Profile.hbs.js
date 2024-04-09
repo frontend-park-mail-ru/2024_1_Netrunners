@@ -1,4 +1,4 @@
-<div class="profile-info">
+export const profileTemplate = `<div class="profile-info">
     <div class="profile-photo">
         <img src="{{ avatar }}" alt="{{ name }}">
     </div>
@@ -34,5 +34,5 @@
             </div>
         {{/each}}
     </div>
-</div>
+</div>`;
 
