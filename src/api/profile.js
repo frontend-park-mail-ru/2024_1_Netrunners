@@ -1,12 +1,16 @@
 import {fetchRequest, IP} from './fetch.js';
 
 const profileData = {
-  name: "Мэттью Макконахи",
-  email: "ahmed@yandex.ru",
-  signUpAt: "2011-04-11T10:20:30",
+  name: 'Мэттью Макконахи',
+  email: 'ahmed@yandex.ru',
+  signUpAt: '2011-04-11T10:20:30',
   isAdmin: false,
-  avatar: 'https://rustars.tv/wp-content/uploads/2017/07/stanislav-yarushin14.jpg'
+  avatar: 'https://rustars.tv/wp-content/uploads/2017/07/stanislav-yarushin14.jpg',
 };
+
+export const CHANGE_USERNAME_ACTION = 'chUsername';
+export const CHANGE_PASSWORD_ACTION = 'chPassword';
+export const CHANGE_AVATAR_ACTION = 'chAvatar';
 
 /**
  * Запрос на получение данных о пользователе
@@ -26,7 +30,7 @@ export async function getProfileData(actorId) {
   });
 }
 
-export async function editProfile(uuid, editData){
+export async function editProfile(uuid, editData) {
   try {
     // const newData = {new_username, new_password, new_avatar};
     // const url = IP + 'profile/${uuid}/edit';

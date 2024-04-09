@@ -29,7 +29,7 @@ export const timeConvert = {
    * @param {string} rawDate - Полная дата в виде строки
    * @return {string} - значение года
    */
-  dateIntoYear: (rawDate) => dateIntoYear(rawDate)
+  dateIntoYear: (rawDate) => dateIntoYear(rawDate),
 };
 
 const intoHours = (durationInSec) => {
