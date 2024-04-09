@@ -42,10 +42,6 @@
     align-items: center;
 }
 
-.profile-info + .films-section {
-    padding-top: 64px;
-}
-
 .profile-page-buttons {
     text-decoration: none;
     color: var(--white);
@@ -70,6 +66,7 @@
     align-items: center;
     flex-direction: row;
     justify-content: flex-start;
+    padding-top: 32px;
 }
 
 .edit-form-button{
@@ -92,7 +89,7 @@
     width: 600px;
 }
 
-.password-section > input {
+.edit-form > input {
     width: 600px;
 }
 
@@ -112,4 +109,24 @@
 #exit-editing-button{
     margin: 32px 32px auto auto;
     cursor: pointer;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-avatar {
+    top: 14vh;
+    position: fixed;
+}
+
+.error-username{
+    top: 24vh;
+    position: fixed;
+}
+
+.error-password {
+    top: 35vh;
+    position: fixed;
 }
