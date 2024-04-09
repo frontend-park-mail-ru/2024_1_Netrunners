@@ -6,6 +6,7 @@
 @import "components/Actor/actor.css";
 @import "components/Film/film.css";
 @import "components/Player/player.css";
+@import "components/Profile/Profile.css";
 
 :root {
   --black: #000000;

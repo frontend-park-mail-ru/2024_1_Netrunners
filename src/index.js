@@ -35,7 +35,7 @@ const config = {
       href: '/subscription',
       text: 'Подписки',
       render: renderFilms,
-    }
+    },
   },
   authElements: {
     profile: {
