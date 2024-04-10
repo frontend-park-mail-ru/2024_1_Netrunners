@@ -35,7 +35,7 @@ const config = {
     subscription: {
       href: '/subscription',
       text: 'Подписки',
-      render: renderPlayer,
+      render: renderFilms,
     },
   },
   authElements: {

@@ -4,7 +4,6 @@ import * as images from '../../img/imgConstants.js';
 import {renderFilmPage} from "../Film/film.js";
 
 export async function renderPlayer(filmId, source) {
-  source = 'https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4'
   const video = {src: source};
   const template = Handlebars.compile(playerTemplate);
 
