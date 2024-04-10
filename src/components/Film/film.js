@@ -23,6 +23,6 @@ export async function renderFilmPage(filmId) {
   const playerButton = document.querySelector('#data-player-button');
   playerButton.addEventListener('click', (e) => {
     e.preventDefault();
-    renderPlayer(filmId);
+    renderPlayer(filmData.source);
   });
 }
