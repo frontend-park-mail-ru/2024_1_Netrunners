@@ -18,7 +18,7 @@ export const filmsTemplate = `
                             <a> {{ this.film_data }} </a>
                         </div>
                         <div class="poster-actions">
-                            <div class="accent-button">
+                            <div class="accent-button" id="data-player-button">
                                 <link>
                                 Смотреть! </link>
                             </div>

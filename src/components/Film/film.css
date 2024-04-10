@@ -168,3 +168,7 @@
 .sub_title {
     color:var(--grey-secondary);
 }
+
+#film-player-button {
+    cursor: pointer;
+}
