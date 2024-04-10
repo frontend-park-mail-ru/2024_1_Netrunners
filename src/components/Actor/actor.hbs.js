@@ -1,6 +1,6 @@
 export const actorTemplate = `<div class="actor-info">
     <div class="actor-photo">
-        <img src="{{ actorPhoto }}" alt="{{ actorName }}">
+        <img src="{{ avatar }}" alt="{{ name }}">
     </div>
     <div class="actor-details">
         <div class="actor-name">
@@ -21,17 +21,39 @@ export const actorTemplate = `<div class="actor-info">
 </div>
 
 <div class="films-section">
-    <div class="films-container">
+    <div class="upper-block">
         <div class="popular-now-title">Фильмы с этим актером</div>
+        <div class="slider-buttons">
+            <button class="carousel-button prev" data-carousel-button="prev"><img src="../../img/icons/arrow.svg"
+                                                                                  alt="">
+            </button>
+            <div class="carousel-shapes">
+                <img src="../../img/icons/shape.svg" alt="">
+                <img src="../../img/icons/shape-none.svg" alt="">
+                <img src="../../img/icons/shape-none.svg" alt="">
+                <img src="../../img/icons/shape-none.svg" alt="">
+            </div>
+            <button class="carousel-button next" data-carousel-button="next"><img src="../../img/icons/arrow.svg"
+                                                                                  alt="">
+            </button>
+        </div>
+    </div>
+    <div class="films-container">
         {{#each filmsData}}
             <div class="film-card" data-film-id="{{this.uuid}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
-                    <div class="film-title">
-                        {{this.title}}
-                    </div>
                     <div class="film-time">
+                        <img class="time-icon" src="../../img/icons/time.svg">
                         {{this.duration}}
+                    </div>
+                    <div class="film-rating">
+                        {{#stars this.average_score}}
+                            <div class="star-container">
+                                <div class="star"></div>
+                            </div>
+                        {{/stars}}
+                        <span class="rating-count">{{this.scores_count}}</span>
                     </div>
                 </div>
             </div>

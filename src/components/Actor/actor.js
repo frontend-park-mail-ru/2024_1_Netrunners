@@ -1,7 +1,7 @@
 import * as actorsApi from '../../api/actors.js';
 import * as filmsApi from '../../api/films.js';
 import {actorTemplate} from './actor.hbs.js';
-import {renderFilmPage} from "../Film/film.js";
+import {renderFilmPage} from '../Film/film.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -16,8 +16,6 @@ export async function renderActorPage(actorId) {
     actorsApi.getActorData(actorId),
     filmsApi.getAll(),
   ]);
-
-  console.log(actorData);
 
   const actorSection = document.createElement('section');
   actorSection.classList.add('actor-section');

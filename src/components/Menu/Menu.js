@@ -1,5 +1,7 @@
 import {createLink} from '../../utils/createLinks.js';
 import {menuTemplate} from './Menu.hbs.js';
+import {getProfilePreview} from '../../api/profile.js';
+import {getCookie} from '../../index.js';
 
 /**
  * Класс, представляющий меню на веб-странице.
@@ -72,7 +74,7 @@ export class Menu {
    * Рендерит элементы аутентификации в зависимости от статуса авторизации.
    * @param {boolean} isAuthorized - Флаг, указывающий, авторизован ли юзер.
    */
-  renderAuth(isAuthorized) {
+  async renderAuth(isAuthorized) {
     const authBlock = document.getElementById('auth');
     authBlock.innerHTML = '';
     authBlock.className = '';
@@ -90,7 +92,7 @@ export class Menu {
     } else {
       authBlock.classList.add('auth-elements');
       const avatar = document.createElement('img');
-      avatar.src = '../../img/avatars/avatar.png';
+      avatar.src = await getProfilePreview(getCookie('user_uuid'));
       avatar.alt = 'Avatar';
       avatar.classList.add('avatar');
       authBlock.appendChild(avatar);

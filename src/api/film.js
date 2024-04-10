@@ -1,6 +1,6 @@
 import {fetchRequest, IP} from './fetch.js';
-import {toFilmDataWithDuration} from "../utils/transformers/filmDataWithDuration.js";
-import {timeConvert} from "../utils/timeConvert.js";
+import {toFilmDataWithDuration} from '../utils/transformers/filmDataWithDuration.js';
+import {timeConvert} from '../utils/timeConvert.js';
 
 export async function getFilmData(filmId) {
   try {

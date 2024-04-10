@@ -111,22 +111,22 @@
     cursor: pointer;
 }
 
-.edit-form {
-    display: flex;
-    flex-direction: column;
-}
+/*.edit-form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
 
-.error-avatar {
-    top: 14vh;
-    position: fixed;
-}
+/*.error-avatar {*/
+/*    top: 14vh;*/
+/*    position: relative;*/
+/*}*/
 
-.error-username{
-    top: 24vh;
-    position: fixed;
-}
+/*.error-username{*/
+/*    top: 24vh;*/
+/*    position: fixed;*/
+/*}*/
 
-.error-password {
-    top: 35vh;
-    position: fixed;
-}
+/*.error-password {*/
+/*    top: 35vh;*/
+/*    position: fixed;*/
+/*}*/

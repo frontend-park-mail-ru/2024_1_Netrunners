@@ -3,7 +3,7 @@ import * as filmsApi from '../../api/films.js';
 import {validators} from '../../utils/validate.js';
 import {profileTemplate} from './Profile.hbs.js';
 import {editFormTemplate} from './editForm.hbs.js';
-import {renderFilmPage} from "../Film/film.js";
+import {renderFilmPage} from '../Film/film.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -18,8 +18,6 @@ export async function renderProfile(profileId) {
     profileApi.getProfileData(profileId),
     filmsApi.getAll(),
   ]);
-  console.log(profileData);
-  console.log(filmsData);
 
   const template = Handlebars.compile(profileTemplate);
   const profilePageData = {...profileData, filmsData};

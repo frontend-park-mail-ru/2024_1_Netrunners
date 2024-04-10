@@ -5,6 +5,7 @@ import {renderLogin} from './components/Login/login.js';
 import {renderSignup} from './components/Signup/signup.js';
 import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
+import {renderPlayer} from './components/Player/player.js';
 
 
 const rootElement = document.getElementById('root');
@@ -19,7 +20,7 @@ const config = {
     home: {
       href: '/home',
       text: 'Главная',
-      render: renderFilms,
+      render: renderPlayer,
     },
     films: {
       href: '/films',
@@ -130,7 +131,7 @@ function getCategory(section) {
   return null;
 }
 
-function getCookie(name) {
+export function getCookie(name) {
   const matches = document.cookie.match(new RegExp(
       '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)',
   ));

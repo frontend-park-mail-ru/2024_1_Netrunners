@@ -2,8 +2,8 @@ import {formatTime} from '../../utils/timeConvert.js';
 import {playerTemplate} from './Player.hbs.js';
 import * as images from '../../img/imgConstants.js';
 
-export async function renderPlayer(src) {
-  const source = src || `../../img/RickRoll.mp4`;
+export async function renderPlayer() {
+  const source = `https://daimnefilm.hb.ru-msk.vkcs.cloud/Rick%20Roll.ia.mp4`;
   const video = {src: source};
   const template = Handlebars.compile(playerTemplate);
 
