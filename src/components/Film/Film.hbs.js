@@ -9,7 +9,7 @@ export const filmPageTemplate = `<div class="film-page-poster-block">
             <a> {{ data }} </a>
         </div>
         <div class="film-page-poster-actions">
-            <div class="accent-button">
+            <div class="accent-button" id="#data-player-button">
                 <link>
                 Смотреть! </link>
             </div>
