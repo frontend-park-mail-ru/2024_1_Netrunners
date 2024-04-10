@@ -1,12 +1,15 @@
 import {formatTime} from '../../utils/timeConvert.js';
 import {playerTemplate} from './Player.hbs.js';
 import * as images from '../../img/imgConstants.js';
+import {renderFilmPage} from "../Film/film.js";
 
-export async function renderPlayer(source) {
+export async function renderPlayer(filmId, source) {
+  source = 'https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4'
   const video = {src: source};
   const template = Handlebars.compile(playerTemplate);
 
   document.getElementById('root').innerHTML = template(video);
+  const exitButton = document.querySelector('#exit-player');
   const container = document.querySelector('.player-container');
   const mainVideo = container.querySelector('video');
   const progressBar = container.querySelector('.progress-bar');
@@ -155,5 +158,10 @@ export async function renderPlayer(source) {
 
   mainVideo.addEventListener('pause', () => {
     playPauseBtn.src = images.PLAY_IMG;
+  });
+  console.log(exitButton)
+  exitButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await renderFilmPage(filmId);
   });
 }

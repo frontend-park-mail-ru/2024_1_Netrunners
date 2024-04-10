@@ -5,6 +5,7 @@ import {renderLogin} from './components/Login/login.js';
 import {renderSignup} from './components/Signup/signup.js';
 import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
+import {renderPlayer} from './components/Player/player.js';
 
 
 const rootElement = document.getElementById('root');
@@ -34,7 +35,7 @@ const config = {
     subscription: {
       href: '/subscription',
       text: 'Подписки',
-      render: renderFilms,
+      render: renderPlayer,
     },
   },
   authElements: {
