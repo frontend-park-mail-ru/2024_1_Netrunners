@@ -3,6 +3,7 @@ import * as filmsApi from '../../api/films.js';
 import {validators} from '../../utils/validate.js';
 import {profileTemplate} from './Profile.hbs.js';
 import {editFormTemplate} from './editForm.hbs.js';
+import {renderFilmPage} from "../Film/film.js";
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -17,6 +18,8 @@ export async function renderProfile(profileId) {
     profileApi.getProfileData(profileId),
     filmsApi.getAll(),
   ]);
+  console.log(profileData);
+  console.log(filmsData);
 
   const template = Handlebars.compile(profileTemplate);
   const profilePageData = {...profileData, filmsData};
@@ -25,6 +28,14 @@ export async function renderProfile(profileId) {
   document.querySelector('.profile-page-buttons').addEventListener('click', (e) => {
     e.preventDefault();
     renderEditForm(profileId);
+  });
+
+  const filmCards = document.querySelectorAll('[data-film-id]');
+
+  filmCards.forEach((filmCard) => {
+    filmCard.addEventListener('click', () => {
+      renderFilmPage(filmCard.dataset.filmId);
+    });
   });
 }
 export async function renderEditForm(profileId) {

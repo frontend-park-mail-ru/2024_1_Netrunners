@@ -1,4 +1,5 @@
 import {fetchRequest, IP} from './fetch.js';
+import {timeConvert} from "../utils/timeConvert.js";
 
 export const CHANGE_USERNAME_ACTION = 'chUsername';
 export const CHANGE_PASSWORD_ACTION = 'chPassword';
@@ -16,7 +17,8 @@ export async function getProfileData(uuid) {
   if (!data || typeof data !== 'object') {
     throw new Error('Ошибка: полученные данные не являются объектом');
   }
-  return data;
+  data.user.registeredAt = timeConvert.dateIntoYear(data.user.registeredAt)
+  return data.user;
 }
 
 export async function editProfile(uuid, editData) {

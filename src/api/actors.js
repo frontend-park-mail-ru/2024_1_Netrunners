@@ -12,5 +12,5 @@ export async function getActorData(actorId) {
   if (!data || typeof data !== 'object') {
     throw new Error('Ошибка: полученные данные не являются объектом');
   }
-  return data;
+  return data.actor;
 }
