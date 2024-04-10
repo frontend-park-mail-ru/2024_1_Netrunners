@@ -6,7 +6,7 @@ export const filmsTemplate = `
     </button>
     <ul data-slides>
         {{#each topFourFilms}}
-            <li class="slide" {{this.active}}>
+            <li class="slide" {{ this.active }}>
                 <div class="poster-block">
                     <div class="image-div">
                         <img class="poster-image" src="{{ this.preview_data }}">
@@ -94,7 +94,7 @@ export const filmsTemplate = `
     </div>
     <div class="films-container">
         {{#each filmData}}
-            <div class="film-card">
+            <div class="film-card" data-film-id="{{this.uuid}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
                     <div class="film-time">
@@ -132,7 +132,7 @@ export const filmsTemplate = `
     </div>
     <div class="films-container">
         {{#each filmData}}
-            <div class="film-card">
+            <div class="film-card" data-film-id="{{this.uuid}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
                     <div class="film-time">
@@ -170,7 +170,7 @@ export const filmsTemplate = `
     </div>
     <div class="films-container">
         {{#each filmData}}
-            <div class="film-card">
+            <div class="film-card" data-film-id="{{this.uuid}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
                     <div class="film-time">

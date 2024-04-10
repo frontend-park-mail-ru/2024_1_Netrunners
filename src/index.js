@@ -95,6 +95,7 @@ export async function renderMenu() {
  * @return {void}
  */
 export function goToPage(menuLinkElement) {
+  const userID = getCookie('user_uuid');
   pageElement.innerHTML = '';
 
   menu.state.activeMenuLink?.classList.remove('active');
@@ -105,7 +106,7 @@ export function goToPage(menuLinkElement) {
   const category = getCategory(section);
 
   if (config[category] && config[category][section]) {
-    config[category][section].render();
+    config[category][section].render(userID);
   } else {
     console.error(`Cannot find render function for section: ${section}`);
   }
@@ -127,6 +128,13 @@ function getCategory(section) {
     return 'noAuthElements';
   }
   return null;
+}
+
+function getCookie(name) {
+  const matches = document.cookie.match(new RegExp(
+      '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)',
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 renderMenu();

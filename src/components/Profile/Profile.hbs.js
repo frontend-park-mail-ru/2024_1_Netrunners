@@ -25,7 +25,7 @@ export const profileTemplate = `<div class="profile-info">
                 <img class="film-image" src="{{ this.preview_data }}">
                 <div class="film-content">
                     <div class="film-title">
-                        {{ this.name }}
+                        {{ this.title }}
                     </div>
                     <div class="film-time">
                         {{ this.duration }}

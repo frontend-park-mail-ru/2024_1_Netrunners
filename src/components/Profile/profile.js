@@ -9,8 +9,8 @@ import {editFormTemplate} from './editForm.hbs.js';
  * и списком фильмов, в которых он снялся.
  * @async
  * @function
- * @param {string} actorId - Идентификатор актёра.
  * @return {void}
+ * @param profileId
  */
 export async function renderProfile(profileId) {
   const [profileData, filmsData] = await Promise.all([
@@ -30,8 +30,6 @@ export async function renderProfile(profileId) {
 export async function renderEditForm(profileId) {
   const formTemplate = Handlebars.compile(editFormTemplate);
   document.querySelector('.profile-info').innerHTML = formTemplate();
-
-  const form = document.querySelector('.form-section');
 
   const usernameButton = document.querySelector('#sendLoginBtn');
   const avatarButton = document.querySelector('#sendImageBtn');
