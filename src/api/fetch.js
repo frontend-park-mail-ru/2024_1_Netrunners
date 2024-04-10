@@ -1,4 +1,4 @@
-export const IP = 'http://127.0.0.1:8081/';
+export const IP = 'http://94.139.247.246:8081/';
 
 
 /**
