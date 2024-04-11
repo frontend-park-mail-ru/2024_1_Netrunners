@@ -2,6 +2,7 @@ import * as filmsApi from '../../api/films.js';
 import {filmsTemplate} from './Films.hbs.js';
 import {renderStarsRating} from '../renderStarsRating.js';
 import {renderSlider} from '../Slider/renderSlider.js';
+import {renderFilmPage} from '../Film/film.js';
 
 /**
  * Рендерит страницу фильмов, получает данные о фильмах с сервера,
@@ -31,6 +32,13 @@ export async function renderFilms() {
     document.querySelector('main').innerHTML = template({filmData, topFourFilms, filmsGenres});
 
     renderSlider();
+    const filmCards = document.querySelectorAll('[data-film-id]');
+
+    filmCards.forEach((filmCard) => {
+      filmCard.addEventListener('click', () => {
+        renderFilmPage(filmCard.dataset.filmId);
+      });
+    });
   } catch (error) {
     console.error('Error rendering films:', error);
   }

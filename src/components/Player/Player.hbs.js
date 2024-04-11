@@ -58,4 +58,5 @@ export const playerTemplate = `<div class="player-container show-controls">
     <video>
         <source src="{{this.src}}">
     </video>
-</div>`;
+</div>
+<button type="button" id="exit-player" class="profile-page-buttons">Назад</button>`;

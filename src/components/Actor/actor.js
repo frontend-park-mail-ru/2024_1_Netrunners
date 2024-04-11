@@ -1,6 +1,7 @@
 import * as actorsApi from '../../api/actors.js';
 import * as filmsApi from '../../api/films.js';
 import {actorTemplate} from './actor.hbs.js';
+import {renderFilmPage} from '../Film/film.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -23,4 +24,12 @@ export async function renderActorPage(actorId) {
   const actorPageData = {...actorData, filmsData};
 
   document.querySelector('main').innerHTML = template(actorPageData);
+
+  const filmCards = document.querySelectorAll('[data-film-id]');
+
+  filmCards.forEach((filmCard) => {
+    filmCard.addEventListener('click', () => {
+      renderFilmPage(filmCard.dataset.filmId);
+    });
+  });
 }

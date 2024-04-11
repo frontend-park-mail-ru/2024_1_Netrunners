@@ -1,7 +1,8 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {goToPage, menu} from '../../index.js';
+import {menu} from '../../index.js';
 import {loginTemplate} from './Login.hbs.js';
+import Router from "../../utils/router.js";
 
 /**
  * Рендерит страницу входа в систему, обрабатывает событие отправки формы,
@@ -31,10 +32,10 @@ export function renderLogin() {
     }
 
     const isAuthorized = await authApi.login(user);
-    menu.renderAuth(isAuthorized);
+    await menu.renderAuth(isAuthorized);
 
     if (isAuthorized) {
-      goToPage(menu.state.menuElements.films);
+      await Router.go('/', 'Netrunnerflix', isAuthorized);
       return;
     }
 

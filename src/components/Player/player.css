@@ -205,3 +205,8 @@
 input[type="range"] {
     accent-color: var(--neon-main);
 }
+
+#exit-player {
+    margin: 32px 16px auto auto;
+    z-index: 3;
+}

@@ -3,14 +3,15 @@ import * as filmsApi from '../../api/films.js';
 import {validators} from '../../utils/validate.js';
 import {profileTemplate} from './Profile.hbs.js';
 import {editFormTemplate} from './editForm.hbs.js';
+import {renderFilmPage} from '../Film/film.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
  * и списком фильмов, в которых он снялся.
  * @async
  * @function
- * @param {string} actorId - Идентификатор актёра.
  * @return {void}
+ * @param profileId
  */
 export async function renderProfile(profileId) {
   const [profileData, filmsData] = await Promise.all([
@@ -26,12 +27,18 @@ export async function renderProfile(profileId) {
     e.preventDefault();
     renderEditForm(profileId);
   });
+
+  const filmCards = document.querySelectorAll('[data-film-id]');
+
+  filmCards.forEach((filmCard) => {
+    filmCard.addEventListener('click', () => {
+      renderFilmPage(filmCard.dataset.filmId);
+    });
+  });
 }
 export async function renderEditForm(profileId) {
   const formTemplate = Handlebars.compile(editFormTemplate);
   document.querySelector('.profile-info').innerHTML = formTemplate();
-
-  const form = document.querySelector('.form-section');
 
   const usernameButton = document.querySelector('#sendLoginBtn');
   const avatarButton = document.querySelector('#sendImageBtn');
@@ -85,4 +92,3 @@ export async function renderEditForm(profileId) {
     await renderProfile(profileId);
   });
 }
-

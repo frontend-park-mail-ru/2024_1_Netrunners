@@ -1,6 +1,6 @@
 export const filmPageTemplate = `<div class="film-page-poster-block">
     <div class="film-page-image-div">
-        <img class="film-page-image" src="{{ banner }}">
+        <img class="film-page-image" src="{{ preview }}">
         <div class="film-overlay"></div>
     </div>
     <div class="film-page-poster-data">
@@ -9,7 +9,7 @@ export const filmPageTemplate = `<div class="film-page-poster-block">
             <a> {{ data }} </a>
         </div>
         <div class="film-page-poster-actions">
-            <div class="accent-button">
+            <div class="accent-button" id="#data-player-button">
                 <link>
                 Смотреть! </link>
             </div>
@@ -21,7 +21,7 @@ export const filmPageTemplate = `<div class="film-page-poster-block">
                 <link>
                 Смотреть позже </link>
             </div>
-            <a class="film-page-duration"> {{duration}} </a>
+            <a class="film-page-duration"> {{ duration }} </a>
         </div>
     </div>
 </div>
@@ -34,8 +34,8 @@ export const filmPageTemplate = `<div class="film-page-poster-block">
         </div>
         <div class="film-page-actors">
             {{#each filmActors}}
-                <div class="actor-preview">
-                    <img class="actor-avatar" src="{{ this.avatar}}">
+                <div class="actor-preview" data-actor-id="{{ this.uuid }}">
+                    <img class="actor-avatar" src="{{ this.avatar }}">
                     <div class="dropdown-actor-name"> {{ this.name }} </div>
                 </div>
             {{/each}}
@@ -46,15 +46,15 @@ export const filmPageTemplate = `<div class="film-page-poster-block">
     <div class="film-page-data">
         <div class="film-page-data-section">
             <a class="sub_title">Дата выхода</a>
-            <div class="film-page-data-element">{{published_at}}</div>
+            <div class="film-page-data-element">{{ date }}</div>
         </div>
         <div class="film-page-data-section">
             <a class="sub_title">Возрастной рейтинг</a>
-            <div class="film-page-data-element"> {{age_limit}}+</div>
+            <div class="film-page-data-element"> {{ ageLimit }}+</div>
         </div>
         <div class="film-page-data-section">
             <a class="sub_title">Рейтинг</a>
-            <div class="film-page-data-element"> {{ average_score }} </div>
+            <div class="film-page-data-element"> {{ averageScore }} </div>
         </div>
         <div class="film-page-data-section">
             <a class="sub_title">Режиссеры</a>

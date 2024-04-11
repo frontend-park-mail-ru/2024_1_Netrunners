@@ -5,6 +5,8 @@ import {renderLogin} from './components/Login/login.js';
 import {renderSignup} from './components/Signup/signup.js';
 import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
+import {Router} from './utils/router.js';
+import Rout from './utils/router.js';
 
 
 const rootElement = document.getElementById('root');
@@ -16,11 +18,6 @@ rootElement.appendChild(pageElement);
 
 const config = {
   menu: {
-    home: {
-      href: '/home',
-      text: 'Главная',
-      render: renderFilms,
-    },
     films: {
       href: '/films',
       text: 'Фильмы и сериалы',
@@ -79,11 +76,11 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === 'a') {
       e.preventDefault();
-      goToPage(target);
+      changeActiveButton(target);
     }
   });
   const isAuthorized = await authApi.check();
-  menu.renderAuth(isAuthorized);
+  await menu.renderAuth(isAuthorized);
 }
 
 /**
@@ -94,40 +91,21 @@ export async function renderMenu() {
  * @param {HTMLAnchorElement} menuLinkElement
  * @return {void}
  */
-export function goToPage(menuLinkElement) {
+export function changeActiveButton(menuLinkElement) {
   pageElement.innerHTML = '';
 
   menu.state.activeMenuLink?.classList.remove('active');
   menuLinkElement.classList.add('active');
   menu.state.activeMenuLink = menuLinkElement;
-
-  const section = menuLinkElement.dataset.section;
-  const category = getCategory(section);
-
-  if (config[category] && config[category][section]) {
-    config[category][section].render();
-  } else {
-    console.error(`Cannot find render function for section: ${section}`);
-  }
 }
 
-/**
- * Возвращает категорию элемента по его секции.
- * @param {string} section - Секция элемента.
- * @return {string|null} Категория элемента.
- */
-function getCategory(section) {
-  if (config.menu[section]) {
-    return 'menu';
-  }
-  if (config.authElements[section]) {
-    return 'authElements';
-  }
-  if (config.noAuthElements[section]) {
-    return 'noAuthElements';
-  }
-  return null;
+export function getCookie(name) {
+  const matches = document.cookie.match(new RegExp(
+      '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)',
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+new Router();
 renderMenu();
-goToPage(menu.state.menuElements.films);
+await Rout.go(decodeURIComponent(window.location.pathname), document.title);

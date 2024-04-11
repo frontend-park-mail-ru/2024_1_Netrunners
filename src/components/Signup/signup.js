@@ -1,6 +1,6 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {goToPage, menu} from '../../index.js';
+import {changeActiveButton, menu} from '../../index.js';
 import {signupTemplate} from './Signup.hbs.js';
 
 /**
@@ -52,8 +52,8 @@ export async function renderSignup() {
 
     const isAuthorized = await authApi.signup(user);
     if (isAuthorized) {
-      menu.renderAuth(isAuthorized);
-      goToPage(menu.state.menuElements.films);
+      await menu.renderAuth(isAuthorized);
+      changeActiveButton(menu.state.menuElements.films);
     } else {
       errorField.innerText = 'Такой пользователь уже существует';
     }

@@ -1,5 +1,6 @@
 import * as authApi from '../../api/auth.js';
-import {goToPage, menu} from '../../index.js';
+import {changeActiveButton, menu} from '../../index.js';
+import Router from '../../utils/router.js';
 
 /**
  * Отправляет запрос на сервер для выхода из аккаунта,
@@ -11,9 +12,10 @@ import {goToPage, menu} from '../../index.js';
  */
 export async function renderLogout() {
   const isAuthorized = await authApi.logout();
-  menu.renderAuth(!isAuthorized);
+  await menu.renderAuth(!isAuthorized);
 
   if (isAuthorized) {
-    goToPage(menu.state.menuElements.films);
+    changeActiveButton(menu.state.menuElements.films);
+    Router.go('/', 'Netrunnerflix', false)
   }
 }
