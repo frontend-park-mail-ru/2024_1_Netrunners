@@ -12,10 +12,9 @@ import Router from '../../utils/router.js';
  */
 export async function renderLogout() {
   const isAuthorized = await authApi.logout();
-  await menu.renderAuth(!isAuthorized);
-
+  await menu.renderAuth();
   if (isAuthorized) {
-    changeActiveButton(menu.state.menuElements.films);
-    Router.go('/', 'Netrunnerflix', false)
+    changeActiveButton('/films');
+    await Router.go('/', 'Netrunnerflix');
   }
 }

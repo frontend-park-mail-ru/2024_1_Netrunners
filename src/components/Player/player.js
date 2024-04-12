@@ -1,7 +1,7 @@
 import {formatTime} from '../../utils/timeConvert.js';
 import {playerTemplate} from './Player.hbs.js';
 import * as images from '../../img/imgConstants.js';
-import {renderFilmPage} from "../Film/film.js";
+import {renderFilmPage} from '../Film/film.js';
 
 export async function renderPlayer(filmId, source) {
   const video = {src: source};

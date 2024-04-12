@@ -2,7 +2,7 @@ import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
 import {menu} from '../../index.js';
 import {loginTemplate} from './Login.hbs.js';
-import Router from "../../utils/router.js";
+import Router from '../../utils/router.js';
 
 /**
  * Рендерит страницу входа в систему, обрабатывает событие отправки формы,
@@ -33,9 +33,8 @@ export function renderLogin() {
 
     const isAuthorized = await authApi.login(user);
     await menu.renderAuth(isAuthorized);
-
     if (isAuthorized) {
-      await Router.go('/', 'Netrunnerflix', isAuthorized);
+      await Router.go('/', 'Netrunnerflix');
       return;
     }
 

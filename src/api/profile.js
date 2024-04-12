@@ -13,7 +13,7 @@ export const CHANGE_AVATAR_ACTION = 'chAvatar';
  */
 export async function getProfileData(uuid) {
   try {
-    const response = await fetchRequest(`${IP}profile/${uuid}/data`, 'GET');
+    const response = await fetchRequest(`${IP}/profile/${uuid}/data`, 'GET');
     const data = await response.json();
     if (!data || typeof data !== 'object') {
       throw new Error('Ошибка: полученные данные не являются объектом');
@@ -27,7 +27,7 @@ export async function getProfileData(uuid) {
 
 export async function editProfile(uuid, editData) {
   try {
-    const response = await fetchRequest(`${IP}profile/${uuid}/edit`, 'POST', editData);
+    const response = await fetchRequest(`${IP}/profile/${uuid}/edit`, 'POST', editData);
     const responseData = await response.json();
 
     return responseData.status === 200;
@@ -38,7 +38,7 @@ export async function editProfile(uuid, editData) {
 
 export async function getProfilePreview(uuid) {
   try {
-    const response = await fetchRequest(`${IP}profile/${uuid}/preview`, 'GET');
+    const response = await fetchRequest(`${IP}/profile/${uuid}/preview`, 'GET');
     const data = await response.json();
 
     if (!data || typeof data !== 'object') {

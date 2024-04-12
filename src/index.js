@@ -1,5 +1,4 @@
 import {Menu} from './components/Menu/Menu.js';
-import * as authApi from './api/auth.js';
 import {renderFilms} from './components/Films/films.js';
 import {renderLogin} from './components/Login/login.js';
 import {renderSignup} from './components/Signup/signup.js';
@@ -7,7 +6,6 @@ import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
 import {Router} from './utils/router.js';
 import Rout from './utils/router.js';
-
 
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');
@@ -76,11 +74,9 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === 'a') {
       e.preventDefault();
-      changeActiveButton(target);
+      changeActiveButton(target.href.replace('http://127.0.0.1:8080', ''));
     }
   });
-  const isAuthorized = await authApi.check();
-  await menu.renderAuth(isAuthorized);
 }
 
 /**
@@ -88,19 +84,21 @@ export async function renderMenu() {
  * обновляет стили активного пункта меню,
  * и отображает соответствующую секцию страницы.
  * @function
- * @param {HTMLAnchorElement} menuLinkElement
+ * @param {string} link
  * @return {void}
  */
-export function changeActiveButton(menuLinkElement) {
+export function changeActiveButton(link) {
   pageElement.innerHTML = '';
-
+  const menuLinkElement = document.querySelector(`a[href="${link}"]`);
   menu.state.activeMenuLink?.classList.remove('active');
   menuLinkElement.classList.add('active');
   menu.state.activeMenuLink = menuLinkElement;
 }
 
+// eslint-disable-next-line require-jsdoc
 export function getCookie(name) {
   const matches = document.cookie.match(new RegExp(
+      // eslint-disable-next-line max-len
       '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)',
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;
@@ -108,4 +106,14 @@ export function getCookie(name) {
 
 new Router();
 renderMenu();
+await menu.renderAuth();
 await Rout.go(decodeURIComponent(window.location.pathname), document.title);
+
+window.addEventListener('popstate', async (e) => {
+  if (e.state === null) {
+    await Rout.go('/', 'Netrunnerflix');
+  } else {
+    const path = e.state.path;
+    await Rout.go(path, e.state.title);
+  }
+});

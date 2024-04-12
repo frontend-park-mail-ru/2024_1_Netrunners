@@ -1,14 +1,14 @@
-import {renderFilms} from "../components/Films/films.js";
-import {renderSignup} from "../components/Signup/signup.js";
-import {renderPlayer} from "../components/Player/player.js";
-import {renderFilmPage} from "../components/Film/film.js";
-import {renderLogin} from "../components/Login/login.js";
-import {renderProfile} from "../components/Profile/profile.js";
-import {renderActorPage} from "../components/Actor/actor.js";
-import {renderLogout} from "../components/Logout/logout.js";
+import {renderFilms} from '../components/Films/films.js';
+import {renderSignup} from '../components/Signup/signup.js';
+import {renderPlayer} from '../components/Player/player.js';
+import {renderFilmPage} from '../components/Film/film.js';
+import {renderLogin} from '../components/Login/login.js';
+import {renderProfile} from '../components/Profile/profile.js';
+import {renderActorPage} from '../components/Actor/actor.js';
+import {renderLogout} from '../components/Logout/logout.js';
 import {validate as uuidValidate} from 'https://jspm.dev/uuid';
-import {menu} from "../index.js";
-import * as authApi from "../api/auth.js";
+import {menu} from '../index.js';
+import * as authApi from '../api/auth.js';
 
 export class Router {
   constructor() {
@@ -19,24 +19,9 @@ export class Router {
       '/profile': renderProfile,
       '/logout': renderLogout,
     };
-
-    window.addEventListener('popstate', async (e) => {
-      const isAuthorized = await authApi.check();
-      if (e.state === null) {
-        await this.go('/', null, e.state, isAuthorized);
-      } else {
-        const path = e.state.path;
-        await this.go(path, e.state.title, e.state, isAuthorized);
-      }
-    });
   }
 
-  async go(path, title, isAuthed) {
-    if (typeof isAuthed !== 'undefined') {
-      console.log(isAuthed);
-      await menu.renderAuth(isAuthed);
-    }
-
+  async go(path, title) {
     const state = {};
     state.path = path;
     state.title = title;

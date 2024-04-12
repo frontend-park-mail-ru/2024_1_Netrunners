@@ -84,7 +84,7 @@ const genresData = [
  */
 export async function getAll() {
   try {
-    const url = IP + 'films/all';
+    const url = IP + '/films/all';
     const response = await fetchRequest(url, 'GET');
 
     const filmsData = await response.json();

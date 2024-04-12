@@ -3,6 +3,7 @@ import {menuTemplate} from './Menu.hbs.js';
 import {getProfilePreview} from '../../api/profile.js';
 import {getCookie} from '../../index.js';
 import Router from '../../utils/router.js';
+import * as authApi from '../../api/auth.js';
 
 const application = document.getElementById('root');
 
@@ -23,7 +24,7 @@ const goProfile = async () => {
 };
 
 const goLogout = async () => {
-  await Router.go('/logout', 'Выход', false);
+  await Router.go('/logout', 'Netrunnerflix');
 };
 
 const menuRoutes = {
@@ -33,7 +34,7 @@ const menuRoutes = {
   signup: goSignup,
   logout: goLogout,
   support: goMain, // временно
-  subscription: goMain, //временно
+  subscription: goMain, // временно
 };
 
 /**
@@ -105,9 +106,11 @@ export class Menu {
 
   /**
    * Рендерит элементы аутентификации в зависимости от статуса авторизации.
-   * @param {boolean} isAuthorized - Флаг, указывающий, авторизован ли юзер.
    */
   async renderAuth(isAuthorized) {
+    if (isAuthorized === undefined) {
+      isAuthorized = await authApi.check();
+    }
     const authBlock = document.getElementById('auth');
     authBlock.innerHTML = '';
     authBlock.className = '';
@@ -176,7 +179,6 @@ export class Menu {
 
 application.addEventListener('click', (e) => {
   const {target} = e;
-
   if (target instanceof HTMLAnchorElement) {
     e.preventDefault();
     menuRoutes[target.dataset.section]();
