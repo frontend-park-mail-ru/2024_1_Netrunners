@@ -117,7 +117,7 @@ window.addEventListener('popstate', async (e) => {
       await Rout.go('/login', e.state.title);
       return;
     }
-    if (e.state.path.includes('/player/')) {
+    if (e.state.path.includes('/player/') || e.state.path.includes('/film/')) {
       await Rout.go(e.state.path, e.state.title);
       return;
     }

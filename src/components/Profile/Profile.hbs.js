@@ -21,7 +21,7 @@ export const profileTemplate = `<div class="profile-info">
     <div class="films-container">
         <div class="popular-now-title">Любимые фильмы</div>
         {{#each filmsData}}
-            <div class="film-card" data-film-id="{{this.uuid}}">
+            <div class="film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
                 <img class="film-image" src="{{ this.preview_data }}">
                 <div class="film-content">
                     <div class="film-title">

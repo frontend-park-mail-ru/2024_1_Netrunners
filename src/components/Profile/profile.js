@@ -3,7 +3,7 @@ import * as filmsApi from '../../api/films.js';
 import {validators} from '../../utils/validate.js';
 import {profileTemplate} from './Profile.hbs.js';
 import {editFormTemplate} from './editForm.hbs.js';
-import {renderFilmPage} from '../Film/film.js';
+import Router from '../../utils/router.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -32,7 +32,7 @@ export async function renderProfile(profileId) {
 
   filmCards.forEach((filmCard) => {
     filmCard.addEventListener('click', () => {
-      renderFilmPage(filmCard.dataset.filmId);
+      Router.go(`/film/${filmCard.dataset.filmId}`, filmCard.dataset.filmTitle);
     });
   });
 }
