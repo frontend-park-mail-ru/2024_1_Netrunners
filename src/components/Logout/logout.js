@@ -14,7 +14,7 @@ export async function renderLogout() {
   const isAuthorized = await authApi.logout();
   await menu.renderAuth();
   if (isAuthorized) {
-    changeActiveButton('/films');
+    changeActiveButton('/');
     await Router.go('/', 'Netrunnerflix');
   }
 }

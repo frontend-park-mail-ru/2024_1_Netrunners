@@ -7,8 +7,6 @@ import {renderProfile} from '../components/Profile/profile.js';
 import {renderActorPage} from '../components/Actor/actor.js';
 import {renderLogout} from '../components/Logout/logout.js';
 import {validate as uuidValidate} from 'https://jspm.dev/uuid';
-import {menu} from '../index.js';
-import * as authApi from '../api/auth.js';
 
 export class Router {
   constructor() {

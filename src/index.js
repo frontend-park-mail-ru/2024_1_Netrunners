@@ -17,7 +17,7 @@ rootElement.appendChild(pageElement);
 const config = {
   menu: {
     films: {
-      href: '/films',
+      href: '/',
       text: 'Фильмы и сериалы',
       render: renderFilms,
     },
@@ -107,13 +107,24 @@ export function getCookie(name) {
 new Router();
 renderMenu();
 await menu.renderAuth();
-await Rout.go(decodeURIComponent(window.location.pathname), document.title);
 
 window.addEventListener('popstate', async (e) => {
   if (e.state === null) {
     await Rout.go('/', 'Netrunnerflix');
   } else {
-    const path = e.state.path;
-    await Rout.go(path, e.state.title);
+    if (e.state.path === '/logout') {
+      changeActiveButton('/login');
+      await Rout.go('/login', e.state.title);
+      return;
+    }
+    changeActiveButton(e.state.path);
+    await Rout.go(e.state.path, e.state.title);
   }
 });
+
+const handleLocation = async () => {
+  const path = window.location.pathname;
+  await Rout.go(decodeURIComponent(path), document.title);
+};
+
+handleLocation();

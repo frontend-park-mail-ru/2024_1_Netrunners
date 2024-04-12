@@ -54,7 +54,7 @@ export async function renderSignup() {
     const isAuthorized = await authApi.signup(user);
     if (isAuthorized) {
       await menu.renderAuth(isAuthorized);
-      changeActiveButton('/films');
+      changeActiveButton('/');
       await Router.go('/', 'Netrunnerflix');
     } else {
       errorField.innerText = 'Такой пользователь уже существует';
