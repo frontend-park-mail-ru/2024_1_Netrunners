@@ -209,4 +209,7 @@ input[type="range"] {
 #exit-player {
     margin: 32px 16px auto auto;
     z-index: 3;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

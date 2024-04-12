@@ -1,13 +1,13 @@
 import {formatTime} from '../../utils/timeConvert.js';
 import {playerTemplate} from './Player.hbs.js';
 import * as images from '../../img/imgConstants.js';
-import {renderFilmPage} from '../Film/film.js';
+import Router from '../../utils/router.js';
 
-export async function renderPlayer(filmId, source) {
+export async function renderPlayer(filmId, filmTitle, source) {
   const video = {src: source};
   const template = Handlebars.compile(playerTemplate);
 
-  document.getElementById('root').innerHTML = template(video);
+  document.querySelector('main').innerHTML = template(video);
   const exitButton = document.querySelector('#exit-player');
   const container = document.querySelector('.player-container');
   const mainVideo = container.querySelector('video');
@@ -161,6 +161,6 @@ export async function renderPlayer(filmId, source) {
 
   exitButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    await renderFilmPage(filmId);
+    Router.go(`/film/${filmId}`, filmTitle);
   });
 }

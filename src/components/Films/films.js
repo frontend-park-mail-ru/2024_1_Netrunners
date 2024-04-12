@@ -2,7 +2,7 @@ import * as filmsApi from '../../api/films.js';
 import {filmsTemplate} from './Films.hbs.js';
 import {renderStarsRating} from '../renderStarsRating.js';
 import {renderSlider} from '../Slider/renderSlider.js';
-import {renderFilmPage} from '../Film/film.js';
+import Router from '../../utils/router.js';
 
 /**
  * Рендерит страницу фильмов, получает данные о фильмах с сервера,
@@ -36,7 +36,7 @@ export async function renderFilms() {
 
     filmCards.forEach((filmCard) => {
       filmCard.addEventListener('click', () => {
-        renderFilmPage(filmCard.dataset.filmId);
+        Router.go(`/film/${filmCard.dataset.filmId}`, filmCard.dataset.filmTitle);
       });
     });
   } catch (error) {

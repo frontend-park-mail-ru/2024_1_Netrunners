@@ -117,6 +117,10 @@ window.addEventListener('popstate', async (e) => {
       await Rout.go('/login', e.state.title);
       return;
     }
+    if (e.state.path.includes('/player/')) {
+      await Rout.go(e.state.path, e.state.title);
+      return;
+    }
     changeActiveButton(e.state.path);
     await Rout.go(e.state.path, e.state.title);
   }

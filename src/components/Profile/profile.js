@@ -36,6 +36,7 @@ export async function renderProfile(profileId) {
     });
   });
 }
+
 export async function renderEditForm(profileId) {
   const formTemplate = Handlebars.compile(editFormTemplate);
   document.querySelector('.profile-info').innerHTML = formTemplate();

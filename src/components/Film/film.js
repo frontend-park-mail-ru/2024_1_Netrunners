@@ -2,6 +2,7 @@ import * as filmApi from '../../api/film.js';
 import {filmPageTemplate} from './Film.hbs.js';
 import {renderActorPage} from '../Actor/actor.js';
 import {renderPlayer} from '../Player/player.js';
+import Router from '../../utils/router.js';
 
 
 export async function renderFilmPage(filmId) {
@@ -20,9 +21,9 @@ export async function renderFilmPage(filmId) {
     });
   });
 
-  const playerButton = document.querySelector('#data-player-button');
+  const playerButton = document.querySelector('.accent-button');
   playerButton.addEventListener('click', (e) => {
     e.preventDefault();
-    renderPlayer(filmId, filmData.source);
+    Router.go(`/player/${filmId}`, filmData.title, filmData.link);
   });
 }

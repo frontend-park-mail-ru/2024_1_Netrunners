@@ -7,6 +7,7 @@ import {renderProfile} from '../components/Profile/profile.js';
 import {renderActorPage} from '../components/Actor/actor.js';
 import {renderLogout} from '../components/Logout/logout.js';
 import {validate as uuidValidate} from 'https://jspm.dev/uuid';
+import {getCookie} from '../index.js';
 
 export class Router {
   constructor() {
@@ -14,12 +15,11 @@ export class Router {
       '/': renderFilms,
       '/signup': renderSignup,
       '/login': renderLogin,
-      '/profile': renderProfile,
       '/logout': renderLogout,
     };
   }
 
-  async go(path, title) {
+  async go(path, title, data) {
     const state = {};
     state.path = path;
     state.title = title;
@@ -36,19 +36,16 @@ export class Router {
     if (func === undefined) {
       if (path.includes('/actor/')) {
         const uuid = path.substring('/actor/'.length, path.length);
-        if (!uuidValidate(uuid)) {
-          window.history.back();
-        }
         renderActorPage(uuid);
       } else if (path.includes('/film/')) {
         const uuid = path.substring('/film/'.length, path.length);
-        if (!uuidValidate(uuid)) {
-          window.history.back();
-        }
         await renderFilmPage(uuid);
       } else if (path.includes('/player/')) {
-        const src = path.substring('/player/'.length, path.length);
-        await renderPlayer(src);
+        const uuid = path.substring('/player/'.length, path.length);
+        await renderPlayer(uuid, title, data);
+      } else if (path.includes('/profile')) {
+        const uuid = getCookie('user_uuid');
+        await renderProfile(uuid);
       } else {
         await this.go('/', 'Netrunnerflix', true);
       }

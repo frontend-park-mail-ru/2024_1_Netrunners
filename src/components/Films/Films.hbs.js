@@ -94,7 +94,7 @@ export const filmsTemplate = `
     </div>
     <div class="films-container">
         {{#each filmData}}
-            <div class="film-card" data-film-id="{{this.uuid}}">
+            <div class="film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
                     <div class="film-time">
@@ -132,7 +132,7 @@ export const filmsTemplate = `
     </div>
     <div class="films-container">
         {{#each filmData}}
-            <div class="film-card" data-film-id="{{this.uuid}}">
+            <div class="film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
                     <div class="film-time">
@@ -170,7 +170,7 @@ export const filmsTemplate = `
     </div>
     <div class="films-container">
         {{#each filmData}}
-            <div class="film-card" data-film-id="{{this.uuid}}">
+            <div class="film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
                 <img class="film-image" src="{{this.preview_data}}">
                 <div class="film-content">
                     <div class="film-time">
