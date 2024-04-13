@@ -53,6 +53,7 @@
 }
 
 .menu-container {
+    width: 1266px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -65,7 +66,7 @@
     align-self: center;
     padding: 8px;
     margin-left: 16px;
-    margin-top: 32px;
+    margin-top: 16px;
     background-color: var(--neutral-dark);
     border-radius: 16px;
 }
@@ -77,7 +78,7 @@
     align-self: center;
     padding: 8px;
     margin-left: 16px;
-    margin-top: 32px;
+    margin-top: 16px;
 }
 
 .auth-item:hover {
@@ -110,7 +111,7 @@
     top: 30px;
     opacity: 0;
     transition: opacity 1s ease;
-    z-index: 2;
+    z-index: var(--second-layer);
 }
 
 .dropdown:hover .dropdown-content {
@@ -125,4 +126,10 @@
 .icons {
     display: flex;
     margin-left: 64px;
+    margin-top: 16px;
+}
+
+.menu-right {
+    display: flex;
+    flex-wrap: wrap;
 }

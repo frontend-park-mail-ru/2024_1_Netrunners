@@ -1,7 +1,8 @@
 import {validators} from '../../utils/validate.js';
 import * as authApi from '../../api/auth.js';
-import {goToPage, menu} from '../../index.js';
+import {changeActiveButton, menu} from '../../index.js';
 import {signupTemplate} from './Signup.hbs.js';
+import Router from '../../utils/router.js';
 
 /**
  * Рендерит страницу регистрации, обрабатывает событие отправки формы,
@@ -52,8 +53,9 @@ export async function renderSignup() {
 
     const isAuthorized = await authApi.signup(user);
     if (isAuthorized) {
-      menu.renderAuth(isAuthorized);
-      goToPage(menu.state.menuElements.films);
+      await menu.renderAuth(isAuthorized);
+      changeActiveButton('/');
+      await Router.goToHomePage();
     } else {
       errorField.innerText = 'Такой пользователь уже существует';
     }

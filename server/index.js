@@ -17,8 +17,8 @@ app.use(body.json());
 app.use(cookie());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
+app.get(/^(?!.*\.(css|js|img|png|webp|webm|svg)).*$/, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'src/index.html'));
 });
 
 const port = process.env.PORT || 8080;

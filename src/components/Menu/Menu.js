@@ -1,5 +1,21 @@
 import {createLink} from '../../utils/createLinks.js';
 import {menuTemplate} from './Menu.hbs.js';
+import {getProfilePreview} from '../../api/profile.js';
+import {getCookie} from '../../index.js';
+import Router from '../../utils/router.js';
+import * as authApi from '../../api/auth.js';
+
+const application = document.getElementById('root');
+
+const menuRoutes = {
+  films: Router.goToHomePage,
+  profile: Router.goToProfilePage,
+  login: Router.goToLoginPage,
+  signup: Router.goToSignupPage,
+  logout: Router.goToLogout,
+  support: Router.goToHomePage, // временно
+  subscription: Router.goToHomePage, // временно
+};
 
 /**
  * Класс, представляющий меню на веб-странице.
@@ -70,12 +86,16 @@ export class Menu {
 
   /**
    * Рендерит элементы аутентификации в зависимости от статуса авторизации.
-   * @param {boolean} isAuthorized - Флаг, указывающий, авторизован ли юзер.
    */
-  renderAuth(isAuthorized) {
+  async renderAuth(isAuthorized) {
+    if (isAuthorized === undefined) {
+      isAuthorized = await authApi.check();
+    }
+
     const authBlock = document.getElementById('auth');
     authBlock.innerHTML = '';
     authBlock.className = '';
+
     if (!isAuthorized) {
       authBlock.classList.add('no-auth-elements');
       this.noAuthItems.forEach(([key, {href, text}]) => {
@@ -90,7 +110,7 @@ export class Menu {
     } else {
       authBlock.classList.add('auth-elements');
       const avatar = document.createElement('img');
-      avatar.src = '../../img/avatars/avatar.png';
+      avatar.src = await getProfilePreview(getCookie('user_uuid'));
       avatar.alt = 'Avatar';
       avatar.classList.add('avatar');
       authBlock.appendChild(avatar);
@@ -115,6 +135,7 @@ export class Menu {
         authBlock.appendChild(menuItem);
         dropdownContent.appendChild(menuItem);
       });
+
       dropdown.appendChild(dropdownContent);
       authBlock.appendChild(dropdown);
     }
@@ -128,13 +149,22 @@ export class Menu {
    */
   renderTemplate() {
     const template = Handlebars.compile(menuTemplate);
-    const items = this.items.map(([key, {href, text}], index) => {
+    const items = this.items.map(([key, {href, text}]) => {
       const className = 'menu-item';
       return {key, href, text, className};
     });
+
     this.#parent.innerHTML = template({items});
     this.#parent.querySelectorAll('a').forEach((element) => {
       this.state.menuElements[element.dataset.section] = element;
     });
   }
 }
+
+application.addEventListener('click', (e) => {
+  const {target} = e;
+  if (target instanceof HTMLAnchorElement) {
+    e.preventDefault();
+    menuRoutes[target.dataset.section]();
+  }
+});

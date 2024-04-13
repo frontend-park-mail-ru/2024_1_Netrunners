@@ -1,11 +1,12 @@
 import {Menu} from './components/Menu/Menu.js';
-import * as authApi from './api/auth.js';
 import {renderFilms} from './components/Films/films.js';
 import {renderLogin} from './components/Login/login.js';
 import {renderSignup} from './components/Signup/signup.js';
 import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
-
+import {Router} from './utils/router.js';
+import Rout from './utils/router.js';
+import {renderStarsRating} from './components/renderStarsRating.js';
 
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');
@@ -16,13 +17,8 @@ rootElement.appendChild(pageElement);
 
 const config = {
   menu: {
-    home: {
-      href: '/home',
-      text: 'Главная',
-      render: renderFilms,
-    },
     films: {
-      href: '/films',
+      href: '/',
       text: 'Фильмы и сериалы',
       render: renderFilms,
     },
@@ -79,11 +75,9 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === 'a') {
       e.preventDefault();
-      goToPage(target);
+      changeActiveButton(target.href.replace('http://127.0.0.1:8080', ''));
     }
   });
-  const isAuthorized = await authApi.check();
-  menu.renderAuth(isAuthorized);
 }
 
 /**
@@ -91,43 +85,59 @@ export async function renderMenu() {
  * обновляет стили активного пункта меню,
  * и отображает соответствующую секцию страницы.
  * @function
- * @param {HTMLAnchorElement} menuLinkElement
+ * @param {string} link
  * @return {void}
  */
-export function goToPage(menuLinkElement) {
+export function changeActiveButton(link) {
   pageElement.innerHTML = '';
-
+  const menuLinkElement = document.querySelector(`a[href="${link}"]`);
   menu.state.activeMenuLink?.classList.remove('active');
-  menuLinkElement.classList.add('active');
+  if (menuLinkElement) {
+    menuLinkElement.classList.add('active');
+  }
   menu.state.activeMenuLink = menuLinkElement;
-
-  const section = menuLinkElement.dataset.section;
-  const category = getCategory(section);
-
-  if (config[category] && config[category][section]) {
-    config[category][section].render();
-  } else {
-    console.error(`Cannot find render function for section: ${section}`);
-  }
 }
 
-/**
- * Возвращает категорию элемента по его секции.
- * @param {string} section - Секция элемента.
- * @return {string|null} Категория элемента.
- */
-function getCategory(section) {
-  if (config.menu[section]) {
-    return 'menu';
-  }
-  if (config.authElements[section]) {
-    return 'authElements';
-  }
-  if (config.noAuthElements[section]) {
-    return 'noAuthElements';
-  }
-  return null;
+export function getCookie(name) {
+  const matches = document.cookie.match(new RegExp(
+      '(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)',
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+new Router();
 renderMenu();
-goToPage(menu.state.menuElements.films);
+await menu.renderAuth();
+
+window.addEventListener('popstate', async (e) => {
+  if (e.state === null) {
+    await Rout.go('/', 'Netrunnerflix', null, false);
+  } else {
+    if (e.state.path === '/logout') {
+      changeActiveButton('/login');
+      await Rout.go('/login', e.state.title, null, false);
+      return;
+    }
+    if (e.state.path.includes('/player/') || e.state.path.includes('/film/') || e.state.path.includes('/actor/')) {
+      await Rout.go(e.state.path, e.state.title, null, false);
+      return;
+    }
+    changeActiveButton(e.state.path);
+    await Rout.go(e.state.path, e.state.title, null, false);
+  }
+});
+
+const handleLocation = async () => {
+  const path = window.location.pathname;
+  await Rout.go(decodeURIComponent(path), document.title);
+};
+
+handleLocation();
+
+Handlebars.registerHelper('stars', function(averageScore) {
+  averageScore = 4.4;
+  const roundedScore = Math.floor(averageScore);
+  const remainder = averageScore - roundedScore;
+  const starsHTML = renderStarsRating(roundedScore, remainder);
+  return new Handlebars.SafeString(starsHTML);
+});

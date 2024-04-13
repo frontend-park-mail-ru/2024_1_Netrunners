@@ -1,17 +1,17 @@
 export const profileTemplate = `<div class="profile-info">
     <div class="profile-photo">
-        <img src="{{ avatar }}" alt="{{ name }}">
+        <img src="{{ avatar }}" alt="{{ username }}">
     </div>
     <div class="profile-details">
         <div class="profile-top">
-            <h1>{{ name }}</h1>
+            <h1>{{ username }}</h1>
             <a class="profile-page-buttons" id="edit-button" href="/edit"> Редактировать </a>
         </div>
         <div class="profile-description">
             <h1>О пользователе</h1>
             <ul>
-                <li>Почта: {{ email }}</li>
-                <li>Дата регистрации: {{ signUpAt }}</li>
+                <li>Почта: {{ login }}</li>
+                <li>Дата регистрации: {{ registeredAt }}</li>
             </ul>
         </div>
     </div>
@@ -21,11 +21,11 @@ export const profileTemplate = `<div class="profile-info">
     <div class="films-container">
         <div class="popular-now-title">Любимые фильмы</div>
         {{#each filmsData}}
-            <div class="film-card">
+            <div class="film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
                 <img class="film-image" src="{{ this.preview_data }}">
                 <div class="film-content">
                     <div class="film-title">
-                        {{ this.name }}
+                        {{ this.title }}
                     </div>
                     <div class="film-time">
                         {{ this.duration }}
@@ -35,4 +35,3 @@ export const profileTemplate = `<div class="profile-info">
         {{/each}}
     </div>
 </div>`;
-

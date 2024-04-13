@@ -1,5 +1,4 @@
 import {fetchRequest, IP} from './fetch.js';
-import {timeConvert} from '../utils/timeConvert.js';
 import {toFilmDataWithDuration} from '../utils/transformers/filmDataWithDuration.js';
 
 const topFourFilms = [
@@ -84,7 +83,7 @@ const genresData = [
  */
 export async function getAll() {
   try {
-    const url = IP + 'films';
+    const url = IP + '/films/all';
     const response = await fetchRequest(url, 'GET');
 
     const filmsData = await response.json();

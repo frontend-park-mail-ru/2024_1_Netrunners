@@ -137,7 +137,7 @@
 }
 
 .poster-data {
-    z-index: 1;
+    z-index: var(--first-layer);
     margin-top: calc(-23% + 2.5rem);
 }
 
@@ -164,6 +164,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--neon-main);
+    cursor: pointer;
 }
 
 .poster-buttons {
@@ -203,7 +204,7 @@
 
 .slide[data-active] {
     opacity: 1;
-    z-index: 1;
+    z-index: var(--first-layer);
     transition-delay: 0ms;
 }
 
@@ -211,7 +212,7 @@
 .poster-carousel-button {
     position: absolute;
     top: 38rem;
-    z-index: 2;
+    z-index: var(--second-layer);
     border: none;
     color: white;
     cursor: pointer;
