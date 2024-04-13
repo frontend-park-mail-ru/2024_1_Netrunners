@@ -111,7 +111,7 @@
     top: 30px;
     opacity: 0;
     transition: opacity 1s ease;
-    z-index: 2;
+    z-index: var(--second-layer);
 }
 
 .dropdown:hover .dropdown-content {

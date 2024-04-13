@@ -1,5 +1,4 @@
 import {fetchRequest, IP} from './fetch.js';
-import {timeConvert} from '../utils/timeConvert.js';
 import {toFilmDataWithDuration} from '../utils/transformers/filmDataWithDuration.js';
 
 const topFourFilms = [

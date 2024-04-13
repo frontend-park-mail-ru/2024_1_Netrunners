@@ -23,7 +23,7 @@
 }
 
 .film-page-poster-data{
-    z-index: 1;
+    z-index: var(--first-layer);
     margin-top: calc(-16% + 2.5rem);
 }
 

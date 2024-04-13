@@ -2,7 +2,6 @@ import * as filmApi from '../../api/film.js';
 import {filmPageTemplate} from './Film.hbs.js';
 import Router from '../../utils/router.js';
 
-
 export async function renderFilmPage(filmId) {
   const [filmData, filmActors] = await Promise.all([
     filmApi.getFilmData(filmId),

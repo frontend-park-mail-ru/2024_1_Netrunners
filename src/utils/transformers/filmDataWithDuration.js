@@ -6,3 +6,10 @@ export const toFilmDataWithDuration = (filmData) => {
     duration: timeConvert.timeIntoText(film.duration),
   }));
 };
+
+export const fixUserData = (data) => {
+  const userData = {...data};
+  userData.registeredAt = timeConvert.dateIntoYear(userData.registeredAt);
+
+  return userData;
+};

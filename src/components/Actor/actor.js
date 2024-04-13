@@ -26,7 +26,6 @@ export async function renderActorPage(actorId) {
   document.querySelector('main').innerHTML = template(actorPageData);
 
   const filmCards = document.querySelectorAll('[data-film-id]');
-
   filmCards.forEach((filmCard, index) => {
     filmCard.addEventListener('click', () => {
       Router.go(`/film/${filmCard.dataset.filmId}`, filmsData[index].title);

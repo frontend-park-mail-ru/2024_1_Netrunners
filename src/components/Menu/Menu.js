@@ -111,9 +111,11 @@ export class Menu {
     if (isAuthorized === undefined) {
       isAuthorized = await authApi.check();
     }
+
     const authBlock = document.getElementById('auth');
     authBlock.innerHTML = '';
     authBlock.className = '';
+
     if (!isAuthorized) {
       authBlock.classList.add('no-auth-elements');
       this.noAuthItems.forEach(([key, {href, text}]) => {
@@ -153,6 +155,7 @@ export class Menu {
         authBlock.appendChild(menuItem);
         dropdownContent.appendChild(menuItem);
       });
+
       dropdown.appendChild(dropdownContent);
       authBlock.appendChild(dropdown);
     }
@@ -170,6 +173,7 @@ export class Menu {
       const className = 'menu-item';
       return {key, href, text, className};
     });
+
     this.#parent.innerHTML = template({items});
     this.#parent.querySelectorAll('a').forEach((element) => {
       this.state.menuElements[element.dataset.section] = element;

@@ -91,11 +91,12 @@ export function changeActiveButton(link) {
   pageElement.innerHTML = '';
   const menuLinkElement = document.querySelector(`a[href="${link}"]`);
   menu.state.activeMenuLink?.classList.remove('active');
-  menuLinkElement.classList.add('active');
+  if (menuLinkElement) {
+    menuLinkElement.classList.add('active');
+  }
   menu.state.activeMenuLink = menuLinkElement;
 }
 
-// eslint-disable-next-line require-jsdoc
 export function getCookie(name) {
   const matches = document.cookie.match(new RegExp(
       // eslint-disable-next-line max-len

@@ -28,12 +28,12 @@ export async function renderFilms() {
       const starsHTML = renderStarsRating(roundedScore, remainder);
       return new Handlebars.SafeString(starsHTML);
     });
+
     const template = Handlebars.compile(filmsTemplate);
     document.querySelector('main').innerHTML = template({filmData, topFourFilms, filmsGenres});
-
     renderSlider();
-    const filmCards = document.querySelectorAll('[data-film-id]');
 
+    const filmCards = document.querySelectorAll('[data-film-id]');
     filmCards.forEach((filmCard) => {
       filmCard.addEventListener('click', () => {
         Router.go(`/film/${filmCard.dataset.filmId}`, filmCard.dataset.filmTitle);

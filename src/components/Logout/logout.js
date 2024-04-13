@@ -13,6 +13,7 @@ import Router from '../../utils/router.js';
 export async function renderLogout() {
   const isAuthorized = await authApi.logout();
   await menu.renderAuth();
+
   if (isAuthorized) {
     changeActiveButton('/');
     await Router.go('/', 'Netrunnerflix');
