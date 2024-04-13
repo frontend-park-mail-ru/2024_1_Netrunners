@@ -7,34 +7,14 @@ import * as authApi from '../../api/auth.js';
 
 const application = document.getElementById('root');
 
-const goMain = async () => {
-  await Router.goHomePage();
-};
-
-const goSignup = async () => {
-  await Router.goSignupPage();
-};
-
-const goLogin = async () => {
-  await Router.goLoginPage();
-};
-
-const goProfile = async () => {
-  await Router.goProfilePage();
-};
-
-const goLogout = async () => {
-  await Router.goLogout();
-};
-
 const menuRoutes = {
-  films: goMain,
-  profile: goProfile,
-  login: goLogin,
-  signup: goSignup,
-  logout: goLogout,
-  support: goMain, // временно
-  subscription: goMain, // временно
+  films: Router.goToHomePage,
+  profile: Router.goToProfilePage,
+  login: Router.goToLoginPage,
+  signup: Router.goToSignupPage,
+  logout: Router.goToLogout,
+  support: Router.goToHomePage, // временно
+  subscription: Router.goToHomePage, // временно
 };
 
 /**

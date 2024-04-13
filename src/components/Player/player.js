@@ -161,6 +161,6 @@ export async function renderPlayer(filmId, filmTitle, source) {
 
   exitButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    Router.goFilmPage(filmId, filmTitle);
+    Router.goToFilmPage(filmId, filmTitle);
   });
 }

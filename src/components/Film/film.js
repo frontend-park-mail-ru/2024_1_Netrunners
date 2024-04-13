@@ -14,13 +14,13 @@ export async function renderFilmPage(filmId) {
   const actorCards = document.querySelectorAll('[data-actor-id]');
   actorCards.forEach((actorCard, index) => {
     actorCard.addEventListener('click', () => {
-      Router.goActorPage(actorCard.dataset.actorId, filmActors[index].name);
+      Router.goToActorPage(actorCard.dataset.actorId, filmActors[index].name);
     });
   });
 
   const playerButton = document.querySelector('.accent-button');
   playerButton.addEventListener('click', (e) => {
     e.preventDefault();
-    Router.goPlayerPage(filmId, filmData.title, filmData.link);
+    Router.goToPlayerPage(filmId, filmData.title, filmData.link);
   });
 }

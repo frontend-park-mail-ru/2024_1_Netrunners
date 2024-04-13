@@ -16,6 +16,6 @@ export async function renderLogout() {
 
   if (isAuthorized) {
     changeActiveButton('/');
-    await Router.goHomePage();
+    await Router.goToHomePage();
   }
 }

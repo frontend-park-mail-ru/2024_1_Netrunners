@@ -18,7 +18,7 @@ export class Router {
     };
   }
 
-  goHomePage() {
+  goToHomePage() {
     const state = {};
     state.path = '/';
     state.title = 'Netrunnerflix';
@@ -33,7 +33,7 @@ export class Router {
     renderFilms();
   }
 
-  goSignupPage() {
+  goToSignupPage() {
     const state = {};
     state.path = '/signup';
     state.title = 'Регистрация';
@@ -48,7 +48,7 @@ export class Router {
     renderSignup();
   }
 
-  goLoginPage() {
+  goToLoginPage() {
     const state = {};
     state.path = '/login';
     state.title = 'Вход';
@@ -63,7 +63,7 @@ export class Router {
     renderLogin();
   }
 
-  goLogout() {
+  goToLogout() {
     const state = {};
     state.path = '/logout';
     state.title = 'Netrunnerflix';
@@ -78,7 +78,7 @@ export class Router {
     renderLogout();
   }
 
-  goActorPage(uuid, title) {
+  goToActorPage(uuid, title) {
     const state = {};
     state.path = `/actor/${uuid}`;
     state.title = title;
@@ -93,7 +93,7 @@ export class Router {
     renderActorPage(uuid);
   }
 
-  goFilmPage(uuid, title) {
+  goToFilmPage(uuid, title) {
     const state = {};
     state.path = `/film/${uuid}`;
     state.title = title;
@@ -108,7 +108,7 @@ export class Router {
     renderFilmPage(uuid);
   }
 
-  goProfilePage() {
+  goToProfilePage() {
     const state = {};
     state.path = '/profile';
     state.title = 'Профиль';
@@ -124,7 +124,7 @@ export class Router {
     renderProfile(uuid);
   }
 
-  goPlayerPage(uuid, title, link) {
+  goToPlayerPage(uuid, title, link) {
     const state = {};
     state.path = `/film/${uuid}`;
     state.title = title;

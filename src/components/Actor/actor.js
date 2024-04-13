@@ -28,7 +28,7 @@ export async function renderActorPage(actorId) {
   const filmCards = document.querySelectorAll('[data-film-id]');
   filmCards.forEach((filmCard, index) => {
     filmCard.addEventListener('click', () => {
-      Router.goFilmPage(filmCard.dataset.filmId, filmsData[index].title);
+      Router.goToFilmPage(filmCard.dataset.filmId, filmsData[index].title);
     });
   });
 }

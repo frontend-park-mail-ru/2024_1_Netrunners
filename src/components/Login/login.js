@@ -34,7 +34,7 @@ export function renderLogin() {
     const isAuthorized = await authApi.login(user);
     await menu.renderAuth(isAuthorized);
     if (isAuthorized) {
-      await Router.goHomePage();
+      await Router.goToHomePage();
       return;
     }
 

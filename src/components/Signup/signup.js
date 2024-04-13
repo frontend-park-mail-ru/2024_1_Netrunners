@@ -55,7 +55,7 @@ export async function renderSignup() {
     if (isAuthorized) {
       await menu.renderAuth(isAuthorized);
       changeActiveButton('/');
-      await Router.goHomePage();
+      await Router.goToHomePage();
     } else {
       errorField.innerText = 'Такой пользователь уже существует';
     }

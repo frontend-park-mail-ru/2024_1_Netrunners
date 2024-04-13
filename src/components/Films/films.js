@@ -28,7 +28,7 @@ export async function renderFilms() {
     const filmCards = document.querySelectorAll('[data-film-id]');
     filmCards.forEach((filmCard) => {
       filmCard.addEventListener('click', () => {
-        Router.goFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
+        Router.goToFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
       });
     });
   } catch (error) {

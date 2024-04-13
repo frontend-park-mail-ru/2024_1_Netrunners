@@ -32,7 +32,7 @@ export async function renderProfile(profileId) {
 
   filmCards.forEach((filmCard) => {
     filmCard.addEventListener('click', () => {
-      Router.goFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
+      Router.goToFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
     });
   });
 }
