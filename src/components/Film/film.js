@@ -1,7 +1,5 @@
 import * as filmApi from '../../api/film.js';
 import {filmPageTemplate} from './Film.hbs.js';
-import {renderActorPage} from '../Actor/actor.js';
-import {renderPlayer} from '../Player/player.js';
 import Router from '../../utils/router.js';
 
 
@@ -15,9 +13,9 @@ export async function renderFilmPage(filmId) {
   document.querySelector('main').innerHTML = template({...filmData, filmActors});
 
   const actorCards = document.querySelectorAll('[data-actor-id]');
-  actorCards.forEach((actorCard) => {
+  actorCards.forEach((actorCard, index) => {
     actorCard.addEventListener('click', () => {
-      renderActorPage(actorCard.dataset.actorId);
+      Router.go(`/actor/${actorCard.dataset.actorId}`, filmActors[index].name);
     });
   });
 

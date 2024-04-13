@@ -6,8 +6,7 @@ import {renderLogin} from '../components/Login/login.js';
 import {renderProfile} from '../components/Profile/profile.js';
 import {renderActorPage} from '../components/Actor/actor.js';
 import {renderLogout} from '../components/Logout/logout.js';
-import {validate as uuidValidate} from 'https://jspm.dev/uuid';
-import {getCookie} from '../index.js';
+import {changeActiveButton, getCookie} from '../index.js';
 
 export class Router {
   constructor() {
@@ -19,20 +18,20 @@ export class Router {
     };
   }
 
-  async go(path, title, data) {
+  async go(path, title, data = null, needPush = true) {
     const state = {};
     state.path = path;
     state.title = title;
-    window.history.pushState(
-        state,
-        state.title,
-        path,
-    );
-
+    if (needPush) {
+      window.history.pushState(
+          state,
+          state.title,
+          path,
+      );
+    }
     document.title = title;
 
     const func = this.routs[path];
-
     if (func === undefined) {
       if (path.includes('/actor/')) {
         const uuid = path.substring('/actor/'.length, path.length);
@@ -45,6 +44,7 @@ export class Router {
         await renderPlayer(uuid, title, data);
       } else if (path.includes('/profile')) {
         const uuid = getCookie('user_uuid');
+        changeActiveButton('/profile');
         await renderProfile(uuid);
       } else {
         await this.go('/', 'Netrunnerflix', true);
@@ -53,4 +53,6 @@ export class Router {
       func();
     }
   }
-} export default new Router();
+}
+
+export default new Router();

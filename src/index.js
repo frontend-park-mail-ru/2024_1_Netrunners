@@ -110,19 +110,19 @@ await menu.renderAuth();
 
 window.addEventListener('popstate', async (e) => {
   if (e.state === null) {
-    await Rout.go('/', 'Netrunnerflix');
+    await Rout.go('/', 'Netrunnerflix', null, false);
   } else {
     if (e.state.path === '/logout') {
       changeActiveButton('/login');
-      await Rout.go('/login', e.state.title);
+      await Rout.go('/login', e.state.title, null, false);
       return;
     }
-    if (e.state.path.includes('/player/') || e.state.path.includes('/film/')) {
-      await Rout.go(e.state.path, e.state.title);
+    if (e.state.path.includes('/player/') || e.state.path.includes('/film/') || e.state.path.includes('/actor/')) {
+      await Rout.go(e.state.path, e.state.title, null, false);
       return;
     }
     changeActiveButton(e.state.path);
-    await Rout.go(e.state.path, e.state.title);
+    await Rout.go(e.state.path, e.state.title, null, false);
   }
 });
 
