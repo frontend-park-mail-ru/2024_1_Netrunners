@@ -21,14 +21,6 @@ export async function renderFilms() {
 
     topFourFilms[0].active = 'data-active';
 
-    Handlebars.registerHelper('stars', function(averageScore) {
-      averageScore = 4.4;
-      const roundedScore = Math.floor(averageScore);
-      const remainder = averageScore - roundedScore;
-      const starsHTML = renderStarsRating(roundedScore, remainder);
-      return new Handlebars.SafeString(starsHTML);
-    });
-
     const template = Handlebars.compile(filmsTemplate);
     document.querySelector('main').innerHTML = template({filmData, topFourFilms, filmsGenres});
     renderSlider();
@@ -36,7 +28,7 @@ export async function renderFilms() {
     const filmCards = document.querySelectorAll('[data-film-id]');
     filmCards.forEach((filmCard) => {
       filmCard.addEventListener('click', () => {
-        Router.go(`/film/${filmCard.dataset.filmId}`, filmCard.dataset.filmTitle);
+        Router.goFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
       });
     });
   } catch (error) {

@@ -16,6 +16,6 @@ export async function renderLogout() {
 
   if (isAuthorized) {
     changeActiveButton('/');
-    await Router.go('/', 'Netrunnerflix');
+    await Router.goHomePage();
   }
 }

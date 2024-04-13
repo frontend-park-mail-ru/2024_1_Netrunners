@@ -8,23 +8,23 @@ import * as authApi from '../../api/auth.js';
 const application = document.getElementById('root');
 
 const goMain = async () => {
-  await Router.go('/', 'Netrunnerflix');
+  await Router.goHomePage();
 };
 
 const goSignup = async () => {
-  await Router.go('/signup', 'Регистрация');
+  await Router.goSignupPage();
 };
 
 const goLogin = async () => {
-  await Router.go('/login', 'Вход');
+  await Router.goLoginPage();
 };
 
 const goProfile = async () => {
-  await Router.go('/profile', 'Профиль');
+  await Router.goProfilePage();
 };
 
 const goLogout = async () => {
-  await Router.go('/logout', 'Netrunnerflix');
+  await Router.goLogout();
 };
 
 const menuRoutes = {

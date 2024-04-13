@@ -6,6 +6,7 @@ import {renderProfile} from './components/Profile/profile.js';
 import {renderLogout} from './components/Logout/logout.js';
 import {Router} from './utils/router.js';
 import Rout from './utils/router.js';
+import {renderStarsRating} from './components/renderStarsRating.js';
 
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');
@@ -132,3 +133,11 @@ const handleLocation = async () => {
 };
 
 handleLocation();
+
+Handlebars.registerHelper('stars', function(averageScore) {
+  averageScore = 4.4;
+  const roundedScore = Math.floor(averageScore);
+  const remainder = averageScore - roundedScore;
+  const starsHTML = renderStarsRating(roundedScore, remainder);
+  return new Handlebars.SafeString(starsHTML);
+});

@@ -55,7 +55,7 @@ export async function renderSignup() {
     if (isAuthorized) {
       await menu.renderAuth(isAuthorized);
       changeActiveButton('/');
-      await Router.go('/', 'Netrunnerflix');
+      await Router.goHomePage();
     } else {
       errorField.innerText = 'Такой пользователь уже существует';
     }

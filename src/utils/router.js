@@ -18,6 +18,127 @@ export class Router {
     };
   }
 
+  goHomePage() {
+    const state = {};
+    state.path = '/';
+    state.title = 'Netrunnerflix';
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderFilms();
+  }
+
+  goSignupPage() {
+    const state = {};
+    state.path = '/signup';
+    state.title = 'Регистрация';
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderSignup();
+  }
+
+  goLoginPage() {
+    const state = {};
+    state.path = '/login';
+    state.title = 'Вход';
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderLogin();
+  }
+
+  goLogout() {
+    const state = {};
+    state.path = '/logout';
+    state.title = 'Netrunnerflix';
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderLogout();
+  }
+
+  goActorPage(uuid, title) {
+    const state = {};
+    state.path = `/actor/${uuid}`;
+    state.title = title;
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderActorPage(uuid);
+  }
+
+  goFilmPage(uuid, title) {
+    const state = {};
+    state.path = `/film/${uuid}`;
+    state.title = title;
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderFilmPage(uuid);
+  }
+
+  goProfilePage() {
+    const state = {};
+    state.path = '/profile';
+    state.title = 'Профиль';
+    document.title = state.title;
+    const uuid = getCookie('user_uuid');
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderProfile(uuid);
+  }
+
+  goPlayerPage(uuid, title, link) {
+    const state = {};
+    state.path = `/film/${uuid}`;
+    state.title = title;
+    document.title = state.title;
+
+    window.history.pushState(
+        state,
+        state.title,
+        state.path,
+    );
+
+    renderPlayer(uuid, title, link);
+  }
+
   async go(path, title, data = null, needPush = true) {
     const state = {};
     state.path = path;
