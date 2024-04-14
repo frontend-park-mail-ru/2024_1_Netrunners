@@ -1,10 +1,7 @@
 const MAX_STARS = 5;
-const FULL_STAR_IMG =
-  '<img class="star" src="../../img/icons/star-full.svg" alt="">';
-const HALF_STAR_IMG =
-  '<img class="star" src="../../img/icons/star-half.svg" alt="">';
-const NONE_STAR_IMG =
-  '<img class="star" src="../../img/icons/star-none.svg" alt="">';
+const FULL_STAR_IMG = '<img class="star" src="./icons/star-full.svg" alt="">';
+const HALF_STAR_IMG = '<img class="star" src="./icons/star-half.svg" alt="">';
+const NONE_STAR_IMG = '<img class="star" src="./icons/star-none.svg" alt="">';
 
 export const renderStarsRating = (roundedScore, remainder) => {
   let starsHTML = "";

@@ -1,8 +1,8 @@
 import * as profileApi from "../../api/profile.js";
 import * as filmsApi from "../../api/films.js";
 import { validators } from "../../utils/validate.js";
-import { profileTemplate } from "./Profile.hbs.js";
-import { editFormTemplate } from "./editForm.hbs.js";
+import profileTemplate from "./Profile.hbs";
+import editFormTemplate from "./editForm.hbs";
 import Router from "../../utils/router.js";
 
 /**
@@ -19,9 +19,8 @@ export async function renderProfile(profileId) {
     filmsApi.getAll(),
   ]);
 
-  const template = Handlebars.compile(profileTemplate);
   const profilePageData = { ...profileData, filmsData };
-  document.querySelector("main").innerHTML = template(profilePageData);
+  document.querySelector("main").innerHTML = profileTemplate(profilePageData);
 
   document
     .querySelector(".profile-page-buttons")
@@ -40,9 +39,9 @@ export async function renderProfile(profileId) {
 }
 
 export async function renderEditForm(profileId) {
-  const formTemplate = Handlebars.compile(editFormTemplate);
-  document.querySelector(".profile-info").innerHTML = formTemplate();
+  document.querySelector(".profile-info").innerHTML = editFormTemplate();
 
+  const editForm = document.querySelector("#myForm");
   const usernameButton = document.querySelector("#sendLoginBtn");
   const avatarButton = document.querySelector("#sendImageBtn");
   const passwordButton = document.querySelector("#sendPasswordBtn");
@@ -61,25 +60,46 @@ export async function renderEditForm(profileId) {
       return;
     }
 
-    await profileApi.editProfile(profileId, {
-      action: profileApi.CHANGE_USERNAME_ACTION,
-      newData: usernameInput.value,
-    });
+    if (
+      await profileApi.editProfile(profileId, {
+        action: profileApi.CHANGE_USERNAME_ACTION,
+        newData: usernameInput.value,
+      })
+    ) {
+      renderProfile(profileId);
+    }
   });
 
   avatarButton.addEventListener("click", async (e) => {
     e.preventDefault();
-    const avatarBinary = avatarInput.value;
+    const avatar = avatarInput.value;
 
-    if (!avatarBinary) {
+    if (!avatar) {
       document.getElementById("avatar-errors").innerText = "Файл не выбран";
       return;
     }
 
-    await profileApi.editProfile(profileId, {
-      action: profileApi.CHANGE_AVATAR_ACTION,
-      newData: avatarBinary,
-    });
+    if (
+      await profileApi.editProfile(profileId, {
+        action: profileApi.CHANGE_AVATAR_ACTION,
+        newData: new FormData(editForm),
+      })
+    ) {
+      renderProfile(profileId);
+    }
+  });
+
+  avatarInput.addEventListener("change", async (e) => {
+    const input = event.target;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const preview = document.getElementById("avatarPreview");
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   });
 
   passwordButton.addEventListener("click", async (e) => {
@@ -96,10 +116,14 @@ export async function renderEditForm(profileId) {
       return;
     }
 
-    await profileApi.editProfile(profileId, {
-      action: profileApi.CHANGE_PASSWORD_ACTION,
-      newData: passwordInput.value,
-    });
+    if (
+      await profileApi.editProfile(profileId, {
+        action: profileApi.CHANGE_PASSWORD_ACTION,
+        newData: passwordInput.value,
+      })
+    ) {
+      renderProfile(profileId);
+    }
   });
 
   exitButton.addEventListener("click", async (e) => {

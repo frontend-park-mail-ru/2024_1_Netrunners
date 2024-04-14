@@ -6,6 +6,7 @@ import { renderProfile } from "./components/Profile/profile.js";
 import { renderLogout } from "./components/Logout/logout.js";
 import { Router } from "./utils/router.js";
 import Rout from "./utils/router.js";
+import "../src/index.scss";
 import { renderStarsRating } from "./components/renderStarsRating.js";
 
 if ("serviceWorker" in navigator) {
@@ -163,7 +164,7 @@ Handlebars.registerHelper("stars", function (averageScore) {
 
 function showOfflineModal() {
   const modalHtml = `
-    <div id="offline-background">
+    <div class="offline-background">
       <div id="offline-modal">
         <p>Отсутствует подключение к интернету. Пожалуйста, проверьте свое соединение.</p>
         <a onclick="window.location.reload()">Перезагрузить страницу</a>
@@ -174,7 +175,7 @@ function showOfflineModal() {
 }
 
 function hideOfflineModal() {
-  const offlineModal = document.getElementById("offline-background");
+  const offlineModal = document.getElementsByClassName("offline-background")[0];
   if (offlineModal) {
     offlineModal.remove();
   }

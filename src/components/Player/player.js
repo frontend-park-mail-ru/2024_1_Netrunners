@@ -1,11 +1,10 @@
 import { formatTime } from "../../utils/timeConvert.js";
-import { playerTemplate } from "./Player.hbs.js";
+import template from "./Player.hbs";
 import * as images from "../../img/imgConstants.js";
 import Router from "../../utils/router.js";
 
 export async function renderPlayer(filmId, filmTitle, source) {
   const video = { src: source };
-  const template = Handlebars.compile(playerTemplate);
 
   document.querySelector("main").innerHTML = template(video);
   const exitButton = document.querySelector("#exit-player");

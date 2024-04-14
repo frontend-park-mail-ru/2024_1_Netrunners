@@ -1,5 +1,5 @@
 import * as filmApi from "../../api/film.js";
-import { filmPageTemplate } from "./Film.hbs.js";
+import template from "./Film.hbs";
 import Router from "../../utils/router.js";
 
 export async function renderFilmPage(filmId) {
@@ -8,7 +8,6 @@ export async function renderFilmPage(filmId) {
     filmApi.getActors(filmId),
   ]);
 
-  const template = Handlebars.compile(filmPageTemplate);
   document.querySelector("main").innerHTML = template({
     ...filmData,
     filmActors,

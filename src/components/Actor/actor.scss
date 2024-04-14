@@ -1,0 +1,41 @@
+@import "../Films/films";
+
+.actor-info {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+
+.actor-photo {
+  margin-right: 32px;
+
+  img {
+    margin-left: 32px;
+    object-fit: cover;
+    border-radius: 16px;
+    width: 380px;
+    height: 500px;
+  }
+}
+
+.actor-details {
+  margin-left: 32px;
+}
+
+.actor-description {
+  margin-top: 8px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-top: 16px;
+  }
+}
+
+.actor-name {
+  margin-bottom: 96px;
+}
