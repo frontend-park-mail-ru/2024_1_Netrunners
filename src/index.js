@@ -8,6 +8,16 @@ import {Router} from './utils/router.js';
 import Rout from './utils/router.js';
 import {renderStarsRating} from './components/renderStarsRating.js';
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js', {scope: '/'})
+      .then((reg) => {
+        console.log('SW register', reg);
+      })
+      .catch((e) => {
+        console.log('SW Error', e);
+      });
+}
+
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');
 const pageElement = document.createElement('main');
