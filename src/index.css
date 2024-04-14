@@ -48,3 +48,27 @@ body {
 main {
   margin-top: 16px;
 }
+
+#offline-modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--neutral-light);
+  color: var(--white);
+  padding: 20px;
+  border-radius: 16px;
+  z-index: var(--third-layer);
+}
+
+#offline-modal > a {
+  padding: 8px;
+  width: fit-content;
+  border-radius: 8px;
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--neon-main);
+  cursor: pointer;
+}
+

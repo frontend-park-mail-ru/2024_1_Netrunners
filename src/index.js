@@ -151,3 +151,37 @@ Handlebars.registerHelper('stars', function(averageScore) {
   const starsHTML = renderStarsRating(roundedScore, remainder);
   return new Handlebars.SafeString(starsHTML);
 });
+
+function showOfflineModal() {
+  const modalHtml = `
+    <div id="offline-modal">
+      <p>Отсутствует подключение к интернету. Пожалуйста, проверьте свое соединение.</p>
+      <a onclick="window.location.reload()">Перезагрузить страницу</a>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+
+function hideOfflineModal() {
+  const offlineModal = document.getElementById('offline-modal');
+  if (offlineModal) {
+    offlineModal.remove();
+  }
+}
+
+window.addEventListener('offline', () => {
+  showOfflineModal();
+});
+
+window.addEventListener('online', () => {
+  hideOfflineModal();
+});
+
+if (!navigator.onLine) {
+  showOfflineModal();
+}
+
+
+if (navigator.onLine) {
+  hideOfflineModal();
+}
