@@ -163,16 +163,18 @@ Handlebars.registerHelper("stars", function (averageScore) {
 
 function showOfflineModal() {
   const modalHtml = `
-    <div id="offline-modal">
-      <p>Отсутствует подключение к интернету. Пожалуйста, проверьте свое соединение.</p>
-      <a onclick="window.location.reload()">Перезагрузить страницу</a>
+    <div id="offline-background">
+      <div id="offline-modal">
+        <p>Отсутствует подключение к интернету. Пожалуйста, проверьте свое соединение.</p>
+        <a onclick="window.location.reload()">Перезагрузить страницу</a>
+      </div>
     </div>
   `;
   document.body.insertAdjacentHTML("beforeend", modalHtml);
 }
 
 function hideOfflineModal() {
-  const offlineModal = document.getElementById("offline-modal");
+  const offlineModal = document.getElementById("offline-background");
   if (offlineModal) {
     offlineModal.remove();
   }
