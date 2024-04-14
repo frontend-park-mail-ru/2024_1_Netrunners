@@ -1,5 +1,5 @@
-export const createLink = ({href, text, key, classNames}) => {
-  const menuItem = document.createElement('a');
+export const createLink = ({ href, text, key, classNames }) => {
+  const menuItem = document.createElement("a");
   menuItem.href = href;
   menuItem.textContent = text;
   menuItem.dataset.section = key;

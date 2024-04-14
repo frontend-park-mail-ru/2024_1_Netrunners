@@ -8,7 +8,12 @@ export const IP = 'http://127.0.0.1:8081';
  * @param {Object} headers - Заголовки запроса (при наличии)
  * @return {Promise} promise - Объект запроса
  */
-export const fetchRequest = async (url, method = 'GET', body = null, headers = {}) => {
+export const fetchRequest = async (
+  url,
+  method = 'GET',
+  body = null,
+  headers = {},
+) => {
   try {
     const options = {
       method: method,

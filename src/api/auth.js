@@ -1,4 +1,4 @@
-import {fetchRequest, IP} from './fetch.js';
+import { fetchRequest, IP } from './fetch.js';
 
 /**
  * проверка валидности сессии
@@ -15,7 +15,6 @@ export async function check() {
     console.error('Произошла ошибка в check:', error.message);
   }
 }
-
 
 /**
  * отправка запроса на вход

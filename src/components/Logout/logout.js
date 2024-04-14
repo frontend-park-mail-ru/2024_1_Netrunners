@@ -1,6 +1,6 @@
-import * as authApi from '../../api/auth.js';
-import {changeActiveButton, menu} from '../../index.js';
-import Router from '../../utils/router.js';
+import * as authApi from "../../api/auth.js";
+import { changeActiveButton, menu } from "../../index.js";
+import Router from "../../utils/router.js";
 
 /**
  * Отправляет запрос на сервер для выхода из аккаунта,
@@ -15,7 +15,7 @@ export async function renderLogout() {
   await menu.renderAuth();
 
   if (isAuthorized) {
-    changeActiveButton('/');
+    changeActiveButton("/");
     await Router.goToHomePage();
   }
 }

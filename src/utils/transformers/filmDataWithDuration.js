@@ -1,4 +1,4 @@
-import {timeConvert} from '../timeConvert.js';
+import { timeConvert } from "../timeConvert.js";
 
 export const toFilmDataWithDuration = (filmData) => {
   return filmData.map((film) => ({
@@ -8,7 +8,7 @@ export const toFilmDataWithDuration = (filmData) => {
 };
 
 export const fixUserData = (data) => {
-  const userData = {...data};
+  const userData = { ...data };
   userData.registeredAt = timeConvert.dateIntoYear(userData.registeredAt);
 
   return userData;

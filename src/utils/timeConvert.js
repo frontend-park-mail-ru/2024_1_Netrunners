@@ -60,9 +60,9 @@ export const formatTime = (time) => {
   let minutes = Math.floor(time / 60) % 60;
   let hours = Math.floor(time / 3600);
 
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  minutes = minutes < 10 ? '0' + minutes : minutes;
-  hours = hours < 10 ? '0' + hours : hours;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  hours = hours < 10 ? "0" + hours : hours;
 
   if (!hours) {
     return `${minutes}:${seconds}`;
@@ -70,7 +70,6 @@ export const formatTime = (time) => {
   return `${hours}:${minutes}:${seconds}`;
 };
 
-const dateIntoYear = (rawDate) =>{
+const dateIntoYear = (rawDate) => {
   return rawDate.substring(0, 4);
 };
-

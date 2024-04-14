@@ -1,8 +1,8 @@
-import {validators} from '../../utils/validate.js';
-import * as authApi from '../../api/auth.js';
-import {menu} from '../../index.js';
-import {loginTemplate} from './Login.hbs.js';
-import Router from '../../utils/router.js';
+import { validators } from "../../utils/validate.js";
+import * as authApi from "../../api/auth.js";
+import { menu } from "../../index.js";
+import { loginTemplate } from "./Login.hbs.js";
+import Router from "../../utils/router.js";
 
 /**
  * Рендерит страницу входа в систему, обрабатывает событие отправки формы,
@@ -13,22 +13,22 @@ import Router from '../../utils/router.js';
  */
 export function renderLogin() {
   const template = Handlebars.compile(loginTemplate);
-  document.querySelector('main').innerHTML = template();
+  document.querySelector("main").innerHTML = template();
 
-  const form = document.querySelector('.form-section');
+  const form = document.querySelector(".form-section");
   const emailInput = document.querySelector('input[type="email"]');
   const passwordInput = document.querySelector('input[type="password"]');
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const login = emailInput.value.trim();
     const password = passwordInput.value;
-    const user = {login, password};
+    const user = { login, password };
 
     if (!validators.login(login)) {
-      const errorField = document.getElementById('login-errors');
-      errorField.innerText = 'Поле почта введено некорректно';
+      const errorField = document.getElementById("login-errors");
+      errorField.innerText = "Поле почта введено некорректно";
     }
 
     const isAuthorized = await authApi.login(user);
@@ -38,7 +38,7 @@ export function renderLogin() {
       return;
     }
 
-    const errorField = document.getElementById('login-errors');
-    errorField.innerText = 'Неверная почта или пароль';
+    const errorField = document.getElementById("login-errors");
+    errorField.innerText = "Неверная почта или пароль";
   });
 }
