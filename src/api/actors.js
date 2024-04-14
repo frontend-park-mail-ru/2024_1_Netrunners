@@ -1,4 +1,4 @@
-import {fetchRequest, IP} from './fetch.js';
+import { fetchRequest, IP } from './fetch.js';
 
 /**
  * Запрос на получение данных об актере

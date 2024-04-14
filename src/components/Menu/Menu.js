@@ -1,11 +1,11 @@
-import {createLink} from '../../utils/createLinks.js';
-import {menuTemplate} from './Menu.hbs.js';
-import {getProfilePreview} from '../../api/profile.js';
-import {getCookie} from '../../index.js';
-import Router from '../../utils/router.js';
-import * as authApi from '../../api/auth.js';
+import { createLink } from "../../utils/createLinks.js";
+import { menuTemplate } from "./Menu.hbs.js";
+import { getProfilePreview } from "../../api/profile.js";
+import { getCookie } from "../../index.js";
+import Router from "../../utils/router.js";
+import * as authApi from "../../api/auth.js";
 
-const application = document.getElementById('root');
+const application = document.getElementById("root");
 
 const menuRoutes = {
   films: Router.goToHomePage,
@@ -92,45 +92,45 @@ export class Menu {
       isAuthorized = await authApi.check();
     }
 
-    const authBlock = document.getElementById('auth');
-    authBlock.innerHTML = '';
-    authBlock.className = '';
+    const authBlock = document.getElementById("auth");
+    authBlock.innerHTML = "";
+    authBlock.className = "";
 
     if (!isAuthorized) {
-      authBlock.classList.add('no-auth-elements');
-      this.noAuthItems.forEach(([key, {href, text}]) => {
+      authBlock.classList.add("no-auth-elements");
+      this.noAuthItems.forEach(([key, { href, text }]) => {
         const menuItem = createLink({
           href,
           text,
           key,
-          classNames: 'auth-item',
+          classNames: "auth-item",
         });
         authBlock.appendChild(menuItem);
       });
     } else {
-      authBlock.classList.add('auth-elements');
-      const avatar = document.createElement('img');
-      avatar.src = await getProfilePreview(getCookie('user_uuid'));
-      avatar.alt = 'Avatar';
-      avatar.classList.add('avatar');
+      authBlock.classList.add("auth-elements");
+      const avatar = document.createElement("img");
+      avatar.src = await getProfilePreview(getCookie("user_uuid"));
+      avatar.alt = "Avatar";
+      avatar.classList.add("avatar");
       authBlock.appendChild(avatar);
 
-      const dropdown = document.createElement('div');
-      const dropdownIcon = document.createElement('img');
-      dropdownIcon.src = '../../img/icons/dropdown.svg';
-      dropdownIcon.alt = 'Dropdown';
-      dropdown.classList.add('dropdown');
+      const dropdown = document.createElement("div");
+      const dropdownIcon = document.createElement("img");
+      dropdownIcon.src = "../../img/icons/dropdown.svg";
+      dropdownIcon.alt = "Dropdown";
+      dropdown.classList.add("dropdown");
       dropdown.appendChild(dropdownIcon);
 
-      const dropdownContent = document.createElement('div');
-      dropdownContent.classList.add('dropdown-content');
+      const dropdownContent = document.createElement("div");
+      dropdownContent.classList.add("dropdown-content");
 
-      this.authItems.forEach(([key, {href, text}]) => {
+      this.authItems.forEach(([key, { href, text }]) => {
         const menuItem = createLink({
           href,
           text,
           key,
-          classNames: 'auth-item',
+          classNames: "auth-item",
         });
         authBlock.appendChild(menuItem);
         dropdownContent.appendChild(menuItem);
@@ -149,20 +149,20 @@ export class Menu {
    */
   renderTemplate() {
     const template = Handlebars.compile(menuTemplate);
-    const items = this.items.map(([key, {href, text}]) => {
-      const className = 'menu-item';
-      return {key, href, text, className};
+    const items = this.items.map(([key, { href, text }]) => {
+      const className = "menu-item";
+      return { key, href, text, className };
     });
 
-    this.#parent.innerHTML = template({items});
-    this.#parent.querySelectorAll('a').forEach((element) => {
+    this.#parent.innerHTML = template({ items });
+    this.#parent.querySelectorAll("a").forEach((element) => {
       this.state.menuElements[element.dataset.section] = element;
     });
   }
 }
 
-application.addEventListener('click', (e) => {
-  const {target} = e;
+application.addEventListener("click", (e) => {
+  const { target } = e;
   if (target instanceof HTMLAnchorElement) {
     e.preventDefault();
     menuRoutes[target.dataset.section]();

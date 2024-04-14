@@ -1,8 +1,7 @@
-import * as filmsApi from '../../api/films.js';
-import {filmsTemplate} from './Films.hbs.js';
-import {renderStarsRating} from '../renderStarsRating.js';
-import {renderSlider} from '../Slider/renderSlider.js';
-import Router from '../../utils/router.js';
+import * as filmsApi from "../../api/films.js";
+import { filmsTemplate } from "./Films.hbs.js";
+import { renderSlider } from "../Slider/renderSlider.js";
+import Router from "../../utils/router.js";
 
 /**
  * Рендерит страницу фильмов, получает данные о фильмах с сервера,
@@ -19,19 +18,26 @@ export async function renderFilms() {
       filmsApi.getGenres(),
     ]);
 
-    topFourFilms[0].active = 'data-active';
+    topFourFilms[0].active = "data-active";
 
     const template = Handlebars.compile(filmsTemplate);
-    document.querySelector('main').innerHTML = template({filmData, topFourFilms, filmsGenres});
+    document.querySelector("main").innerHTML = template({
+      filmData,
+      topFourFilms,
+      filmsGenres,
+    });
     renderSlider();
 
-    const filmCards = document.querySelectorAll('[data-film-id]');
+    const filmCards = document.querySelectorAll("[data-film-id]");
     filmCards.forEach((filmCard) => {
-      filmCard.addEventListener('click', () => {
-        Router.goToFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
+      filmCard.addEventListener("click", () => {
+        Router.goToFilmPage(
+          filmCard.dataset.filmId,
+          filmCard.dataset.filmTitle,
+        );
       });
     });
   } catch (error) {
-    console.error('Error rendering films:', error);
+    console.error("Error rendering films:", error);
   }
 }

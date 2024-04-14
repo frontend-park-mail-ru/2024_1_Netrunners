@@ -5,7 +5,7 @@ export const validators = {
    * @param {string} login - почта
    * @return {boolean} - флаг правильности почты
    */
-  login: (login= '') => validateEmail(login),
+  login: (login = "") => validateEmail(login),
   /**
    * Проверка валидности имени пользователя
    * @function
@@ -35,7 +35,7 @@ const MIN_PASSW_LENGTH = 6;
 
 const loginRegular = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-const validateEmail = (email = '') => {
+const validateEmail = (email = "") => {
   return loginRegular.test(email);
 };
 

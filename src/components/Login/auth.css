@@ -41,12 +41,14 @@ input:focus {
     margin-top: 8px;
     padding: 8px;
 }
+
 .form-section {
     border: 2px solid var(--border-color);
     padding: 32px;
     border-radius: 16px;
     margin-top: 32px;
 }
+
 input + input {
     margin-top: 16px;
 }
