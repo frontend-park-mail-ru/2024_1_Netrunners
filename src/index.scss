@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Monoton&display=swap');
-@import "components/Menu/Menu.css";
-@import "components/Films/films.css";
-@import "components/Login/auth.css";
-@import "components/Signup/signup.css";
-@import "components/Actor/actor.css";
-@import "components/Film/film.css";
-@import "components/Player/player.css";
-@import "components/Profile/Profile.css";
+@import "components/Menu/Menu";
+@import "components/Films/films";
+@import "components/Login/auth";
+@import "components/Signup/signup";
+@import "components/Actor/actor";
+@import "components/Film/film";
+@import "components/Player/player";
+@import "components/Profile/Profile";
 
 :root {
     --black: #000000;
@@ -50,7 +50,7 @@ main {
     margin-top: 16px;
 }
 
-#offline-background {
+.offline-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -70,17 +70,16 @@ main {
     border-radius: 16px;
     position: relative;
     z-index: 1;
-}
 
-#offline-modal > a {
-    padding: 8px;
-    width: fit-content;
-    border-radius: 8px;
-    color: var(--white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--neon-main);
-    cursor: pointer;
+    & > a {
+        padding: 8px;
+        width: fit-content;
+        border-radius: 8px;
+        color: var(--white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--neon-main);
+        cursor: pointer;
+    }
 }
-

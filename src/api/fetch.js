@@ -1,4 +1,4 @@
-export const IP = 'http://127.0.0.1:8081';
+export const IP = "http://127.0.0.1:8081";
 
 /**
  * @function
@@ -10,7 +10,7 @@ export const IP = 'http://127.0.0.1:8081';
  */
 export const fetchRequest = async (
   url,
-  method = 'GET',
+  method = "GET",
   body = null,
   headers = {},
 ) => {
@@ -18,10 +18,10 @@ export const fetchRequest = async (
     const options = {
       method: method,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "multipart/form-data",
         ...headers,
       },
-      credentials: 'include',
+      credentials: "include",
     };
 
     if (body !== null) {
@@ -36,6 +36,6 @@ export const fetchRequest = async (
 
     return response;
   } catch (error) {
-    console.error('Произошла ошибка:', error.message);
+    console.error("Произошла ошибка:", error.message);
   }
 };

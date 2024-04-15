@@ -1,6 +1,6 @@
 import * as actorsApi from "../../api/actors.js";
 import * as filmsApi from "../../api/films.js";
-import { actorTemplate } from "./actor.hbs.js";
+import template from "./actor.hbs";
 import Router from "../../utils/router.js";
 
 /**
@@ -20,7 +20,6 @@ export async function renderActorPage(actorId) {
   const actorSection = document.createElement("section");
   actorSection.classList.add("actor-section");
 
-  const template = Handlebars.compile(actorTemplate);
   const actorPageData = { ...actorData, filmsData };
 
   document.querySelector("main").innerHTML = template(actorPageData);

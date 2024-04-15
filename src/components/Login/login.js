@@ -1,7 +1,7 @@
 import { validators } from "../../utils/validate.js";
 import * as authApi from "../../api/auth.js";
 import { menu } from "../../index.js";
-import { loginTemplate } from "./Login.hbs.js";
+import template from "./Login.hbs";
 import Router from "../../utils/router.js";
 
 /**
@@ -12,7 +12,6 @@ import Router from "../../utils/router.js";
  * @return {void}
  */
 export function renderLogin() {
-  const template = Handlebars.compile(loginTemplate);
   document.querySelector("main").innerHTML = template();
 
   const form = document.querySelector(".form-section");

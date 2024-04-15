@@ -1,7 +1,7 @@
 import { validators } from "../../utils/validate.js";
 import * as authApi from "../../api/auth.js";
 import { changeActiveButton, menu } from "../../index.js";
-import { signupTemplate } from "./Signup.hbs.js";
+import template from "./Signup.hbs";
 import Router from "../../utils/router.js";
 
 /**
@@ -13,7 +13,6 @@ import Router from "../../utils/router.js";
  * @return {void}
  */
 export async function renderSignup() {
-  const template = Handlebars.compile(signupTemplate);
   document.querySelector("main").innerHTML = template();
 
   const form = document.querySelector(".form-section");

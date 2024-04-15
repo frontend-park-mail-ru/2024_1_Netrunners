@@ -27,7 +27,7 @@ const update = async (request) => {
     const response = await fetch(request);
     cache.put(request, response);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 

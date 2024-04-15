@@ -1,0 +1,45 @@
+input {
+  height: 60px;
+  font-size: var(--header-300);
+  display: block;
+  padding: 0 16px;
+  border-width: 0;
+  line-height: 40px;
+  border-radius: 20px;
+  color: var(--white);
+  background: var(--grey-main);
+  font-family: var(--input-font);
+
+  &:focus {
+    outline: var(--white) solid thin;
+  }
+
+  & + input {
+    margin-top: 16px;
+  }
+}
+
+.form-section {
+  margin-top: 32px;
+  border: 2px solid var(--border-color);
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.submit-button {
+  margin: 32px auto 16px;
+  background: none;
+  outline: var(--neon-main) solid medium;
+
+  &:hover {
+    color: var(--neon-secondary);
+    background-color: var(--hover-color);
+  }
+}
+
+.error-login {
+  color: red;
+  font-size: var(--main-text);
+  margin-top: 8px;
+  padding: 8px;
+}

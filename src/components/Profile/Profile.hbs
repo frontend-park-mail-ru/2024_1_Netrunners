@@ -1,0 +1,59 @@
+<div class="profile-info">
+  <div class="profile-photo">
+    <img src="{{ avatar }}" alt="{{ username }}">
+  </div>
+  <div class="profile-details">
+    <div class="profile-top">
+      <h1>{{ username }}</h1>
+      <a class="profile-page-buttons" id="edit-button" href="/edit"> Редактировать </a>
+    </div>
+    <div class="profile-description">
+      <h1>О пользователе</h1>
+      <ul>
+        <li>Почта: {{ login }}</li>
+        <li>Дата регистрации: {{ registeredAt }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="films-section">
+  <div class="upper-block">
+    <div class="popular-now-title">Популярно сейчас</div>
+    <div class="slider-buttons">
+      <button class="carousel-button prev" data-carousel-button="prev"><img src="/icons/arrow.svg"
+                                                                            alt="">
+      </button>
+      <div class="carousel-shapes">
+        <img src="/icons/shape.svg" alt="">
+        <img src="/icons/shape-none.svg" alt="">
+        <img src="/icons/shape-none.svg" alt="">
+        <img src="/icons/shape-none.svg" alt="">
+      </div>
+      <button class="carousel-button next" data-carousel-button="next"><img src="/icons/arrow.svg"
+                                                                            alt="">
+      </button>
+    </div>
+  </div>
+  <div class="films-container">
+    {{#each filmsData}}
+      <div class="film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
+        <img class="film-image" src="{{this.preview_data}}">
+        <div class="film-content">
+          <div class="film-time">
+            <img class="time-icon" src="/icons/time.svg">
+            {{this.duration}}
+          </div>
+          <div class="film-rating">
+            {{#stars this.average_score}}
+              <div class="star-container">
+                <div class="star"></div>
+              </div>
+            {{/stars}}
+            <span class="rating-count">{{this.scores_count}}</span>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

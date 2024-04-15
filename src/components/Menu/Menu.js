@@ -1,5 +1,5 @@
 import { createLink } from "../../utils/createLinks.js";
-import { menuTemplate } from "./Menu.hbs.js";
+import template from "./Menu.hbs";
 import { getProfilePreview } from "../../api/profile.js";
 import { getCookie } from "../../index.js";
 import Router from "../../utils/router.js";
@@ -117,7 +117,7 @@ export class Menu {
 
       const dropdown = document.createElement("div");
       const dropdownIcon = document.createElement("img");
-      dropdownIcon.src = "../../img/icons/dropdown.svg";
+      dropdownIcon.src = "/icons/dropdown.svg";
       dropdownIcon.alt = "Dropdown";
       dropdown.classList.add("dropdown");
       dropdown.appendChild(dropdownIcon);
@@ -148,7 +148,6 @@ export class Menu {
    * @return {void}
    */
   renderTemplate() {
-    const template = Handlebars.compile(menuTemplate);
     const items = this.items.map(([key, { href, text }]) => {
       const className = "menu-item";
       return { key, href, text, className };
@@ -163,6 +162,9 @@ export class Menu {
 
 application.addEventListener("click", (e) => {
   const { target } = e;
+  if (target.id === "edit-button") {
+    return;
+  }
   if (target instanceof HTMLAnchorElement) {
     e.preventDefault();
     menuRoutes[target.dataset.section]();

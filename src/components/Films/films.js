@@ -1,5 +1,5 @@
 import * as filmsApi from "../../api/films.js";
-import { filmsTemplate } from "./Films.hbs.js";
+import template from "./Films.hbs";
 import { renderSlider } from "../Slider/renderSlider.js";
 import Router from "../../utils/router.js";
 
@@ -20,7 +20,6 @@ export async function renderFilms() {
 
     topFourFilms[0].active = "data-active";
 
-    const template = Handlebars.compile(filmsTemplate);
     document.querySelector("main").innerHTML = template({
       filmData,
       topFourFilms,
