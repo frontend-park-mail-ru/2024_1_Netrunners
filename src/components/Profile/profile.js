@@ -89,19 +89,6 @@ export async function renderEditForm(profileId) {
     }
   });
 
-  avatarInput.addEventListener("change", async (e) => {
-    const input = event.target;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const preview = document.getElementById("avatarPreview");
-        preview.src = e.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  });
-
   passwordButton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (!validators.password(passwordInput.value)) {

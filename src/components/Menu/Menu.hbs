@@ -1,18 +1,18 @@
 <div class="menu-container">
-  <div class="logo">
+  <div class="menu-container__logo">
     <img src="/logo/logo.svg" alt="Логотип">
   </div>
-  <div class="menu">
+  <div class="menu-container__menu">
     {{#each items}}
       <a class="{{this.className}}" href="{{this.href}}" data-section="{{this.key}}">{{this.text}}</a>
     {{/each}}
   </div>
-  <div class="menu-right">
-    <div class="icons">
-      <div class="nav-icon">
+  <div class="menu-container__menu-right">
+    <div class="menu-container__icons">
+      <div class="menu-container__nav-icon">
         <img src="/icons/search.svg" alt="Логотип">
       </div>
-      <div class="nav-icon">
+      <div class="menu-container__nav-icon">
         <img src="/icons/notifications.svg" alt="Логотип">
       </div>
       <div id="auth"></div>

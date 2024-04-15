@@ -10,20 +10,20 @@ export async function renderPlayer(filmId, filmTitle, source) {
   const exitButton = document.querySelector("#exit-player");
   const container = document.querySelector(".player-container");
   const mainVideo = container.querySelector("video");
-  const progressBar = container.querySelector(".progress-bar");
-  const videoTimeline = container.querySelector(".video-timeline");
-  const volumeBtn = container.querySelector(".volume img");
+  const progressBar = container.querySelector(".player-container__progress-bar");
+  const videoTimeline = container.querySelector(".player-container__video-timeline");
+  const volumeBtn = container.querySelector(".player-container__volume img");
   const volumeSlider = container.querySelector(".left input");
-  const currentVideoTime = container.querySelector(".current-time");
-  const videoDuration = container.querySelector(".video-duration");
-  const nextSeries = container.querySelector(".skip-forward img");
-  const previousSeries = container.querySelector(".skip-backward img");
-  const playPauseBtn = container.querySelector(".play-pause img");
-  const speedBtn = container.querySelector(".playback-speed span");
-  const speedOptions = container.querySelector(".speed-options");
-  const pinInPicBtn = container.querySelector(".pic-in-pic span");
-  const fullscreenBtn = container.querySelector(".fullscreen img");
-  const wrapper = container.querySelector(".wrapper");
+  const currentVideoTime = container.querySelector(".player-container__current-time");
+  const videoDuration = container.querySelector(".player-container__video-duration");
+  const nextSeries = container.querySelector(".player-container__skip-forward img");
+  const previousSeries = container.querySelector(".player-container__skip-backward img");
+  const playPauseBtn = container.querySelector(".player-container__play-pause img");
+  const speedBtn = container.querySelector(".player-container__playback-speed span");
+  const speedOptions = container.querySelector(".player-container__speed-options");
+  const pinInPicBtn = container.querySelector(".player-container__pic-in-pic span");
+  const fullscreenBtn = container.querySelector(".player-container__fullscreen img");
+  const wrapper = container.querySelector(".player-container__wrapper");
 
   let timer;
   const hideControls = () => {
@@ -113,7 +113,7 @@ export async function renderPlayer(filmId, filmTitle, source) {
   });
 
   wrapper.addEventListener("click", (e) => {
-    if (e.target.className === "wrapper") {
+    if (e.target.className === "player-container__wrapper") {
       mainVideo.paused ? mainVideo.play() : mainVideo.pause();
     }
   });
