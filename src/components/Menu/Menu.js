@@ -149,7 +149,7 @@ export class Menu {
    */
   renderTemplate() {
     const items = this.items.map(([key, { href, text }]) => {
-      const className = "menu-item";
+      const className = "menu-container__menu-item";
       return { key, href, text, className };
     });
 

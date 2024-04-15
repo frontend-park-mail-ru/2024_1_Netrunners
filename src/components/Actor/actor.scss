@@ -7,7 +7,7 @@
   color: var(--white);
 }
 
-.actor-photo {
+.actor-info__photo {
   margin-right: 32px;
 
   img {
@@ -19,11 +19,11 @@
   }
 }
 
-.actor-details {
+.actor-info__details {
   margin-left: 32px;
 }
 
-.actor-description {
+.actor-info__description {
   margin-top: 8px;
 
   ul {
@@ -36,6 +36,6 @@
   }
 }
 
-.actor-name {
+.actor-info__name {
   margin-bottom: 96px;
 }

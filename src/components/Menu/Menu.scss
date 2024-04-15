@@ -1,4 +1,4 @@
-.menu {
+.menu-container__menu {
   display: flex;
   align-items: flex-start;
   font-size: var(--main-text);
@@ -9,7 +9,7 @@
   border-radius: 16px;
 }
 
-.menu-item {
+.menu-container__menu-item {
   white-space: nowrap;
   color: var(--grey-secondary);
   padding: 16px;
@@ -42,7 +42,7 @@
   background-color: var(--hover-color);
 }
 
-.logo {
+.menu-container__logo {
   margin-top: 32px;
 
   & > img {
@@ -51,7 +51,7 @@
   }
 }
 
-.nav-icon {
+.menu-container__nav-icon {
   & > img {
     margin-left: 32px;
     margin-top: 32px;
@@ -127,13 +127,13 @@
   margin-left: 10px;
 }
 
-.icons {
+.menu-container__icons {
   display: flex;
   margin-left: 64px;
   margin-top: 16px;
 }
 
-.menu-right {
+.menu-container__menu-right {
   display: flex;
   flex-wrap: wrap;
 }

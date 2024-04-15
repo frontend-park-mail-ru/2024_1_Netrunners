@@ -1,9 +1,9 @@
 const Handlebars = require("handlebars/runtime");
 
 const MAX_STARS = 5;
-const FULL_STAR_IMG = '<img class="star" src="/icons/star-full.svg" alt="">';
-const HALF_STAR_IMG = '<img class="star" src="/icons/star-half.svg" alt="">';
-const NONE_STAR_IMG = '<img class="star" src="/icons/star-none.svg" alt="">';
+const FULL_STAR_IMG = '<img class="films-section__star" src="/icons/star-full.svg" alt="">';
+const HALF_STAR_IMG = '<img class="films-section__star" src="/icons/star-half.svg" alt="">';
+const NONE_STAR_IMG = '<img class="films-section__star" src="/icons/star-none.svg" alt="">';
 
 Handlebars.registerHelper("stars", function (averageScore) {
   averageScore = 4.4;
