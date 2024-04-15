@@ -1,9 +1,13 @@
-import * as profileApi from "../../api/profile.js";
-import * as filmsApi from "../../api/films.js";
-import { validators } from "../../utils/validate.js";
-import profileTemplate from "./Profile.hbs";
-import editFormTemplate from "./editForm.hbs";
-import Router from "../../utils/router.js";
+import * as profileApi from '../../api/profile.js';
+import { validators } from '../../utils/validate.js';
+import profileTemplate from './Profile.hbs';
+import editFormTemplate from './editForm.hbs';
+import Router from '../../utils/router.js';
+import { FilmsAllRequest } from '../../../use-cases/filmsAll.js';
+import store from '../../index.js';
+import { FILMS_REDUCER } from '../../../flux/actions/filmsAll.js';
+import { getProfileData } from '../../../use-cases/profile.js';
+import { PROFILE_REDUCER } from '../../../flux/actions/profile.js';
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -14,106 +18,114 @@ import Router from "../../utils/router.js";
  * @param profileId
  */
 export async function renderProfile(profileId) {
-  const [profileData, filmsData] = await Promise.all([
-    profileApi.getProfileData(profileId),
-    filmsApi.getAll(),
-  ]);
+  let filmsData;
+  let profileData;
+  await FilmsAllRequest();
+  store.subscribe(FILMS_REDUCER, () => {
+    filmsData = store.getState().films.films;
+  });
+  await FilmsAllRequest();
+  await getProfileData(profileId);
+  store.subscribe(PROFILE_REDUCER, () => {
+    profileData = store.getState().profile.profileData.user;
+  });
+  await getProfileData(profileId);
 
   const profilePageData = { ...profileData, filmsData };
-  document.querySelector("main").innerHTML = profileTemplate(profilePageData);
+  document.querySelector('main').innerHTML = profileTemplate(profilePageData);
 
   document
-    .querySelector(".profile-page-buttons")
-    .addEventListener("click", (e) => {
+    .querySelector('.profile-page-buttons')
+    .addEventListener('click', (e) => {
       e.preventDefault();
       renderEditForm(profileId);
     });
 
-  const filmCards = document.querySelectorAll("[data-film-id]");
+  const filmCards = document.querySelectorAll('[data-film-id]');
 
   filmCards.forEach((filmCard) => {
-    filmCard.addEventListener("click", () => {
+    filmCard.addEventListener('click', () => {
       Router.goToFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
     });
   });
 }
 
 export async function renderEditForm(profileId) {
-  document.querySelector(".profile-info").innerHTML = editFormTemplate();
+  document.querySelector('.profile-info').innerHTML = editFormTemplate();
 
-  const editForm = document.querySelector("#myForm");
-  const usernameButton = document.querySelector("#sendLoginBtn");
-  const avatarButton = document.querySelector("#sendImageBtn");
-  const passwordButton = document.querySelector("#sendPasswordBtn");
-  const exitButton = document.querySelector("#exit-editing-button");
+  const editForm = document.querySelector('#myForm');
+  const usernameButton = document.querySelector('#sendLoginBtn');
+  const avatarButton = document.querySelector('#sendImageBtn');
+  const passwordButton = document.querySelector('#sendPasswordBtn');
+  const exitButton = document.querySelector('#exit-editing-button');
 
   const usernameInput = document.querySelector('input[name="username"]');
   const passConfInput = document.querySelector('input[name="passConf"]');
   const passwordInput = document.querySelector('input[name="password"]');
   const avatarInput = document.querySelector('input[name="avatar"]');
 
-  usernameButton.addEventListener("click", async (e) => {
+  usernameButton.addEventListener('click', async (e) => {
     e.preventDefault();
     if (!validators.username(usernameInput.value)) {
-      document.getElementById("username-errors").innerText =
-        "Имя пользователя слишком короткое";
+      document.getElementById('username-errors').innerText =
+        'Имя пользователя слишком короткое';
       return;
     }
 
     if (
       await profileApi.editProfile(profileId, {
         action: profileApi.CHANGE_USERNAME_ACTION,
-        newData: usernameInput.value,
+        newData: usernameInput.value
       })
     ) {
       renderProfile(profileId);
     }
   });
 
-  avatarButton.addEventListener("click", async (e) => {
+  avatarButton.addEventListener('click', async (e) => {
     e.preventDefault();
     const avatar = avatarInput.value;
 
     if (!avatar) {
-      document.getElementById("avatar-errors").innerText = "Файл не выбран";
+      document.getElementById('avatar-errors').innerText = 'Файл не выбран';
       return;
     }
 
     if (
       await profileApi.editProfile(profileId, {
         action: profileApi.CHANGE_AVATAR_ACTION,
-        newData: new FormData(editForm),
+        newData: new FormData(editForm)
       })
     ) {
       renderProfile(profileId);
     }
   });
 
-  passwordButton.addEventListener("click", async (e) => {
+  passwordButton.addEventListener('click', async (e) => {
     e.preventDefault();
     if (!validators.password(passwordInput.value)) {
-      document.getElementById("password-errors").innerText =
-        "Пароль слишком короткий";
+      document.getElementById('password-errors').innerText =
+        'Пароль слишком короткий';
       return;
     }
 
     if (!validators.passwordConf(passwordInput.value, passConfInput.value)) {
-      document.getElementById("password-errors").innerText =
-        "Пароли не совпадают";
+      document.getElementById('password-errors').innerText =
+        'Пароли не совпадают';
       return;
     }
 
     if (
       await profileApi.editProfile(profileId, {
         action: profileApi.CHANGE_PASSWORD_ACTION,
-        newData: passwordInput.value,
+        newData: passwordInput.value
       })
     ) {
       renderProfile(profileId);
     }
   });
 
-  exitButton.addEventListener("click", async (e) => {
+  exitButton.addEventListener('click', async (e) => {
     e.preventDefault();
     await renderProfile(profileId);
   });

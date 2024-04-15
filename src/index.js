@@ -4,9 +4,15 @@ import { renderLogin } from "./components/Login/login.js";
 import { renderSignup } from "./components/Signup/signup.js";
 import { renderProfile } from "./components/Profile/profile.js";
 import { renderLogout } from "./components/Logout/logout.js";
+import {rootReducer} from "../flux/reducers/rootReducer.js";
+import {createStore} from "../flux/redux-lite.js";
 import { Router } from "./utils/router.js";
 import Rout from "./utils/router.js";
 import "../src/index.scss";
+
+const store = createStore(rootReducer);
+
+export default store;
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
@@ -86,7 +92,7 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === "a") {
       e.preventDefault();
-      changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
+      changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
     }
   });
 }

@@ -22,7 +22,7 @@ app.get(/^(?!.*\.(css|js|img|png|webp|webm|svg)).*$/, (req, res) => {
 });
 
 const port = process.env.PORT || 8080;
-const IP = "127.0.0.1";
+const IP = "94.139.247.246";
 
 app.listen(port, IP, function () {
   console.log(`Server listening at http://${IP}:${port}`);
