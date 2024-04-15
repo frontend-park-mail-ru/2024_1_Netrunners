@@ -26,41 +26,18 @@ export const LOGIN_REDUCER = 'LOGIN_REDUCER';
  * @function
  * @returns {Object} Экшен с типом "USER_INFO_REQUEST".
  */
-export const $LoginRequest = () => ({ type: LOGIN_REQUEST, reducerName: LOGIN_REDUCER });
+export const LoginRequest = () => ({ type: LOGIN_REQUEST, reducerName: LOGIN_REDUCER });
 /**
  * Генерирует экшен для успешного получения информации о пользователе.
  * @function
  * @param {Object} info - Информация о пользователе.
  * @returns {Object} Экшен с типом "USER_INFO_SUCCESS".
  */
-export const $LoginSuccess = (info) => ({ type: LOGIN_SUCCESS, payload: info, reducerName: LOGIN_REDUCER });
+export const LoginSuccess = (info) => ({ type: LOGIN_SUCCESS, payload: info, reducerName: LOGIN_REDUCER });
 /**
  * Генерирует экшен для обработки ошибки при получении информации о пользователе.
  * @function
  * @param {Object} error - Объект ошибки.
  * @returns {Object} Экшен с типом "USER_INFO_ERROR".
  */
-export const $LoginError = (error) => ({ type: LOGIN_ERROR, payload: { isError: true, error: error }, reducerName: LOGIN_REDUCER });
-
-
-/**
- * Запрос на получение данных о пользователе
- * @function
- * @param {string} uuid - Идентификатор пользователя.
- * @return {Promise} promise - Объект запроса
- */
-export async function sentLoginRequest(uuid) {
-    try {
-        store.dispatch($LoginRequest());
-        const response = await fetchRequest(`${IP}/auth/login`, 'GET');
-        const data = await response.json();
-
-        if (!data || typeof data !== 'object') {
-            throw new Error('Ошибка: полученные данные не являются объектом');
-        }
-        store.dispatch($LoginSuccess());
-    } catch (error) {
-        console.error('Произошла ошибка: ', error.message);
-        store.dispatch($LoginError());
-    }
-}
+export const LoginError = (error) => ({ type: LOGIN_ERROR, payload: { isError: true, error: error }, reducerName: LOGIN_REDUCER });

@@ -4,6 +4,11 @@ import {validators} from '../../utils/validate.js';
 import {profileTemplate} from './Profile.hbs.js';
 import {editFormTemplate} from './editForm.hbs.js';
 import Router from '../../utils/router.js';
+import {FilmsAllRequest} from "../../use-cases/filmsAll.js";
+import store from "../../index.js";
+import {FILMS_REDUCER} from "../../flux/actions/filmsAll.js";
+import {getProfileData} from "../../use-cases/profile.js";
+import {PROFILE_REDUCER} from "../../flux/actions/profile.js";
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -14,11 +19,19 @@ import Router from '../../utils/router.js';
  * @param profileId
  */
 export async function renderProfile(profileId) {
-  const [profileData, filmsData] = await Promise.all([
-    profileApi.getProfileData(profileId),
-    filmsApi.getAll(),
-  ]);
 
+  let filmsData;
+  let profileData;
+  await FilmsAllRequest();
+  store.subscribe(FILMS_REDUCER, () => {
+    filmsData = store.getState().films.films;
+  });
+  await FilmsAllRequest();
+  await getProfileData(profileId);
+  store.subscribe(PROFILE_REDUCER, () => {
+    profileData = store.getState().profile.profileData.user;
+  });
+  await getProfileData(profileId);
   const template = Handlebars.compile(profileTemplate);
   const profilePageData = {...profileData, filmsData};
   document.querySelector('main').innerHTML = template(profilePageData);
