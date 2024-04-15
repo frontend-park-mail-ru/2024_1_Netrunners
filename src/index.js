@@ -7,7 +7,6 @@ import { renderLogout } from "./components/Logout/logout.js";
 import { Router } from "./utils/router.js";
 import Rout from "./utils/router.js";
 import "../src/index.scss";
-import { renderStarsRating } from "./components/renderStarsRating.js";
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
@@ -126,7 +125,7 @@ renderMenu();
 await menu.renderAuth();
 
 window.addEventListener("popstate", async (e) => {
-  if (e.state === null) {
+  if (e.state === null || !navigator.onLine) {
     await Rout.go("/", "Netrunnerflix", null, false);
   } else {
     if (e.state.path === "/logout") {
@@ -148,19 +147,14 @@ window.addEventListener("popstate", async (e) => {
 });
 
 const handleLocation = async () => {
+  if (!navigator.onLine) {
+    await Rout.go("/", "Netrunnerflix", null, false);
+  }
   const path = window.location.pathname;
   await Rout.go(decodeURIComponent(path), document.title);
 };
 
 handleLocation();
-
-Handlebars.registerHelper("stars", function (averageScore) {
-  averageScore = 4.4;
-  const roundedScore = Math.floor(averageScore);
-  const remainder = averageScore - roundedScore;
-  const starsHTML = renderStarsRating(roundedScore, remainder);
-  return new Handlebars.SafeString(starsHTML);
-});
 
 function showOfflineModal() {
   const modalHtml = `
