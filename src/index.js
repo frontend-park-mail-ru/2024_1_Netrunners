@@ -7,6 +7,12 @@ import {renderLogout} from './components/Logout/logout.js';
 import {Router} from './utils/router.js';
 import Rout from './utils/router.js';
 import {renderStarsRating} from './components/renderStarsRating.js';
+import {rootReducer} from "./flux/reducers/rootReducer.js";
+import {createStore} from "./flux/redux-lite.js";
+
+const store = createStore(rootReducer);
+// Экспорт стора, чтобы он был доступен в других частях приложения
+export default store;
 
 const rootElement = document.getElementById('root');
 const menuElement = document.createElement('nav');

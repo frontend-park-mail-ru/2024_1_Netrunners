@@ -2,6 +2,8 @@ import * as actorsApi from '../../api/actors.js';
 import * as filmsApi from '../../api/films.js';
 import {actorTemplate} from './actor.hbs.js';
 import Router from '../../utils/router.js';
+import store from "../../index.js";
+import {$getActorData, ACTOR_REDUCER} from "../../flux/actions/actor.js";
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -12,13 +14,19 @@ import Router from '../../utils/router.js';
  * @return {void}
  */
 export async function renderActorPage(actorId) {
-  const [actorData, filmsData] = await Promise.all([
-    actorsApi.getActorData(actorId),
+  const [ //actorData,
+    filmsData] = await Promise.all([
+    //actorsApi.getActorData(actorId),
     filmsApi.getAll(),
   ]);
-
+  store.clearSubscribes();
   const actorSection = document.createElement('section');
   actorSection.classList.add('actor-section');
+  store.dispatch($getActorData(actorId));
+  let actorData;
+  store.subscribe(ACTOR_REDUCER, () => {
+    actorData = store.getState().actor.data;
+  });
 
   const template = Handlebars.compile(actorTemplate);
   const actorPageData = {...actorData, filmsData};
