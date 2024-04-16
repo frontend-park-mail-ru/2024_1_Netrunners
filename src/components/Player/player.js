@@ -1,4 +1,4 @@
-import { formatTime } from "../../utils/timeConvert.js";
+ import { formatTime } from "../../utils/timeConvert.js";
 import template from "./Player.hbs";
 import * as images from "../../img/imgConstants.js";
 import Router from "../../utils/router.js";

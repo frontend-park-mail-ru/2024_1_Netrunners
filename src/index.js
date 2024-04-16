@@ -4,8 +4,8 @@ import { renderLogin } from "./components/Login/login.js";
 import { renderSignup } from "./components/Signup/signup.js";
 import { renderProfile } from "./components/Profile/profile.js";
 import { renderLogout } from "./components/Logout/logout.js";
-import {rootReducer} from "../flux/reducers/rootReducer.js";
-import {createStore} from "../flux/redux-lite.js";
+import { rootReducer } from "../flux/reducers/rootReducer.js";
+import { createStore } from "../flux/redux-lite.js";
 import { Router } from "./utils/router.js";
 import Rout from "./utils/router.js";
 import "../src/index.scss";
@@ -14,6 +14,7 @@ const store = createStore(rootReducer);
 
 export default store;
 
+console.log(window.isSecureContext);
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("./sw.js", { scope: "/" })
