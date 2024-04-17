@@ -5,6 +5,7 @@ import {
   filmsAllRequest,
   filmsAllSuccess,
 } from "../flux/actions/filmsAll.js";
+import { toFilmDataWithDuration } from "../src/utils/transformers/filmDataWithDuration.js";
 
 /**
  * Выполняет запрос на получение данных всех фильмов.

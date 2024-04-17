@@ -34,11 +34,22 @@ export async function getProfileData(uuid) {
  */
 export async function editProfile(uuid, editData) {
   try {
-    const response = await fetchRequest(
-      `${IP}/profile/${uuid}/edit`,
-      "POST",
-      editData,
-    );
+    let response;
+    if (editData.action === "chAvatar") {
+      response = await fetchRequest(
+        `${IP}/profile/${uuid}/edit`,
+        "POST",
+        editData,
+        null,
+        "multipart/form-data",
+      );
+    } else {
+      response = await fetchRequest(
+        `${IP}/profile/${uuid}/edit`,
+        "POST",
+        editData,
+      );
+    }
     const responseData = await response.json();
 
     return responseData.status === 200;
