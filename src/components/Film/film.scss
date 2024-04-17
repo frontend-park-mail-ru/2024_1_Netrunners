@@ -1,39 +1,32 @@
 .film-page-poster-block {
-    margin-top: 32px;
-    align-items: center;
-    color: var(--white);
-    display: flex;
-    flex-direction: column;
-    margin-bottom: calc(8% + 2.5rem);
-}
-.poster-block__overlay {
-    background-image: linear-gradient(to top, var(--neutral-main), transparent);
-    bottom: 0;
-    content: "";
-    left: 0;
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-    height: 52%;
-}
-.film-page-poster-block__image-div {
+  margin-top: 32px;
+  align-items: center;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: calc(8% + 2.5rem);
+
+  &__image-div {
     position: relative;
-}
-.film-page-poster-block__poster-data {
+  }
+
+  &__poster-data {
     z-index: var(--first-layer);
     margin-top: calc(-16% + 2.5rem);
-}
-.film-page-poster-block__text-data {
+  }
+
+  &__text-data {
     text-align: center;
-}
-.film-page-poster-block__poster-actions {
+  }
+
+  &__poster-actions {
     margin-top: 16px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-}
-.film-page-poster-block__buttons {
+  }
+
+  &__buttons {
     color: var(--white);
     border: 1px solid var(--grey-main);
     border-radius: 8px;
@@ -42,37 +35,48 @@
     margin-left: 8px;
     width: fit-content;
     background-color: var(--hover-color);
-}
-.film-page-poster-block__duration {
+  }
+
+  &__duration {
     margin-left: 8px;
     font-weight: bold;
-}
-.accent-button {
-    width: 128px;
-    height: 50px;
-    border-radius: 8px;
-    color: var(--white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--neon-main);
-}
-.film-page-poster-block__image {
+  }
+
+  &__image {
     display: block;
     width: 70vw;
     height: 60vh;
     object-fit: cover;
     border-radius: 12px;
     background: var(--grey-secondary);
+  }
 }
-.film-content-block__description {
+
+.accent-button {
+  width: 128px;
+  height: 50px;
+  border-radius: 8px;
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--neon-main);
+}
+
+.film-content-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__description {
     background-color: var(--hover-color);
     border: 2px solid var(--border-color);
     padding: 32px;
     border-radius: 16px;
     color: var(--white);
-}
-.film-content-block__data {
+  }
+
+  &__data {
     background-color: var(--hover-color);
     border: 2px solid var(--border-color);
     border-radius: 16px;
@@ -82,8 +86,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-.film-content-block__data-element {
+  }
+
+  &__data-element {
     color: var(--white);
     border: 1px solid var(--grey-main);
     border-radius: 8px;
@@ -93,11 +98,13 @@
     margin-bottom: 16px;
     width: fit-content;
     background-color: var(--hover-color);
-}
-.film-content-block__data-section {
+  }
+
+  &__data-section {
     display: inline-block;
-}
-.film-content-block__actors {
+  }
+
+  &__actors {
     background-color: var(--hover-color);
     border: 2px solid var(--border-color);
     padding: 32px;
@@ -105,24 +112,22 @@
     margin-top: 32px;
     color: var(--white);
     display: flex;
-}
-.film-content-block__left {
+  }
+
+  &__left {
     width: 100%;
     margin-right: 32px;
-}
-.film-content-block {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.film-content-block__actor-avatar {
+  }
+
+  &__actor-avatar {
     object-fit: cover;
     width: 64px;
     height: 64px;
     border-radius: 8px;
     overflow: hidden;
-}
-.film-content-block__dropdown-actor-name {
+  }
+
+  &__dropdown-actor-name {
     display: none;
     position: absolute;
     top: 120%;
@@ -133,23 +138,28 @@
     border-radius: 5px;
     opacity: 0;
     transition: opacity 0.5s ease;
-}
-.film-content-block__actor-preview {
+  }
+
+  &__actor-preview {
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
     margin-right: 16px;
+
     &:hover {
-        .film-content-block__dropdown-actor-name {
-            display: block;
-            opacity: 1;
-        }
+      .film-content-block__dropdown-actor-name {
+        display: block;
+        opacity: 1;
+      }
     }
-}
-.film-content-block__sub-title {
+  }
+
+  &__sub-title {
     color: var(--grey-secondary);
+  }
 }
+
 #film-player-button {
-    cursor: pointer;
+  cursor: pointer;
 }

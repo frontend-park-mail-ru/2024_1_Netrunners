@@ -1,5 +1,4 @@
-import {ACTOR_ERROR, ACTOR_REQUEST, ACTOR_SUCCESS} from "../actions/actor.js";
-
+import { ACTOR_ERROR, ACTOR_REQUEST, ACTOR_SUCCESS } from "../actions/actor.js";
 
 const initialState = {
   actorRequest: false,
@@ -14,9 +13,21 @@ export const actorReducer = (state = initialState, action) => {
     case ACTOR_REQUEST:
       return { ...state, actorRequest: true };
     case ACTOR_SUCCESS:
-      return { ...state, actorRequest: false, info: action.payload, actorSuccess: true, actorError: false, error: null };
+      return {
+        ...state,
+        actorRequest: false,
+        info: action.payload,
+        actorSuccess: true,
+        actorError: false,
+        error: null,
+      };
     case ACTOR_ERROR:
-      return { ...state, actorRequest: false, actorSuccess: false, actorError: true };
+      return {
+        ...state,
+        actorRequest: false,
+        actorSuccess: false,
+        actorError: true,
+      };
     default:
       return state;
   }

@@ -85,7 +85,9 @@ export class Menu {
   }
 
   /**
-   * Рендерит элементы аутентификации в зависимости от статуса авторизации.
+   * Отображает элементы аутентификации в зависимости от статуса авторизации.
+   * @param {boolean} isAuthorized - Флаг, указывающий на авторизацию пользователя.
+   * @return {void}
    */
   async renderAuth(isAuthorized) {
     if (isAuthorized === undefined) {
@@ -157,6 +159,20 @@ export class Menu {
     this.#parent.querySelectorAll("a").forEach((element) => {
       this.state.menuElements[element.dataset.section] = element;
     });
+
+    this.homePageListener();
+  }
+
+  /**
+   * Устанавливает слушатель событий для кнопки логотипа на главной странице.
+   * При клике на логотип происходит переход на домашнюю страницу.
+   * @return {void}
+   */
+  homePageListener() {
+    const logo = document.querySelector(".menu-container__logo");
+    logo.addEventListener("click", () => {
+      Router.goToHomePage();
+    });
   }
 }
 
@@ -165,7 +181,11 @@ application.addEventListener("click", (e) => {
   if (target.id === "edit-button") {
     return;
   }
-  if (target instanceof HTMLAnchorElement) {
+  if (
+    (target instanceof HTMLAnchorElement &&
+      target.className === "menu-container__menu-item active") ||
+    target.className === "auth-item active"
+  ) {
     e.preventDefault();
     menuRoutes[target.dataset.section]();
   }

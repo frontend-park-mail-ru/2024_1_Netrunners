@@ -10,9 +10,10 @@
 📎 **Горбатов Александр** - [Tovardas](https://github.com/Tovardas)
 
 ## Менторы
+
 📎 [Дарья Лабзунова](https://github.com/labzunova), backend  
 📎 [Володин Владислав](https://github.com/Kand1), frontend  
-📎 TBD, ux  
+📎 TBD, ux
 
 ## Ссылки на деплой
 

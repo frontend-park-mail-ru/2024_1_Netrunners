@@ -8,7 +8,13 @@ import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
 import { changeActiveButton, getCookie } from "../index.js";
 
+/**
+ * Класс для управления навигацией и отображением различных страниц.
+ */
 export class Router {
+  /**
+   * Создает новый экземпляр класса Router.
+   */
   constructor() {
     this.routs = {
       "/": renderFilms,
@@ -18,6 +24,9 @@ export class Router {
     };
   }
 
+  /**
+   * Переход на главную страницу.
+   */
   goToHomePage() {
     const state = {};
     state.path = "/";
@@ -25,10 +34,13 @@ export class Router {
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-
+    changeActiveButton(state.path);
     renderFilms();
   }
 
+  /**
+   * Переход на страницу регистрации.
+   */
   goToSignupPage() {
     const state = {};
     state.path = "/signup";
@@ -36,10 +48,13 @@ export class Router {
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-
+    changeActiveButton(state.path);
     renderSignup();
   }
 
+  /**
+   * Переход на страницу входа.
+   */
   goToLoginPage() {
     const state = {};
     state.path = "/login";
@@ -47,10 +62,13 @@ export class Router {
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-
+    changeActiveButton(state.path);
     renderLogin();
   }
 
+  /**
+   * Переход на страницу выхода.
+   */
   goToLogout() {
     const state = {};
     state.path = "/logout";
@@ -62,6 +80,11 @@ export class Router {
     renderLogout();
   }
 
+  /**
+   * Переход на страницу актера по его идентификатору.
+   * @param {string} uuid Идентификатор актера.
+   * @param {string} title Заголовок страницы.
+   */
   goToActorPage(uuid, title) {
     const state = {};
     state.path = `/actor/${uuid}`;
@@ -73,6 +96,11 @@ export class Router {
     renderActorPage(uuid);
   }
 
+  /**
+   * Переход на страницу фильма по его идентификатору.
+   * @param {string} uuid Идентификатор фильма.
+   * @param {string} title Заголовок страницы.
+   */
   goToFilmPage(uuid, title) {
     const state = {};
     state.path = `/film/${uuid}`;
@@ -84,6 +112,9 @@ export class Router {
     renderFilmPage(uuid);
   }
 
+  /**
+   * Переход на страницу профиля пользователя.
+   */
   goToProfilePage() {
     const state = {};
     state.path = "/profile";
@@ -92,10 +123,16 @@ export class Router {
     const uuid = getCookie("user_uuid");
 
     window.history.pushState(state, state.title, state.path);
-
+    changeActiveButton(state.path);
     renderProfile(uuid);
   }
 
+  /**
+   * Переход на страницу плеера для просмотра фильма.
+   * @param {string} uuid Идентификатор фильма.
+   * @param {string} title Заголовок страницы.
+   * @param {string} link Ссылка на видеофайл фильма.
+   */
   goToPlayerPage(uuid, title, link) {
     const state = {};
     state.path = `/film/${uuid}`;
@@ -107,6 +144,14 @@ export class Router {
     renderPlayer(uuid, title, link);
   }
 
+  /**
+   * Метод для перехода по заданному пути.
+   * @param {string} path Путь для перехода.
+   * @param {string} title Заголовок страницы.
+   * @param {any} data Дополнительные данные, передаваемые в функцию отображения страницы.
+   * @param {boolean} needPush Флаг для определения необходимости добавления новой записи в историю браузера.
+   * @return {Promise<void>}
+   */
   async go(path, title, data = null, needPush = true) {
     const state = {};
     state.path = path;

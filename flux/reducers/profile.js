@@ -1,5 +1,8 @@
-import {PROFILE_ERROR, PROFILE_REQUEST, PROFILE_SUCCESS} from "../actions/profile.js";
-
+import {
+  PROFILE_ERROR,
+  PROFILE_REQUEST,
+  PROFILE_SUCCESS,
+} from "../actions/profile.js";
 
 const initialState = {
   profileRequest: false,
@@ -14,9 +17,21 @@ export const profileReducer = (state = initialState, action) => {
     case PROFILE_REQUEST:
       return { ...state, profileRequest: true };
     case PROFILE_SUCCESS:
-      return { ...state, profileRequest: false, profileData: action.payload, profileSuccess: true, profileError: false, error: null };
+      return {
+        ...state,
+        profileRequest: false,
+        profileData: action.payload,
+        profileSuccess: true,
+        profileError: false,
+        error: null,
+      };
     case PROFILE_ERROR:
-      return { ...state, profileRequest: false, profileSuccess: false, profileError: true };
+      return {
+        ...state,
+        profileRequest: false,
+        profileSuccess: false,
+        profileError: true,
+      };
     default:
       return state;
   }

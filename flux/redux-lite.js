@@ -8,21 +8,16 @@
 
  * @param {Object} initialState - Начальное состояние хранилища.
 
- * @returns {Object} Хранилище с методами dispatch, subscribe, getState и clearSubscribes.
+ * @return {Object} Хранилище с методами dispatch, subscribe, getState и clearSubscribes.
 
  */
 
 export const createStore = (reducer, initialState) => {
-
   let state = initialState;
 
   let subscribers = {};
 
-
-
-
   return {
-
     /**
 
      * Очищает все подписки на изменение состояния.
@@ -30,9 +25,7 @@ export const createStore = (reducer, initialState) => {
      */
 
     clearSubscribes() {
-
       subscribers = {};
-
     },
 
     /**
@@ -43,29 +36,22 @@ export const createStore = (reducer, initialState) => {
 
      * @param {Object|function} action - Экшен для обновления состояния или функция (thunk), возвращающая экшены.
 
-     * @returns {Object} Обработанный экшен.
+     * @return {Object} Обработанный экшен.
 
      */
 
     dispatch(action) {
-
-
-      if (action && Object.prototype.hasOwnProperty.call(action, 'type')) {
-
+      if (action && Object.prototype.hasOwnProperty.call(action, "type")) {
         state = reducer(state, action);
 
-        const reducerName = action.reducerName || 'default';
+        const reducerName = action.reducerName || "default";
 
         subscribers[reducerName]?.forEach((cb) => cb());
 
         return action;
-
       } else if (action) {
-
         action(this.dispatch, this.getState);
-
       }
-
     },
 
     /**
@@ -81,15 +67,11 @@ export const createStore = (reducer, initialState) => {
      */
 
     subscribe(reducerName, cb) {
-
       if (!subscribers[reducerName]) {
-
         subscribers[reducerName] = [];
-
       }
 
       subscribers[reducerName].push(cb);
-
     },
 
     /**
@@ -103,13 +85,9 @@ export const createStore = (reducer, initialState) => {
      */
 
     getState() {
-
       return state;
-
     },
-
   };
-
 };
 
 /**
@@ -125,20 +103,11 @@ export const createStore = (reducer, initialState) => {
  */
 
 export const combineReducers = (reducers) => {
-
   return (state = {}, action) => {
-
     return Object.keys(reducers).reduce((nextState, key) => {
-
       nextState[key] = reducers[key](state[key], action);
 
-
-
-
       return nextState;
-
     }, {});
-
   };
-
 };

@@ -1,17 +1,19 @@
 <div class="profile-info">
-  <div class="profile-photo">
-    <img src="{{ avatar }}" alt="{{ username }}">
+  <div class="profile-info__photo">
+    <img src="{{avatar}}" alt="{{username}}" />
   </div>
-  <div class="profile-details">
-    <div class="profile-top">
-      <h1>{{ username }}</h1>
-      <a class="profile-page-buttons" id="edit-button" href="/edit"> Редактировать </a>
+  <div class="profile-info__details">
+    <div class="profile-info__top">
+      <h1>{{username}}</h1>
+      <a class="profile-info__buttons" id="edit-button" href="/edit">
+        Редактировать
+      </a>
     </div>
-    <div class="profile-description">
+    <div class="profile-info__description">
       <h1>О пользователе</h1>
       <ul>
-        <li>Почта: {{ login }}</li>
-        <li>Дата регистрации: {{ registeredAt }}</li>
+        <li>Почта: {{login}}</li>
+        <li>Дата регистрации: {{registeredAt}}</li>
       </ul>
     </div>
   </div>
@@ -21,27 +23,35 @@
   <div class="films-section__upper-block">
     <div class="films-section__title">Популярно сейчас</div>
     <div class="films-section__slider-buttons">
-      <button class="films-section__carousel-button prev" data-carousel-button="prev"><img src="/icons/arrow.svg"
-                                                                            alt="">
+      <button
+        class="films-section__carousel-button prev"
+        data-carousel-button="prev"
+      ><img src="/icons/arrow.svg" alt="" />
       </button>
       <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="">
-        <img src="/icons/shape-none.svg" alt="">
-        <img src="/icons/shape-none.svg" alt="">
-        <img src="/icons/shape-none.svg" alt="">
+        <img src="/icons/shape.svg" alt="" />
+        <img src="/icons/shape-none.svg" alt="" />
+        <img src="/icons/shape-none.svg" alt="" />
+        <img src="/icons/shape-none.svg" alt="" />
       </div>
-      <button class="films-section__carousel-button next" data-carousel-button="next"><img src="/icons/arrow.svg"
-                                                                            alt="">
+      <button
+        class="films-section__carousel-button next"
+        data-carousel-button="next"
+      ><img src="/icons/arrow.svg" alt="" />
       </button>
     </div>
   </div>
   <div class="films-section__films-container">
     {{#each filmsData}}
-      <div class="films-section__film-card" data-film-id="{{this.uuid}}" data-film-title="{{this.title}}">
-        <img class="films-section__film-image" src="{{this.preview_data}}">
+      <div
+        class="films-section__film-card"
+        data-film-id="{{this.uuid}}"
+        data-film-title="{{this.title}}"
+      >
+        <img class="films-section__film-image" src="{{this.preview_data}}" />
         <div class="films-section__film-content">
           <div class="films-section__film-time">
-            <img class="films-section__time-icon" src="/icons/time.svg">
+            <img class="films-section__time-icon" src="/icons/time.svg" />
             {{this.duration}}
           </div>
           <div class="films-section__film-rating">
@@ -50,7 +60,9 @@
                 <div class="films-section__star"></div>
               </div>
             {{/stars}}
-            <span class="films-section__rating-count">{{this.scores_count}}</span>
+            <span
+              class="films-section__rating-count"
+            >{{this.scores_count}}</span>
           </div>
         </div>
       </div>

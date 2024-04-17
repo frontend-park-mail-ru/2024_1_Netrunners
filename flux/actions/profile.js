@@ -1,39 +1,50 @@
-export const CHANGE_USERNAME_ACTION = 'chUsername';
-export const CHANGE_PASSWORD_ACTION = 'chPassword';
-export const CHANGE_AVATAR_ACTION = 'chAvatar';
+export const CHANGE_USERNAME_ACTION = "chUsername";
+export const CHANGE_PASSWORD_ACTION = "chPassword";
+export const CHANGE_AVATAR_ACTION = "chAvatar";
 
-export const PROFILE_REQUEST = 'PROFILE_REQUEST_REQUEST';
+export const PROFILE_REQUEST = "PROFILE_REQUEST_REQUEST";
 /**
  * Экшен типа "USER_INFO_SUCCESS".
  * @constant
  * @type {string}
  */
-export const PROFILE_SUCCESS = 'PROFILE_SUCCESS';
+export const PROFILE_SUCCESS = "PROFILE_SUCCESS";
 /**
  * Экшен типа "USER_INFO_ERROR".
  * @constant
  * @type {string}
  */
-export const PROFILE_ERROR = 'PROFILE_ERROR';
+export const PROFILE_ERROR = "PROFILE_ERROR";
 
-export const PROFILE_REDUCER = 'PROFILE_REDUCER';
+export const PROFILE_REDUCER = "PROFILE_REDUCER";
 /**
  * Генерирует экшен для запроса информации о пользователе.
  * @function
- * @returns {Object} Экшен с типом "USER_INFO_REQUEST".
+ * @return {Object} Экшен с типом "USER_INFO_REQUEST".
  */
-export const profileRequest = () => ({ type: PROFILE_REQUEST, reducerName: PROFILE_REDUCER });
+export const profileRequest = () => ({
+  type: PROFILE_REQUEST,
+  reducerName: PROFILE_REDUCER,
+});
 /**
  * Генерирует экшен для успешного получения информации о пользователе.
  * @function
  * @param {Object} info - Информация о пользователе.
- * @returns {Object} Экшен с типом "USER_INFO_SUCCESS".
+ * @return {Object} Экшен с типом "USER_INFO_SUCCESS".
  */
-export const profileSuccess = (info) => ({ type: PROFILE_SUCCESS, payload: info, reducerName: PROFILE_REDUCER });
+export const profileSuccess = (info) => ({
+  type: PROFILE_SUCCESS,
+  payload: info,
+  reducerName: PROFILE_REDUCER,
+});
 /**
  * Генерирует экшен для обработки ошибки при получении информации о пользователе.
  * @function
  * @param {Object} error - Объект ошибки.
- * @returns {Object} Экшен с типом "USER_INFO_ERROR".
+ * @return {Object} Экшен с типом "USER_INFO_ERROR".
  */
-export const profileError = (error) => ({ type: PROFILE_ERROR, payload: { isError: true, error: error }, reducerName: PROFILE_REDUCER });
+export const profileError = (error) => ({
+  type: PROFILE_ERROR,
+  payload: { isError: true, error: error },
+  reducerName: PROFILE_REDUCER,
+});

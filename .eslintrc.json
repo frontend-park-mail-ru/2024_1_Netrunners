@@ -12,10 +12,13 @@
     "sourceType": "module"
   },
   "ignorePatterns": [
-    "*.precompiled.js"
+    "*.precompiled.js",
+    "/dist/*"
   ],
   "rules": {
     "linebreak-style": "off",
+    "new-cap": "off",
+    "prefer-promise-reject-errors": "off",
     "max-len": 0
   }
 }

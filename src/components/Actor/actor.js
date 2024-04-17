@@ -1,10 +1,10 @@
-import template from './actor.hbs';
-import Router from '../../utils/router.js';
-import store from '../../index.js';
-import { ACTOR_REDUCER } from '../../../flux/actions/actor.js';
-import { getActorData } from '../../../use-cases/actor.js';
-import { FilmsAllRequest } from '../../../use-cases/filmsAll.js';
-import { FILMS_REDUCER } from '../../../flux/actions/filmsAll.js';
+import template from "./actor.hbs";
+import Router from "../../utils/router.js";
+import store from "../../index.js";
+import { ACTOR_REDUCER } from "../../../flux/actions/actor.js";
+import { getActorData } from "../../../use-cases/actor.js";
+import { FilmsAllRequest } from "../../../use-cases/filmsAll.js";
+import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -17,8 +17,8 @@ import { FILMS_REDUCER } from '../../../flux/actions/filmsAll.js';
 export async function renderActorPage(actorId) {
   store.clearSubscribes();
 
-  const actorSection = document.createElement('section');
-  actorSection.classList.add('actor-section');
+  const actorSection = document.createElement("section");
+  actorSection.classList.add("actor-section");
 
   let actorData;
   let filmsData;
@@ -34,11 +34,11 @@ export async function renderActorPage(actorId) {
 
   const actorPageData = { ...actorData.actor, filmsData };
 
-  document.querySelector('main').innerHTML = template(actorPageData);
+  document.querySelector("main").innerHTML = template(actorPageData);
 
-  const filmCards = document.querySelectorAll('[data-film-id]');
+  const filmCards = document.querySelectorAll("[data-film-id]");
   filmCards.forEach((filmCard, index) => {
-    filmCard.addEventListener('click', () => {
+    filmCard.addEventListener("click", () => {
       Router.goToFilmPage(filmCard.dataset.filmId, filmsData[index].title);
     });
   });

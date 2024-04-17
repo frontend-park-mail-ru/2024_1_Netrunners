@@ -4,8 +4,8 @@ import { renderLogin } from "./components/Login/login.js";
 import { renderSignup } from "./components/Signup/signup.js";
 import { renderProfile } from "./components/Profile/profile.js";
 import { renderLogout } from "./components/Logout/logout.js";
-import {rootReducer} from "../flux/reducers/rootReducer.js";
-import {createStore} from "../flux/redux-lite.js";
+import { rootReducer } from "../flux/reducers/rootReducer.js";
+import { createStore } from "../flux/redux-lite.js";
 import { Router } from "./utils/router.js";
 import Rout from "./utils/router.js";
 import "../src/index.scss";
@@ -26,7 +26,7 @@ if ("serviceWorker" in navigator) {
 }
 
 const rootElement = document.getElementById("root");
-const menuElement = document.createElement("nav");
+export const menuElement = document.createElement("nav");
 const pageElement = document.createElement("main");
 
 rootElement.appendChild(menuElement);
@@ -92,7 +92,7 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === "a") {
       e.preventDefault();
-      changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
+      changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
     }
   });
 }
@@ -115,6 +115,11 @@ export function changeActiveButton(link) {
   menu.state.activeMenuLink = menuLinkElement;
 }
 
+/**
+ * Получает значение куки по его имени.
+ * @param {string} name Имя куки, значение которой необходимо получить.
+ * @return {string | undefined} Значение куки или undefined, если куки с указанным именем не найдено.
+ */
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
@@ -162,6 +167,9 @@ const handleLocation = async () => {
 
 handleLocation();
 
+/**
+ * Отображает модальное окно об отсутствии подключения к интернету.
+ */
 function showOfflineModal() {
   const modalHtml = `
     <div class="offline-background">
@@ -174,6 +182,9 @@ function showOfflineModal() {
   document.body.insertAdjacentHTML("beforeend", modalHtml);
 }
 
+/**
+ * Скрывает модальное окно об отсутствии подключения к интернету.
+ */
 function hideOfflineModal() {
   const offlineModal = document.getElementsByClassName("offline-background")[0];
   if (offlineModal) {

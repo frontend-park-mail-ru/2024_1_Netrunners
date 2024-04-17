@@ -1,9 +1,9 @@
-import { combineReducers } from '../redux-lite.js';
-import { profileReducer } from './profile.js';
-import { filmsReducer } from './filmsAll.js';
-import { filmReducer } from './film.js';
-import { loginReducer } from './auth.js';
-import { actorReducer } from './actor.js';
+import { combineReducers } from "../redux-lite.js";
+import { profileReducer } from "./profile.js";
+import { filmsReducer } from "./filmsAll.js";
+import { filmReducer } from "./film.js";
+import { loginReducer } from "./auth.js";
+import { actorReducer } from "./actor.js";
 
 /**
  * Объединенный редюсер для управления состоянием всего приложения.
@@ -15,5 +15,5 @@ export const rootReducer = combineReducers({
   films: filmsReducer,
   film: filmReducer,
   login: loginReducer,
-  actor: actorReducer
+  actor: actorReducer,
 });
