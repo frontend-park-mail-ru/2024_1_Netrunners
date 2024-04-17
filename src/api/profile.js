@@ -26,6 +26,12 @@ export async function getProfileData(uuid) {
   }
 }
 
+/**
+ * Отправляет запрос на изменение профиля пользователя.
+ * @param {string} uuid - Идентификатор пользователя.
+ * @param {object} editData - Данные для изменения профиля.
+ * @return {Promise<boolean>} - Возвращает true в случае успешного изменения профиля, иначе false.
+ */
 export async function editProfile(uuid, editData) {
   try {
     const response = await fetchRequest(
@@ -41,6 +47,11 @@ export async function editProfile(uuid, editData) {
   }
 }
 
+/**
+ * Получает превью аватара пользователя по его идентификатору.
+ * @param {string} uuid - Идентификатор пользователя.
+ * @return {Promise<string>} - Возвращает URL изображения аватара пользователя.
+ */
 export async function getProfilePreview(uuid) {
   try {
     const response = await fetchRequest(`${IP}/profile/${uuid}/preview`, "GET");
