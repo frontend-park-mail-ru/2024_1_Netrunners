@@ -1,0 +1,34 @@
+name: ESLint_Prettier
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '24 11 * * 2'
+
+jobs:
+  eslint:
+    name: Run eslint scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ESLint
+        run: |
+          npm install eslint
+          npm i eslint-config-prettier
+
+      - name: Run ESLint
+        run: npx eslint .
+          --config .eslintrc.js
+          --ext .js,.jsx,.ts,.tsx
+          --format @microsoft/eslint-formatter-sarif
+          --output-file eslint-results.sarif
+        continue-on-error: true
+
+      - name: Run Prettier
+        run: npx prettier . --write
+        continue-on-error: true
