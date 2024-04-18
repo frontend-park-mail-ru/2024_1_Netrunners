@@ -52,7 +52,6 @@ export async function renderProfile(profileId) {
 export async function renderEditForm(profileId) {
   document.querySelector(".profile-info").innerHTML = editFormTemplate();
 
-  const editForm = document.querySelector("#myForm");
   const usernameButton = document.querySelector("#sendLoginBtn");
   const avatarButton = document.querySelector("#sendImageBtn");
   const passwordButton = document.querySelector("#sendPasswordBtn");
