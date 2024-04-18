@@ -40,7 +40,7 @@ export async function editProfile(uuid, editData) {
         `${IP}/profile/${uuid}/edit`,
         "POST",
         editData,
-        null,
+        {},
         "multipart/form-data",
       );
     } else {

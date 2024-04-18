@@ -10,7 +10,7 @@ on:
 
 jobs:
   eslint:
-    name: Run eslint scanning
+    name: Run eslint and prettier scanning
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

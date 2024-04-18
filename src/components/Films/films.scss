@@ -2,6 +2,7 @@
   border: 2px solid var(--border-color);
   padding: 16px 32px;
   border-radius: 16px;
+  margin-bottom: 86px;
   margin-top: 32px;
   width: 1200px;
 
@@ -22,9 +23,9 @@
   }
 
   &__film-card {
-    max-width: 284px;
+    max-width: 290px;
     width: 100%;
-    height: 400px;
+    height: 500px;
     margin: 16px 0 16px 0;
     background-size: cover;
     border-radius: 15px;
@@ -43,11 +44,10 @@
   }
 
   &__film-content {
-    display: flex;
-    gap: 64px;
+    display: grid;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-top: 16px;
   }
 
   &__film-image {
@@ -172,9 +172,26 @@
     flex-direction: row;
     justify-content: center;
   }
+
+  &__content-top {
+    display: flex;
+    padding-bottom: 12px;
+    padding-top: 12px
+  }
+
+  &__content-bottom {
+    display: flex;
+    gap: 58px;
+  }
+
+  &__film-title {
+    padding-left: 4px;
+    color: var(--white);
+  }
 }
 
 .film-title {
+  font: var(--main-font);
   color: var(--white);
   margin-right: 16px;
   display: flex;

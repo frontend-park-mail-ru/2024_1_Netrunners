@@ -83,6 +83,7 @@ export async function renderEditForm(profileId) {
 
   avatarButton.addEventListener("click", async (e) => {
     e.preventDefault();
+
     const avatar = avatarInput.value;
 
     if (!avatar) {
@@ -93,7 +94,7 @@ export async function renderEditForm(profileId) {
     if (
       await profileApi.editProfile(profileId, {
         action: profileApi.CHANGE_AVATAR_ACTION,
-        newData: new FormData(editForm),
+        newData: avatar,
       })
     ) {
       renderProfile(profileId);
