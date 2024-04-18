@@ -16,16 +16,29 @@
     width: 100%;
   }
 
-  &__films-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  &__films-container &__carousel {
+    padding-left: 0;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  &__carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__carousel &__carousel-card {
+    scroll-snap-align: start;
+    list-style: none;
   }
 
   &__film-card {
-    max-width: 290px;
-    width: 100%;
-    height: 500px;
+    width: 290px;
+    height: 450px;
     margin: 16px 0 16px 0;
     background-size: cover;
     border-radius: 15px;
@@ -39,7 +52,7 @@
     align-items: center;
 
     &:hover {
-      transform: scale(1.05);
+      //transform: scale(1.02);
     }
   }
 
@@ -52,7 +65,7 @@
 
   &__film-image {
     width: 87%;
-    height: 80%;
+    height: 75%;
     background-size: cover;
     background-position: center;
     border-radius: 15px;
@@ -141,19 +154,17 @@
     border: none;
     color: white;
     cursor: pointer;
-    border-radius: 8px;
     padding: 0;
-    background: var(--neutral-dark);
-    transition: transform 0.3s ease;
+    background: none;
 
     & > img {
-      border-radius: 8px;
-      background-color: var(--neutral-light);
+      border-radius: 50%;
+      background: var(--neutral-light);
       padding: 12px;
     }
 
-    &:hover {
-      background-color: var(--neutral-light);
+    & > img:hover {
+      background-color: var(--hover-color);
     }
 
     &.prev {
@@ -163,6 +174,29 @@
     &.next {
       margin-right: 16px;
     }
+  }
+
+  &__films-container &__carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__carousel-button > img {
+    width: 28px;
+    box-shadow: 3px 0 8px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  &__films-container &__carousel-button:first-child {
+    left: -35px;
+  }
+
+  &__films-container &__carousel-button:last-child {
+    right: -35px;
+  }
+
+  &__films-container {
+    position: relative;
   }
 
   &__carousel-shapes {

@@ -45,24 +45,6 @@
   <div class="films-section__text">Фильмы</div>
   <div class="films-section__first-upper-block">
     <div class="films-section__title">Жанры</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="genres-container">
     {{#each filmsGenres}}
@@ -83,168 +65,159 @@
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Популярно сейчас</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="films-section__films-container">
-    {{#each filmData}}
-      <div
-        class="films-section__film-card"
-        data-film-id="{{this.uuid}}"
-        data-film-title="{{this.title}}"
-      >
-        <img class="films-section__film-image" src="{{this.preview_data}}" />
-        <div class="films-section__film-content">
-          <div class="films-section__content-top">
-            <div class="films-section__film-title">
-              {{this.title}}
-            </div>
-          </div>
-          <div class="films-section__content-bottom">
-            <div class="films-section__film-time">
-              <img class="films-section__time-icon" src="/icons/time.svg" />
-              {{this.duration}}
-            </div>
-            <div class="films-section__film-rating">
-              {{#stars this.average_score}}
-                <div class="films-section__star-container">
-                  <div class="films-section__star"></div>
+    <button class="films-section__carousel-button prev" id="left"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
+    <ul class="films-section__carousel">
+      {{#each filmData}}
+        <li class="films-section__carousel-card">
+          <div
+            class="films-section__film-card"
+            data-film-id="{{this.uuid}}"
+            data-film-title="{{this.title}}"
+          >
+            <img
+              class="films-section__film-image"
+              src="{{this.preview_data}}"
+            />
+            <div class="films-section__film-content">
+              <div class="films-section__content-top">
+                <div class="films-section__film-title">
+                  {{this.title}}
                 </div>
-              {{/stars}}
-              <span
-                class="films-section__rating-count"
-              >{{this.scores_count}}</span>
+              </div>
+              <div class="films-section__content-bottom">
+                <div class="films-section__film-time">
+                  <img class="films-section__time-icon" src="/icons/time.svg" />
+                  {{this.duration}}
+                </div>
+                <div class="films-section__film-rating">
+                  {{#stars this.average_score}}
+                    <div class="films-section__star-container">
+                      <div class="films-section__star"></div>
+                    </div>
+                  {{/stars}}
+                  <span
+                    class="films-section__rating-count"
+                  >{{this.scores_count}}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Новые релизы</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="films-section__films-container">
-    {{#each filmData}}
-      <div
-        class="films-section__film-card"
-        data-film-id="{{this.uuid}}"
-        data-film-title="{{this.title}}"
-      >
-        <img class="films-section__film-image" src="{{this.preview_data}}" />
-        <div class="films-section__film-content">
-          <div class="films-section__content-top">
-            <div class="films-section__film-title">
-              {{this.title}}
-            </div>
-          </div>
-          <div class="films-section__content-bottom">
-            <div class="films-section__film-time">
-              <img class="films-section__time-icon" src="/icons/time.svg" />
-              {{this.duration}}
-            </div>
-            <div class="films-section__film-rating">
-              {{#stars this.average_score}}
-                <div class="films-section__star-container">
-                  <div class="films-section__star"></div>
+    <button class="films-section__carousel-button prev" id="left"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
+    <ul class="films-section__carousel">
+      {{#each filmData}}
+        <li class="films-section__carousel-card">
+          <div
+            class="films-section__film-card"
+            data-film-id="{{this.uuid}}"
+            data-film-title="{{this.title}}"
+          >
+            <img
+              class="films-section__film-image"
+              src="{{this.preview_data}}"
+            />
+            <div class="films-section__film-content">
+              <div class="films-section__content-top">
+                <div class="films-section__film-title">
+                  {{this.title}}
                 </div>
-              {{/stars}}
-              <span
-                class="films-section__rating-count"
-              >{{this.scores_count}}</span>
+              </div>
+              <div class="films-section__content-bottom">
+                <div class="films-section__film-time">
+                  <img class="films-section__time-icon" src="/icons/time.svg" />
+                  {{this.duration}}
+                </div>
+                <div class="films-section__film-rating">
+                  {{#stars this.average_score}}
+                    <div class="films-section__star-container">
+                      <div class="films-section__star"></div>
+                    </div>
+                  {{/stars}}
+                  <span
+                    class="films-section__rating-count"
+                  >{{this.scores_count}}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Советуем посмотреть</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="films-section__films-container">
-    {{#each filmData}}
-      <div
-        class="films-section__film-card"
-        data-film-id="{{this.uuid}}"
-        data-film-title="{{this.title}}"
-      >
-        <img class="films-section__film-image" src="{{this.preview_data}}" />
-        <div class="films-section__film-content">
-          <div class="films-section__content-top">
-            <div class="films-section__film-title">
-              {{this.title}}
-            </div>
-          </div>
-          <div class="films-section__content-bottom">
-            <div class="films-section__film-time">
-              <img class="films-section__time-icon" src="/icons/time.svg" />
-              {{this.duration}}
-            </div>
-            <div class="films-section__film-rating">
-              {{#stars this.average_score}}
-                <div class="films-section__star-container">
-                  <div class="films-section__star"></div>
+    <button class="films-section__carousel-button prev" id="left"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
+    <ul class="films-section__carousel">
+      {{#each filmData}}
+        <li class="films-section__carousel-card">
+          <div
+            class="films-section__film-card"
+            data-film-id="{{this.uuid}}"
+            data-film-title="{{this.title}}"
+          >
+            <img
+              class="films-section__film-image"
+              src="{{this.preview_data}}"
+            />
+            <div class="films-section__film-content">
+              <div class="films-section__content-top">
+                <div class="films-section__film-title">
+                  {{this.title}}
                 </div>
-              {{/stars}}
-              <span
-                class="films-section__rating-count"
-              >{{this.scores_count}}</span>
+              </div>
+              <div class="films-section__content-bottom">
+                <div class="films-section__film-time">
+                  <img class="films-section__time-icon" src="/icons/time.svg" />
+                  {{this.duration}}
+                </div>
+                <div class="films-section__film-rating">
+                  {{#stars this.average_score}}
+                    <div class="films-section__star-container">
+                      <div class="films-section__star"></div>
+                    </div>
+                  {{/stars}}
+                  <span
+                    class="films-section__rating-count"
+                  >{{this.scores_count}}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
   </div>
 </div>
 
@@ -252,24 +225,6 @@
   <div class="films-section__text">Сериалы</div>
   <div class="films-section__first-upper-block">
     <div class="films-section__title">Жанры</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="genres-container">
     {{#each filmsGenres}}
@@ -290,167 +245,158 @@
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Популярно сейчас</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="films-section__films-container">
-    {{#each filmData}}
-      <div
-        class="films-section__film-card"
-        data-film-id="{{this.uuid}}"
-        data-film-title="{{this.title}}"
-      >
-        <img class="films-section__film-image" src="{{this.preview_data}}" />
-        <div class="films-section__film-content">
-          <div class="films-section__content-top">
-            <div class="films-section__film-title">
-              {{this.title}}
-            </div>
-          </div>
-          <div class="films-section__content-bottom">
-            <div class="films-section__film-time">
-              <img class="films-section__time-icon" src="/icons/time.svg" />
-              {{this.duration}}
-            </div>
-            <div class="films-section__film-rating">
-              {{#stars this.average_score}}
-                <div class="films-section__star-container">
-                  <div class="films-section__star"></div>
+    <button class="films-section__carousel-button prev" id="left"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
+    <ul class="films-section__carousel">
+      {{#each filmData}}
+        <li class="films-section__carousel-card">
+          <div
+            class="films-section__film-card"
+            data-film-id="{{this.uuid}}"
+            data-film-title="{{this.title}}"
+          >
+            <img
+              class="films-section__film-image"
+              src="{{this.preview_data}}"
+            />
+            <div class="films-section__film-content">
+              <div class="films-section__content-top">
+                <div class="films-section__film-title">
+                  {{this.title}}
                 </div>
-              {{/stars}}
-              <span
-                class="films-section__rating-count"
-              >{{this.scores_count}}</span>
+              </div>
+              <div class="films-section__content-bottom">
+                <div class="films-section__film-time">
+                  <img class="films-section__time-icon" src="/icons/time.svg" />
+                  {{this.duration}}
+                </div>
+                <div class="films-section__film-rating">
+                  {{#stars this.average_score}}
+                    <div class="films-section__star-container">
+                      <div class="films-section__star"></div>
+                    </div>
+                  {{/stars}}
+                  <span
+                    class="films-section__rating-count"
+                  >{{this.scores_count}}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Новые релизы</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="films-section__films-container">
-    {{#each filmData}}
-      <div
-        class="films-section__film-card"
-        data-film-id="{{this.uuid}}"
-        data-film-title="{{this.title}}"
-      >
-        <img class="films-section__film-image" src="{{this.preview_data}}" />
-        <div class="films-section__film-content">
-          <div class="films-section__content-top">
-            <div class="films-section__film-title">
-              {{this.title}}
-            </div>
-          </div>
-          <div class="films-section__content-bottom">
-            <div class="films-section__film-time">
-              <img class="films-section__time-icon" src="/icons/time.svg" />
-              {{this.duration}}
-            </div>
-            <div class="films-section__film-rating">
-              {{#stars this.average_score}}
-                <div class="films-section__star-container">
-                  <div class="films-section__star"></div>
+    <button class="films-section__carousel-button prev" id="left"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
+    <ul class="films-section__carousel">
+      {{#each filmData}}
+        <li class="films-section__carousel-card">
+          <div
+            class="films-section__film-card"
+            data-film-id="{{this.uuid}}"
+            data-film-title="{{this.title}}"
+          >
+            <img
+              class="films-section__film-image"
+              src="{{this.preview_data}}"
+            />
+            <div class="films-section__film-content">
+              <div class="films-section__content-top">
+                <div class="films-section__film-title">
+                  {{this.title}}
                 </div>
-              {{/stars}}
-              <span
-                class="films-section__rating-count"
-              >{{this.scores_count}}</span>
+              </div>
+              <div class="films-section__content-bottom">
+                <div class="films-section__film-time">
+                  <img class="films-section__time-icon" src="/icons/time.svg" />
+                  {{this.duration}}
+                </div>
+                <div class="films-section__film-rating">
+                  {{#stars this.average_score}}
+                    <div class="films-section__star-container">
+                      <div class="films-section__star"></div>
+                    </div>
+                  {{/stars}}
+                  <span
+                    class="films-section__rating-count"
+                  >{{this.scores_count}}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Советуем посмотреть</div>
-    <div class="films-section__slider-buttons">
-      <button
-        class="films-section__carousel-button prev"
-        data-carousel-button="prev"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-      <div class="films-section__carousel-shapes">
-        <img src="/icons/shape.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-        <img src="/icons/shape-none.svg" alt="" />
-      </div>
-      <button
-        class="films-section__carousel-button next"
-        data-carousel-button="next"
-      ><img src="/icons/arrow.svg" alt="" />
-      </button>
-    </div>
   </div>
   <div class="films-section__films-container">
-    {{#each filmData}}
-      <div
-        class="films-section__film-card"
-        data-film-id="{{this.uuid}}"
-        data-film-title="{{this.title}}"
-      >
-        <img class="films-section__film-image" src="{{this.preview_data}}" />
-        <div class="films-section__film-content">
-          <div class="films-section__content-top">
-            <div class="films-section__film-title">
-              {{this.title}}
-            </div>
-          </div>
-          <div class="films-section__content-bottom">
-            <div class="films-section__film-time">
-              <img class="films-section__time-icon" src="/icons/time.svg" />
-              {{this.duration}}
-            </div>
-            <div class="films-section__film-rating">
-              {{#stars this.average_score}}
-                <div class="films-section__star-container">
-                  <div class="films-section__star"></div>
+    <button class="films-section__carousel-button prev" id="left"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
+    <ul class="films-section__carousel">
+      {{#each filmData}}
+        <li class="films-section__carousel-card">
+          <div
+            class="films-section__film-card"
+            data-film-id="{{this.uuid}}"
+            data-film-title="{{this.title}}"
+          >
+            <img
+              class="films-section__film-image"
+              src="{{this.preview_data}}"
+            />
+            <div class="films-section__film-content">
+              <div class="films-section__content-top">
+                <div class="films-section__film-title">
+                  {{this.title}}
                 </div>
-              {{/stars}}
-              <span
-                class="films-section__rating-count"
-              >{{this.scores_count}}</span>
+              </div>
+              <div class="films-section__content-bottom">
+                <div class="films-section__film-time">
+                  <img class="films-section__time-icon" src="/icons/time.svg" />
+                  {{this.duration}}
+                </div>
+                <div class="films-section__film-rating">
+                  {{#stars this.average_score}}
+                    <div class="films-section__star-container">
+                      <div class="films-section__star"></div>
+                    </div>
+                  {{/stars}}
+                  <span
+                    class="films-section__rating-count"
+                  >{{this.scores_count}}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {{/each}}
+        </li>
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right"><img
+        src="/icons/arrow.svg"
+        alt=""
+      /></button>
   </div>
 </div>

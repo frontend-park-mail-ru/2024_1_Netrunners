@@ -135,7 +135,7 @@ export class Router {
    */
   goToPlayerPage(uuid, title, link) {
     const state = {};
-    state.path = `/film/${uuid}`;
+    state.path = `/player/${uuid}`;
     state.title = title;
     document.title = state.title;
 
