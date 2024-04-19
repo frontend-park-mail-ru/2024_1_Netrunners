@@ -41,7 +41,7 @@ export async function editProfile(uuid, editData) {
         "POST",
         editData,
         {},
-        "multipart/form-data",
+        "multipart/form-data; boundary=MfnBoundry",
       );
     } else {
       response = await fetchRequest(

@@ -8,6 +8,7 @@ import store from "../../index.js";
 import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
 import { getProfileData } from "../../../use-cases/profile.js";
 import { PROFILE_REDUCER } from "../../../flux/actions/profile.js";
+import { addSliderHandler } from "../../utils/slider";
 
 /**
  * Отображает профиль пользователя на странице.
@@ -44,6 +45,8 @@ export async function renderProfile(profileId) {
       Router.goToFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
     });
   });
+
+  addSliderHandler();
 }
 /**
  * Отображает форму редактирования профиля
@@ -83,19 +86,18 @@ export async function renderEditForm(profileId) {
   avatarButton.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const avatar = avatarInput.value;
+    const avatar = avatarInput.files[0];
+
+    const data = new FormData();
+    data.append("action", profileApi.CHANGE_AVATAR_ACTION);
+    data.append("avatar", avatar);
 
     if (!avatar) {
       document.getElementById("avatar-errors").innerText = "Файл не выбран";
       return;
     }
 
-    if (
-      await profileApi.editProfile(profileId, {
-        action: profileApi.CHANGE_AVATAR_ACTION,
-        newData: avatar,
-      })
-    ) {
+    if (await profileApi.editProfile(profileId, data)) {
       renderProfile(profileId);
     }
   });
@@ -128,4 +130,6 @@ export async function renderEditForm(profileId) {
     e.preventDefault();
     await renderProfile(profileId);
   });
+
+  addSliderHandler();
 }

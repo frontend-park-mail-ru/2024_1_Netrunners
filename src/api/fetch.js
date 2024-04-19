@@ -25,8 +25,9 @@ export const fetchRequest = async (
       },
       credentials: "include",
     };
-
-    if (body !== null) {
+    if (contentType === "multipart/form-data; boundary=MfnBoundry") {
+      options.body = body;
+    } else if (body !== null) {
       options.body = JSON.stringify(body);
     }
 
