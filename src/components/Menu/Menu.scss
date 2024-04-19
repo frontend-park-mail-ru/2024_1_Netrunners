@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
 
   &__menu {
     display: flex;
@@ -10,7 +12,6 @@
     font-size: var(--main-text);
     align-self: center;
     padding: 8px;
-    margin-top: 32px;
     background-color: var(--neutral-dark);
     border-radius: 16px;
   }
@@ -29,8 +30,6 @@
   }
 
   &__logo {
-    margin-top: 32px;
-
     & > img {
       margin-right: 32px;
       width: 360px;
@@ -38,9 +37,10 @@
   }
 
   &__nav-icon {
+    align-self: center;
+
     & > img {
       margin-left: 32px;
-      margin-top: 32px;
       width: 32px;
     }
   }
@@ -48,7 +48,6 @@
   &__icons {
     display: flex;
     margin-left: 64px;
-    margin-top: 16px;
   }
 
   &__menu-right {
@@ -84,7 +83,6 @@
   align-self: center;
   padding: 8px;
   margin-left: 16px;
-  margin-top: 16px;
   background-color: var(--neutral-dark);
   border-radius: 16px;
 }
@@ -96,7 +94,6 @@
   align-self: center;
   padding: 8px;
   margin-left: 16px;
-  margin-top: 16px;
 }
 
 .avatar {

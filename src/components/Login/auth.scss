@@ -1,11 +1,11 @@
-input {
+input{
   height: 60px;
   font-size: var(--header-300);
   display: block;
   padding: 0 16px;
   border-width: 0;
   line-height: 40px;
-  border-radius: 20px;
+  border-radius: 16px;
   color: var(--white);
   background: var(--grey-main);
   font-family: var(--input-font);
@@ -15,31 +15,68 @@ input {
   }
 
   & + input {
-    margin-top: 16px;
+    margin-top: 32px;
   }
 }
 
 .form-section {
-  margin-top: 32px;
+  margin: 64px auto;
   border: 2px solid var(--border-color);
   padding: 32px;
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  color: var(--white);
+  background: var(--neutral-main);
+
 
   &__submit-button {
-    margin: 32px auto 16px;
-    background: none;
-    outline: var(--neon-main) solid medium;
+    margin: 64px auto 16px;
+    background: var(--neon-main);
+    width: -webkit-fill-available;
+
 
     &:hover {
-      color: var(--neon-secondary);
-      background-color: var(--hover-color);
+      background-color: var(--neon-secondary);
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
   &__error-login {
-    color: red;
+    color: var(--neon-main);
     font-size: var(--main-text);
-    margin-top: 8px;
-    padding: 8px;
+    padding: 8px 12px 16px;
+    overflow: hidden;
+    height: var(--main-text);
   }
+
+  &__title {
+    font-size: xx-large;
+    color: var(--white);
+
+  }
+
+  &__logo {
+    margin: 16px auto;
+
+    & > img {
+      width: 418px;
+    }
+  }
+
+  &__form-background {
+    background: var(--neutral-dark);
+  }
+}
+
+.auth-background {
+  background: url("img/background/background.png") no-repeat;
+  height: -webkit-fill-available;
+  width: 100vw;
+  position: absolute;
+  left: 0;
 }

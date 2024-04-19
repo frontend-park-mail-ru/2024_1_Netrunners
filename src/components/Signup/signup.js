@@ -20,7 +20,7 @@ export async function renderSignup() {
   const usernameInput = document.querySelector('input[name="username"]');
   const passConfInput = document.querySelector('input[name="passConf"]');
   const passwordInput = document.querySelector('input[name="password"]');
-  const errorField = document.getElementById("signup-errors");
+  const errorFields = document.getElementsByClassName("form-section__error-signup");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -30,24 +30,32 @@ export async function renderSignup() {
     const username = usernameInput.value;
     const user = { password, login, username };
 
-    if (!validators.username(username)) {
-      errorField.innerText = "Имя пользователя слишком короткое";
-      return;
+    if (!validators.login(login)) {
+      errorFields[0].innerText = "Поле почта введено некорректно";
+      return
+    } else {
+      errorFields[0].innerText = "";
     }
 
-    if (!validators.login(login)) {
-      errorField.innerText = "Поле почта введено некорректно";
-      return;
+    if (!validators.username(username)) {
+      errorFields[1].innerText = "Имя пользователя слишком короткое";
+      return
+    } else {
+      errorFields[1].innerText = "";
     }
 
     if (!validators.password(password)) {
-      errorField.innerText = "Пароль слишком короткий";
-      return;
+      errorFields[2].innerText = "Пароль слишком короткий";
+      return
+    } else {
+      errorFields[2].innerText = "";
     }
 
     if (!validators.passwordConf(password, passConf)) {
-      errorField.innerText = "Пароли не совпадают";
-      return;
+      errorFields[3].innerText = "Пароли не совпадают";
+      return
+    } else {
+      errorFields[3].innerText = "";
     }
 
     const isAuthorized = await authApi.signup(user);
