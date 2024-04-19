@@ -7,6 +7,7 @@ import { renderProfile } from "../components/Profile/profile.js";
 import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
 import { changeActiveButton, getCookie } from "../index.js";
+import * as authApi from "../api/auth";
 
 /**
  * Класс для управления навигацией и отображением различных страниц.
@@ -153,6 +154,7 @@ export class Router {
    * @return {Promise<void>}
    */
   async go(path, title, data = null, needPush = true) {
+    const isAuthorized = await authApi.check();
     const state = {};
     state.path = path;
     state.title = title;
@@ -173,9 +175,13 @@ export class Router {
         const uuid = path.substring("/player/".length, path.length);
         await renderPlayer(uuid, title, data);
       } else if (path.includes("/profile")) {
-        const uuid = getCookie("user_uuid");
-        changeActiveButton("/profile");
-        await renderProfile(uuid);
+        if (!isAuthorized) {
+          this.goToHomePage();
+        } else {
+          const uuid = getCookie("user_uuid");
+          changeActiveButton("/profile");
+          await renderProfile(uuid);
+        }
       } else {
         await this.go("/", "Netrunnerflix", true);
       }

@@ -19,6 +19,7 @@ export async function getProfileData(uuid) {
     if (!data || typeof data !== "object") {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
+    data.user.avatar = `data:image/png;base64,${data.user.avatar}`;
     data.user = fixUserData(data.user);
     store.dispatch(profileSuccess(data));
   } catch (error) {

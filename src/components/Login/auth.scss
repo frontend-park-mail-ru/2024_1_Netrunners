@@ -1,4 +1,4 @@
-input{
+input {
   height: 60px;
   font-size: var(--header-300);
   display: block;
@@ -30,12 +30,10 @@ input{
   color: var(--white);
   background: var(--neutral-main);
 
-
   &__submit-button {
     margin: 64px auto 16px;
     background: var(--neon-main);
     width: -webkit-fill-available;
-
 
     &:hover {
       background-color: var(--neon-secondary);
@@ -57,7 +55,6 @@ input{
   &__title {
     font-size: xx-large;
     color: var(--white);
-
   }
 
   &__logo {

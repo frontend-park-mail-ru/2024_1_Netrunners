@@ -18,10 +18,10 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("./sw.js", { scope: "/" })
     .then((reg) => {
-      console.log("SW register", reg);
+      // console.log("SW register", reg);
     })
     .catch((e) => {
-      console.log("SW Error", e);
+      // console.log("SW Error", e);
     });
 }
 

@@ -10,7 +10,7 @@ export async function check() {
     const response = await fetchRequest(IP + "/auth/check", "POST");
     const responseData = await response.json();
 
-    return responseData.status === 200;
+    return responseData.status === 200 || responseData.status === 400;
   } catch (error) {
     console.error("Произошла ошибка в check:", error.message);
   }

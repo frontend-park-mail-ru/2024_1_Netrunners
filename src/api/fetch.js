@@ -14,20 +14,20 @@ export const fetchRequest = async (
   method = "GET",
   body = null,
   headers = {},
-  contentType = "application/json",
+  contentType,
 ) => {
   try {
     const options = {
       method: method,
       headers: {
-        "Content-Type": contentType,
         ...headers,
       },
       credentials: "include",
     };
-    if (contentType === "multipart/form-data; boundary=MfnBoundry") {
+    if (body instanceof FormData || contentType === "multipart/form-data") {
       options.body = body;
     } else if (body !== null) {
+      options.headers["Content-type"] = contentType;
       options.body = JSON.stringify(body);
     }
 

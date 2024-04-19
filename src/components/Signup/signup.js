@@ -20,7 +20,9 @@ export async function renderSignup() {
   const usernameInput = document.querySelector('input[name="username"]');
   const passConfInput = document.querySelector('input[name="passConf"]');
   const passwordInput = document.querySelector('input[name="password"]');
-  const errorFields = document.getElementsByClassName("form-section__error-signup");
+  const errorFields = document.getElementsByClassName(
+    "form-section__error-signup",
+  );
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -32,28 +34,28 @@ export async function renderSignup() {
 
     if (!validators.login(login)) {
       errorFields[0].innerText = "Поле почта введено некорректно";
-      return
+      return;
     } else {
       errorFields[0].innerText = "";
     }
 
     if (!validators.username(username)) {
       errorFields[1].innerText = "Имя пользователя слишком короткое";
-      return
+      return;
     } else {
       errorFields[1].innerText = "";
     }
 
     if (!validators.password(password)) {
       errorFields[2].innerText = "Пароль слишком короткий";
-      return
+      return;
     } else {
       errorFields[2].innerText = "";
     }
 
     if (!validators.passwordConf(password, passConf)) {
       errorFields[3].innerText = "Пароли не совпадают";
-      return
+      return;
     } else {
       errorFields[3].innerText = "";
     }

@@ -34,22 +34,13 @@ export async function getProfileData(uuid) {
  */
 export async function editProfile(uuid, editData) {
   try {
-    let response;
-    if (editData.action === "chAvatar") {
-      response = await fetchRequest(
-        `${IP}/profile/${uuid}/edit`,
-        "POST",
-        editData,
-        {},
-        "multipart/form-data; boundary=MfnBoundry",
-      );
-    } else {
-      response = await fetchRequest(
-        `${IP}/profile/${uuid}/edit`,
-        "POST",
-        editData,
-      );
-    }
+    const response = await fetchRequest(
+      `${IP}/profile/${uuid}/edit`,
+      "POST",
+      editData,
+      {},
+      "multipart/form-data",
+    );
     const responseData = await response.json();
 
     return responseData.status === 200;
@@ -67,7 +58,7 @@ export async function getProfilePreview(uuid) {
   try {
     const response = await fetchRequest(`${IP}/profile/${uuid}/preview`, "GET");
     const data = await response.json();
-
+    data.user.Avatar = `data:image/png;base64,${data.user.Avatar}`;
     if (!data || typeof data !== "object") {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }

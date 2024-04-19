@@ -4,7 +4,7 @@ import profileTemplate from "./Profile.hbs";
 import editFormTemplate from "./editForm.hbs";
 import Router from "../../utils/router.js";
 import { FilmsAllRequest } from "../../../use-cases/filmsAll.js";
-import store from "../../index.js";
+import store, { menu } from "../../index.js";
 import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
 import { getProfileData } from "../../../use-cases/profile.js";
 import { PROFILE_REDUCER } from "../../../flux/actions/profile.js";
@@ -73,12 +73,11 @@ export async function renderEditForm(profileId) {
       return;
     }
 
-    if (
-      await profileApi.editProfile(profileId, {
-        action: profileApi.CHANGE_USERNAME_ACTION,
-        newData: usernameInput.value,
-      })
-    ) {
+    const data = new FormData();
+    data.append("action", profileApi.CHANGE_USERNAME_ACTION);
+    data.append("newData", usernameInput.value);
+
+    if (await profileApi.editProfile(profileId, data)) {
       renderProfile(profileId);
     }
   });
@@ -99,6 +98,7 @@ export async function renderEditForm(profileId) {
 
     if (await profileApi.editProfile(profileId, data)) {
       renderProfile(profileId);
+      menu.renderAuth();
     }
   });
 
@@ -116,12 +116,11 @@ export async function renderEditForm(profileId) {
       return;
     }
 
-    if (
-      await profileApi.editProfile(profileId, {
-        action: profileApi.CHANGE_PASSWORD_ACTION,
-        newData: passwordInput.value,
-      })
-    ) {
+    const data = new FormData();
+    data.append("action", profileApi.CHANGE_PASSWORD_ACTION);
+    data.append("newData", passwordInput.value);
+
+    if (await profileApi.editProfile(profileId, data)) {
       renderProfile(profileId);
     }
   });
