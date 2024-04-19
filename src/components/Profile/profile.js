@@ -8,6 +8,7 @@ import store from "../../index.js";
 import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
 import { getProfileData } from "../../../use-cases/profile.js";
 import { PROFILE_REDUCER } from "../../../flux/actions/profile.js";
+import { addSliderHandler } from "../../utils/slider";
 
 /**
  * Отображает профиль пользователя на странице.
@@ -44,6 +45,8 @@ export async function renderProfile(profileId) {
       Router.goToFilmPage(filmCard.dataset.filmId, filmCard.dataset.filmTitle);
     });
   });
+
+  addSliderHandler();
 }
 /**
  * Отображает форму редактирования профиля
@@ -128,4 +131,6 @@ export async function renderEditForm(profileId) {
     e.preventDefault();
     await renderProfile(profileId);
   });
+
+  addSliderHandler();
 }

@@ -5,6 +5,7 @@ import { ACTOR_REDUCER } from "../../../flux/actions/actor.js";
 import { getActorData } from "../../../use-cases/actor.js";
 import { FilmsAllRequest } from "../../../use-cases/filmsAll.js";
 import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
+import { addSliderHandler } from "../../utils/slider.js";
 
 /**
  * Рендерит страницу актёра с данными об актёре
@@ -42,4 +43,6 @@ export async function renderActorPage(actorId) {
       Router.goToFilmPage(filmCard.dataset.filmId, filmsData[index].title);
     });
   });
+
+  addSliderHandler();
 }
