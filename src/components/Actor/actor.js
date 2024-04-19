@@ -32,7 +32,7 @@ export async function renderActorPage(actorId) {
     filmsData = store.getState().films.films;
   });
   await FilmsAllRequest();
-
+  filmsData = actorData.actor.films;
   const actorPageData = { ...actorData.actor, filmsData };
 
   document.querySelector("main").innerHTML = template(actorPageData);
