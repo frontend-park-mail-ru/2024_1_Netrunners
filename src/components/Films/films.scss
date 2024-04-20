@@ -25,6 +25,7 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    justify-content: start;
   }
 
   &__carousel::-webkit-scrollbar {
