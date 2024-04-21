@@ -53,6 +53,8 @@ export async function renderPlayer(filmId, filmTitle, source) {
     ".player-container__fullscreen img",
   );
 
+  mainVideo.play();
+
   let timer;
   const hideControls = () => {
     if (mainVideo.paused) return;

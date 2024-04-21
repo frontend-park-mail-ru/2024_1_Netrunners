@@ -66,7 +66,7 @@ export async function renderSignup() {
       changeActiveButton("/");
       await Router.goToHomePage();
     } else {
-      errorField.innerText = "Такой пользователь уже существует";
+      errorFields[0].innerText = "Такой пользователь уже существует";
     }
   });
 }

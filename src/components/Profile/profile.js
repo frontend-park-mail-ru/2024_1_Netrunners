@@ -9,6 +9,7 @@ import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
 import { getProfileData } from "../../../use-cases/profile.js";
 import { PROFILE_REDUCER } from "../../../flux/actions/profile.js";
 import { addSliderHandler } from "../../utils/slider";
+import { showNotification } from "../Notification/notification.js";
 
 /**
  * Отображает профиль пользователя на странице.
@@ -48,6 +49,7 @@ export async function renderProfile(profileId) {
 
   addSliderHandler();
 }
+
 /**
  * Отображает форму редактирования профиля
  * @param {string} profileId Идентификатор профиля, который редактируется.
@@ -68,8 +70,7 @@ export async function renderEditForm(profileId) {
   usernameButton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (!validators.username(usernameInput.value)) {
-      document.getElementById("username-errors").innerText =
-        "Имя пользователя слишком короткое";
+      showNotification("Имя пользователя слишком короткое", "danger");
       return;
     }
 
@@ -79,6 +80,18 @@ export async function renderEditForm(profileId) {
 
     if (await profileApi.editProfile(profileId, data)) {
       renderProfile(profileId);
+    }
+  });
+
+  avatarInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file.type.startsWith("image/") || file.type.startsWith("image/svg")) {
+      showNotification(
+        "Неправильный формат файла. Пожалуйста, выберите изображение (например, JPEG или PNG).",
+        "danger",
+      );
+      avatarInput.value = "";
+      return;
     }
   });
 
@@ -97,6 +110,7 @@ export async function renderEditForm(profileId) {
     }
 
     if (await profileApi.editProfile(profileId, data)) {
+      showNotification("Аватар пользователя обновлен", "success");
       renderProfile(profileId);
       menu.renderAuth();
     }
@@ -105,14 +119,12 @@ export async function renderEditForm(profileId) {
   passwordButton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (!validators.password(passwordInput.value)) {
-      document.getElementById("password-errors").innerText =
-        "Пароль слишком короткий";
+      showNotification("Пароль слишком короткий", "danger");
       return;
     }
 
     if (!validators.passwordConf(passwordInput.value, passConfInput.value)) {
-      document.getElementById("password-errors").innerText =
-        "Пароли не совпадают";
+      showNotification("Пароли не совпадают", "danger");
       return;
     }
 

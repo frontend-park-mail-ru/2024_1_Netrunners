@@ -111,6 +111,7 @@ export class Router {
     window.history.pushState(state, state.title, state.path);
 
     renderFilmPage(uuid);
+    window.scrollTo(0, 0);
   }
 
   /**
@@ -141,7 +142,6 @@ export class Router {
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-
     renderPlayer(uuid, title, link);
   }
 

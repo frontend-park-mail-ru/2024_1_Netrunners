@@ -9,6 +9,8 @@ import { createStore } from "../flux/redux-lite.js";
 import { Router } from "./utils/router.js";
 import Rout from "./utils/router.js";
 import "../src/index.scss";
+import { getFilmData } from "../use-cases/film";
+import { FILM_REDUCER } from "../flux/actions/film";
 
 const store = createStore(rootReducer);
 
@@ -92,7 +94,8 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === "a") {
       e.preventDefault();
-      changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
+      // changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
+      changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
     }
   });
 }
@@ -161,7 +164,25 @@ const handleLocation = async () => {
   if (!navigator.onLine) {
     await Rout.go("/", "Netrunnerflix", null, false);
   }
+
   const path = window.location.pathname;
+  if (
+    window.location.href.includes("/film/") ||
+    window.location.href.includes("/actor/")
+  ) {
+    await Rout.go(decodeURIComponent(path), document.title, null, false);
+    return;
+  }
+
+  if (window.location.href.includes("/player/")) {
+    const uuid = path.substring("/player/".length, path.length);
+    getFilmData(uuid);
+    store.subscribe(FILM_REDUCER, () => {
+      const filmData = store.getState().film.data.film;
+      Rout.goToPlayerPage(uuid, filmData.title, filmData.link);
+    });
+    return;
+  }
   await Rout.go(decodeURIComponent(path), document.title);
 };
 
