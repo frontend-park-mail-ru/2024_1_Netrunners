@@ -200,6 +200,14 @@
     position: relative;
   }
 
+  &__genre-films-container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 13px
+  }
+
   &__carousel-shapes {
     display: flex;
     width: 18px;

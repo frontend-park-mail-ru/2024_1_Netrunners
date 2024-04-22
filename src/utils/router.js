@@ -8,6 +8,7 @@ import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
 import { changeActiveButton, getCookie } from "../index.js";
 import * as authApi from "../api/auth";
+import { renderGenrePage } from "../components/Genre/genre.js";
 
 /**
  * Класс для управления навигацией и отображением различных страниц.
@@ -115,6 +116,22 @@ export class Router {
   }
 
   /**
+   * Переход на страницу фильмов по жанру.
+   * @param {string} genreName название жанра.
+   */
+  goToGenrePage(genreName) {
+    const state = {};
+    state.path = `/genre/${genreName}`;
+    state.title = genreName;
+    document.title = state.title;
+
+    window.history.pushState(state, state.title, state.path);
+
+    renderGenrePage(genreName);
+    window.scrollTo(0, 0);
+  }
+
+  /**
    * Переход на страницу профиля пользователя.
    */
   goToProfilePage() {
@@ -171,6 +188,9 @@ export class Router {
       } else if (path.includes("/film/")) {
         const uuid = path.substring("/film/".length, path.length);
         await renderFilmPage(uuid);
+      } else if (path.includes("/genre/")) {
+        const genreName = path.substring("/genre/".length, path.length);
+        await renderGenrePage(genreName);
       } else if (path.includes("/player/")) {
         const uuid = path.substring("/player/".length, path.length);
         await renderPlayer(uuid, title, data);

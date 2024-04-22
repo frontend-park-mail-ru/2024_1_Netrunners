@@ -48,7 +48,7 @@
   </div>
   <div class="genres-container">
     {{#each filmsGenres}}
-      <div class="genres-container__card">
+      <div class="genres-container__card" data-genre-name="{{this.nameEn}}">
         <div class="genres-container__images">
           {{#each posters}}
             <img class="genres-container__image" src="{{this}}" />
