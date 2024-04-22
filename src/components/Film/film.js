@@ -1,12 +1,27 @@
 import * as filmApi from "../../api/film.js";
 import template from "./Film.hbs";
 import Router from "../../utils/router.js";
+import store from "../../index.js";
+import { getFilmData } from "../../../use-cases/film.js";
+import { FILM_REDUCER } from "../../../flux/actions/film.js";
 
+/**
+ * Отображает страницу фильма с указанным идентификатором.
+ * @param {string} filmId - Идентификатор фильма.
+ * @return {void}
+ */
 export async function renderFilmPage(filmId) {
-  const [filmData, filmActors] = await Promise.all([
-    filmApi.getFilmData(filmId),
-    filmApi.getActors(filmId),
-  ]);
+  const [filmActors] = await Promise.all([filmApi.getActors(filmId)]);
+
+  store.clearSubscribes();
+  const actorSection = document.createElement("section");
+  actorSection.classList.add("actor-section");
+  let filmData;
+  await getFilmData(filmId);
+  store.subscribe(FILM_REDUCER, () => {
+    filmData = store.getState().film.data.film;
+  });
+  await getFilmData(filmId);
 
   document.querySelector("main").innerHTML = template({
     ...filmData,

@@ -18,6 +18,9 @@ module.exports = {
     allowedHosts: "all",
     historyApiFallback: true,
     hot: true,
+    client: {
+      overlay: false,
+    },
     static: path.resolve(__dirname, "dist"),
     port: 8080,
   },

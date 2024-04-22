@@ -3,6 +3,13 @@ import template from "./Player.hbs";
 import * as images from "../../img/imgConstants.js";
 import Router from "../../utils/router.js";
 
+/**
+ * Отображает интерфейс проигрывателя для указанного фильма.
+ * @param {string} filmId - Идентификатор фильма, который проигрывается.
+ * @param {string} filmTitle - Заголовок фильма, который проигрывается.
+ * @param {string} source - URL источника видео.
+ * @return {void}
+ */
 export async function renderPlayer(filmId, filmTitle, source) {
   const video = { src: source };
 
@@ -10,20 +17,43 @@ export async function renderPlayer(filmId, filmTitle, source) {
   const exitButton = document.querySelector("#exit-player");
   const container = document.querySelector(".player-container");
   const mainVideo = container.querySelector("video");
-  const progressBar = container.querySelector(".player-container__progress-bar");
-  const videoTimeline = container.querySelector(".player-container__video-timeline");
+  const progressBar = container.querySelector(
+    ".player-container__progress-bar",
+  );
+  const videoTimeline = container.querySelector(
+    ".player-container__video-timeline",
+  );
   const volumeBtn = container.querySelector(".player-container__volume img");
   const volumeSlider = container.querySelector(".left input");
-  const currentVideoTime = container.querySelector(".player-container__current-time");
-  const videoDuration = container.querySelector(".player-container__video-duration");
-  const nextSeries = container.querySelector(".player-container__skip-forward img");
-  const previousSeries = container.querySelector(".player-container__skip-backward img");
-  const playPauseBtn = container.querySelector(".player-container__play-pause img");
-  const speedBtn = container.querySelector(".player-container__playback-speed span");
-  const speedOptions = container.querySelector(".player-container__speed-options");
-  const pinInPicBtn = container.querySelector(".player-container__pic-in-pic span");
-  const fullscreenBtn = container.querySelector(".player-container__fullscreen img");
-  const wrapper = container.querySelector(".player-container__wrapper");
+  const currentVideoTime = container.querySelector(
+    ".player-container__current-time",
+  );
+  const videoDuration = container.querySelector(
+    ".player-container__video-duration",
+  );
+  const nextSeries = container.querySelector(
+    ".player-container__skip-forward img",
+  );
+  const previousSeries = container.querySelector(
+    ".player-container__skip-backward img",
+  );
+  const playPauseBtn = container.querySelector(
+    ".player-container__play-pause img",
+  );
+  const speedBtn = container.querySelector(
+    ".player-container__playback-speed span",
+  );
+  const speedOptions = container.querySelector(
+    ".player-container__speed-options",
+  );
+  const pinInPicBtn = container.querySelector(
+    ".player-container__pic-in-pic span",
+  );
+  const fullscreenBtn = container.querySelector(
+    ".player-container__fullscreen img",
+  );
+
+  mainVideo.play();
 
   let timer;
   const hideControls = () => {
@@ -112,8 +142,8 @@ export async function renderPlayer(filmId, filmTitle, source) {
     speedOptions.classList.toggle("show");
   });
 
-  wrapper.addEventListener("click", (e) => {
-    if (e.target.className === "player-container__wrapper") {
+  document.addEventListener("click", (e) => {
+    if (e.target.tagName === "VIDEO") {
       mainVideo.paused ? mainVideo.play() : mainVideo.pause();
     }
   });

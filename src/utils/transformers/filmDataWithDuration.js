@@ -9,7 +9,16 @@ export const toFilmDataWithDuration = (filmData) => {
 
 export const fixUserData = (data) => {
   const userData = { ...data };
-  userData.registeredAt = timeConvert.dateIntoYear(userData.registeredAt);
+  userData.registeredAt = timeConvert.dateIntoDayMonthYear(
+    userData.registeredAt,
+  );
 
   return userData;
+};
+
+export const fixActorData = (data) => {
+  const actorData = { ...data };
+  actorData.birthday = timeConvert.dateIntoDayMonthYear(actorData.birthday);
+
+  return actorData;
 };

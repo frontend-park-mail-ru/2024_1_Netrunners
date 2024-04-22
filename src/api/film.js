@@ -1,6 +1,11 @@
 import { fetchRequest, IP } from "./fetch.js";
 import { timeConvert } from "../utils/timeConvert.js";
 
+/**
+ * Получает данные о фильме по его идентификатору.
+ * @param {string} filmId - Идентификатор фильма.
+ * @return {Promise<object>} - Возвращает объект с данными о фильме.
+ */
 export async function getFilmData(filmId) {
   try {
     const response = await fetchRequest(`${IP}/films/${filmId}/data`, "GET");
@@ -19,6 +24,11 @@ export async function getFilmData(filmId) {
   }
 }
 
+/**
+ * Получает список актеров фильма по его идентификатору.
+ * @param {string} filmId - Идентификатор фильма.
+ * @return {Promise<object[]>} - Возвращает массив объектов с данными об актерах фильма.
+ */
 export async function getActors(filmId) {
   try {
     const response = await fetchRequest(`${IP}/films/${filmId}/actors`, "GET");

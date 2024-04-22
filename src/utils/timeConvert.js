@@ -30,6 +30,13 @@ export const timeConvert = {
    * @return {string} - значение года
    */
   dateIntoYear: (rawDate) => dateIntoYear(rawDate),
+  /**
+   * Форматирует полную дату в День Месяц Год
+   * @private
+   * @param {string} rawDate - Полная дата в виде строки
+   * @return {string} - значение года
+   */
+  dateIntoDayMonthYear: (rawDate) => dateIntoDayMonthYear(rawDate),
 };
 
 const intoHours = (durationInSec) => {
@@ -40,9 +47,9 @@ const intoMinutes = (durationInSec) => {
   return Math.floor((durationInSec % 3600) / 60);
 };
 
-const timeIntoText = (durationInSec) => {
-  const hours = Math.floor(durationInSec / 3600);
-  const minutes = Math.floor((durationInSec % 3600) / 60);
+const timeIntoText = (durationInMin) => {
+  const hours = Math.floor(durationInMin / 60);
+  const minutes = durationInMin % 60;
 
   if (!hours) {
     return `${minutes}мин`;
@@ -52,7 +59,7 @@ const timeIntoText = (durationInSec) => {
     return `${hours}ч`;
   }
 
-  return `${hours}ч ${minutes}мин`;
+  return `${hours}ч ${minutes} мин`;
 };
 
 export const formatTime = (time) => {
@@ -72,4 +79,31 @@ export const formatTime = (time) => {
 
 const dateIntoYear = (rawDate) => {
   return rawDate.substring(0, 4);
+};
+
+const dateIntoDayMonthYear = (rawDate) => {
+  const date = new Date(rawDate);
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  const months = [
+    "Января",
+    "Февраля",
+    "Марта",
+    "Апреля",
+    "Мая",
+    "Июня",
+    "Июля",
+    "Августа",
+    "Сентября",
+    "Октября",
+    "Ноября",
+    "Декабря",
+  ];
+
+  const monthName = months[monthIndex];
+
+  return `${day} ${monthName} ${year}`;
 };

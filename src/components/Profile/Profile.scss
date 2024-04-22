@@ -1,40 +1,47 @@
 @import "../Films/films";
 
 .profile-info {
-    margin-top: 32px;
-    display: flex;
-    color: var(--white);
-}
-.profile-photo {
+  margin-top: 32px;
+  display: flex;
+  color: var(--white);
+
+  &__photo {
     margin-right: 32px;
+
     img {
-        margin-left: 32px;
-        object-fit: cover;
-        border-radius: 16px;
-        width: 380px;
-        height: 500px;
+      margin-left: 32px;
+      object-fit: cover;
+      border-radius: 16px;
+      width: 380px;
+      height: 500px;
     }
-}
-.profile-details {
+  }
+
+  &__details {
     margin-left: 32px;
     color: var(--white);
-}
-.profile-description {
+  }
+
+  &__description {
     margin-top: 8px;
+
     ul {
-        list-style: none;
-        padding: 0;
+      list-style: none;
+      padding: 0;
     }
+
     li {
-        margin-top: 16px;
+      margin-top: 16px;
     }
-}
-.profile-top {
+  }
+
+  &__top {
     margin-bottom: 96px;
     display: flex;
     align-items: center;
-}
-.profile-page-buttons {
+  }
+
+  &__buttons {
     text-decoration: none;
     color: var(--white);
     border: 1px solid var(--grey-main);
@@ -46,22 +53,31 @@
     height: fit-content;
     background-color: var(--hover-color);
     font-size: 18px;
+
     &:hover {
-        color: var(--neon-secondary);
-        padding: 16px;
+      color: var(--neon-secondary);
+      padding: 16px;
     }
+  }
 }
+
 .edit-section {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-top: 32px;
-    & > input {
-        width: 600px;
-    }
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  & > input {
+    width: 600px;
+  }
 }
-.edit-form__button {
+
+.edit-form {
+  & > input {
+    width: 600px;
+  }
+
+  &__button {
     background-color: var(--neon-main);
     border: none;
     border-radius: 8px;
@@ -73,29 +89,35 @@
     font-size: 16px;
     margin-left: 16px;
     margin-bottom: auto;
-    margin-top: 6px;
+    margin-top: 45px;
     cursor: pointer;
+  }
 }
-.edit-form {
-    & > input {
-        width: 600px;
-    }
-}
+
 #imageInput {
-    &::-webkit-file-upload-button {
-        cursor: pointer;
-        height: 48px;
-        padding: 8px 16px;
-        border: none;
-        margin-top: 6px;
-        margin-left: -8px;
-        border-radius: 16px;
-        color: var(--white);
-        background: var(--neon-main);
-        font-family: var(--input-font);
-    }
-}
-#exit-editing-button {
-    margin: 32px 32px auto auto;
+  &::-webkit-file-upload-button {
     cursor: pointer;
+    height: 48px;
+    padding: 8px 16px;
+    border: none;
+    margin-top: 6px;
+    margin-left: -8px;
+    border-radius: 16px;
+    color: var(--white);
+    background: var(--neon-main);
+    font-family: var(--input-font);
+  }
+}
+
+#exit-editing-button {
+  margin: 32px 32px auto auto;
+  cursor: pointer;
+}
+
+.edit-form__error {
+  color: var(--neon-main);
+  font-size: var(--main-text);
+  padding: 8px 12px 16px;
+  overflow: hidden;
+  height: var(--main-text);
 }

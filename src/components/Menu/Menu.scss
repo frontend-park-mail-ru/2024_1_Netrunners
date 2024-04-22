@@ -1,24 +1,59 @@
-.menu-container__menu {
+.menu-container {
+  width: 1266px;
   display: flex;
-  align-items: flex-start;
-  font-size: var(--main-text);
-  align-self: center;
-  padding: 8px;
-  margin-top: 32px;
-  background-color: var(--neutral-dark);
-  border-radius: 16px;
-}
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
 
-.menu-container__menu-item {
-  white-space: nowrap;
-  color: var(--grey-secondary);
-  padding: 16px;
-  display: block;
-  text-decoration: none;
+  &__menu {
+    display: flex;
+    align-items: flex-start;
+    font-size: var(--main-text);
+    align-self: center;
+    padding: 8px;
+    background-color: var(--neutral-dark);
+    border-radius: 16px;
+  }
 
-  &:hover {
-    color: var(--neon-secondary);
+  &__menu-item {
+    white-space: nowrap;
+    color: var(--grey-secondary);
     padding: 16px;
+    display: block;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--neon-secondary);
+      padding: 16px;
+    }
+  }
+
+  &__logo {
+    & > img {
+      cursor: pointer;
+      margin-right: 32px;
+      width: 360px;
+    }
+  }
+
+  &__nav-icon {
+    align-self: center;
+
+    & > img {
+      margin-left: 32px;
+      width: 32px;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    margin-left: 64px;
+  }
+
+  &__menu-right {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
@@ -42,30 +77,6 @@
   background-color: var(--hover-color);
 }
 
-.menu-container__logo {
-  margin-top: 32px;
-
-  & > img {
-    margin-right: 32px;
-    width: 328px;
-  }
-}
-
-.menu-container__nav-icon {
-  & > img {
-    margin-left: 32px;
-    margin-top: 32px;
-    width: 25px;
-  }
-}
-
-.menu-container {
-  width: 1266px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .no-auth-elements {
   display: flex;
   align-items: flex-start;
@@ -73,7 +84,6 @@
   align-self: center;
   padding: 8px;
   margin-left: 16px;
-  margin-top: 16px;
   background-color: var(--neutral-dark);
   border-radius: 16px;
 }
@@ -85,7 +95,6 @@
   align-self: center;
   padding: 8px;
   margin-left: 16px;
-  margin-top: 16px;
 }
 
 .avatar {
@@ -125,15 +134,4 @@
 
 .auth-menu {
   margin-left: 10px;
-}
-
-.menu-container__icons {
-  display: flex;
-  margin-left: 64px;
-  margin-top: 16px;
-}
-
-.menu-container__menu-right {
-  display: flex;
-  flex-wrap: wrap;
 }
