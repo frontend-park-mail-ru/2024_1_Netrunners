@@ -90,6 +90,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 284px;
+    height: fit-content;
   }
 
   &__data-element {
@@ -167,3 +168,67 @@
 #film-player-button {
   cursor: pointer;
 }
+
+
+.series-block {
+  border: 2px solid var(--border-color);
+  padding: 32px;
+  border-radius: 16px;
+  color: white;
+  max-height: 36%;
+  overflow-y: scroll;
+  list-style: none;
+
+  &__element {
+    padding: 48px 0;
+    position: relative;
+    border-top: 2px solid var(--border-color);
+    counter-increment: list;
+    display: flex;
+    align-items: center;
+
+    & > span {
+      margin-left: 80px;
+    }
+
+    & > div {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  &__element::before {
+    content: counter(list);
+    font-size: xx-large;
+    color: var(--grey-secondary);
+    position: absolute; /* Абсолютное позиционирование */
+  }
+
+  &__seasons {
+    padding: 24px 0;
+  }
+
+}
+
+.series-block::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  width: 10px; /* Ширина скроллбара */
+  transform: translateX(-100px);
+
+}
+
+.series-block::-webkit-scrollbar-track {
+  background: var(--neutral-main); /* Цвет фона */
+  border-radius: 16px;
+}
+
+.series-block::-webkit-scrollbar-thumb {
+  background: var(--grey-main); /* Цвет бегунка */
+  border-radius: 16px;
+}
+
+.series-block::-webkit-scrollbar-thumb:hover {
+  background: var(--grey-secondary); /* Измененный цвет при наведении */
+}
+
