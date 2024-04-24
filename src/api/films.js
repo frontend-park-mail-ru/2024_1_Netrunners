@@ -130,6 +130,19 @@ export async function getTopFour() {
  * @throws {Error} Если произошла ошибка при получении данных.
  */
 export async function getGenres() {
+  // try {
+  //   const url = IP + "/films/genres/preview";
+  //   const response = await fetchRequest(url, "GET");
+  //
+  //   const genresData = await response.json();
+  //   if (!genresData || !genresData.genres || !Array.isArray(genresData.genre)) {
+  //     throw new Error("Ошибка: ответ не содержит массива жанров");
+  //   }
+  //
+  //   return genresData.genres;
+  // } catch (error) {
+  //   console.error("Произошла ошибка:", error.message);
+  // }
   try {
     return new Promise(function (resolve) {
       resolve(genresData);
@@ -137,4 +150,25 @@ export async function getGenres() {
   } catch (error) {
     console.error("Произошла ошибка:", error.message);
   }
+}
+
+/**
+ * Получает список фильмов определенного жанра.
+ * @param {string} genreName - Название жанра.
+ * @return {Promise<object[]>} - Возвращает массив объектов с данными о фильмах.
+ */
+export async function getFilmsOfGenre(genreName) {
+  // try {
+  //   const url = IP + "/films/genres/{genre}/all";
+  //   const response = await fetchRequest(url, "GET");
+  //
+  //   const filmsData = await response.json();
+  //   if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
+  //     throw new Error("Ошибка: ответ не содержит массива фильмов");
+  //   }
+  //
+  //   return toFilmDataWithDuration(filmsData.films);
+  // } catch (error) {
+  //   console.error("Произошла ошибка:", error.message);
+  // }
 }

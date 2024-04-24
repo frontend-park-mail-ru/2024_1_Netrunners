@@ -118,16 +118,16 @@ export class Router {
   /**
    * Переход на страницу фильмов по жанру.
    * @param {string} genreName название жанра.
+   * @param {string} genreNameRu название жанра на русском.
    */
-  goToGenrePage(genreName) {
+  goToGenrePage(genreName, genreNameRu) {
     const state = {};
     state.path = `/genre/${genreName}`;
-    state.title = genreName;
+    state.title = genreNameRu;
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-
-    renderGenrePage(genreName);
+    renderGenrePage(genreNameRu);
     window.scrollTo(0, 0);
   }
 

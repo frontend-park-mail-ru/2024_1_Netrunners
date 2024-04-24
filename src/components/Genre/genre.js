@@ -6,9 +6,9 @@ import Router from "../../utils/router.js";
 
 /**
  * Отображает страницу фильмов определенного жанра.
- * @param {string} genreName Название жанра.
+ * @param {string} genreNameRu Название жанра.
  */
-export async function renderGenrePage(genreName) {
+export async function renderGenrePage(genreNameRu) {
   let filmsData;
   await FilmsAllRequest();
   store.subscribe(FILMS_REDUCER, () => {
@@ -16,7 +16,7 @@ export async function renderGenrePage(genreName) {
   });
   await FilmsAllRequest();
 
-  const genrePageData = { filmsData, genreName };
+  const genrePageData = { filmsData, genreNameRu };
   document.querySelector("main").innerHTML = template(genrePageData);
 
   const filmCards = document.querySelectorAll("[data-film-id]");

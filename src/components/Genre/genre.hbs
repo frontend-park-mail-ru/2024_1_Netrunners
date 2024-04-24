@@ -1,5 +1,5 @@
 <div class="films-section">
-  <div class="films-section__title">{{ genreName }}</div>
+  <div class="films-section__title">{{genreNameRu}}</div>
   <div class="films-section__genre-films-container">
     {{#each filmsData}}
       <div
@@ -7,10 +7,7 @@
         data-film-id="{{this.uuid}}"
         data-film-title="{{this.title}}"
       >
-        <img
-          class="films-section__film-image"
-          src="{{this.preview_data}}"
-        />
+        <img class="films-section__film-image" src="{{this.preview_data}}" />
         <div class="films-section__film-content">
           <div class="films-section__content-top">
             <div class="films-section__film-title">

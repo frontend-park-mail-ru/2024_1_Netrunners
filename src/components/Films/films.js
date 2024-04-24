@@ -40,7 +40,10 @@ export async function renderFilms() {
     const genreCards = document.querySelectorAll("[data-genre-name]");
     genreCards.forEach((genreCard) => {
       genreCard.addEventListener("click", () => {
-        Router.goToGenrePage(genreCard.dataset.genreName);
+        Router.goToGenrePage(
+          genreCard.dataset.genreName,
+          genreCard.dataset.genreNameRu,
+        );
       });
     });
 
