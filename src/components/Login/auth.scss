@@ -63,20 +63,21 @@ input {
   }
 
   &__form-background {
-    margin: 4% auto;
+    margin: 6% auto;
     padding: 32px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     width: 18%;
     color: var(--white);
-    background: #0E0E0EB2;
+    background: #0e0e0eb2;
     backdrop-filter: blur(10px);
   }
 }
 
 .auth-background {
-  background: url("img/background/background.png") rgba(255, 255, 255, 0.3) no-repeat;
+  background: url("img/background/background.png") rgba(255, 255, 255, 0.3)
+    no-repeat;
   height: -webkit-fill-available;
   width: -webkit-fill-available;
   position: absolute;
