@@ -1,6 +1,5 @@
 input {
-  height: 60px;
-  font-size: var(--header-300);
+  font-size: var(--main-text);
   display: block;
   padding: 0 16px;
   border-width: 0;
@@ -20,13 +19,13 @@ input {
 }
 
 .form-section {
-  margin: 64px auto;
+  margin: 96px auto;
   border: 2px solid var(--border-color);
   padding: 32px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 18%;
   color: var(--white);
   background: var(--neutral-main);
 
@@ -47,21 +46,23 @@ input {
   &__error-login {
     color: var(--neon-main);
     font-size: var(--main-text);
-    padding: 8px 12px 16px;
+    padding: 6px 12px 12px;
     overflow: hidden;
     height: var(--main-text);
   }
 
   &__title {
-    font-size: xx-large;
+    font-size: x-large;
     color: var(--white);
+    margin-left: 12px;
   }
 
   &__logo {
     margin: 16px auto;
+    width: auto;
 
     & > img {
-      width: 418px;
+      width: 100%;
     }
   }
 
