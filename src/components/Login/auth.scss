@@ -8,7 +8,7 @@ input {
   color: var(--white);
   background: var(--grey-main);
   font-family: var(--input-font);
-
+  opacity: 100%;
   &:focus {
     outline: var(--white) solid thin;
   }
@@ -19,15 +19,11 @@ input {
 }
 
 .form-section {
-  margin: 96px auto;
-  border: 2px solid var(--border-color);
-  padding: 32px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 100%;
   color: var(--white);
-  background: var(--neutral-main);
 
   &__submit-button {
     margin: 64px auto 16px;
@@ -67,14 +63,23 @@ input {
   }
 
   &__form-background {
-    background: var(--neutral-dark);
+    margin: 4% auto;
+    padding: 32px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    color: var(--white);
+    background: #0E0E0EB2;
+    backdrop-filter: blur(10px);
   }
 }
 
 .auth-background {
-  background: url("img/background/background.png") no-repeat;
+  background: url("img/background/background.png") rgba(255, 255, 255, 0.3) no-repeat;
   height: -webkit-fill-available;
-  width: 100vw;
+  width: -webkit-fill-available;
   position: absolute;
   left: 0;
+  background-size: cover;
 }
