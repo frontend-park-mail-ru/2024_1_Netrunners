@@ -32,11 +32,12 @@ export const fixFilmData = (data) => {
   filmData.film.date = timeConvert.dateIntoYear(filmData.film.date);
   if (
     filmData.film.isSeries &&
-    typeof filmData.film.series[filmData.film.series.length - 1].duration ===
-      "number"
+    typeof filmData.film.series.at(-1).at(-1).duration === "number"
   ) {
     filmData.film.series.forEach((elem) => {
-      elem.duration = timeConvert.timeIntoText(elem.duration);
+      elem.forEach((episode) => {
+        episode.duration = timeConvert.timeIntoText(episode.duration);
+      });
     });
   }
   return filmData;

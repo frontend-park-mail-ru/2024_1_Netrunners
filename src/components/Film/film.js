@@ -11,6 +11,7 @@ import {
   removeFromFavorite,
 } from "../../api/profile.js";
 import { IN_FAVOUTITES, NOT_IN_FAVOUTITES } from "../../img/imgConstants.js";
+import { renderSeriesBlock } from "../components/episodesBlock/seriesBlock";
 
 /**
  * Отображает страницу фильма с указанным идентификатором.
@@ -55,13 +56,6 @@ export async function renderFilmPage(filmId) {
   });
 
   const playerButton = document.querySelector(".accent-button");
-  playerButton.addEventListener("click", () => {
-    if (getCookie("user_uuid") !== undefined) {
-      Router.goToPlayerPage(filmId, filmData.title, filmData.link);
-    } else {
-      showNotification("Для этого нужно быть авторизованным", "danger");
-    }
-  });
 
   const favouritesButton = document.querySelector("#favourites-button");
   favouritesButton.addEventListener("click", async () => {
@@ -81,5 +75,32 @@ export async function renderFilmPage(filmId) {
     } else {
       showNotification("Для этого нужно быть авторизованным", "danger");
     }
+
+  if (!filmData.isSeries) {
+    playerButton.addEventListener("click", (e) => {
+        if (getCookie("user_uuid") !== undefined) {
+            e.preventDefault();
+            Router.goToPlayerPage(filmId, filmData.title, filmData.link);
+        } else {
+            showNotification("Для этого нужно быть авторизованным", "danger");
+        }
+    });
+    return;
+  }
+
+  const seriesBlockParent = document.querySelector(".film-content-block__left");
+  const firstEpisodeTitle = filmData.series[0][0].title;
+  const firstEpisodeLink = filmData.series[0][0].link;
+
+  renderSeriesBlock(seriesBlockParent, filmData.series, filmId);
+
+  playerButton.addEventListener("click", (e) => {
+      if (getCookie("user_uuid") !== undefined) {
+          e.preventDefault();
+          Router.goToPlayerPage(filmId, firstEpisodeTitle, firstEpisodeLink);
+      } else {
+          showNotification("Для этого нужно быть авторизованным", "danger");
+      }
   });
-}
+  }
+
