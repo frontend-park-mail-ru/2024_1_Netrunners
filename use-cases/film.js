@@ -4,55 +4,54 @@ import { FilmError, FilmRequest, FilmSuccess } from "../flux/actions/film.js";
 import { timeConvert } from "../src/utils/timeConvert.js";
 
 const data = {
-  "status": 200,
-  "film": {
-    "isSeries": true,
-    "uuid": "47ec70ab-2599-46fd-8124-35da92909939",
-    "preview": "https://shorturl.at/akMR2",
-    "title": "joik",
-    "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-    "director": "iuhiu",
-    "averageScore": 3,
-    "scoresCount": 1,
-    "duration": 1403,
-    "date": "2024-04-22T16:53:35.577104+03:00",
-    "data": "some description",
-    "ageLimit": 18,
-    "series":[
+  status: 200,
+  film: {
+    isSeries: true,
+    uuid: "47ec70ab-2599-46fd-8124-35da92909939",
+    preview: "https://shorturl.at/akMR2",
+    title: "joik",
+    link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+    director: "iuhiu",
+    averageScore: 3,
+    scoresCount: 1,
+    duration: 1403,
+    date: "2024-04-22T16:53:35.577104+03:00",
+    data: "some description",
+    ageLimit: 18,
+    series: [
       {
-        "title": "Some series",
-        "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-        "duration": 143
+        title: "Some series",
+        link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+        duration: 143,
       },
       {
-        "title": "Some series",
-        "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-        "duration": 143
+        title: "Some series",
+        link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+        duration: 143,
       },
       {
-        "title": "Some series",
-        "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-        "duration": 143
+        title: "Some series",
+        link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+        duration: 143,
       },
       {
-        "title": "Some series",
-        "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-        "duration": 143
+        title: "Some series",
+        link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+        duration: 143,
       },
       {
-        "title": "Some series",
-        "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-        "duration": 143
+        title: "Some series",
+        link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+        duration: 143,
       },
       {
-        "title": "Some series",
-        "link": "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
-        "duration": 143
-      }
-    ]
-  }
-}
-
+        title: "Some series",
+        link: "https://daimnefilm.hb.ru-msk.vkcs.cloud/rammstein-feuer-frei_783972.mp4",
+        duration: 143,
+      },
+    ],
+  },
+};
 
 /**
  * Выполняет запрос на получение данных конкретного фильма по его UUID.
@@ -74,10 +73,14 @@ export async function getFilmData(uuid) {
     }
 
     data.film.date = timeConvert.dateIntoYear(data.film.date);
-    if (data.film.isSeries && typeof data.film.series[data.film.series.length - 1].duration === "number" ){
-      data.film.series.forEach((elem) => {elem.duration = timeConvert.timeIntoText(elem.duration);})
+    if (
+      data.film.isSeries &&
+      typeof data.film.series[data.film.series.length - 1].duration === "number"
+    ) {
+      data.film.series.forEach((elem) => {
+        elem.duration = timeConvert.timeIntoText(elem.duration);
+      });
     }
-
 
     store.dispatch(FilmSuccess(data));
   } catch (error) {

@@ -169,7 +169,6 @@
   cursor: pointer;
 }
 
-
 .series-block {
   border: 2px solid var(--border-color);
   padding: 32px;
@@ -208,27 +207,26 @@
     padding: 24px 0;
   }
 
+  &::-webkit-scrollbar {
+    position: absolute;
+    left: 0;
+    width: 10px; /* Ширина скроллбара */
+    transform: translateX(-100px);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--neutral-main);
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--grey-main);
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--grey-secondary);
+  }
 }
 
-.series-block::-webkit-scrollbar {
-  position: absolute;
-  left: 0;
-  width: 10px; /* Ширина скроллбара */
-  transform: translateX(-100px);
-
-}
-
-.series-block::-webkit-scrollbar-track {
-  background: var(--neutral-main); /* Цвет фона */
-  border-radius: 16px;
-}
-
-.series-block::-webkit-scrollbar-thumb {
-  background: var(--grey-main); /* Цвет бегунка */
-  border-radius: 16px;
-}
-
-.series-block::-webkit-scrollbar-thumb:hover {
-  background: var(--grey-secondary); /* Измененный цвет при наведении */
-}
 
