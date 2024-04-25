@@ -300,13 +300,14 @@
   }
 
   &__buttons {
-    color: white;
+    cursor: pointer;
+    color: var(--white);
     border: 1px solid var(--grey-main);
     border-radius: 8px;
-    padding: 16px;
+    padding: 12px;
     display: block;
     margin-left: 8px;
-    width: fit-content;
+    height: 28px;
     background-color: var(--hover-color);
   }
 

@@ -1,9 +1,10 @@
 import * as filmApi from "../../api/film.js";
 import template from "./Film.hbs";
 import Router from "../../utils/router.js";
-import store from "../../index.js";
+import store, { getCookie } from "../../index.js";
 import { getFilmData } from "../../../use-cases/film.js";
 import { FILM_REDUCER } from "../../../flux/actions/film.js";
+import { showNotification } from "../Notification/notification.js";
 
 /**
  * Отображает страницу фильма с указанным идентификатором.
@@ -36,8 +37,22 @@ export async function renderFilmPage(filmId) {
   });
 
   const playerButton = document.querySelector(".accent-button");
-  playerButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    Router.goToPlayerPage(filmId, filmData.title, filmData.link);
+  playerButton.addEventListener("click", () => {
+    if (getCookie("user_uuid") !== undefined) {
+      Router.goToPlayerPage(filmId, filmData.title, filmData.link);
+    } else {
+      showNotification("Для этого нужно быть авторизованным", "danger");
+    }
+  });
+
+  const favouritesButton = document.querySelector("#favourites-button");
+  favouritesButton.addEventListener("click", () => {
+    const uuid = getCookie("user_uuid");
+    if (uuid !== undefined) {
+      // addToFavorite(filmId, uuid);
+      console.log("Добавил");
+    } else {
+      showNotification("Для этого нужно быть авторизованным", "danger");
+    }
   });
 }

@@ -18,6 +18,7 @@ import { showNotification } from "../Notification/notification.js";
 export async function renderProfile(profileId) {
   let filmsData;
   let profileData;
+  // filmsData = getFavouritesFilms(profileId);
   await FilmsAllRequest();
   store.subscribe(FILMS_REDUCER, () => {
     filmsData = store.getState().films.films;

@@ -41,11 +41,6 @@ const config = {
       text: "Фильмы и сериалы",
       render: renderFilms,
     },
-    support: {
-      href: "/support",
-      text: "Поддержка",
-      render: renderFilms,
-    },
     subscription: {
       href: "/subscription",
       text: "Подписки",

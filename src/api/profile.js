@@ -1,5 +1,8 @@
 import { fetchRequest, IP } from "./fetch.js";
-import { fixUserData } from "../utils/transformers/filmDataWithDuration.js";
+import {
+  fixUserData,
+  toFilmDataWithDuration,
+} from "../utils/transformers/filmDataWithDuration.js";
 
 export const CHANGE_USERNAME_ACTION = "chUsername";
 export const CHANGE_PASSWORD_ACTION = "chPassword";
@@ -66,5 +69,47 @@ export async function getProfilePreview(uuid) {
     return data.user.Avatar;
   } catch (error) {
     console.error("Произошла ошибка: ", error.message);
+  }
+}
+
+/**
+ * Получает список актеров фильма по его идентификатору.
+ * @param {string} filmId - Идентификатор фильма.
+ * @param {string} uuid - Идентификатор пользователя.
+ * @return {Promise<boolean>} - Возвращает true в случае успешного добавления фильма в избранное
+ */
+export async function addToFavorite(filmId, uuid) {
+  try {
+    const response = await fetchRequest(
+      `${IP}/profile/${uuid}/favourites/add`,
+      "GET",
+    );
+    const responseData = await response.json();
+
+    return responseData.status === 200;
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
+}
+
+/**
+ * Запрос на получение массива с фильмами
+ * @function
+ * @param {string} uuid - Идентификатор пользователя.
+ * @return {Promise} - Объект запроса
+ */
+export async function getFavouritesFilms(uuid) {
+  try {
+    const url = IP + `/profile/${uuid}/favourites/all`;
+    const response = await fetchRequest(url, "GET");
+
+    const filmsData = await response.json();
+    if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
+      throw new Error("Ошибка: ответ не содержит массив фильмов");
+    }
+
+    return toFilmDataWithDuration(filmsData.films);
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
   }
 }
