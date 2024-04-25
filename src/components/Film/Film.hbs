@@ -25,6 +25,9 @@
 
 <div class="film-content-block">
   <div class="film-content-block__left">
+      {{#if series}}
+          {{> series}}
+      {{/if}}
     <div class="film-content-block__description">
       <a class="film-content-block__sub-title">Описание</a>
       <p>{{data}}</p>

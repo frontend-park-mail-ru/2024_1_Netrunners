@@ -59,7 +59,7 @@ const timeIntoText = (durationInMin) => {
     return `${hours}ч`;
   }
 
-  return `${hours}ч ${minutes} мин`;
+  return `${hours}ч ${minutes}мин`;
 };
 
 export const formatTime = (time) => {
