@@ -38,7 +38,7 @@
   }
 
   &__film-card {
-    width: 290px;
+    width: 288px;
     height: 450px;
     margin: 16px 0 16px 0;
     background-size: cover;
@@ -202,10 +202,8 @@
 
   &__genre-films-container {
     display: flex;
-    flex-direction: row-reverse;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 13px;
+    gap: 16px;
   }
 
   &__carousel-shapes {

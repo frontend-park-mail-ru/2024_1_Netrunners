@@ -1,20 +1,13 @@
-import { FilmsAllRequest } from "../../../use-cases/filmsAll.js";
 import template from "./genre.hbs";
-import store from "../../index.js";
-import { FILMS_REDUCER } from "../../../flux/actions/filmsAll.js";
 import Router from "../../utils/router.js";
+import { getFilmsOfGenre } from "../../api/films.js";
 
 /**
  * Отображает страницу фильмов определенного жанра.
  * @param {string} genreNameRu Название жанра.
  */
 export async function renderGenrePage(genreNameRu) {
-  let filmsData;
-  await FilmsAllRequest();
-  store.subscribe(FILMS_REDUCER, () => {
-    filmsData = store.getState().films.films;
-  });
-  await FilmsAllRequest();
+  const filmsData = await getFilmsOfGenre(genreNameRu);
 
   const genrePageData = { filmsData, genreNameRu };
   document.querySelector("main").innerHTML = template(genrePageData);

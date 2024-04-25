@@ -171,4 +171,5 @@ export async function getFilmsOfGenre(genreName) {
   // } catch (error) {
   //   console.error("Произошла ошибка:", error.message);
   // }
+  return await getAll();
 }
