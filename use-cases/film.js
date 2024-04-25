@@ -1,7 +1,7 @@
 import store from "../src/index.js";
 import { fetchRequest, IP } from "../src/api/fetch.js";
 import { FilmError, FilmRequest, FilmSuccess } from "../flux/actions/film.js";
-import { timeConvert } from "../src/utils/timeConvert.js";
+import {fixFilmData} from "../src/utils/transformers/filmDataWithDuration.js";
 
 const data = {
   status: 200,
@@ -68,21 +68,7 @@ export async function getFilmData(uuid) {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
 
-    if (typeof data.film.duration === "number") {
-      data.film.duration = timeConvert.timeIntoText(data.film.duration);
-    }
-
-    data.film.date = timeConvert.dateIntoYear(data.film.date);
-    if (
-      data.film.isSeries &&
-      typeof data.film.series[data.film.series.length - 1].duration === "number"
-    ) {
-      data.film.series.forEach((elem) => {
-        elem.duration = timeConvert.timeIntoText(elem.duration);
-      });
-    }
-
-    store.dispatch(FilmSuccess(data));
+    store.dispatch(FilmSuccess(fixFilmData(data)));
   } catch (error) {
     console.error("Произошла ошибка: ", error.message);
     store.dispatch(FilmError());

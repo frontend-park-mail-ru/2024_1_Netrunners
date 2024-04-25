@@ -174,25 +174,65 @@
   padding: 32px;
   border-radius: 16px;
   color: white;
-  max-height: 36%;
-  overflow-y: scroll;
-  list-style: none;
+
+
+  &__series-list {
+    overflow-y: scroll;
+    height: auto;
+    max-height: 360px;
+    list-style: none;
+    border-top: 2px solid var(--border-color);
+
+
+    &::-webkit-scrollbar {
+      position: absolute;
+      left: 0;
+      width: 10px;
+      transform: translateX(-100px);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--neutral-main);
+      border-radius: 16px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--grey-main);
+      border-radius: 16px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--grey-secondary);
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 14px 14px transparent;
+      border: solid 4px transparent;
+      transform: translateX(10px);
+    }
+  }
 
   &__element {
     padding: 48px 0;
     position: relative;
-    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
     counter-increment: list;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
-    & > span {
+    & > .series-block__content-in-element {
       margin-left: 80px;
     }
 
-    & > div {
+    & > .film-content-block__data-element {
       position: absolute;
       right: 0;
+      margin-right: 32px ;
+    }
+
+    &:hover  {
+      background-color: var(--hover-color);
     }
   }
 
@@ -200,33 +240,15 @@
     content: counter(list);
     font-size: xx-large;
     color: var(--grey-secondary);
-    position: absolute; /* Абсолютное позиционирование */
+    position: absolute;
+    margin-left: 16px;
   }
 
   &__seasons {
-    padding: 24px 0;
+    padding: 0 0 32px 16px;
   }
 
-  &::-webkit-scrollbar {
-    position: absolute;
-    left: 0;
-    width: 10px; /* Ширина скроллбара */
-    transform: translateX(-100px);
-  }
 
-  &::-webkit-scrollbar-track {
-    background: var(--neutral-main);
-    border-radius: 16px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--grey-main);
-    border-radius: 16px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: var(--grey-secondary);
-  }
 }
 
 
