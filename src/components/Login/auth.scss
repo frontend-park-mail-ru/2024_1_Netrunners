@@ -8,7 +8,6 @@ input {
   color: var(--white);
   background: var(--grey-main);
   font-family: var(--input-font);
-  opacity: 100%;
   &:focus {
     outline: var(--white) solid thin;
   }
@@ -63,14 +62,15 @@ input {
   }
 
   &__form-background {
-    margin: 6% auto;
+    margin: 96px auto;
     padding: 32px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    width: 18%;
+    min-width: 322px;
+    max-width: 346px;
     color: var(--white);
-    background: #0e0e0eb2;
+    background: var(--neutral-main-with-opacity);
     backdrop-filter: blur(10px);
   }
 }
