@@ -37,6 +37,16 @@ export async function renderFilms() {
     });
     renderSlider();
 
+    const genreCards = document.querySelectorAll("[data-genre-name]");
+    genreCards.forEach((genreCard) => {
+      genreCard.addEventListener("click", () => {
+        Router.goToGenrePage(
+          genreCard.dataset.genreName,
+          genreCard.dataset.genreNameRu,
+        );
+      });
+    });
+
     const filmCards = document.querySelectorAll("[data-film-id]");
     filmCards.forEach((filmCard) => {
       filmCard.addEventListener("click", () => {

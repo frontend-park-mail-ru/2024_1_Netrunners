@@ -32,7 +32,9 @@
               <div class="poster-block__buttons">
                 Смотреть позже
               </div>
-              <a class="poster-block__duration"> {{this.duration}} </a>
+              <a class="poster-block__duration">
+                {{this.duration}}
+              </a>
             </div>
           </div>
         </div>
@@ -48,7 +50,11 @@
   </div>
   <div class="genres-container">
     {{#each filmsGenres}}
-      <div class="genres-container__card">
+      <div
+        class="genres-container__card"
+        data-genre-name="{{this.nameEn}}"
+        data-genre-name-ru="{{this.name}}"
+      >
         <div class="genres-container__images">
           {{#each posters}}
             <img class="genres-container__image" src="{{this}}" />
