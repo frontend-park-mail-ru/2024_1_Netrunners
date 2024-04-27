@@ -1,0 +1,136 @@
+<div class="statistics-container">
+    <ul class="series-block">
+        <div class="series-block__seasons">
+            Статистика главной страницы
+        </div>
+        <div class="statistics-container__questions-list">
+            {{#each mainPageStat}}
+                <li class="series-block__element">
+                    <span class="series-block__content-in-element"> {{this.title}} </span>
+                    {{#if this.isAdditional}}
+                        <div class="liElement">
+                            {{#each this.checkVariants}}
+                                <li class="statistics-container__check-question">
+                                    <span class="series-block__content-in-element"> {{this.title}} </span>
+                                    <div class="statistics-container__progress-bar">
+                                        <div class="statistics-container__progress-bar-done">
+                                        </div>
+                                    </div>
+                                    <div class="film-content-block__data-element">
+                                        {{this.count}}
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </div>
+                    {{else}}
+                    <div class="film-content-block__data-element">
+                        {{this.averageScore}}
+                    </div>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </div>
+    </ul>
+</div>
+<div class="statistics-container">
+    <ul class="series-block">
+        <div class="series-block__seasons">
+            Статистика страницы фильмов и сериалов
+        </div>
+        <div class="statistics-container__questions-list">
+            {{#each filmPageStat}}
+            <li class="series-block__element">
+                <span class="series-block__content-in-element"> {{this.title}} </span>
+                {{#if this.isAdditional}}
+                    <div class="liElement">
+                        {{#each this.checkVariants}}
+                            <li class="statistics-container__check-question">
+                                <span class="series-block__content-in-element"> {{this.title}} </span>
+                                <div class="statistics-container__progress-bar">
+                                    <div class="statistics-container__progress-bar-done">
+                                    </div>
+                                </div>
+                                <div class="film-content-block__data-element">
+                                    {{this.count}}
+                                </div>
+                            </li>
+                        {{/each}}
+                    </div>
+                {{else}}
+                    <div class="film-content-block__data-element">
+                        {{this.averageScore}}
+                    </div>
+                {{/if}}
+                </li>
+            {{/each}}
+        </div>
+    </ul>
+</div>
+<div class="statistics-container">
+    <ul class="series-block">
+        <div class="series-block__seasons">
+            Статистика страницы актера
+        </div>
+        <div class="statistics-container__questions-list">
+            {{#each actorPageStat}}
+            <li class="series-block__element">
+                <span class="series-block__content-in-element"> {{this.title}} </span>
+                {{#if this.isAdditional}}
+                    <div class="liElement">
+                        {{#each this.checkVariants}}
+                            <li class="statistics-container__check-question">
+                                <span class="series-block__content-in-element"> {{this.title}} </span>
+                                <div class="statistics-container__progress-bar">
+                                    <div class="statistics-container__progress-bar-done">
+                                    </div>
+                                </div>
+                                <div class="film-content-block__data-element">
+                                    {{this.count}}
+                                </div>
+                            </li>
+                        {{/each}}
+                    </div>
+                {{else}}
+                    <div class="film-content-block__data-element">
+                        {{this.averageScore}}
+                    </div>
+                {{/if}}
+                </li>
+            {{/each}}
+        </div>
+    </ul>
+</div>
+<div class="statistics-container">
+    <ul class="series-block">
+        <div class="series-block__seasons">
+            Статистика страницы профиля
+        </div>
+        <div class="statistics-container__questions-list">
+            {{#each profilePageStat}}
+            <li class="series-block__element">
+                <span class="series-block__content-in-element"> {{this.title}} </span>
+                {{#if this.isAdditional}}
+                    <div class="liElement">
+                    {{#each this.checkVariants}}
+                        <li class="statistics-container__check-question">
+                            <span class="series-block__content-in-element"> {{this.title}} </span>
+                            <div class="statistics-container__progress-bar">
+                                <div class="statistics-container__progress-bar-done">
+                                </div>
+                            </div>
+                            <div class="film-content-block__data-element">
+                                {{this.count}}
+                            </div>
+                        </li>
+                    {{/each}}
+                    </div>
+                {{else}}
+                    <div class="film-content-block__data-element">
+                        {{this.averageScore}}
+                    </div>
+                {{/if}}
+                </li>
+            {{/each}}
+        </div>
+    </ul>
+</div>

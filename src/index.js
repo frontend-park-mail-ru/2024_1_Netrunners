@@ -11,6 +11,7 @@ import Rout from "./utils/router.js";
 import "../src/index.scss";
 import { getFilmData } from "../use-cases/film";
 import { FILM_REDUCER } from "../flux/actions/film";
+import {renderStatistics} from "./components/Statistics/statistics.js";
 
 const store = createStore(rootReducer);
 
@@ -46,10 +47,10 @@ const config = {
       text: "Поддержка",
       render: renderFilms,
     },
-    subscription: {
-      href: "/subscription",
-      text: "Подписки",
-      render: renderFilms,
+    statistics: {
+      href: "/statistics",
+      text: "Статистика",
+      render: renderStatistics,
     },
   },
   authElements: {
@@ -137,6 +138,38 @@ export function getCookie(name) {
 new Router();
 renderMenu();
 await menu.renderAuth();
+
+export function renderIframe() {
+  const newElement = document.createElement('iframe');
+  newElement.src = 'http://127.0.0.1:8090/'
+
+  const parentPageUrl = window.location.href;
+  if (parentPageUrl == "http://127.0.0.1:8080/" || parentPageUrl.includes('film') || parentPageUrl.includes('films') || parentPageUrl.includes('profile')) {
+    setTimeout(() => {
+      document.body.appendChild(newElement);
+    }, 50000);
+
+    const closeButton = document.createElement('button');
+    rootElement.appendChild(newElement);
+    closeButton.id = 'closeButton';
+    closeButton.innerText= 'X'
+    rootElement.appendChild(closeButton);
+
+    newElement.addEventListener('load', function() {
+      newElement.contentWindow.postMessage({ url: parentPageUrl }, 'http://127.0.0.1:8090');
+    });
+
+    closeButton.addEventListener('click', () => {
+      rootElement.removeChild(closeButton);
+      rootElement.removeChild(newElement);
+    });
+  }
+};
+
+renderIframe();
+
+
+
 
 window.addEventListener("popstate", async (e) => {
   if (e.state === null || !navigator.onLine) {

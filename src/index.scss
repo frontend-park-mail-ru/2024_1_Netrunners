@@ -8,6 +8,7 @@
 @import "components/Player/player";
 @import "components/Profile/Profile";
 @import "components/Notification/notification";
+@import "components/Statistics/statistics";
 
 :root {
   --black: #000000;
@@ -80,4 +81,25 @@ body {
     background-color: var(--neon-main);
     cursor: pointer;
   }
+}
+
+iframe {
+  position: absolute;
+  border: none;
+  top:200px;
+  left:0px;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+}
+
+#closeButton {
+  position: absolute;
+  top: 216px;
+  left: 250px;
+  padding: 10px 20px;
+  background-color: var(--neon-main);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }

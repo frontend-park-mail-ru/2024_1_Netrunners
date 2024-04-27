@@ -6,9 +6,10 @@ import { renderLogin } from "../components/Login/login.js";
 import { renderProfile } from "../components/Profile/profile.js";
 import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
-import { changeActiveButton, getCookie } from "../index.js";
+import {changeActiveButton, getCookie, renderIframe} from "../index.js";
 import * as authApi from "../api/auth";
 import { renderGenrePage } from "../components/Genre/genre.js";
+import {renderStatistic, renderStatistics} from "../components/Statistics/statistics.js";
 
 /**
  * Класс для управления навигацией и отображением различных страниц.
@@ -23,6 +24,7 @@ export class Router {
       "/signup": renderSignup,
       "/login": renderLogin,
       "/logout": renderLogout,
+      "/statistics": renderStatistics
     };
   }
 
@@ -38,6 +40,7 @@ export class Router {
     window.history.pushState(state, state.title, state.path);
     changeActiveButton(state.path);
     renderFilms();
+    renderIframe();
   }
 
   /**
@@ -52,6 +55,20 @@ export class Router {
     window.history.pushState(state, state.title, state.path);
     changeActiveButton(state.path);
     renderSignup();
+  }
+
+  /**
+   * Переход на страницу регистрации.
+   */
+  goToStatisticsPage() {
+    const state = {};
+    state.path = "/statistics";
+    state.title = "Статистика";
+    document.title = state.title;
+
+    window.history.pushState(state, state.title, state.path);
+    changeActiveButton(state.path);
+    renderStatistics();
   }
 
   /**
@@ -96,6 +113,7 @@ export class Router {
     window.history.pushState(state, state.title, state.path);
 
     renderActorPage(uuid);
+    renderIframe();
   }
 
   /**
@@ -113,6 +131,7 @@ export class Router {
 
     renderFilmPage(uuid);
     window.scrollTo(0, 0);
+    renderIframe();
   }
 
   /**
@@ -144,6 +163,7 @@ export class Router {
     window.history.pushState(state, state.title, state.path);
     changeActiveButton(state.path);
     renderProfile(uuid);
+    renderIframe();
   }
 
   /**
@@ -194,6 +214,10 @@ export class Router {
       } else if (path.includes("/player/")) {
         const uuid = path.substring("/player/".length, path.length);
         await renderPlayer(uuid, title, data);
+      } else if (path.includes("/statistics")) {
+        if (!isAuthorized) {
+          this.goToHomePage();
+        }
       } else if (path.includes("/profile")) {
         if (!isAuthorized) {
           this.goToHomePage();

@@ -14,7 +14,7 @@ const menuRoutes = {
   signup: Router.goToSignupPage,
   logout: Router.goToLogout,
   support: Router.goToHomePage, // временно
-  subscription: Router.goToHomePage, // временно
+  statistics: Router.goToStatisticsPage, // временно
 };
 
 /**
