@@ -96,7 +96,7 @@ export async function renderMenu() {
     if (target.tagName.toLowerCase() === "a") {
       e.preventDefault();
       // changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
-      changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
+      changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
     }
   });
 }
@@ -141,10 +141,10 @@ await menu.renderAuth();
 
 export function renderIframe() {
   const newElement = document.createElement('iframe');
-  newElement.src = 'http://127.0.0.1:8090/'
+  newElement.src = 'http://94.139.247.246:8090/'
 
   const parentPageUrl = window.location.href;
-  if (parentPageUrl == "http://127.0.0.1:8080/" || parentPageUrl.includes('film') || parentPageUrl.includes('films') || parentPageUrl.includes('profile')) {
+  if (parentPageUrl == "http://94.139.247.246:8080/" || parentPageUrl.includes('film') || parentPageUrl.includes('films') || parentPageUrl.includes('profile')) {
     setTimeout(() => {
       document.body.appendChild(newElement);
     }, 50000);
@@ -156,7 +156,7 @@ export function renderIframe() {
     rootElement.appendChild(closeButton);
 
     newElement.addEventListener('load', function() {
-      newElement.contentWindow.postMessage({ url: parentPageUrl }, 'http://127.0.0.1:8090');
+      newElement.contentWindow.postMessage({ url: parentPageUrl }, 'http://94.139.247.246:8090');
     });
 
     closeButton.addEventListener('click', () => {
