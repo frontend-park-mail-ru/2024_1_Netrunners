@@ -20,15 +20,15 @@ type QuestionStatistics struct {
 export async function getStatistics() {
     try {
         let data = {mainPageStat: [], filmPageStat: [], actorPageStat: [], profilePageStat: []};
-        let mainPageStat = await fetchRequest(`${IP}/csat/get&p=filmsAll`, "GET");
-        let filmPageStat = await fetchRequest(`${IP}/csat/get&p=filmData`, "GET");
-        let actorPageStat = await fetchRequest(`${IP}/csat/get&p=actorData`, "GET");
-        let profilePageStat = await fetchRequest(`${IP}/csat/get&p=profileData`, "GET");
+        let mainPageStat = await fetchRequest(`${IP}/csat/stat/get&p=filmsAll`, "GET");
+        let filmPageStat = await fetchRequest(`${IP}/csat/stat/get&p=filmData`, "GET");
+        let actorPageStat = await fetchRequest(`${IP}/csat/stat/get&p=actorData`, "GET");
+        let profilePageStat = await fetchRequest(`${IP}/csat/stat/get&p=profileData`, "GET");
 
-        data.append(mainPageStat.json());
-        data.append(filmPageStat.json());
-        data.append(actorPageStat.json());
-        data.append(profilePageStat.json());
+        data.append(mainPageStat.statistics.json());
+        data.append(filmPageStat.statistics.json());
+        data.append(actorPageStat.statistics.json());
+        data.append(profilePageStat.statistics.json());
 
         if (!data || typeof data !== "object") {
             throw new Error("Ошибка: полученные данные не являются объектом");
