@@ -4,11 +4,12 @@
   </div>
   <div class="menu-container__menu">
     {{#each items}}
-      <a
-        class="{{this.className}}"
-        href="{{this.href}}"
-        data-section="{{this.key}}"
-      >{{this.text}}</a>
+    <a
+      class="{{ this.className }}"
+      href="{{ this.href }}"
+      data-section="{{ this.key }}"
+      >{{ this.text }}</a
+    >
     {{/each}}
   </div>
   <div class="menu-container__menu-right">

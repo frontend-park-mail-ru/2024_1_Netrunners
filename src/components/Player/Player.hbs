@@ -20,7 +20,7 @@
         />
         <div class="player-container__video-timer">
           <p class="player-container__current-time">00:00</p>
-          <p class="player-container__separator"> / </p>
+          <p class="player-container__separator">/</p>
           <p class="player-container__video-duration">00:00</p>
         </div>
       </li>
@@ -70,11 +70,9 @@
     </ul>
   </div>
   <video>
-    <source src="{{this.src}}" />
+    <source src="{{ this.src }}" />
   </video>
 </div>
-<button
-  type="button"
-  id="exit-player"
-  class="profile-info__buttons"
->Назад</button>
+<button type="button" id="exit-player" class="profile-info__buttons">
+  Назад
+</button>
