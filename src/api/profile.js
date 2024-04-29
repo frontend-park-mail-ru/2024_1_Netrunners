@@ -73,16 +73,35 @@ export async function getProfilePreview(uuid) {
 }
 
 /**
- * Получает список актеров фильма по его идентификатору.
- * @param {string} filmId - Идентификатор фильма.
- * @param {string} uuid - Идентификатор пользователя.
+ * Добавляет фильм в избранное
+ * @param {Object} requestData
  * @return {Promise<boolean>} - Возвращает true в случае успешного добавления фильма в избранное
  */
-export async function addToFavorite(filmId, uuid) {
+export async function addToFavorite(requestData) {
   try {
     const response = await fetchRequest(
-      `${IP}/profile/${uuid}/favourites/add`,
-      "GET",
+      `${IP}/films/put_favorite`,
+      "POST",
+      requestData,
+    );
+    const responseData = await response.json();
+    return responseData.status === 200;
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
+}
+
+/**
+ * Удаляет фильм из избранного
+ * @param {Object} requestData
+ * @return {Promise<boolean>} - Возвращает true в случае успешного удаления фильма из избранного
+ */
+export async function removeFromFavorite(requestData) {
+  try {
+    const response = await fetchRequest(
+      `${IP}/films/remove_favorite`,
+      "POST",
+      requestData,
     );
     const responseData = await response.json();
 
@@ -100,12 +119,12 @@ export async function addToFavorite(filmId, uuid) {
  */
 export async function getFavouritesFilms(uuid) {
   try {
-    const url = IP + `/profile/${uuid}/favourites/all`;
+    const url = IP + `/films/${uuid}/all_favorite`;
     const response = await fetchRequest(url, "GET");
 
     const filmsData = await response.json();
     if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
-      throw new Error("Ошибка: ответ не содержит массив фильмов");
+      return;
     }
 
     return toFilmDataWithDuration(filmsData.films);

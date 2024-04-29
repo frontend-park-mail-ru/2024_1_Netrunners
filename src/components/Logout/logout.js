@@ -13,11 +13,10 @@ import Router from "../../utils/router.js";
 export async function renderLogout() {
   const isAuthorized = await authApi.logout();
 
-  document.cookie =
-    "user_uuid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   await menu.renderAuth();
-
   if (isAuthorized) {
+    document.cookie =
+      "user_uuid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     changeActiveButton("/");
     await Router.goToHomePage();
   }

@@ -11,7 +11,11 @@
     <div class="film-page-poster-block__poster-actions">
       <div class="accent-button" id="data-player-button">Смотреть</div>
       <div class="film-page-poster-block__buttons" id="favourites-button">
+        {{#if inFavorites}}
+        <img src="/icons/full-heart.svg" />
+        {{else}}
         <img src="/icons/heart.svg" />
+        {{/if}}
       </div>
       <a class="film-page-poster-block__duration"> {{ duration }} </a>
     </div>

@@ -6,8 +6,6 @@ import { renderLogin } from "../components/Login/login.js";
 import { renderProfile } from "../components/Profile/profile.js";
 import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
-import { changeActiveButton, getCookie } from "../index.js";
-import * as authApi from "../api/auth";
 import { renderGenrePage } from "../components/Genre/genre.js";
 
 /**
@@ -171,7 +169,7 @@ export class Router {
    * @return {Promise<void>}
    */
   async go(path, title, data = null, needPush = true) {
-    const isAuthorized = await authApi.check();
+    const isAuthorized = getCookie("user_uuid") !== undefined;
     const state = {};
     state.path = path;
     state.title = title;

@@ -15,16 +15,12 @@ Handlebars.registerHelper("stars", function (averageScore) {
   return new Handlebars.SafeString(starsHTML);
 });
 
+const cookieRegex = /(?:^|; )user_uuid=([^;]*)/;
+
 Handlebars.registerHelper("isAuthenticated", function () {
-  const matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-        "user_uuid".replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)",
-    ),
-  );
-  const userUuid = matches ? decodeURIComponent(matches[1]) : undefined;
-  return userUuid !== undefined;
+  const matches = document.cookie.match(cookieRegex);
+
+  return Boolean(matches && decodeURIComponent(matches[1]));
 });
 
 /**

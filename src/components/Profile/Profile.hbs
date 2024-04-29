@@ -23,6 +23,7 @@
   <div class="films-section__upper-block">
     <div class="films-section__title">Моя коллекция</div>
   </div>
+  {{#if filmsData}}
   <div class="films-section__films-container">
     <button class="films-section__carousel-button prev" id="left">
       <img src="/icons/arrow.svg" alt="" />
@@ -70,4 +71,9 @@
       <img src="/icons/arrow.svg" alt="" />
     </button>
   </div>
+  {{else}}
+  <div class="films-section__no-collection">
+    Чтобы здесь появились фильмы, добавьте их в избранное
+  </div>
+  {{/if}}
 </div>

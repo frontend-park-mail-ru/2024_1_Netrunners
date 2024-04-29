@@ -113,19 +113,15 @@ export function changeActiveButton(link) {
   menu.state.activeMenuLink = menuLinkElement;
 }
 
+const cookieRegex = /(?:^|; )user_uuid=([^;]*)/;
 /**
  * Получает значение куки по его имени.
  * @param {string} name Имя куки, значение которой необходимо получить.
  * @return {string | undefined} Значение куки или undefined, если куки с указанным именем не найдено.
  */
 export function getCookie(name) {
-  const matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)",
-    ),
-  );
+  const matches = document.cookie.match(cookieRegex);
+
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
