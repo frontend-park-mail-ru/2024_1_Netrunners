@@ -1,15 +1,15 @@
 <ul class="series-block">
-  <div class="series-block__seasons">
-    some buttons for seasons
-  </div>
-    <div class="series-block__series-list">
-  {{#each series}}
+  <div class="series-block__seasons">some buttons for seasons</div>
+  <div class="series-block__series-list">
+    {{#each series}}
     <li class="series-block__element">
-      <span class="series-block__content-in-element" href="{{this.link}}"> {{this.title}} </span>
+      <span class="series-block__content-in-element" href="{{ this.link }}">
+        {{ this.title }}
+      </span>
       <div class="film-content-block__data-element">
-        {{this.duration}}
+        {{ this.duration }}
       </div>
     </li>
-  {{/each}}
-    </div>
+    {{/each}}
+  </div>
 </ul>

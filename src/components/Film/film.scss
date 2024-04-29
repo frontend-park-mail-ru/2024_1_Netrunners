@@ -30,13 +30,14 @@
   }
 
   &__buttons {
+    cursor: pointer;
     color: var(--white);
     border: 1px solid var(--grey-main);
     border-radius: 8px;
-    padding: 16px;
+    padding: 12px;
     display: block;
     margin-left: 8px;
-    width: fit-content;
+    height: 28px;
     background-color: var(--hover-color);
   }
 
@@ -175,14 +176,12 @@
   border-radius: 16px;
   color: white;
 
-
   &__series-list {
     overflow-y: scroll;
     height: auto;
     max-height: 360px;
     list-style: none;
     border-top: 2px solid var(--border-color);
-
 
     &::-webkit-scrollbar {
       position: absolute;
@@ -228,10 +227,10 @@
     & > .film-content-block__data-element {
       position: absolute;
       right: 0;
-      margin-right: 32px ;
+      margin-right: 32px;
     }
 
-    &:hover  {
+    &:hover {
       background-color: var(--hover-color);
     }
   }
@@ -247,8 +246,4 @@
   &__seasons {
     padding: 0 0 32px 16px;
   }
-
-
 }
-
-

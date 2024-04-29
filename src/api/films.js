@@ -33,59 +33,6 @@ const topFourFilms = [
   },
 ];
 
-const genresData = [
-  {
-    name: "Боевик",
-    nameEn: "Action",
-    posters: [
-      "https://yobte.ru/uploads/posts/2019-07/podborka-plakatov-s-gerojami-boevikov-80-h-90-h-godov-12.jpg",
-      "https://i.pinimg.com/originals/dd/bc/5c/ddbc5c9c728a04c57b7e7ba05fdb93ba.jpg",
-      "https://lightbox-prod.imgix.net/images/assets/100141671-p9000544_v_v10_ac.jpg",
-      "https://media.kg-portal.ru/movies/s/security/posters/security_2.jpg",
-    ],
-  },
-  {
-    name: "Комедия",
-    nameEn: "Comedy",
-    posters: [
-      "https://images.justwatch.com/poster/301028172/s718/gentlemen-of-fortune.%7Bformat%7D",
-      "https://fs.kinomania.ru/file/film_poster/c/5a/c5ac4788fb9f7d49b78128ce3c2637e3.jpeg",
-      "https://4tololo.ru/sites/default/files/images/20140907132433.jpg?itok=WNvojXhV",
-      "https://pic.rutubelist.ru/video/a0/77/a077b5f93cb7474e527b15f154a97341.jpg",
-    ],
-  },
-  {
-    name: "Драма",
-    nameEn: "Drama",
-    posters: [
-      "https://sun9-67.userapi.com/impg/E8pgKo9kqiHUxPQd-AamV2YsTnb_zOTFO0H6KQ/5lKdkFFLG2Q.jpg?size=646x807&quality=95&sign=c784fde94499b2c6bb4ead461fc3ab92&c_uniq_tag=5tZv8sO0MhCbilTXrMxtwP7iztmm_mV47D74XQdZVbs&type=album",
-      "https://u2.9111s.ru/uploads/202302/06/fad90e48a7a82f234725d11aeddd042d.jpg",
-      "https://dominioncinema.ru/upload/iblock/2aa/ap70cucz9oc1ivrjz17z9iohhac7nem4.jpg",
-      "https://i.pinimg.com/originals/19/b8/c5/19b8c5b123a4b5301cf44785452cd20e.jpg",
-    ],
-  },
-  {
-    name: "Фэнтези",
-    nameEn: "Fantasy",
-    posters: [
-      "https://i2.wp.com/www.weidmangallery.com/wp-content/uploads/2019/05/WG00911.jpg?fit=4224%2C2816&ssl=1",
-      "https://media.filmz.ru/photos/full/filmz.ru_f_72760.jpg",
-      "https://i.artfile.ru/3840x2160_1566401_[www.ArtFile.ru].jpg",
-      "https://i.pinimg.com/originals/6d/44/82/6d4482ab03ca7de7405144221256edcd.jpg",
-    ],
-  },
-  {
-    name: "Фэнтези",
-    nameEn: "Fantasy",
-    posters: [
-      "https://i2.wp.com/www.weidmangallery.com/wp-content/uploads/2019/05/WG00911.jpg?fit=4224%2C2816&ssl=1",
-      "https://media.filmz.ru/photos/full/filmz.ru_f_72760.jpg",
-      "https://i.artfile.ru/3840x2160_1566401_[www.ArtFile.ru].jpg",
-      "https://i.pinimg.com/originals/6d/44/82/6d4482ab03ca7de7405144221256edcd.jpg",
-    ],
-  },
-];
-
 /**
  * Запрос на получение массива с фильмами
  * @function
@@ -130,23 +77,17 @@ export async function getTopFour() {
  * @throws {Error} Если произошла ошибка при получении данных.
  */
 export async function getGenres() {
-  // try {
-  //   const url = IP + "/films/genres/preview";
-  //   const response = await fetchRequest(url, "GET");
-  //
-  //   const genresData = await response.json();
-  //   if (!genresData || !genresData.genres || !Array.isArray(genresData.genre)) {
-  //     throw new Error("Ошибка: ответ не содержит массива жанров");
-  //   }
-  //
-  //   return genresData.genres;
-  // } catch (error) {
-  //   console.error("Произошла ошибка:", error.message);
-  // }
   try {
-    return new Promise(function (resolve) {
-      resolve(genresData);
-    });
+    const url = IP + "/films/genres/preview";
+    const response = await fetchRequest(url, "GET");
+
+    const genresData = await response.json();
+
+    if (!genresData || !genresData.genres) {
+      throw new Error("Ошибка: ответ не содержит массива жанров");
+    }
+
+    return genresData.genres;
   } catch (error) {
     console.error("Произошла ошибка:", error.message);
   }
@@ -154,22 +95,21 @@ export async function getGenres() {
 
 /**
  * Получает список фильмов определенного жанра.
- * @param {string} genreName - Название жанра.
+ * @param {string} genreUuid - Идентификатор жанра.
  * @return {Promise<object[]>} - Возвращает массив объектов с данными о фильмах.
  */
-export async function getFilmsOfGenre(genreName) {
-  // try {
-  //   const url = IP + "/films/genres/{genre}/all";
-  //   const response = await fetchRequest(url, "GET");
-  //
-  //   const filmsData = await response.json();
-  //   if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
-  //     throw new Error("Ошибка: ответ не содержит массива фильмов");
-  //   }
-  //
-  //   return toFilmDataWithDuration(filmsData.films);
-  // } catch (error) {
-  //   console.error("Произошла ошибка:", error.message);
-  // }
-  return await getAll();
+export async function getFilmsOfGenre(genreUuid) {
+  try {
+    const url = IP + `/films/genres/${genreUuid}/all`;
+    const response = await fetchRequest(url, "GET");
+
+    const filmsData = await response.json();
+    if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
+      throw new Error("Ошибка: ответ не содержит массива фильмов");
+    }
+
+    return toFilmDataWithDuration(filmsData.films);
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
 }

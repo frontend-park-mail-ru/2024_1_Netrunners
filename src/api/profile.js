@@ -1,5 +1,8 @@
 import { fetchRequest, IP } from "./fetch.js";
-import { fixUserData } from "../utils/transformers/filmDataWithDuration.js";
+import {
+  fixUserData,
+  toFilmDataWithDuration,
+} from "../utils/transformers/filmDataWithDuration.js";
 
 export const CHANGE_USERNAME_ACTION = "chUsername";
 export const CHANGE_PASSWORD_ACTION = "chPassword";
@@ -66,5 +69,66 @@ export async function getProfilePreview(uuid) {
     return data.user.Avatar;
   } catch (error) {
     console.error("Произошла ошибка: ", error.message);
+  }
+}
+
+/**
+ * Добавляет фильм в избранное
+ * @param {Object} requestData
+ * @return {Promise<boolean>} - Возвращает true в случае успешного добавления фильма в избранное
+ */
+export async function addToFavorite(requestData) {
+  try {
+    const response = await fetchRequest(
+      `${IP}/films/put_favorite`,
+      "POST",
+      requestData,
+    );
+    const responseData = await response.json();
+    return responseData.status === 200;
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
+}
+
+/**
+ * Удаляет фильм из избранного
+ * @param {Object} requestData
+ * @return {Promise<boolean>} - Возвращает true в случае успешного удаления фильма из избранного
+ */
+export async function removeFromFavorite(requestData) {
+  try {
+    const response = await fetchRequest(
+      `${IP}/films/remove_favorite`,
+      "POST",
+      requestData,
+    );
+    const responseData = await response.json();
+
+    return responseData.status === 200;
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
+}
+
+/**
+ * Запрос на получение массива с фильмами
+ * @function
+ * @param {string} uuid - Идентификатор пользователя.
+ * @return {Promise} - Объект запроса
+ */
+export async function getFavouritesFilms(uuid) {
+  try {
+    const url = IP + `/films/${uuid}/all_favorite`;
+    const response = await fetchRequest(url, "GET");
+
+    const filmsData = await response.json();
+    if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
+      return;
+    }
+
+    return toFilmDataWithDuration(filmsData.films);
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
   }
 }

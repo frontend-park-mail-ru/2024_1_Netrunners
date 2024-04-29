@@ -41,11 +41,6 @@ const config = {
       text: "Фильмы и сериалы",
       render: renderFilms,
     },
-    support: {
-      href: "/support",
-      text: "Поддержка",
-      render: renderFilms,
-    },
     subscription: {
       href: "/subscription",
       text: "Подписки",
@@ -118,19 +113,15 @@ export function changeActiveButton(link) {
   menu.state.activeMenuLink = menuLinkElement;
 }
 
+const cookieRegex = /(?:^|; )user_uuid=([^;]*)/;
 /**
  * Получает значение куки по его имени.
  * @param {string} name Имя куки, значение которой необходимо получить.
  * @return {string | undefined} Значение куки или undefined, если куки с указанным именем не найдено.
  */
 export function getCookie(name) {
-  const matches = document.cookie.match(
-    new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)",
-    ),
-  );
+  const matches = document.cookie.match(cookieRegex);
+
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
@@ -150,7 +141,8 @@ window.addEventListener("popstate", async (e) => {
     if (
       e.state.path.includes("/player/") ||
       e.state.path.includes("/film/") ||
-      e.state.path.includes("/actor/")
+      e.state.path.includes("/actor/") ||
+      window.location.href.includes("/genre/")
     ) {
       await Rout.go(e.state.path, e.state.title, null, false);
       return;
@@ -168,7 +160,8 @@ const handleLocation = async () => {
   const path = window.location.pathname;
   if (
     window.location.href.includes("/film/") ||
-    window.location.href.includes("/actor/")
+    window.location.href.includes("/actor/") ||
+    window.location.href.includes("/genre/")
   ) {
     await Rout.go(decodeURIComponent(path), document.title, null, false);
     return;

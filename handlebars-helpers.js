@@ -15,6 +15,14 @@ Handlebars.registerHelper("stars", function (averageScore) {
   return new Handlebars.SafeString(starsHTML);
 });
 
+const cookieRegex = /(?:^|; )user_uuid=([^;]*)/;
+
+Handlebars.registerHelper("isAuthenticated", function () {
+  const matches = document.cookie.match(cookieRegex);
+
+  return Boolean(matches && decodeURIComponent(matches[1]));
+});
+
 /**
  * Генерирует HTML-код для рейтинга звезд, основанный на округленном оценочном балле и остатке.
  * @param {number} roundedScore Округленный оценочный балл (целое число).

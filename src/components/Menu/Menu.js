@@ -13,7 +13,6 @@ const menuRoutes = {
   login: Router.goToLoginPage,
   signup: Router.goToSignupPage,
   logout: Router.goToLogout,
-  support: Router.goToHomePage, // временно
   subscription: Router.goToHomePage, // временно
 };
 
