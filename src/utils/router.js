@@ -7,6 +7,7 @@ import { renderProfile } from "../components/Profile/profile.js";
 import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
 import { renderGenrePage } from "../components/Genre/genre.js";
+import { changeActiveButton, getCookie } from "../index.js";
 
 /**
  * Класс для управления навигацией и отображением различных страниц.
@@ -115,17 +116,17 @@ export class Router {
 
   /**
    * Переход на страницу фильмов по жанру.
-   * @param {string} genreName название жанра.
+   * @param {string} genreUuid Идентификатор жанра.
    * @param {string} genreNameRu название жанра на русском.
    */
-  goToGenrePage(genreName, genreNameRu) {
+  goToGenrePage(genreUuid, genreNameRu) {
     const state = {};
-    state.path = `/genre/${genreName}`;
+    state.path = `/genre/${genreUuid}`;
     state.title = genreNameRu;
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-    renderGenrePage(genreNameRu);
+    renderGenrePage(genreUuid, genreNameRu);
     window.scrollTo(0, 0);
   }
 
@@ -187,8 +188,8 @@ export class Router {
         const uuid = path.substring("/film/".length, path.length);
         await renderFilmPage(uuid);
       } else if (path.includes("/genre/")) {
-        const genreName = path.substring("/genre/".length, path.length);
-        await renderGenrePage(genreName);
+        const uuid = path.substring("/genre/".length, path.length);
+        await renderGenrePage(uuid);
       } else if (path.includes("/player/")) {
         const uuid = path.substring("/player/".length, path.length);
         await renderPlayer(uuid, title, data);

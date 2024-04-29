@@ -30,6 +30,7 @@ export async function renderFilms() {
     });
     await FilmsAllRequest();
 
+    console.log(filmsGenres);
     document.querySelector("main").innerHTML = template({
       filmData,
       topFourFilms,
@@ -37,11 +38,11 @@ export async function renderFilms() {
     });
     renderSlider();
 
-    const genreCards = document.querySelectorAll("[data-genre-name]");
+    const genreCards = document.querySelectorAll("[data-genre-uuid]");
     genreCards.forEach((genreCard) => {
       genreCard.addEventListener("click", () => {
         Router.goToGenrePage(
-          genreCard.dataset.genreName,
+          genreCard.dataset.genreUuid,
           genreCard.dataset.genreNameRu,
         );
       });

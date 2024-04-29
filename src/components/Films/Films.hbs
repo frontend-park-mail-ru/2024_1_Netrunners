@@ -43,18 +43,21 @@
     {{#each filmsGenres}}
     <div
       class="genres-container__card"
-      data-genre-name="{{ this.nameEn }}"
-      data-genre-name-ru="{{ this.name }}"
+      data-genre-uuid="{{ this.genreUuid }}"
+      data-genre-name-ru="{{ this.genre }}"
     >
       <div class="genres-container__images">
-        {{#each posters}}
-        <img class="genres-container__image" src="{{ this }}" />
+        {{#each films}}
+        <img class="genres-container__image" src="{{ this.preview_data }}" />
+        <img class="genres-container__image" src="{{ this.preview_data }}" />
+        <img class="genres-container__image" src="{{ this.preview_data }}" />
+        <img class="genres-container__image" src="{{ this.preview_data }}" />
         {{/each}}
       </div>
       <div class="genres-container__overlay"></div>
       <div class="genres-container__content">
         <div class="genres-container__name">
-          {{ this.name }}
+          {{ this.genre }}
         </div>
       </div>
     </div>

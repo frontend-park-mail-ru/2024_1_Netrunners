@@ -141,7 +141,8 @@ window.addEventListener("popstate", async (e) => {
     if (
       e.state.path.includes("/player/") ||
       e.state.path.includes("/film/") ||
-      e.state.path.includes("/actor/")
+      e.state.path.includes("/actor/") ||
+      window.location.href.includes("/genre/")
     ) {
       await Rout.go(e.state.path, e.state.title, null, false);
       return;
@@ -159,7 +160,8 @@ const handleLocation = async () => {
   const path = window.location.pathname;
   if (
     window.location.href.includes("/film/") ||
-    window.location.href.includes("/actor/")
+    window.location.href.includes("/actor/") ||
+    window.location.href.includes("/genre/")
   ) {
     await Rout.go(decodeURIComponent(path), document.title, null, false);
     return;
