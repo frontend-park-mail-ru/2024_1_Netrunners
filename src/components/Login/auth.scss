@@ -7,7 +7,7 @@ input {
   border-radius: 16px;
   color: var(--white);
   background: var(--grey-main);
-  font-family: var(--input-font);
+  font-family: var(--input-font), serif;
   &:focus {
     outline: var(--white) solid thin;
   }
@@ -72,10 +72,26 @@ input {
     color: var(--white);
     background: var(--neutral-main-with-opacity);
     backdrop-filter: blur(10px);
+
+    @media (width <= 720px) {
+      min-width: 200px;
+      max-width: 300px;
+    }
+
+    @media (width <= 500px) {
+      min-width: 150px;
+      max-width: 250px;
+    }
+
+    @media (width <= 400px) {
+      min-width: 100px;
+      max-width: 200px;
+    }
   }
 }
 
 .auth-background {
+  overflow: hidden;
   background: url("img/background/background.png") rgba(255, 255, 255, 0.3)
     no-repeat;
   height: -webkit-fill-available;

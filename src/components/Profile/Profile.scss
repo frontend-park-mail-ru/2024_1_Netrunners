@@ -54,9 +54,18 @@
     background-color: var(--hover-color);
     font-size: 18px;
 
-    &:hover {
-      color: var(--neon-secondary);
-      padding: 16px;
+    @media (hover: hover) {
+      &:hover {
+        color: var(--neon-secondary);
+        padding: 16px;
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        color: var(--neon-secondary);
+        padding: 16px;
+      }
     }
   }
 }
