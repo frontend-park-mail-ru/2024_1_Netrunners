@@ -29,6 +29,18 @@ input {
     background: var(--neon-main);
     width: -webkit-fill-available;
 
+    @media (width <= 720px) {
+      margin-top: 48px;
+    }
+
+    @media (width <= 500px) {
+      margin-top: 32px;
+    }
+
+    @media (width <= 400px) {
+      margin-top: 28px;
+    }
+
     &:hover {
       background-color: var(--neon-secondary);
     }
@@ -44,12 +56,36 @@ input {
     padding: 6px 12px 12px;
     overflow: hidden;
     height: var(--main-text);
+
+    @media (width <= 720px) {
+      font-size: 12px;
+    }
+
+    @media (width <= 500px) {
+      font-size: 12px;
+    }
+
+    @media (width <= 400px) {
+      font-size: 12px;
+    }
   }
 
   &__title {
-    font-size: x-large;
+    font-size: 24px;
     color: var(--white);
     margin-left: 12px;
+
+    @media (width <= 720px) {
+      font-size: 22px;
+    }
+
+    @media (width <= 500px) {
+      font-size: 20px;
+    }
+
+    @media (width <= 400px) {
+      font-size: 18px;
+    }
   }
 
   &__logo {
@@ -91,11 +127,10 @@ input {
 }
 
 .auth-background {
-  overflow: hidden;
   background: url("img/background/background.png") rgba(255, 255, 255, 0.3)
     no-repeat;
-  height: -webkit-fill-available;
-  width: -webkit-fill-available;
+  height: 100vh;
+  width: 100vw;
   position: absolute;
   left: 0;
   background-size: cover;
