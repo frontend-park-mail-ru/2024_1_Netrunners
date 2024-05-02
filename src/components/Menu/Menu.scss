@@ -1,75 +1,27 @@
 .menu-container {
-  width: 1266px;
+  width: clamp(500px, 100vw, 1266px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
-
-  @media (width <= 900px) {
-    padding: 16px 24px;
-  }
-
-  @media (width <= 720px) {
-    padding: 16px 18px;
-  }
-
-  @media (width <= 400px) {
-    padding: 8px 10px;
-  }
+  padding: clamp(8px, 1vw, 16px) clamp(10px, 1vw, 24px);
 
   &__menu {
     display: flex;
     align-items: flex-start;
     font-size: var(--main-text);
     align-self: center;
-    padding: 8px;
+    padding: clamp(4px, 1vw, 8px);
     background-color: var(--neutral-dark);
-    border-radius: 16px;
-
-    @media (width <= 1100px) {
-      border-radius: 14px;
-    }
-
-    @media (width <= 900px) {
-      border-radius: 8px;
-    }
-
-    @media (width <= 720px) {
-      border-radius: 8px;
-    }
-
-    @media (width <= 400px) {
-      border-radius: 4px;
-    }
+    border-radius: clamp(4px, 1vw, 16px);
   }
 
   &__menu-item {
-    font-size: 15px;
     white-space: nowrap;
     color: var(--grey-secondary);
-    padding: 16px;
     display: block;
     text-decoration: none;
-
-    @media (width <= 1100px) {
-      padding: 13px;
-      font-size: 12px;
-    }
-
-    @media (width <= 900px) {
-      padding: 10px;
-      font-size: 9px;
-    }
-
-    @media (width <= 720px) {
-      padding: 7px;
-      font-size: 7px;
-    }
-
-    @media (width <= 400px) {
-      padding: 4px;
-      font-size: 7px;
-    }
+    font-size: clamp(6px, 1.4vw, 15px);
+    padding: clamp(4px, 1.4vw, 16px);
 
     @media (hover: hover) {
       &:hover {
@@ -88,31 +40,11 @@
     & > img {
       cursor: pointer;
       margin-right: 32px;
-      width: 360px;
-
-      @media (max-width: 1100px) {
-        width: 300px;
-      }
-
-      @media (max-width: 900px) {
-        width: 240px;
-      }
+      width: clamp(15px, 30vw, 360px);
 
       @media (max-width: 720px) {
-        width: 24px;
-        margin-right: 16px;
-        content: url("./img/logo/favicon.webp");
-      }
-
-      @media (max-width: 400px) {
-        width: 18px;
-        margin-right: 4px;
-        content: url("./img/logo/favicon.webp");
-      }
-
-      @media (max-width: 340px) {
-        width: 15px;
-        margin-right: 2px;
+        width: clamp(15px, 5vw, 24px);
+        margin-right: clamp(2px, 1vw, 16px);
         content: url("./img/logo/favicon.webp");
       }
     }
@@ -123,23 +55,7 @@
 
     & > img {
       margin-left: 8px;
-      width: 32px;
-
-      @media (width <= 1100px) {
-        width: 28px;
-      }
-
-      @media (width <= 900px) {
-        width: 24px;
-      }
-
-      @media (width <= 720px) {
-        width: 16px;
-      }
-
-      @media (width <= 400px) {
-        width: 12px;
-      }
+      width: clamp(12px, 2.5vw, 28px);
     }
   }
 
@@ -154,32 +70,12 @@
 }
 
 .auth-item {
-  font-size: 15px;
   white-space: nowrap;
   color: var(--grey-secondary);
-  padding: 16px;
   display: block;
   text-decoration: none;
-
-  @media (width <= 1100px) {
-    padding: 13px;
-    font-size: 12px;
-  }
-
-  @media (width <= 900px) {
-    padding: 10px;
-    font-size: 9px;
-  }
-
-  @media (width <= 720px) {
-    padding: 7px;
-    font-size: 7px;
-  }
-
-  @media (width <= 400px) {
-    padding: 5px;
-    font-size: 7px;
-  }
+  font-size: clamp(6px, 1.4vw, 15px);
+  padding: clamp(4px, 1.4vw, 16px);
 
   @media (hover: hover) {
     &:hover {
@@ -197,20 +93,8 @@
 .active {
   color: var(--white);
   border: 1px solid var(--neon-main);
-  border-radius: 8px;
+  border-radius: clamp(3px, 1vw, 8px);
   background-color: var(--hover-color);
-
-  @media (width <= 900px) {
-    border-radius: 4px;
-  }
-
-  @media (width <= 720px) {
-    border-radius: 4px;
-  }
-
-  @media (width <= 400px) {
-    border-radius: 2px;
-  }
 }
 
 .no-auth-elements {
@@ -218,27 +102,10 @@
   align-items: flex-start;
   font-size: var(--main-text);
   align-self: center;
-  padding: 8px;
-  margin-left: 16px;
+  padding: clamp(4px, 1vw, 8px);
+  margin-left: clamp(8px, 1vw, 16px);
   background-color: var(--neutral-dark);
-  border-radius: 16px;
-
-  @media (width <= 1100px) {
-    border-radius: 14px;
-  }
-
-  @media (width <= 900px) {
-    border-radius: 8px;
-  }
-
-  @media (width <= 720px) {
-    border-radius: 8px;
-  }
-
-  @media (width <= 400px) {
-    border-radius: 4px;
-    margin-left: 8px;
-  }
+  border-radius: clamp(4px, 1vw, 16px);
 }
 
 .auth-elements {

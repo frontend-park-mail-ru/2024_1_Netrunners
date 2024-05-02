@@ -3,11 +3,12 @@ input {
   display: block;
   padding: 0 16px;
   border-width: 0;
-  line-height: 40px;
+  line-height: clamp(30px, 4vw, 40px);
   border-radius: 16px;
   color: var(--white);
   background: var(--grey-main);
   font-family: var(--input-font), serif;
+
   &:focus {
     outline: var(--white) solid thin;
   }
@@ -25,21 +26,9 @@ input {
   color: var(--white);
 
   &__submit-button {
-    margin: 64px auto 16px;
+    margin: clamp(28px, 8vw, 48px) auto 16px;
     background: var(--neon-main);
     width: -webkit-fill-available;
-
-    @media (width <= 720px) {
-      margin-top: 48px;
-    }
-
-    @media (width <= 500px) {
-      margin-top: 32px;
-    }
-
-    @media (width <= 400px) {
-      margin-top: 28px;
-    }
 
     &:hover {
       background-color: var(--neon-secondary);
@@ -52,40 +41,18 @@ input {
 
   &__error-login {
     color: var(--neon-main);
-    font-size: var(--main-text);
-    padding: 6px 12px 12px;
+    font-size: clamp(12px, 1.5vw, 15px);
+    padding: 6px 12px 6px;
+    flex-wrap: wrap;
+    align-content: center;
     overflow: hidden;
     height: var(--main-text);
-
-    @media (width <= 720px) {
-      font-size: 12px;
-    }
-
-    @media (width <= 500px) {
-      font-size: 12px;
-    }
-
-    @media (width <= 400px) {
-      font-size: 12px;
-    }
   }
 
   &__title {
-    font-size: 24px;
+    font-size: clamp(18px, 1.5vw, 24px);
     color: var(--white);
     margin-left: 12px;
-
-    @media (width <= 720px) {
-      font-size: 22px;
-    }
-
-    @media (width <= 500px) {
-      font-size: 20px;
-    }
-
-    @media (width <= 400px) {
-      font-size: 18px;
-    }
   }
 
   &__logo {
@@ -103,34 +70,19 @@ input {
     border-radius: 16px;
     display: flex;
     flex-direction: column;
-    min-width: 322px;
-    max-width: 346px;
+    min-width: clamp(100px, 30vw, 322px);
+    max-width: clamp(200px, 30vw, 346px);
     color: var(--white);
     background: var(--neutral-main-with-opacity);
     backdrop-filter: blur(10px);
-
-    @media (width <= 720px) {
-      min-width: 200px;
-      max-width: 300px;
-    }
-
-    @media (width <= 500px) {
-      min-width: 150px;
-      max-width: 250px;
-    }
-
-    @media (width <= 400px) {
-      min-width: 100px;
-      max-width: 200px;
-    }
   }
 }
 
 .auth-background {
   background: url("img/background/background.png") rgba(255, 255, 255, 0.3)
     no-repeat;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   position: absolute;
   left: 0;
   background-size: cover;
