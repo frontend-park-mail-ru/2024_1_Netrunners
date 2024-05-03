@@ -30,7 +30,6 @@ export async function renderFilms() {
     });
     await FilmsAllRequest();
 
-    console.log(filmsGenres);
     document.querySelector("main").innerHTML = template({
       filmData,
       topFourFilms,
