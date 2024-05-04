@@ -20,7 +20,7 @@
     color: var(--grey-secondary);
     display: block;
     text-decoration: none;
-    font-size: clamp(6px, 1.4vw, 15px);
+    font-size: clamp(7px, 1.4vw, 15px);
     padding: clamp(4px, 1.4vw, 16px);
 
     @media (hover: hover) {
@@ -74,7 +74,7 @@
   color: var(--grey-secondary);
   display: block;
   text-decoration: none;
-  font-size: clamp(6px, 1.4vw, 15px);
+  font-size: clamp(7px, 1.4vw, 15px);
   padding: clamp(4px, 1.4vw, 16px);
 
   @media (hover: hover) {

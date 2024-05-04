@@ -30,8 +30,16 @@ input {
     background: var(--neon-main);
     width: -webkit-fill-available;
 
-    &:hover {
-      background-color: var(--neon-secondary);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--neon-secondary);
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        background-color: var(--neon-secondary);
+      }
     }
 
     &:focus {

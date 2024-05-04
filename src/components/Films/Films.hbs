@@ -15,17 +15,11 @@
         </div>
         <div class="poster-block__data">
           <div class="poster-block__text-data">
-            <h1>{{ this.title }}</h1>
-            <a> {{ this.film_data }} </a>
+            <h1 class="poster-block__title">{{ this.title }}</h1>
+            <a class="poster-block__film-data"> {{ this.film_data }} </a>
           </div>
           <div class="poster-block__actions">
-            <div class="accent-button" id="data-player-button">Смотреть</div>
-            <div class="poster-block__buttons">
-              <img src="/icons/heart.svg" />
-            </div>
-            <a class="poster-block__duration">
-              {{ this.duration }}
-            </a>
+            <div class="accent-button" id="data-player-button">Подробнее</div>
           </div>
         </div>
       </div>
@@ -40,25 +34,33 @@
     <div class="films-section__title">Жанры</div>
   </div>
   <div class="genres-container">
-    {{#each filmsGenres}}
-    <div
-      class="genres-container__card"
-      data-genre-uuid="{{ this.genreUuid }}"
-      data-genre-name-ru="{{ this.genre }}"
-    >
-      <div class="genres-container__images">
-        {{#each films}}
-        <img class="genres-container__image" src="{{ this.preview_data }}" />
-        {{/each}}
-      </div>
-      <div class="genres-container__overlay"></div>
-      <div class="genres-container__content">
-        <div class="genres-container__name">
-          {{ this.genre }}
+    <button class="films-section__carousel-button prev" id="left">
+      <img src="/icons/arrow.svg" alt="" />
+    </button>
+    <ul class="films-section__carousel">
+      {{#each filmsGenres}}
+      <div
+        class="genres-container__card"
+        data-genre-uuid="{{ this.genreUuid }}"
+        data-genre-name-ru="{{ this.genre }}"
+      >
+        <div class="genres-container__images">
+          {{#each films}}
+          <img class="genres-container__image" src="{{ this.preview_data }}" />
+          {{/each}}
+        </div>
+        <div class="genres-container__overlay"></div>
+        <div class="genres-container__content">
+          <div class="genres-container__name">
+            {{ this.genre }}
+          </div>
         </div>
       </div>
-    </div>
-    {{/each}}
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right">
+      <img src="/icons/arrow.svg" alt="" />
+    </button>
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Популярно сейчас</div>
@@ -218,21 +220,33 @@
     <div class="films-section__title">Жанры</div>
   </div>
   <div class="genres-container">
-    {{#each filmsGenres}}
-    <div class="genres-container__card">
-      <div class="genres-container__images">
-        {{#each posters}}
-        <img class="genres-container__image" src="{{ this }}" />
-        {{/each}}
-      </div>
-      <div class="genres-container__overlay"></div>
-      <div class="genres-container__content">
-        <div class="genres-container__name">
-          {{ this.name }}
+    <button class="films-section__carousel-button prev" id="left">
+      <img src="/icons/arrow.svg" alt="" />
+    </button>
+    <ul class="films-section__carousel">
+      {{#each filmsGenres}}
+      <div
+        class="genres-container__card"
+        data-genre-uuid="{{ this.genreUuid }}"
+        data-genre-name-ru="{{ this.genre }}"
+      >
+        <div class="genres-container__images">
+          {{#each films}}
+          <img class="genres-container__image" src="{{ this.preview_data }}" />
+          {{/each}}
+        </div>
+        <div class="genres-container__overlay"></div>
+        <div class="genres-container__content">
+          <div class="genres-container__name">
+            {{ this.genre }}
+          </div>
         </div>
       </div>
-    </div>
-    {{/each}}
+      {{/each}}
+    </ul>
+    <button class="films-section__carousel-button next" id="right">
+      <img src="/icons/arrow.svg" alt="" />
+    </button>
   </div>
   <div class="films-section__upper-block">
     <div class="films-section__title">Популярно сейчас</div>
