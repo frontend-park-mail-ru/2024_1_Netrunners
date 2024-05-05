@@ -54,19 +54,29 @@ export async function renderPlayer(filmId, filmTitle, source) {
   );
 
   mainVideo.play();
-
   let timer;
   const hideControls = () => {
-    if (mainVideo.paused) return;
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+        navigator.userAgent,
+      );
+
+    if ((isMobile && !mainVideo.paused) || (!isMobile && mainVideo.paused)) {
+      return;
+    }
+
     timer = setTimeout(() => {
       container.classList.add("no-cursor");
+      exitButton.classList.remove("show-exit");
       container.classList.remove("show-controls");
     }, 1000);
   };
+
   hideControls();
 
   container.addEventListener("mousemove", () => {
     container.classList.remove("no-cursor");
+    exitButton.classList.add("show-exit");
     container.classList.add("show-controls");
     clearTimeout(timer);
     hideControls();
@@ -85,13 +95,17 @@ export async function renderPlayer(filmId, filmTitle, source) {
 
   videoTimeline.addEventListener("click", (e) => {
     const timelineWidth = videoTimeline.clientWidth;
-    mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+    mainVideo.currentTime =
+      ((e.touches[0].pageX - e.touches[0].target.offsetLeft) / timelineWidth) *
+      mainVideo.duration;
   });
 
   const draggableProgressBar = (e) => {
     const timelineWidth = videoTimeline.clientWidth;
-    progressBar.style.width = `${e.offsetX}px`;
-    mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+    progressBar.style.width = `${e.touches[0].pageX - e.touches[0].target.offsetLeft}px`;
+    mainVideo.currentTime =
+      ((e.touches[0].pageX - e.touches[0].target.offsetLeft) / timelineWidth) *
+      mainVideo.duration;
     currentVideoTime.innerText = formatTime(mainVideo.currentTime);
   };
 
@@ -99,16 +113,26 @@ export async function renderPlayer(filmId, filmTitle, source) {
     videoTimeline.addEventListener("mousemove", draggableProgressBar);
   });
 
+  videoTimeline.addEventListener("touchstart", () => {
+    videoTimeline.addEventListener("touchmove", draggableProgressBar);
+  });
+
   container.addEventListener("mouseup", () => {
     videoTimeline.removeEventListener("mousemove", draggableProgressBar);
   });
 
+  videoTimeline.addEventListener("touchend", () => {
+    videoTimeline.addEventListener("touchmove", draggableProgressBar);
+  });
+
   videoTimeline.addEventListener("mousemove", (e) => {
     const progressTime = videoTimeline.querySelector("span");
-    const offsetX = e.offsetX;
+    const offsetX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
     progressTime.style.left = `${offsetX}px`;
     const timelineWidth = videoTimeline.clientWidth;
-    const percent = (e.offsetX / timelineWidth) * mainVideo.duration;
+    const percent =
+      ((e.touches[0].pageX - e.touches[0].target.offsetLeft) / timelineWidth) *
+      mainVideo.duration;
     progressTime.innerText = formatTime(percent);
   });
 

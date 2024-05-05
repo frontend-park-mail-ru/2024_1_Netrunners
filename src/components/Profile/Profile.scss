@@ -1,24 +1,24 @@
 @import "../Films/films";
 
 .profile-info {
-  margin-top: 32px;
+  margin-top: clamp(16px, 5vw, 32px);
   display: flex;
   color: var(--white);
 
   &__photo {
-    margin-right: 32px;
+    margin-right: clamp(16px, 5vw, 32px);
 
     img {
-      margin-left: 32px;
+      margin-left: clamp(8px, 2vw, 32px);
       object-fit: cover;
       border-radius: 16px;
-      width: 380px;
-      height: 500px;
+      width: clamp(132px, 41vw, 380px);
+      height: clamp(174px, 54vw, 500px);
     }
   }
 
   &__details {
-    margin-left: 32px;
+    margin-left: clamp(16px, 5vw, 32px);
     color: var(--white);
   }
 
@@ -36,27 +36,42 @@
   }
 
   &__top {
-    margin-bottom: 96px;
+    margin-bottom: clamp(48px, 15vw, 96px);
     display: flex;
     align-items: center;
+  }
+
+  &__information {
+    font-size: clamp(8px, 2vw, 16px);
+  }
+
+  &__nickname {
+    font-size: clamp(16px, 5vw, 32px);
   }
 
   &__buttons {
     text-decoration: none;
     color: var(--white);
     border: 1px solid var(--grey-main);
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: clamp(8px, 1vw, 16px);
+    padding: clamp(10px, 3vw, 16px);
     display: block;
     margin-left: 8px;
     width: fit-content;
     height: fit-content;
     background-color: var(--hover-color);
-    font-size: 18px;
+    font-size: clamp(11px, 3vw, 18px);
 
-    &:hover {
-      color: var(--neon-secondary);
-      padding: 16px;
+    @media (hover: hover) {
+      &:hover {
+        color: var(--neon-secondary);
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        color: var(--neon-secondary);
+      }
     }
   }
 }
@@ -68,13 +83,13 @@
   justify-content: flex-start;
 
   & > input {
-    width: 600px;
+    width: clamp(173px, 50vw, 500px);
   }
 }
 
 .edit-form {
   & > input {
-    width: 600px;
+    width: clamp(173px, 50vw, 500px);
   }
 
   &__button {
@@ -82,11 +97,11 @@
     border: none;
     border-radius: 8px;
     color: white;
-    padding: 15px 32px;
+    padding: clamp(8px, 2vw, 15px) clamp(16px, 4vw, 32px);
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: clamp(8px, 3vw, 15px);
     margin-left: 16px;
     margin-bottom: auto;
     margin-top: 45px;
@@ -94,23 +109,29 @@
   }
 }
 
+#myForm {
+  padding-left: clamp(10px, 3vw, 16px);
+}
+
 #imageInput {
+  font-size: clamp(12px, 3vw, var(--main-text));
+
   &::-webkit-file-upload-button {
     cursor: pointer;
-    height: 48px;
-    padding: 8px 16px;
+    height: clamp(34px, 6vw, 48px);
+    padding: clamp(2px, 1vw, 15px) clamp(8px, 1vw, 32px);
+    font-size: clamp(8px, 1vw, var(--main-text));
     border: none;
-    margin-top: 6px;
-    margin-left: -8px;
-    border-radius: 16px;
+    margin-left: -16px;
+    border-radius: clamp(8px, 1vw, 16px);
     color: var(--white);
     background: var(--neon-main);
-    font-family: var(--input-font);
+    font-family: var(--input-font), serif;
   }
 }
 
 #exit-editing-button {
-  margin: 32px 32px auto auto;
+  margin: 8px;
   cursor: pointer;
 }
 

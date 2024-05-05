@@ -4,13 +4,13 @@
   border-radius: 16px;
   margin-bottom: 86px;
   margin-top: 32px;
-  width: 1200px;
+  width: clamp(249px, 78vw, 1200px);
 
   &__title {
-    font-size: var(--header-300);
+    font-size: clamp(18px, 3vw, var(--header-300));
     font-weight: bold;
-    margin-top: 32px;
-    margin-bottom: 32px;
+    margin-top: clamp(8px, 2.5vw, 32px);
+    margin-bottom: clamp(8px, 2.5vw, 32px);
     color: var(--white);
     text-align: left;
     width: 100%;
@@ -26,7 +26,8 @@
     width: 100%;
   }
 
-  &__films-container &__carousel {
+  &__films-container &__carousel,
+  .genres-container &__carousel {
     padding-left: 0;
     display: grid;
     grid-auto-flow: column;
@@ -48,11 +49,11 @@
   }
 
   &__film-card {
-    width: 288px;
-    height: 450px;
+    width: clamp(119px, 37vw, 288px);
+    height: clamp(186px, 58vw, 450px);
     margin: 16px 0 16px 0;
     background-size: cover;
-    border-radius: 15px;
+    border-radius: clamp(6px, 2vw, 15px);
     overflow: hidden;
     box-shadow: 0 0 10px var(--shadow-color);
     cursor: pointer;
@@ -63,7 +64,7 @@
     align-items: center;
 
     &:hover {
-      //transform: scale(1.02);
+      transform: scale(1.02);
     }
   }
 
@@ -79,27 +80,30 @@
     height: 75%;
     background-size: cover;
     background-position: center;
-    border-radius: 15px;
-    margin-top: 20px;
+    border-radius: clamp(6px, 2vw, 15px);
+    margin-top: clamp(8px, 2vw, 20px);
     object-fit: cover;
   }
 
   &__film-time {
     display: flex;
-    font-size: var(--caption);
+    font-size: clamp(6px, 2vw, var(--caption));
     background-color: var(--neutral-main);
     color: var(--grey-secondary);
-    padding: 4px 8px;
+    padding: clamp(1px, 1vw, 4px) clamp(4px, 1vw, 8px);
     border-radius: 16px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
   &__text {
-    width: fit-content;
+    font-size: clamp(10px, 1.3vw, 15px);
+    width: clamp(32px, 4vw, 50px);
+    height: clamp(32px, 4vw, 50px);
     padding-left: 16px;
     padding-right: 16px;
-    height: 50px;
     border-radius: 8px;
     color: var(--white);
     background-color: var(--neon-main);
@@ -107,18 +111,18 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top: -40px;
+    top: clamp(-34px, 1vw, -43px);
   }
 
   &__film-rating {
     display: flex;
     background-color: var(--neutral-main);
-    padding: 4px 8px;
+    padding: clamp(1px, 1vw, 4px) clamp(4px, 1vw, 8px);
     border-radius: 16px;
   }
 
   &__star {
-    width: 16px;
+    width: clamp(7px, 2vw, 16px);
   }
 
   &__star-container {
@@ -130,11 +134,11 @@
   &__rating-count {
     margin-left: 2px;
     color: var(--grey-secondary);
-    font-size: var(--caption);
+    font-size: clamp(6px, 2vw, var(--caption));
   }
 
   &__time-icon {
-    width: 16px;
+    width: clamp(8px, 2vw, 16px);
     margin-right: 2px;
   }
 
@@ -152,7 +156,7 @@
   &__upper-block {
     display: flex;
     justify-content: space-between;
-    margin-top: 32px;
+    margin-top: clamp(16px, 5vw, 32px);
   }
 
   &__first-upper-block {
@@ -170,12 +174,22 @@
 
     & > img {
       border-radius: 50%;
+      width: clamp(12px, 4vw, 28px);
+      box-shadow: 3px 0 8px 3px rgba(0, 0, 0, 0.3);
       background: var(--neutral-light);
-      padding: 12px;
+      padding: clamp(6px, 1vw, 12px);
     }
 
-    & > img:hover {
-      background-color: var(--hover-color);
+    @media (hover: hover) {
+      & > img:hover {
+        background-color: var(--hover-color);
+      }
+    }
+
+    @media (hover: none) {
+      & > img:active {
+        background-color: var(--hover-color);
+      }
     }
 
     &.prev {
@@ -187,23 +201,24 @@
     }
   }
 
-  &__films-container &__carousel-button {
+  &__films-container &__carousel-button,
+  .genres-container &__carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  &__carousel-button > img {
-    width: 28px;
-    box-shadow: 3px 0 8px 3px rgba(0, 0, 0, 0.3);
+  &__films-container &__carousel-button:first-child,
+  .genres-container &__carousel-button:first-child {
+    height: auto;
+    z-index: var(--third-layer);
+    left: clamp(-30px, 1vw, -35px);
   }
 
-  &__films-container &__carousel-button:first-child {
-    left: -35px;
-  }
-
-  &__films-container &__carousel-button:last-child {
-    right: -35px;
+  &__films-container &__carousel-button:last-child,
+  .genres-container &__carousel-button:last-child {
+    height: auto;
+    right: clamp(-29px, 1vw, -35px);
   }
 
   &__films-container {
@@ -226,16 +241,17 @@
 
   &__content-top {
     display: flex;
-    padding-bottom: 12px;
-    padding-top: 12px;
+    padding-bottom: clamp(4px, 1vw, 12px);
+    padding-top: clamp(6px, 1vw, 12px);
   }
 
   &__content-bottom {
     display: flex;
-    gap: 58px;
+    gap: clamp(15px, 6vw, 58px);
   }
 
   &__film-title {
+    font-size: clamp(7px, 2vw, 15px);
     padding-left: 4px;
     color: var(--white);
   }
@@ -260,7 +276,7 @@
 }
 
 .poster-block {
-  margin-top: 32px;
+  margin-top: clamp(16px, 5vw, 32px);
   align-items: center;
   color: white;
   display: flex;
@@ -272,16 +288,28 @@
 
   &__image {
     display: block;
-    width: 1260px;
-    height: 605px;
+    width: clamp(311px, 97vw, 1260px);
+    height: clamp(150px, 47vw, 605px);
     object-fit: cover;
     border-radius: 12px;
     background: var(--grey-secondary);
   }
 
+  &__title {
+    font-size: clamp(15px, 2.5vw, 32px);
+  }
+
+  &__film-data {
+    font-size: clamp(8px, 1.4vw, 16px);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
   &__overlay {
     background-image: linear-gradient(to top, var(--neutral-main), transparent);
-    bottom: 0;
+    bottom: -1px;
     content: "";
     left: 0;
     pointer-events: none;
@@ -291,17 +319,21 @@
   }
 
   &__data {
+    width: clamp(275px, 94vw, 1260px);
     z-index: var(--first-layer);
-    margin-top: calc(-23% + 2.5rem);
+    margin-top: clamp(-255px, -21vw, -46px);
   }
 
   &__text-data {
-    margin-left: 32px;
-    margin-right: 32px;
+    text-wrap: balance;
+    line-height: clamp(1px, 3vw, 32px);
+    margin-left: clamp(8px, 1vw, 32px);
+    margin-right: clamp(8px, 1vw, 32px);
     text-align: center;
   }
 
   &__actions {
+    z-index: var(--third-layer);
     margin-top: 16px;
     display: flex;
     flex-direction: row;
@@ -328,10 +360,11 @@
 }
 
 .accent-button {
-  width: 128px;
-  height: 50px;
-  border-radius: 8px;
-  color: white;
+  font-size: clamp(8px, 1.3vw, 15px);
+  width: clamp(64px, 10vw, 128px);
+  height: clamp(25px, 4vw, 50px);
+  border-radius: clamp(4px, 1vw, 8px);
+  color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -340,7 +373,7 @@
 }
 
 .poster-carousel {
-  height: 48rem;
+  height: clamp(19rem, 60vw, 48rem);
   position: relative;
 
   & > ul {
@@ -353,19 +386,16 @@
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: 200ms opacity ease-in-out;
-    transition-delay: 200ms;
   }
 
   &__slide[data-active] {
     opacity: 1;
     z-index: var(--first-layer);
-    transition-delay: 0ms;
   }
 
   &__button {
     position: absolute;
-    top: 38rem;
+    top: clamp(15rem, 47vw, 38rem);
     z-index: var(--second-layer);
     border: none;
     color: white;
@@ -373,14 +403,22 @@
     border-radius: 8px;
     padding: 0;
     background: var(--neutral-dark);
-    transition: transform 0.3s ease;
 
     & > img {
-      margin: 12px;
+      width: clamp(14px, 2vw, 24px);
+      margin: clamp(7px, 2vw, 12px);
     }
 
-    &:hover {
-      background-color: var(--neutral-light);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--neutral-light);
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        background-color: var(--neutral-light);
+      }
     }
 
     &.prev {
@@ -400,15 +438,13 @@
 }
 
 .genres-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  position: relative;
 
   &__card {
     display: flex;
     align-content: space-around;
-    width: 220px;
-    height: 300px;
+    width: clamp(118px, 35vw, 230px);
+    height: clamp(150px, 48vw, 300px);
     margin: 8px 0 8px 0;
     border-radius: 10px;
     box-shadow: 0 0 10px var(--shadow-color);
@@ -423,13 +459,13 @@
     align-items: flex-start;
 
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
   }
 
   &__images {
     margin-top: 15px;
-    width: 184px;
+    width: clamp(90px, 28vw, 184px);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -437,10 +473,10 @@
   }
 
   &__image {
-    margin-bottom: 8px;
+    margin-bottom: clamp(3px, 0.5vw, 8px);
     border-radius: 8px;
-    width: 83px;
-    height: 102px;
+    width: clamp(42px, 13vw, 83px);
+    height: clamp(51px, 16vw, 102px);
     object-fit: cover;
     transition: 0.3s ease-in-out;
 
@@ -453,21 +489,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 16px;
+    padding-bottom: clamp(8px, 2vw, 16px);
   }
 
   &__name {
     color: white;
-    font-size: 18px;
+    font-size: clamp(12px, 3vw, 18px);
     font-weight: 500;
     margin: 0;
   }
 
   &__overlay {
-    width: 178px;
+    width: clamp(89px, 28vw, 184px);
     position: absolute;
-    bottom: 66px;
-    left: 20px;
+    bottom: clamp(31px, 9vw, 66px);
+    left: clamp(13px, 4vw, 20px);
     height: 60%;
     background-image: linear-gradient(
       to top,

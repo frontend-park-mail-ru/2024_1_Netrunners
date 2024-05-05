@@ -200,8 +200,16 @@
       border-radius: 16px;
     }
 
-    &::-webkit-scrollbar-thumb:hover {
-      background: var(--grey-secondary);
+    @media (hover: hover) {
+      &::-webkit-scrollbar-thumb:hover {
+        background: var(--grey-secondary);
+      }
+    }
+
+    @media (hover: none) {
+      &::-webkit-scrollbar-thumb:active {
+        background: var(--grey-secondary);
+      }
     }
 
     &::-webkit-scrollbar-track {
@@ -230,8 +238,16 @@
       margin-right: 32px;
     }
 
-    &:hover {
-      background-color: var(--hover-color);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--hover-color);
+      }
+    }
+
+    @media (hover: none) {
+      &:active {
+        background-color: var(--hover-color);
+      }
     }
   }
 
