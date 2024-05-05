@@ -87,13 +87,15 @@
 
   &__film-time {
     display: flex;
-    font-size: var(--caption);
+    font-size: clamp(6px, 2vw, var(--caption));
     background-color: var(--neutral-main);
     color: var(--grey-secondary);
-    padding: 4px 8px;
+    padding: clamp(1px, 1vw, 4px) clamp(4px, 1vw, 8px);
     border-radius: 16px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
   &__text {
@@ -115,12 +117,12 @@
   &__film-rating {
     display: flex;
     background-color: var(--neutral-main);
-    padding: 4px 8px;
+    padding: clamp(1px, 1vw, 4px) clamp(4px, 1vw, 8px);
     border-radius: 16px;
   }
 
   &__star {
-    width: clamp(7px, 1vw, 16px);
+    width: clamp(7px, 2vw, 16px);
   }
 
   &__star-container {
@@ -132,11 +134,11 @@
   &__rating-count {
     margin-left: 2px;
     color: var(--grey-secondary);
-    font-size: var(--caption);
+    font-size: clamp(6px, 2vw, var(--caption));
   }
 
   &__time-icon {
-    width: 16px;
+    width: clamp(8px, 2vw, 16px);
     margin-right: 2px;
   }
 
@@ -239,13 +241,13 @@
 
   &__content-top {
     display: flex;
-    padding-bottom: 12px;
-    padding-top: 12px;
+    padding-bottom: clamp(4px, 1vw, 12px);
+    padding-top: clamp(6px, 1vw, 12px);
   }
 
   &__content-bottom {
     display: flex;
-    gap: clamp(20px, 6vw, 58px);
+    gap: clamp(15px, 6vw, 58px);
   }
 
   &__film-title {
@@ -299,11 +301,15 @@
 
   &__film-data {
     font-size: clamp(8px, 1.4vw, 16px);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
   }
 
   &__overlay {
     background-image: linear-gradient(to top, var(--neutral-main), transparent);
-    bottom: 0;
+    bottom: -1px;
     content: "";
     left: 0;
     pointer-events: none;
@@ -327,6 +333,7 @@
   }
 
   &__actions {
+    z-index: var(--third-layer);
     margin-top: 16px;
     display: flex;
     flex-direction: row;
@@ -379,14 +386,11 @@
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: 200ms opacity ease-in-out;
-    transition-delay: 200ms;
   }
 
   &__slide[data-active] {
     opacity: 1;
     z-index: var(--first-layer);
-    transition-delay: 0ms;
   }
 
   &__button {
@@ -399,7 +403,6 @@
     border-radius: 8px;
     padding: 0;
     background: var(--neutral-dark);
-    transition: transform 0.3s ease;
 
     & > img {
       width: clamp(14px, 2vw, 24px);
@@ -499,8 +502,8 @@
   &__overlay {
     width: clamp(89px, 28vw, 184px);
     position: absolute;
-    bottom: clamp(32px, 10vw, 66px);
-    left: clamp(12px, 4vw, 20px);
+    bottom: clamp(31px, 9vw, 66px);
+    left: clamp(13px, 4vw, 20px);
     height: 60%;
     background-image: linear-gradient(
       to top,

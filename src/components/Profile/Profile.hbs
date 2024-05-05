@@ -4,16 +4,18 @@
   </div>
   <div class="profile-info__details">
     <div class="profile-info__top">
-      <h1>{{ username }}</h1>
+      <h1 class="profile-info__nickname">{{ username }}</h1>
       <a class="profile-info__buttons" id="edit-button" href="/edit">
         Редактировать
       </a>
     </div>
     <div class="profile-info__description">
-      <h1>О пользователе</h1>
+      <h1 class="profile-info__nickname">О пользователе</h1>
       <ul>
-        <li>Почта: {{ login }}</li>
-        <li>Дата регистрации: {{ registeredAt }}</li>
+        <li class="profile-info__information">Почта: {{ login }}</li>
+        <li class="profile-info__information">
+          Дата регистрации: {{ registeredAt }}
+        </li>
       </ul>
     </div>
   </div>

@@ -12,6 +12,7 @@
   }
 
   &.show-controls &__wrapper {
+    background-color: rgba(0, 0, 0, 0.385);
     bottom: 0;
     opacity: 1;
     pointer-events: auto;
@@ -123,7 +124,7 @@
   &__video-controls {
     margin-top: 8px;
     margin-bottom: 8px;
-    padding: 8px 16px;
+    padding: 8px clamp(8px, 1vw, 16px);
   }
 
   &__options {
@@ -148,39 +149,15 @@
 
     button > img,
     button > span > img {
-      width: clamp(16px, 5vw, 32px);
+      width: clamp(14px, 4vw, 32px);
     }
 
     input {
       margin-left: clamp(4px, 1vw, 8px);
       padding: 0;
       height: 4px;
-      max-width: clamp(48px, 12vw, 96px);
+      max-width: clamp(40px, 12vw, 96px);
       accent-color: var(--neon-main);
-      //appearance: none;
-      //background: white;
-      //
-      //&::-webkit-slider-thumb {
-      //  height: 15px;
-      //  width: 15px;
-      //  background: var(--neon-main);
-      //  appearance: none;
-      //  cursor: pointer;
-      //  border-radius: 50%;
-      //  box-shadow: -25px 0 0 -5px var(--neon-main);
-      //  border: 0;
-      //}
-      //
-      //&::-moz-range-thumb {
-      //  height: 15px;
-      //  width: 15px;
-      //  background: var(--neon-main);
-      //  box-shadow: var(--neon-main);
-      //  appearance: none;
-      //  cursor: pointer;
-      //  border-radius: 50%;
-      //  border: 0;
-      //}
     }
   }
 
@@ -259,15 +236,15 @@ input[type="range"] {
   text-decoration: none;
   color: var(--white);
   border: 1px solid var(--grey-main);
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: clamp(8px, 2vw, 16px);
+  padding: clamp(10px, 3vw, 16px);
   opacity: 0;
   display: block;
   margin-left: 8px;
   width: fit-content;
   height: fit-content;
   background-color: var(--hover-color);
-  font-size: 18px;
+  font-size: clamp(11px, 3vw, 18px);
 }
 
 .show-exit {

@@ -110,24 +110,24 @@
 
 .auth-elements {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   font-size: var(--main-text);
   align-self: center;
   padding: 8px;
-  margin-left: 16px;
+  margin-left: clamp(8px, 2vw, 16px);
 }
 
 .avatar {
   object-fit: cover;
-  width: 48px;
-  height: 48px;
+  width: clamp(32px, 7vw, 48px);
+  height: clamp(32px, 7vw, 48px);
   border-radius: 8px;
   overflow: hidden;
 }
 
 .dropdown {
   position: relative;
-  padding-top: 16px;
+  padding-top: clamp(3px, 1vw, 8px);
   padding-left: 8px;
 
   &:hover {
@@ -136,17 +136,21 @@
       opacity: 5;
     }
   }
+
+  & > img {
+    width: clamp(12px, 3vw, 17px);
+  }
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: var(--neutral-dark);
-  min-width: 120px;
-  padding: 10px;
+  min-width: clamp(60px, 1vw, 120px);
+  padding: clamp(5px, 1vw, 10px);
   border-radius: 8px;
   right: -10px;
-  top: 30px;
+  top: clamp(22px, 1vw, 30px);
   opacity: 0;
   transition: opacity 1s ease;
   z-index: var(--second-layer);

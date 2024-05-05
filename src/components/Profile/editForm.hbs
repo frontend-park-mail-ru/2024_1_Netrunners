@@ -1,5 +1,14 @@
 <form id="myForm">
-  <h1>Смена аватара</h1>
+  <div class="films-section__first-upper-block">
+    <h1 class="profile-info__nickname">Смена аватара</h1>
+    <button
+      type="button"
+      id="exit-editing-button"
+      class="profile-info__buttons"
+    >
+      Назад
+    </button>
+  </div>
   <div class="edit-section">
     <div class="edit-form">
       <div class="edit-form__error" id="avatar-errors"></div>
@@ -14,7 +23,7 @@
       Сохранить
     </button>
   </div>
-  <h1>Смена логина</h1>
+  <h1 class="profile-info__nickname">Смена логина</h1>
   <div class="edit-section">
     <div class="edit-form">
       <div class="edit-form__error" id="username-errors"></div>
@@ -29,7 +38,7 @@
       Сохранить
     </button>
   </div>
-  <h1>Смена пароля</h1>
+  <h1 class="profile-info__nickname">Смена пароля</h1>
   <div class="edit-section">
     <div class="edit-form">
       <div class="edit-form__error" id="password-errors"></div>
@@ -52,6 +61,3 @@
     </button>
   </div>
 </form>
-<button type="button" id="exit-editing-button" class="profile-info__buttons">
-  Назад
-</button>

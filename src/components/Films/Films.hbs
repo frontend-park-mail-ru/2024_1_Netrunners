@@ -16,10 +16,16 @@
         <div class="poster-block__data">
           <div class="poster-block__text-data">
             <h1 class="poster-block__title">{{ this.title }}</h1>
-            <a class="poster-block__film-data"> {{ this.film_data }} </a>
+            <a class="poster-block__film-data"> {{ this.data }} </a>
           </div>
-          <div class="poster-block__actions">
-            <div class="accent-button" id="data-player-button">Подробнее</div>
+        </div>
+        <div class="poster-block__actions">
+          <div
+            class="accent-button"
+            data-film-id="{{ this.uuid }}"
+            data-film-title="{{ this.title }}"
+          >
+            Подробнее
           </div>
         </div>
       </div>
