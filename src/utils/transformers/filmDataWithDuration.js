@@ -31,7 +31,7 @@ export const fixFilmData = (data) => {
 
   filmData.film.date = timeConvert.dateIntoYear(filmData.film.date);
   if (
-    filmData.film.isSeries &&
+    filmData.film.isSerial &&
     typeof filmData.film.series.at(-1).at(-1).duration === "number"
   ) {
     filmData.film.series.forEach((elem) => {
