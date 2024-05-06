@@ -8,6 +8,7 @@ import { renderActorPage } from "../components/Actor/actor.js";
 import { renderLogout } from "../components/Logout/logout.js";
 import { renderGenrePage } from "../components/Genre/genre.js";
 import { changeActiveButton, getCookie } from "../index.js";
+import { renderSearchPage } from "../components/SearchPage/searchPage.js";
 
 /**
  * Класс для управления навигацией и отображением различных страниц.
@@ -22,6 +23,7 @@ export class Router {
       "/signup": renderSignup,
       "/login": renderLogin,
       "/logout": renderLogout,
+      "/search": renderSearchPage,
     };
   }
 
@@ -162,6 +164,19 @@ export class Router {
   }
 
   /**
+   * Переход на страницу поиска.
+   */
+  goToSearchPage() {
+    const state = {};
+    state.path = "/search";
+    state.title = "Поиск";
+    document.title = state.title;
+    window.history.pushState(state, state.title, state.path);
+    console.log("go to search page");
+    renderSearchPage();
+  }
+
+  /**
    * Метод для перехода по заданному пути.
    * @param {string} path Путь для перехода.
    * @param {string} title Заголовок страницы.
@@ -187,6 +202,8 @@ export class Router {
       } else if (path.includes("/film/")) {
         const uuid = path.substring("/film/".length, path.length);
         await renderFilmPage(uuid);
+      } else if (path.includes("/search")) {
+        this.goToSearchPage();
       } else if (path.includes("/genre/")) {
         const uuid = path.substring("/genre/".length, path.length);
         await renderGenrePage(uuid);

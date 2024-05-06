@@ -23,6 +23,13 @@
     font-size: clamp(7px, 1.4vw, 15px);
     padding: clamp(4px, 1.4vw, 16px);
 
+    &.active {
+      color: var(--white);
+      border: 1px solid var(--neon-main);
+      border-radius: clamp(3px, 1vw, 8px);
+      background-color: var(--hover-color);
+    }
+
     @media (hover: hover) {
       &:hover {
         color: var(--neon-secondary);
@@ -51,11 +58,19 @@
   }
 
   &__nav-icon {
+    display: flex;
+    justify-content: center;
     align-self: center;
 
     & > img {
       margin-left: 8px;
       width: clamp(12px, 2.5vw, 28px);
+      cursor: pointer;
+    }
+    & > a {
+      font-size: clamp(7px, 1vw, var(--main-text));
+      align-self: center;
+      color: var(--neon-main);
     }
   }
 
@@ -77,6 +92,13 @@
   font-size: clamp(7px, 1.4vw, 15px);
   padding: clamp(4px, 1.4vw, 16px);
 
+  &.active {
+    color: var(--white);
+    border: 1px solid var(--neon-main);
+    border-radius: clamp(3px, 1vw, 8px);
+    background-color: var(--hover-color);
+  }
+
   @media (hover: hover) {
     &:hover {
       color: var(--neon-secondary);
@@ -88,13 +110,6 @@
       color: var(--neon-secondary);
     }
   }
-}
-
-.active {
-  color: var(--white);
-  border: 1px solid var(--neon-main);
-  border-radius: clamp(3px, 1vw, 8px);
-  background-color: var(--hover-color);
 }
 
 .no-auth-elements {
