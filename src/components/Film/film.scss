@@ -276,5 +276,24 @@
 
   &__seasons {
     padding: 0 0 32px 16px;
+    display: flex;
+  }
+
+  &__simple-button {
+    color: var(--white);
+    font-size: var(--small-font);
+    border: 1px solid var(--grey-main);
+    border-radius: 8px;
+    padding: clamp(2px, 1vw, 16px);
+    display: block;
+    margin-left: 8px;
+    width: clamp(12px, 3vw, 50px);
+    background-color: var(--hover-color);
+    cursor: pointer;
+
+    &.active {
+      background-color: var(--neon-main);
+      border: none;
+    }
   }
 }

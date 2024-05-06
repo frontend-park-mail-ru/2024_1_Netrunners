@@ -1,0 +1,12 @@
+{{#each episodes}}
+  <li
+    class="series-block__element"
+    data-episode-title="{{this.title}}"
+    data-episode-link="{{this.link}}"
+  >
+    <span class="series-block__content-in-element"> {{this.title}} </span>
+    <div class="film-content-block__data-element">
+      {{this.duration}}
+    </div>
+  </li>
+{{/each}}
