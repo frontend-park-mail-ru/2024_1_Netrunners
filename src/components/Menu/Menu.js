@@ -160,6 +160,7 @@ export class Menu {
     });
 
     this.homePageListener();
+    this.searchPageListener();
   }
 
   /**
@@ -171,6 +172,18 @@ export class Menu {
     const logo = document.querySelector(".menu-container__logo");
     logo.addEventListener("click", () => {
       Router.goToHomePage();
+    });
+  }
+
+  /**
+   * Устанавливает слушатель событий для иконку лупы на главной странице.
+   * При клике на лупу происходит переход на страницу поиска.
+   * @return {void}
+   */
+  searchPageListener() {
+    const searchElement = document.querySelector(".menu-container__nav-icon");
+    searchElement.addEventListener("click", () => {
+      Router.goToSearchPage();
     });
   }
 }
