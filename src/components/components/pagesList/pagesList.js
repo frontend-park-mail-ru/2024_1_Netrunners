@@ -14,5 +14,5 @@ export function pagesListElement(currentPage, maxPage) {
     );
     return templatePagesList({ pages: arrayOfPages });
   }
-  return templatePagesList({pages: [1,2,3,4,5]});
+  return templatePagesList({ pages: [1, 2, 3, 4, 5] });
 }

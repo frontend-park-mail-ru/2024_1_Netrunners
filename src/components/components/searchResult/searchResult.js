@@ -58,8 +58,8 @@ export async function renderSearchResult(parent, params) {
       break;
   }
 
-  //TODO ждет реализации поля кол-ва запросов на беке
-  //parent.lastChild.innerHTML = pagesListElement(params.page, searchResult[count]);
+  // TODO ждет реализации поля кол-ва запросов на беке
+  // parent.lastChild.innerHTML = pagesListElement(params.page, searchResult[count]);
 
   const pagesBlock = parent.querySelector(".pages-block");
   pagesBlock.innerHTML = pagesListElement(params.page, 1);
@@ -82,7 +82,7 @@ export async function renderSearchResult(parent, params) {
     if (params.page - 3 <= 0) {
       newParams.page = 1 + index;
     }
-    //to-do else if(params.page +2 >= searchResult.count){
+    // to-do else if(params.page +2 >= searchResult.count){
     else if (params.page + 2 >= 5) {
       newParams.page = searchResult.count - 4 + index;
     } else {
@@ -111,8 +111,8 @@ export async function renderSearchResult(parent, params) {
     });
   }
 
-  //TODO ждет реализации поля кол-ва запросов на беке
-  //if (params.page === searchResult.count){
+  // TODO ждет реализации поля кол-ва запросов на беке
+  // if (params.page === searchResult.count){
 
   if (params.page === 1) {
     rightPageButtons.forEach((button) => {

@@ -8,9 +8,23 @@ import Router from "../../utils/router.js";
  * @param {string} filmId - Идентификатор фильма, который проигрывается.
  * @param {string} filmTitle - Заголовок фильма, который проигрывается.
  * @param {string} source - URL источника видео.
+ * @param {Array} series - все серии
+ * @param {int} index - индекс серии
  * @return {void}
  */
-export async function renderPlayer(filmId, filmTitle, source) {
+export async function renderPlayer(
+  filmId,
+  filmTitle,
+  source,
+  series = null,
+  index = 0,
+) {
+  series = [
+    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%281%20%D0%A1%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%282019%29.mp4",
+    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%282%20%D1%81%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%232%20%282020%29.mp4",
+    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%283%20%D1%81%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%282022%29.mp4",
+    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%284%20%D1%81%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D1%83%D0%B1%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%282024%29.mp4",
+  ];
   const video = { src: source };
 
   document.querySelector("main").innerHTML = template(video);
@@ -95,12 +109,17 @@ export async function renderPlayer(filmId, filmTitle, source) {
 
   videoTimeline.addEventListener("click", (e) => {
     const timelineWidth = videoTimeline.clientWidth;
+    mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+  });
+
+  videoTimeline.addEventListener("touchstart", (e) => {
+    const timelineWidth = videoTimeline.clientWidth;
     mainVideo.currentTime =
       ((e.touches[0].pageX - e.touches[0].target.offsetLeft) / timelineWidth) *
       mainVideo.duration;
   });
 
-  const draggableProgressBar = (e) => {
+  const draggableProgressBarMobile = (e) => {
     const timelineWidth = videoTimeline.clientWidth;
     progressBar.style.width = `${e.touches[0].pageX - e.touches[0].target.offsetLeft}px`;
     mainVideo.currentTime =
@@ -109,12 +128,19 @@ export async function renderPlayer(filmId, filmTitle, source) {
     currentVideoTime.innerText = formatTime(mainVideo.currentTime);
   };
 
+  const draggableProgressBar = (e) => {
+    const timelineWidth = videoTimeline.clientWidth;
+    progressBar.style.width = `${e.offsetX}px`;
+    mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+    currentVideoTime.innerText = formatTime(mainVideo.currentTime);
+  };
+
   videoTimeline.addEventListener("mousedown", () => {
     videoTimeline.addEventListener("mousemove", draggableProgressBar);
   });
 
   videoTimeline.addEventListener("touchstart", () => {
-    videoTimeline.addEventListener("touchmove", draggableProgressBar);
+    videoTimeline.addEventListener("touchmove", draggableProgressBarMobile);
   });
 
   container.addEventListener("mouseup", () => {
@@ -122,7 +148,7 @@ export async function renderPlayer(filmId, filmTitle, source) {
   });
 
   videoTimeline.addEventListener("touchend", () => {
-    videoTimeline.addEventListener("touchmove", draggableProgressBar);
+    videoTimeline.addEventListener("touchmove", draggableProgressBarMobile);
   });
 
   videoTimeline.addEventListener("mousemove", (e) => {
@@ -193,11 +219,17 @@ export async function renderPlayer(filmId, filmTitle, source) {
   });
 
   previousSeries.addEventListener("click", () => {
-    // TODO переход на предыдущую серию, если это сериал
+    if (series && index !== 0) {
+      index -= 1;
+      renderPlayer(filmId, filmTitle, series[index], series, index--);
+    }
   });
 
   nextSeries.addEventListener("click", () => {
-    // TODO переход на следующую серию, если это сериал
+    if (series && index !== series.length - 1) {
+      index += 1;
+      renderPlayer(filmId, filmTitle, series[index], series, index);
+    }
   });
 
   playPauseBtn.addEventListener("click", () => {

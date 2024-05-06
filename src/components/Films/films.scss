@@ -473,6 +473,7 @@
   }
 
   &__image {
+    flex: 1;
     margin-bottom: clamp(3px, 0.5vw, 8px);
     border-radius: 8px;
     width: clamp(42px, 13vw, 83px);
@@ -503,7 +504,7 @@
     width: clamp(89px, 28vw, 184px);
     position: absolute;
     bottom: clamp(31px, 9vw, 66px);
-    left: clamp(13px, 4vw, 20px);
+    left: clamp(13px, 4vw, 23px);
     height: 60%;
     background-image: linear-gradient(
       to top,
