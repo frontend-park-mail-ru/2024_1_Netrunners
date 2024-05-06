@@ -5,13 +5,12 @@ import Router from "../../../utils/router.js";
 /**
  * Рендерит блок серий в родительский элемент.
  * @param {HTMLElement} parent - Родительский элемент, в который будет добавлен блок серий.
- * @param {Array} series - Массив объектов с информацией о сериях.
+ * @param {Array} seasons - Массив объектов с информацией о сериях.
  * @param {string} filmId - Идентификатор фильма.
  * @return {void}
  */
 export function renderSeriesBlock(parent, seasons, filmId) {
   const seasonsCount = seasons.length;
-  console.log(seasons);
   const firstSeason = seasons[0];
   const buttonsData = Array.from(
     { length: seasonsCount },
@@ -53,13 +52,15 @@ export function renderEpisodesBlock(parent, season, filmId) {
   parent.innerHTML = templateEpisodesList(season);
   const allEpisodes = document.querySelectorAll(".series-block__element");
 
-  allEpisodes.forEach((episode) => {
+  allEpisodes.forEach((episode, index) => {
     episode.addEventListener("click", (e) => {
       e.preventDefault();
       Router.goToPlayerPage(
         filmId,
         episode.dataset.episodeTitle,
-        episode.dataset.episodeLink,
+        season.series[index].link,
+        season.series,
+        index,
       );
     });
   });
