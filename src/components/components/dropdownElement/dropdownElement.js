@@ -7,5 +7,4 @@ import templateDropdown from "./dropdownElement.hbs";
  */
 export function dropdownElement(choices) {
   return templateDropdown({ choices: choices });
-  // в теории можно добавить поле айди или имя для элемента
 }

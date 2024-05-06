@@ -172,7 +172,6 @@ export class Router {
     state.title = "Поиск";
     document.title = state.title;
     window.history.pushState(state, state.title, state.path);
-    console.log("go to search page");
     renderSearchPage();
   }
 

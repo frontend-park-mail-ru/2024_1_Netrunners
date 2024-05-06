@@ -14,21 +14,5 @@ export function pagesListElement(currentPage, maxPage) {
     );
     return templatePagesList({ pages: arrayOfPages });
   }
-  if (currentPage + 2 >= maxPage) {
-    return templatePagesList({
-      pages: [maxPage - 4, maxPage - 3, maxPage - 2, maxPage - 1, maxPage],
-    });
-  }
-  if (currentPage - 3 <= 0) {
-    return templatePagesList({ pages: [1, 2, 3, 4, 5] });
-  }
-  return templatePagesList({
-    pages: [
-      currentPage - 2,
-      currentPage - 1,
-      currentPage,
-      currentPage + 1,
-      currentPage + 2,
-    ],
-  });
+  return templatePagesList({pages: [1,2,3,4,5]});
 }

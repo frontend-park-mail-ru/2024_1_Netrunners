@@ -19,34 +19,31 @@ const SEARCH_SORTING_OPTION = [
  * @param {string} genreNameRu Название жанра.
  */
 export async function renderSearchPage() {
-  // document.querySelector("main").insertAdjacentHTML("beforeend", searchPageTemplate());
   document.querySelector("main").innerHTML = searchPageTemplate();
-  console.log(document.querySelector("main"));
   const searchInputBlock = document.querySelector(".search-input-block");
-  const findbyBlock = document.querySelector(
-    ".search-input-block__findby-element",
-  );
+  const searchResultBlock = document.querySelector(".search-result-block");
   const sortbyBlock = document.querySelector(
     ".search-input-block__sortby-element",
   );
-  const searchResultBlock = document.querySelector(".search-result-block");
-
   const searchInputElement = searchInput("Поиск");
   const sortbyElement = dropdownElement(SEARCH_SORTING_OPTION);
-  const findbyElement = dropdownElement(SEARCH_TYPE_OPTION);
   searchInputBlock.insertAdjacentHTML("afterbegin", searchInputElement);
   sortbyBlock.insertAdjacentHTML("beforeend", sortbyElement);
-  findbyBlock.insertAdjacentHTML("beforeend", findbyElement);
 
-  // const fragment = document.createRange().createContextualFragment(sortbyElement);
-  // sortbyBlock.appendChild(fragment)
+  //TODO сортировка, ждет реализации на беке
+  //const findbyBlock = document.querySelector(
+  //    ".search-input-block__findby-element",
+  //);
+  //const findbyElement = dropdownElement(SEARCH_TYPE_OPTION);
+  //findbyBlock.insertAdjacentHTML("beforeend", findbyElement);
+
 
   const dropdownElements = document.querySelectorAll(".dropdown-element");
   const searchButton = document.querySelector(".search-button");
   const searchInputField = document.querySelector("[type=search]");
 
   searchButton.addEventListener("click", () => {
-    const dropdownIndex = SEARCH_TYPE_OPTION.indexOf(dropdownElements[1].value);
+    const dropdownIndex = SEARCH_TYPE_OPTION.indexOf(dropdownElements[0].value);
     renderSearchResult(searchResultBlock, {
       page: 1,
       string: searchInputField.value,

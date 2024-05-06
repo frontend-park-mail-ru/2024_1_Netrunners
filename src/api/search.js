@@ -15,7 +15,6 @@ export async function searchRequest(params) {
       "GET",
     );
     const searchData = await response.json();
-    // const searchData = searchResult;
     if (!searchData || typeof searchData !== "object") {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
