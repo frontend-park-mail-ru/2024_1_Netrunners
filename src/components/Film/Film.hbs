@@ -17,11 +17,11 @@
         <img src="/icons/heart.svg" />
         {{/if}}
       </div>
-        {{#if isSerial}}
+      {{#if isSerial}}
 
-        {{else}}
-            <a class="film-page-poster-block__duration"> {{ duration }} </a>
-        {{/if}}
+      {{else}}
+      <a class="film-page-poster-block__duration"> {{ duration }} </a>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -33,6 +33,8 @@
       <p>{{ data }}</p>
     </div>
     <div class="film-content-block__actors">
+        <a class="film-content-block__sub-title">Актеры</a>
+        <div class="film-content-block__actors-list">
       {{#each filmActors}}
       <div
         class="film-content-block__actor-preview"
@@ -45,6 +47,7 @@
       </div>
       {{/each}}
     </div>
+    </div>
   </div>
 
   <div class="film-content-block__data">
@@ -53,7 +56,7 @@
       <div class="film-content-block__data-element">{{ date }}</div>
     </div>
     <div class="film-content-block__data-section">
-      <a class="film-content-block__sub-title">Возрастной рейтинг</a>
+      <a class="film-content-block__sub-title">Возрастное ограничение</a>
       <div class="film-content-block__data-element">{{ ageLimit }}+</div>
     </div>
     <div class="film-content-block__data-section">
@@ -62,6 +65,16 @@
         {{ averageScore }}
       </div>
     </div>
+      <div class="film-content-block__data-section">
+          <a class="film-content-block__sub-title">Жанры</a>
+          <div class="film-content-block__genres-list">
+              {{#each genres}}
+                  <div class="film-content-block__data-element">
+                      {{ this }}
+                  </div>
+              {{/each}}
+          </div>
+      </div>
     <div class="film-content-block__data-section">
       <a class="film-content-block__sub-title">Режиссеры</a>
       <div class="film-content-block__data-element">{{ director }}</div>
