@@ -17,7 +17,11 @@
         <img src="/icons/heart.svg" />
         {{/if}}
       </div>
-      <a class="film-page-poster-block__duration"> {{ duration }} </a>
+        {{#if isSerial}}
+
+        {{else}}
+            <a class="film-page-poster-block__duration"> {{ duration }} </a>
+        {{/if}}
     </div>
   </div>
 </div>

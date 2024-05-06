@@ -32,6 +32,7 @@ export async function renderFilmPage(filmId) {
   });
   await getFilmData(filmId);
   let inFavorites;
+  console.log(filmData)
   const profileId = getCookie("user_uuid");
   if (profileId !== undefined) {
     const filmsData = await getFavouritesFilms(profileId);
@@ -93,15 +94,14 @@ export async function renderFilmPage(filmId) {
   }
 
   const seriesBlockParent = document.querySelector(".film-content-block__left");
-  const firstEpisodeTitle = filmData.series[0][0].title;
-  const firstEpisodeLink = filmData.series[0][0].link;
-
-  renderSeriesBlock(seriesBlockParent, filmData.series, filmId);
+  const firstEpisodeLink = filmData.seasons[0].series[0].link;
+  console.log(filmData);
+  renderSeriesBlock(seriesBlockParent, filmData.seasons, filmId);
 
   playerButton.addEventListener("click", (e) => {
     if (getCookie("user_uuid") !== undefined) {
       e.preventDefault();
-      Router.goToPlayerPage(filmId, firstEpisodeTitle, firstEpisodeLink);
+      Router.goToPlayerPage(filmId, filmData.title, firstEpisodeLink);
     } else {
       showNotification("Для этого нужно быть авторизованным", "danger");
     }
