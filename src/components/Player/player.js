@@ -19,18 +19,12 @@ export async function renderPlayer(
   series = null,
   index = 0,
 ) {
-  series = [
-    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%281%20%D0%A1%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%282019%29.mp4",
-    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%282%20%D1%81%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%232%20%282020%29.mp4",
-    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%283%20%D1%81%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%282022%29.mp4",
-    "https://daimnefilm.hb.ru-msk.vkcs.cloud/%D0%9F%D0%B0%D1%86%D0%B0%D0%BD%D1%8B%20%284%20%D1%81%D0%B5%D0%B7%D0%BE%D0%BD%29%20%E2%80%94%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D1%83%D0%B1%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9%20%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80%20%282024%29.mp4",
-  ];
   const video = { src: source };
-
+  let mainVideo = null;
   document.querySelector("main").innerHTML = template(video);
   const exitButton = document.querySelector("#exit-player");
   const container = document.querySelector(".player-container");
-  const mainVideo = container.querySelector("video");
+  mainVideo = container.querySelector("video");
   const progressBar = container.querySelector(
     ".player-container__progress-bar",
   );
@@ -63,6 +57,7 @@ export async function renderPlayer(
   const pinInPicBtn = container.querySelector(
     ".player-container__pic-in-pic span",
   );
+
   const fullscreenBtn = container.querySelector(
     ".player-container__fullscreen img",
   );
@@ -153,6 +148,15 @@ export async function renderPlayer(
 
   videoTimeline.addEventListener("mousemove", (e) => {
     const progressTime = videoTimeline.querySelector("span");
+    const offsetX = e.offsetX;
+    progressTime.style.left = `${offsetX}px`;
+    const timelineWidth = videoTimeline.clientWidth;
+    const percent = (e.offsetX / timelineWidth) * mainVideo.duration;
+    progressTime.innerText = formatTime(percent);
+  });
+
+  videoTimeline.addEventListener("touchmove", (e) => {
+    const progressTime = videoTimeline.querySelector("span");
     const offsetX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
     progressTime.style.left = `${offsetX}px`;
     const timelineWidth = videoTimeline.clientWidth;
@@ -192,7 +196,7 @@ export async function renderPlayer(
     speedOptions.classList.toggle("show");
   });
 
-  document.addEventListener("click", (e) => {
+  container.addEventListener("click", (e) => {
     if (e.target.tagName === "VIDEO") {
       mainVideo.paused ? mainVideo.play() : mainVideo.pause();
     }
@@ -221,14 +225,15 @@ export async function renderPlayer(
   previousSeries.addEventListener("click", () => {
     if (series && index !== 0) {
       index -= 1;
-      renderPlayer(filmId, filmTitle, series[index], series, index--);
+      renderPlayer(filmId, filmTitle, series[index].link, series, index--);
     }
   });
 
   nextSeries.addEventListener("click", () => {
     if (series && index !== series.length - 1) {
       index += 1;
-      renderPlayer(filmId, filmTitle, series[index], series, index);
+      mainVideo.pause();
+      renderPlayer(filmId, filmTitle, series[index].link, series, index);
     }
   });
 
