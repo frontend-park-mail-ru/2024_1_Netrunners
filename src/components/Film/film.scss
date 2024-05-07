@@ -69,6 +69,10 @@
   justify-content: space-between;
   width: clamp(320px, 70vw, 1344px);
 
+  &__genre {
+    cursor: pointer;
+  }
+
   &__genres-list {
     display: flex;
     gap: 4px;
@@ -172,6 +176,7 @@
   }
 
   &__actor-preview {
+    cursor: pointer;
     display: flex;
     position: relative;
     font-size: clamp(12px, 4vw, var(--main-text));

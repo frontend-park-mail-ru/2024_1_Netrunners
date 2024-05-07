@@ -233,6 +233,7 @@ input[type="range"] {
 }
 
 .exit-button {
+  cursor: pointer;
   text-decoration: none;
   color: var(--white);
   border: 1px solid var(--grey-main);
