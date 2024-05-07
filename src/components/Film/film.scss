@@ -72,6 +72,10 @@
 
   &__genre {
     cursor: pointer;
+
+    &:hover {
+      background-color: var(--grey-main);
+    }
   }
 
   &__genres-list {
@@ -112,7 +116,6 @@
     width: fit-content;
     background-color: var(--neutral-main);
     font-size: clamp(12px, 3vw, var(--main-text));
-
   }
 
   &__data-section {
@@ -235,7 +238,7 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: var(--neutral-main);
+      background: var(--neutral-dark);
       border-radius: 16px;
     }
 
