@@ -77,8 +77,18 @@ export async function renderFilmPage(filmId) {
     }
   });
 
-  const playerButton = document.querySelector(".accent-button");
+  const genreCards = document.querySelectorAll("[data-genre-uuid]");
 
+  genreCards.forEach((genreCard) => {
+    genreCard.addEventListener("click", () => {
+      Router.goToGenrePage(
+        genreCard.dataset.genreUuid,
+        genreCard.dataset.genreNameRu,
+      );
+    });
+  });
+
+  const playerButton = document.querySelector(".accent-button");
   if (!filmData.isSerial) {
     playerButton.addEventListener("click", async (e) => {
       const isAuthorized = await authApi.check();
@@ -95,8 +105,9 @@ export async function renderFilmPage(filmId) {
   const seriesBlockParent = document.querySelector(".film-content-block__left");
   renderSeriesBlock(seriesBlockParent, filmData.seasons, filmId);
 
-  playerButton.addEventListener("click", (e) => {
-    if (getCookie("user_uuid") !== undefined) {
+  playerButton.addEventListener("click", async (e) => {
+    const isAuthorized = await authApi.check();
+    if (isAuthorized) {
       e.preventDefault();
       Router.goToPlayerPage(
         filmId,

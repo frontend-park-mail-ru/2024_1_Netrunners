@@ -69,9 +69,9 @@
   justify-content: space-between;
   width: clamp(320px, 70vw, 1344px);
 
-  &__genres-list{
+  &__genres-list {
     display: flex;
-    gap:4px;
+    gap: 4px;
     flex-wrap: wrap;
   }
 
@@ -103,14 +103,14 @@
     border-radius: 8px;
     padding: clamp(8px, 2vw, 16px);
     display: block;
-    margin-top: clamp(4px,1vw,16px);
-    margin-bottom: clamp(4px,1vw,16px);
+    margin-top: clamp(4px, 1vw, 16px);
+    margin-bottom: clamp(4px, 1vw, 16px);
     width: fit-content;
     background-color: var(--neutral-main);
     font-size: clamp(12px, 3vw, var(--main-text));
 
     @media (max-width: 800px) {
-      & + .film-content-block__data-element{
+      & + .film-content-block__data-element {
         margin-top: 0px;
       }
     }
@@ -132,7 +132,7 @@
     width: clamp(160px, 46vw, 900px);
   }
 
-  &__actors-list{
+  &__actors-list {
     margin-block-start: 1em;
     display: flex;
     flex-wrap: wrap;
@@ -225,7 +225,7 @@
     &::-webkit-scrollbar {
       position: absolute;
       left: 0;
-      width: clamp(4px,1vw,10px);
+      width: clamp(4px, 1vw, 10px);
       transform: translateX(-100px);
     }
 
@@ -259,7 +259,7 @@
   }
 
   &__element {
-    padding: clamp(24px,7vw,48px) 0;
+    padding: clamp(24px, 7vw, 48px) 0;
     position: relative;
     border-bottom: 2px solid var(--border-color);
     counter-increment: list;
@@ -293,14 +293,14 @@
 
   &__element::before {
     content: counter(list);
-    font-size: clamp(16px,5vw, 24px);
+    font-size: clamp(16px, 5vw, 24px);
     color: var(--grey-secondary);
     position: absolute;
     margin-left: 16px;
   }
 
   &__seasons {
-    padding: 0 0 clamp(16px,1vw, 32px) 16px;
+    padding: 0 0 clamp(16px, 1vw, 32px) 16px;
     display: flex;
   }
 
@@ -308,7 +308,7 @@
     color: var(--white);
     font-size: var(--small-font);
     border: none;
-    border-radius: clamp(4px,1vw,8px);
+    border-radius: clamp(4px, 1vw, 8px);
     padding: clamp(4px, 1vw, 16px);
     display: block;
     margin-left: 8px;
@@ -316,7 +316,7 @@
     background-color: var(--hover-color);
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       background-color: var(--hover-color);
     }
 
