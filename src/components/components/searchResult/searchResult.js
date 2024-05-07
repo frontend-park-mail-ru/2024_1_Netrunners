@@ -134,12 +134,11 @@ export async function renderSearchResult(parent, params) {
 
 /**
  * Рендерит список элементов на указанном родительском элементе с использованием заданного шаблона.
- * @param {HTMLElement} parent - Родительский элемент, на котором будет отображен список.
+ * @param {ChildNode} parent - Родительский элемент, на котором будет отображен список.
  * @param {Array} items - Элементы для отображения в списке.
- * @param {Function} itemTemplate - Функция-шаблон для формирования HTML элемента списка на основе данных элементов.
+ * @param {{}} itemTemplate - Функция-шаблон для формирования HTML элемента списка на основе данных элементов.
  */
 export function renderSearchList(parent, items, itemTemplate) {
-  console.log(items);
   items.forEach((element) => {
     const filmElement = itemTemplate(element);
     parent.insertAdjacentHTML("beforeend", filmElement);
