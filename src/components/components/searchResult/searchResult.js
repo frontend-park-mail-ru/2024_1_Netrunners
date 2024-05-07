@@ -52,7 +52,7 @@ export async function renderSearchResult(parent, params) {
     case "serials":
       renderSearchList(
         parent.firstChild,
-        searchResult.serials,
+        searchResult.films,
         templateSearchSerialResult,
       );
       break;
@@ -139,6 +139,7 @@ export async function renderSearchResult(parent, params) {
  * @param {Function} itemTemplate - Функция-шаблон для формирования HTML элемента списка на основе данных элементов.
  */
 export function renderSearchList(parent, items, itemTemplate) {
+  console.log(items);
   items.forEach((element) => {
     const filmElement = itemTemplate(element);
     parent.insertAdjacentHTML("beforeend", filmElement);
