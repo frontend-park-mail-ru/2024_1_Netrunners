@@ -370,6 +370,11 @@
   align-items: center;
   background-color: var(--neon-main);
   cursor: pointer;
+
+  &:hover{
+    background-color: var(--neon-secondary);
+  }
+
 }
 
 .poster-carousel {

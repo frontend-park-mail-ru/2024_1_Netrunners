@@ -37,10 +37,11 @@
     margin-left: 8px;
     height: clamp(25px, 1vw, 50px);
     border-radius: clamp(4px, 1vw, 8px);
-    background-color: var(--border-color);
+    background-color: transparent;
 
     @media (min-width: 800px) {
       padding: 8px;
+      background-color: var(--border-color);
     }
 
     @media (min-width: 1100px) {
@@ -113,10 +114,8 @@
     background-color: var(--neutral-main);
     font-size: clamp(12px, 3vw, var(--main-text));
 
-    @media (max-width: 800px) {
-      & + .film-content-block__data-element {
-        margin-top: 0px;
-      }
+    & + .film-content-block__data-element {
+      margin-top: 0px;
     }
   }
 
@@ -209,6 +208,10 @@
 
 #film-player-button {
   cursor: pointer;
+
+  &:hover{
+    background-color: var(--neon-secondary);
+  }
 }
 
 .series-block {
