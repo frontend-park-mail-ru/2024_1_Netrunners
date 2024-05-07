@@ -50,6 +50,13 @@ export async function renderSearchPage() {
     });
   });
 
+  searchInputField.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      searchButton.click();
+    }
+  });
+
   dropdownElements.forEach((element) => {
     element.addEventListener("change", () => {
       const dropdownIndex = SEARCH_TYPE_OPTION.indexOf(element.value);
