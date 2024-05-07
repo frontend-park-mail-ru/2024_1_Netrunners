@@ -109,18 +109,15 @@
     padding: clamp(8px, 2vw, 16px);
     display: block;
     margin-top: clamp(4px, 1vw, 16px);
-    margin-bottom: clamp(4px, 1vw, 16px);
     width: fit-content;
     background-color: var(--neutral-main);
     font-size: clamp(12px, 3vw, var(--main-text));
 
-    & + .film-content-block__data-element {
-      margin-top: 0px;
-    }
   }
 
   &__data-section {
     display: inline-block;
+    padding-bottom: clamp(4px, 1vw, 16px);
   }
 
   &__actors {
@@ -209,7 +206,7 @@
 #film-player-button {
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     background-color: var(--neon-secondary);
   }
 }
