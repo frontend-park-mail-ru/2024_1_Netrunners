@@ -1,23 +1,23 @@
 .actor-info {
-  margin-top: 32px;
+  margin-top: clamp(16px, 5vw, 32px);
   display: flex;
   align-items: center;
   color: var(--white);
 
   &__photo {
-    margin-right: 32px;
+    margin-right: clamp(16px, 5vw, 32px);
 
     img {
-      margin-left: 32px;
+      margin-left: clamp(8px, 2vw, 32px);
       object-fit: cover;
       border-radius: 16px;
-      width: 380px;
-      height: 500px;
+      width: clamp(132px, 41vw, 380px);
+      height: clamp(174px, 54vw, 500px);
     }
   }
 
   &__details {
-    margin-left: 32px;
+    margin-left: clamp(16px, 5vw, 32px);
   }
 
   &__description {
@@ -29,11 +29,23 @@
     }
 
     li {
-      margin-top: 16px;
+      margin-top: clamp(8px, 2vw, 16px);
     }
   }
 
   &__name {
-    margin-bottom: 96px;
+    margin-bottom: clamp(24px, 7vw, 96px);
+  }
+
+  &__actor-name {
+    font-size: clamp(16px, 5vw, 32px);
+  }
+
+  &__info {
+    font-size: clamp(16px, 5vw, 32px);
+  }
+
+  &__information {
+    font-size: clamp(8px, 2vw, 16px);
   }
 }

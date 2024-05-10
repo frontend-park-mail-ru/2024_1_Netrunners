@@ -3,7 +3,7 @@ import { validators } from "../../utils/validate.js";
 import profileTemplate from "./Profile.hbs";
 import editFormTemplate from "./editForm.hbs";
 import Router from "../../utils/router.js";
-import store, { menu } from "../../index.js";
+import store from "../../index.js";
 import { getProfileData } from "../../../use-cases/profile.js";
 import { PROFILE_REDUCER } from "../../../flux/actions/profile.js";
 import { addSliderHandler } from "../../utils/slider.js";
@@ -106,7 +106,7 @@ export async function renderEditForm(profileId) {
     if (await profileApi.editProfile(profileId, data)) {
       showNotification("Аватар пользователя обновлен", "success");
       renderProfile(profileId);
-      menu.renderAuth();
+      // menu.renderAuth();
     }
   });
 
