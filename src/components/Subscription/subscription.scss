@@ -1,0 +1,114 @@
+.subscriptions {
+  &__title {
+    margin-bottom: 32px;
+    margin-top: 32px;
+    font-size: var(--header-300);
+    color: var(--white);
+  }
+
+  &__card {
+    padding: 32px;
+    border-radius: 8px;
+    width: 553px;
+    color: var(--white);
+    background-color: var(--hover-color);
+  }
+
+  &__cards {
+    gap: 32px;
+    display: flex;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  &__features {
+    color: var(--grey-secondary);
+    width: fit-content;
+    text-wrap: pretty;
+    font-size: 18px;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  &__plan {
+    width: 244px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    width: 244px;
+    border-radius: 8px;
+    background-color: var(--neon-main);
+    padding: 4px 16px;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  &__price {
+    margin: 0;
+    font-size: 32px;
+  }
+
+  &__month {
+    color: var(--grey-secondary);
+  }
+
+  &__table {
+    margin-bottom: 64px;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    td {
+      height: 48px;
+      width: 400px;
+      word-wrap: break-word;
+      background-color: var(--hover-color);
+      color: var(--grey-secondary);
+      padding: 10px;
+    }
+
+    th {
+      height: 32px;
+      color: var(--white);
+      background-color: var(--neutral-dark);
+      padding: 16px;
+      text-align: left;
+    }
+
+    tr th,
+    tr td {
+      border-top: solid 1px var(--border-color);
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    tr:first-child th:first-child {
+      border-top-left-radius: 12px;
+    }
+
+    tr:first-child th:last-child {
+      border-top-right-radius: 12px;
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: 12px;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: 12px;
+    }
+  }
+}

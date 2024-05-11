@@ -57,52 +57,50 @@ export async function renderFilmPage(filmId) {
 
   const favouritesButton = document.querySelector("#favourites-button");
   favouritesButton.addEventListener("click", async () => {
-      const uuid = getCookie("user_uuid");
-      if (uuid !== undefined) {
-          const requestData = {
-              filmUuid: filmId,
-              userUuid: uuid,
-          };
+    const uuid = getCookie("user_uuid");
+    if (uuid !== undefined) {
+      const requestData = {
+        filmUuid: filmId,
+        userUuid: uuid,
+      };
 
-          if (!(await addToFavorite(requestData))) {
-              removeFromFavorite(requestData);
-              favouritesButton.innerHTML = NOT_IN_FAVOUTITES;
-          } else {
-              favouritesButton.innerHTML = IN_FAVOUTITES;
-          }
+      if (!(await addToFavorite(requestData))) {
+        removeFromFavorite(requestData);
+        favouritesButton.innerHTML = NOT_IN_FAVOUTITES;
       } else {
-          showNotification("Для этого нужно быть авторизованным", "danger");
+        favouritesButton.innerHTML = IN_FAVOUTITES;
       }
+    } else {
+      showNotification("Для этого нужно быть авторизованным", "danger");
+    }
   });
 
-    const playerButton = document.querySelector(".accent-button");
+  const playerButton = document.querySelector(".accent-button");
 
-    if (!filmData.isSerial) {
-        playerButton.addEventListener("click", (e) => {
-            if (getCookie("user_uuid") !== undefined) {
-                e.preventDefault();
-                Router.goToPlayerPage(filmId, filmData.title, filmData.link);
-            } else {
-                showNotification("Для этого нужно быть авторизованным", "danger");
-            }
-        });
-        return;
-    }
-
-    const seriesBlockParent = document.querySelector(".film-content-block__left");
-    const firstEpisodeTitle = filmData.series[0][0].title;
-    const firstEpisodeLink = filmData.series[0][0].link;
-
-    renderSeriesBlock(seriesBlockParent, filmData.series, filmId);
-
+  if (!filmData.isSerial) {
     playerButton.addEventListener("click", (e) => {
-        if (getCookie("user_uuid") !== undefined) {
-            e.preventDefault();
-            Router.goToPlayerPage(filmId, firstEpisodeTitle, firstEpisodeLink);
-        } else {
-            showNotification("Для этого нужно быть авторизованным", "danger");
-        }
+      if (getCookie("user_uuid") !== undefined) {
+        e.preventDefault();
+        Router.goToPlayerPage(filmId, filmData.title, filmData.link);
+      } else {
+        showNotification("Для этого нужно быть авторизованным", "danger");
+      }
     });
+    return;
+  }
 
+  const seriesBlockParent = document.querySelector(".film-content-block__left");
+  const firstEpisodeTitle = filmData.series[0][0].title;
+  const firstEpisodeLink = filmData.series[0][0].link;
+
+  renderSeriesBlock(seriesBlockParent, filmData.series, filmId);
+
+  playerButton.addEventListener("click", (e) => {
+    if (getCookie("user_uuid") !== undefined) {
+      e.preventDefault();
+      Router.goToPlayerPage(filmId, firstEpisodeTitle, firstEpisodeLink);
+    } else {
+      showNotification("Для этого нужно быть авторизованным", "danger");
+    }
+  });
 }
-

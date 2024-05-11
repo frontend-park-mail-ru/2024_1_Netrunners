@@ -30,13 +30,12 @@ export async function renderSearchPage() {
   searchInputBlock.insertAdjacentHTML("afterbegin", searchInputElement);
   sortbyBlock.insertAdjacentHTML("beforeend", sortbyElement);
 
-  //TODO сортировка, ждет реализации на беке
-  //const findbyBlock = document.querySelector(
+  // TODO сортировка, ждет реализации на беке
+  // const findbyBlock = document.querySelector(
   //    ".search-input-block__findby-element",
-  //);
-  //const findbyElement = dropdownElement(SEARCH_TYPE_OPTION);
-  //findbyBlock.insertAdjacentHTML("beforeend", findbyElement);
-
+  // );
+  // const findbyElement = dropdownElement(SEARCH_TYPE_OPTION);
+  // findbyBlock.insertAdjacentHTML("beforeend", findbyElement);
 
   const dropdownElements = document.querySelectorAll(".dropdown-element");
   const searchButton = document.querySelector(".search-button");

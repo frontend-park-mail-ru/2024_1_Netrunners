@@ -11,6 +11,7 @@ import Rout from "./utils/router.js";
 import "../src/index.scss";
 import { getFilmData } from "../use-cases/film";
 import { FILM_REDUCER } from "../flux/actions/film";
+import { renderSubscriptionPage } from "./components/Subscription/subscription.js";
 
 const store = createStore(rootReducer);
 
@@ -44,7 +45,7 @@ const config = {
     subscription: {
       href: "/subscription",
       text: "Подписки",
-      render: renderFilms,
+      render: renderSubscriptionPage,
     },
   },
   authElements: {
@@ -89,8 +90,8 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === "a") {
       e.preventDefault();
-      changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
-      // changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
+      // changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
+      changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
     }
   });
 }
@@ -176,6 +177,7 @@ const handleLocation = async () => {
     });
     return;
   }
+  changeActiveButton(path);
   await Rout.go(decodeURIComponent(path), document.title);
 };
 
