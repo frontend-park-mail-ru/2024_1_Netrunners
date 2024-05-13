@@ -82,7 +82,7 @@ export async function renderSearchResult(parent, params) {
     if (params.page - 3 <= 0) {
       newParams.page = 1 + index;
     }
-    // to-do else if(params.page +2 >= searchResult.count){
+    // TODO else if(params.page +2 >= searchResult.count){
     else if (params.page + 2 >= 5) {
       newParams.page = searchResult.count - 4 + index;
     } else {
