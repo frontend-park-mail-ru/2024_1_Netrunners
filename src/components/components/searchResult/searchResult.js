@@ -79,13 +79,13 @@ export async function renderSearchResult(parent, params) {
     const newParams = Object.assign({}, params);
     if (params.page - 3 <= 0) {
       newParams.page = 1 + index;
-    }
-    else if (params.page + 2 >= pagesCount) {
+    } else if (params.page + 2 >= pagesCount) {
       newParams.page = pagesCount - 4 + index;
     } else {
       newParams.page = newParams.page + pageRelativelyIndex[index];
     }
     button.addEventListener("click", () => {
+      window.scrollTo(0, 0);
       renderSearchResult(parent, newParams);
     });
   });
