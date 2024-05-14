@@ -5,11 +5,9 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
-  schedule:
-    - cron: "24 11 * * 2"
 
 jobs:
-  eslint:
+  linters:
     name: Run eslint and prettier scanning
     runs-on: ubuntu-latest
     steps:
@@ -21,11 +19,5 @@ jobs:
           npm install eslint
           npm i eslint-config-prettier
 
-      - name: Run ESLint
-        run: npx eslint .
-          --config .eslintrc.json
-        continue-on-error: true
-
-      - name: Run Prettier
-        run: npx prettier . --write
-        continue-on-error: true
+      - name: Run linters
+        run: npm run linters

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
+    "linters": "npm run eslint && npm run prettier",
     "eslint": "npx eslint src --fix",
     "prettier": "npx prettier . --write",
     "build": "npx webpack --mode production",
