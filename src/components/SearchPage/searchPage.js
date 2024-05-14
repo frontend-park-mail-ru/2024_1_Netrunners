@@ -22,15 +22,16 @@ export async function renderSearchPage() {
   document.querySelector("main").innerHTML = searchPageTemplate();
   const searchInputBlock = document.querySelector(".search-input-block");
   const searchResultBlock = document.querySelector(".search-result-block");
+  const searchInputElement = searchInput("Поиск");
+  searchInputBlock.insertAdjacentHTML("afterbegin", searchInputElement);
+
+  // TODO сортировка, ждет реализации на беке
   // const sortbyBlock = document.querySelector(
   //   ".search-input-block__sortby-element",
   // );
-  const searchInputElement = searchInput("Поиск");
   // const sortbyElement = dropdownElement(SEARCH_SORTING_OPTION);
-  searchInputBlock.insertAdjacentHTML("afterbegin", searchInputElement);
   // sortbyBlock.insertAdjacentHTML("beforeend", sortbyElement);
 
-  // TODO сортировка, ждет реализации на беке
   const findbyBlock = document.querySelector(
     ".search-input-block__findby-element",
   );

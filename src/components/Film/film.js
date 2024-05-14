@@ -112,7 +112,7 @@ export async function renderFilmPage(filmId) {
       Router.goToPlayerPage(
         filmId,
         filmData.title,
-        filmData.seasons[0].series[0]?.link,
+        filmData.seasons[0]?.series[0]?.link,
         filmData.seasons[0]?.series,
       );
     } else {
