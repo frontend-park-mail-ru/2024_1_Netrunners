@@ -134,9 +134,11 @@ input[type="search"] {
 .search-item-image {
   padding: 16px;
   width: clamp(84px, 26vw, 184px);
+  height: clamp(128px, 26vw, 280px);
   border-radius: 32px;
   justify-content: space-around;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .search-text-data {
