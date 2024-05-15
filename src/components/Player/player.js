@@ -8,15 +8,23 @@ import Router from "../../utils/router.js";
  * @param {string} filmId - Идентификатор фильма, который проигрывается.
  * @param {string} filmTitle - Заголовок фильма, который проигрывается.
  * @param {string} source - URL источника видео.
+ * @param {Array} series - все серии
+ * @param {int} index - индекс серии
  * @return {void}
  */
-export async function renderPlayer(filmId, filmTitle, source) {
+export async function renderPlayer(
+  filmId,
+  filmTitle,
+  source,
+  series = null,
+  index = 0,
+) {
   const video = { src: source };
-
+  let mainVideo = null;
   document.querySelector("main").innerHTML = template(video);
   const exitButton = document.querySelector("#exit-player");
   const container = document.querySelector(".player-container");
-  const mainVideo = container.querySelector("video");
+  mainVideo = container.querySelector("video");
   const progressBar = container.querySelector(
     ".player-container__progress-bar",
   );
@@ -49,6 +57,7 @@ export async function renderPlayer(filmId, filmTitle, source) {
   const pinInPicBtn = container.querySelector(
     ".player-container__pic-in-pic span",
   );
+
   const fullscreenBtn = container.querySelector(
     ".player-container__fullscreen img",
   );
@@ -95,12 +104,17 @@ export async function renderPlayer(filmId, filmTitle, source) {
 
   videoTimeline.addEventListener("click", (e) => {
     const timelineWidth = videoTimeline.clientWidth;
+    mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+  });
+
+  videoTimeline.addEventListener("touchstart", (e) => {
+    const timelineWidth = videoTimeline.clientWidth;
     mainVideo.currentTime =
       ((e.touches[0].pageX - e.touches[0].target.offsetLeft) / timelineWidth) *
       mainVideo.duration;
   });
 
-  const draggableProgressBar = (e) => {
+  const draggableProgressBarMobile = (e) => {
     const timelineWidth = videoTimeline.clientWidth;
     progressBar.style.width = `${e.touches[0].pageX - e.touches[0].target.offsetLeft}px`;
     mainVideo.currentTime =
@@ -109,12 +123,19 @@ export async function renderPlayer(filmId, filmTitle, source) {
     currentVideoTime.innerText = formatTime(mainVideo.currentTime);
   };
 
+  const draggableProgressBar = (e) => {
+    const timelineWidth = videoTimeline.clientWidth;
+    progressBar.style.width = `${e.offsetX}px`;
+    mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+    currentVideoTime.innerText = formatTime(mainVideo.currentTime);
+  };
+
   videoTimeline.addEventListener("mousedown", () => {
     videoTimeline.addEventListener("mousemove", draggableProgressBar);
   });
 
   videoTimeline.addEventListener("touchstart", () => {
-    videoTimeline.addEventListener("touchmove", draggableProgressBar);
+    videoTimeline.addEventListener("touchmove", draggableProgressBarMobile);
   });
 
   container.addEventListener("mouseup", () => {
@@ -122,10 +143,19 @@ export async function renderPlayer(filmId, filmTitle, source) {
   });
 
   videoTimeline.addEventListener("touchend", () => {
-    videoTimeline.addEventListener("touchmove", draggableProgressBar);
+    videoTimeline.addEventListener("touchmove", draggableProgressBarMobile);
   });
 
   videoTimeline.addEventListener("mousemove", (e) => {
+    const progressTime = videoTimeline.querySelector("span");
+    const offsetX = e.offsetX;
+    progressTime.style.left = `${offsetX}px`;
+    const timelineWidth = videoTimeline.clientWidth;
+    const percent = (e.offsetX / timelineWidth) * mainVideo.duration;
+    progressTime.innerText = formatTime(percent);
+  });
+
+  videoTimeline.addEventListener("touchmove", (e) => {
     const progressTime = videoTimeline.querySelector("span");
     const offsetX = e.touches[0].pageX - e.touches[0].target.offsetLeft;
     progressTime.style.left = `${offsetX}px`;
@@ -166,7 +196,7 @@ export async function renderPlayer(filmId, filmTitle, source) {
     speedOptions.classList.toggle("show");
   });
 
-  document.addEventListener("click", (e) => {
+  container.addEventListener("click", (e) => {
     if (e.target.tagName === "VIDEO") {
       mainVideo.paused ? mainVideo.play() : mainVideo.pause();
     }
@@ -193,11 +223,18 @@ export async function renderPlayer(filmId, filmTitle, source) {
   });
 
   previousSeries.addEventListener("click", () => {
-    // TODO переход на предыдущую серию, если это сериал
+    if (series && index !== 0) {
+      index -= 1;
+      renderPlayer(filmId, filmTitle, series[index].link, series, index--);
+    }
   });
 
   nextSeries.addEventListener("click", () => {
-    // TODO переход на следующую серию, если это сериал
+    if (series && index !== series.length - 1) {
+      index += 1;
+      mainVideo.pause();
+      renderPlayer(filmId, filmTitle, series[index].link, series, index);
+    }
   });
 
   playPauseBtn.addEventListener("click", () => {

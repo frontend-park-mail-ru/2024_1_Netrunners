@@ -119,6 +119,7 @@ input[type="search"] {
   outline: none;
   border: 1px solid var(--grey-main);
   border-radius: 8px;
+  margin-left: 4px;
 }
 
 .search-item-block {
@@ -133,20 +134,25 @@ input[type="search"] {
 .search-item-image {
   padding: 16px;
   width: clamp(84px, 26vw, 184px);
+  height: clamp(128px, 26vw, 280px);
   border-radius: 32px;
   justify-content: space-around;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .search-text-data {
   display: flex;
   flex-direction: column;
   width: clamp(196px, 60vw, 1160px);
+  @media (min-width: 700px) {
+    margin-left: 24px;
+  }
 
   &__title {
     margin-top: clamp(8px, 1vw, 32px);
     & > h2 {
-      font-size: clamp(16px, 5vw, 18px);
+      font-size: clamp(16px, 5vw, 24px);
     }
     font-size: var(--input-font);
   }
@@ -176,7 +182,7 @@ input[type="search"] {
     padding: clamp(2px, 1vw, 8px);
     display: flex;
     align-items: center;
-    font-size: clamp(12px, 3vw, var(--main-text));
+    font-size: clamp(12px, 3vw, 16px);
 
     & > img {
       width: clamp(16px, 1vw, 24px);

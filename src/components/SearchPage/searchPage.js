@@ -5,14 +5,14 @@ import { renderSearchResult } from "../components/searchResult/searchResult";
 
 const SEARCH_TYPE_OPTION = ["Фильмы", "Сериалы", "Актеры"];
 const SEARCH_TYPE_OPTION_VALUE = ["films", "serials", "actors"];
-const SEARCH_SORTING_OPTION = [
-  "По популярности(убыв.)",
-  "По популярности(возр.)",
-  "По дате(убыв.)",
-  "По дате(убыв.)",
-  "По алфавиту(возр.)",
-  "По алфавиту(возр.)",
-];
+// const SEARCH_SORTING_OPTION = [
+//   "По популярности(убыв.)",
+//   "По популярности(возр.)",
+//   "По дате(убыв.)",
+//   "По дате(убыв.)",
+//   "По алфавиту(возр.)",
+//   "По алфавиту(возр.)",
+// ];
 /**
  * Отображает страницу фильмов определенного жанра.
  * @param {string} genreUuid Идентификатор жанра.
@@ -22,21 +22,21 @@ export async function renderSearchPage() {
   document.querySelector("main").innerHTML = searchPageTemplate();
   const searchInputBlock = document.querySelector(".search-input-block");
   const searchResultBlock = document.querySelector(".search-result-block");
-  const sortbyBlock = document.querySelector(
-    ".search-input-block__sortby-element",
-  );
   const searchInputElement = searchInput("Поиск");
-  const sortbyElement = dropdownElement(SEARCH_SORTING_OPTION);
   searchInputBlock.insertAdjacentHTML("afterbegin", searchInputElement);
-  sortbyBlock.insertAdjacentHTML("beforeend", sortbyElement);
 
-  //TODO сортировка, ждет реализации на беке
-  //const findbyBlock = document.querySelector(
-  //    ".search-input-block__findby-element",
-  //);
-  //const findbyElement = dropdownElement(SEARCH_TYPE_OPTION);
-  //findbyBlock.insertAdjacentHTML("beforeend", findbyElement);
+  // TODO сортировка, ждет реализации на беке
+  // const sortbyBlock = document.querySelector(
+  //   ".search-input-block__sortby-element",
+  // );
+  // const sortbyElement = dropdownElement(SEARCH_SORTING_OPTION);
+  // sortbyBlock.insertAdjacentHTML("beforeend", sortbyElement);
 
+  const findbyBlock = document.querySelector(
+    ".search-input-block__findby-element",
+  );
+  const findbyElement = dropdownElement(SEARCH_TYPE_OPTION);
+  findbyBlock.insertAdjacentHTML("beforeend", findbyElement);
 
   const dropdownElements = document.querySelectorAll(".dropdown-element");
   const searchButton = document.querySelector(".search-button");
@@ -49,6 +49,13 @@ export async function renderSearchPage() {
       string: searchInputField.value,
       findBy: SEARCH_TYPE_OPTION_VALUE[dropdownIndex],
     });
+  });
+
+  searchInputField.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      searchButton.click();
+    }
   });
 
   dropdownElements.forEach((element) => {

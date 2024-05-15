@@ -17,7 +17,11 @@
         <img src="/icons/heart.svg" />
         {{/if}}
       </div>
+      {{#if isSerial}}
+
+      {{else}}
       <a class="film-page-poster-block__duration"> {{ duration }} </a>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -29,17 +33,23 @@
       <p>{{ data }}</p>
     </div>
     <div class="film-content-block__actors">
-      {{#each filmActors}}
-      <div
-        class="film-content-block__actor-preview"
-        data-actor-id="{{ this.uuid }}"
-      >
-        <img class="film-content-block__actor-avatar" src="{{ this.avatar }}" />
-        <div class="film-content-block__dropdown-actor-name">
-          {{ this.name }}
+      <a class="film-content-block__sub-title">Актеры</a>
+      <div class="film-content-block__actors-list">
+        {{#each filmActors}}
+        <div
+          class="film-content-block__actor-preview"
+          data-actor-id="{{ this.uuid }}"
+        >
+          <img
+            class="film-content-block__actor-avatar"
+            src="{{ this.avatar }}"
+          />
+          <div class="film-content-block__dropdown-actor-name">
+            {{ this.name }}
+          </div>
         </div>
+        {{/each}}
       </div>
-      {{/each}}
     </div>
   </div>
 
@@ -49,13 +59,27 @@
       <div class="film-content-block__data-element">{{ date }}</div>
     </div>
     <div class="film-content-block__data-section">
-      <a class="film-content-block__sub-title">Возрастной рейтинг</a>
+      <a class="film-content-block__sub-title">Возрастное ограничение</a>
       <div class="film-content-block__data-element">{{ ageLimit }}+</div>
     </div>
     <div class="film-content-block__data-section">
       <a class="film-content-block__sub-title">Рейтинг</a>
       <div class="film-content-block__data-element">
         {{ averageScore }}
+      </div>
+    </div>
+    <div class="film-content-block__data-section">
+      <a class="film-content-block__sub-title">Жанры</a>
+      <div class="film-content-block__genres-list">
+        {{#each genres}}
+        <div
+          class="film-content-block__data-element film-content-block__genre"
+          data-genre-uuid="{{ this.genreUuid }}"
+          data-genre-name-ru="{{ this.genreName }}"
+        >
+          {{ this.genreName }}
+        </div>
+        {{/each}}
       </div>
     </div>
     <div class="film-content-block__data-section">

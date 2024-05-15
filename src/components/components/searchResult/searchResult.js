@@ -26,8 +26,9 @@ export async function renderSearchResult(parent, params) {
   }
 
   const [searchResult] = await Promise.all([searchApi.searchRequest(params)]);
+  const pagesCount = Math.ceil(searchResult.searchResCount / 8);
 
-  if (!searchResult.films && !searchResult.actors) {
+  if (pagesCount === 0) {
     parent.innerText = "Ничего не найдено";
     return;
   }
@@ -52,19 +53,16 @@ export async function renderSearchResult(parent, params) {
     case "serials":
       renderSearchList(
         parent.firstChild,
-        searchResult.serials,
+        searchResult.films,
         templateSearchSerialResult,
       );
       break;
   }
 
-  //TODO ждет реализации поля кол-ва запросов на беке
-  //parent.lastChild.innerHTML = pagesListElement(params.page, searchResult[count]);
-
   const pagesBlock = parent.querySelector(".pages-block");
-  pagesBlock.innerHTML = pagesListElement(params.page, 1);
+  pagesBlock.innerHTML = pagesListElement(params.page, pagesCount);
   const pageButtons = pagesBlock.querySelectorAll(
-    ".pages-list__simple-button:not([class*=''])",
+    ".pages-list__simple-button:not([class*=' '])",
   );
   const leftPageButtons = pagesBlock.querySelectorAll(
     ".pages-list__simple-button.left",
@@ -81,14 +79,13 @@ export async function renderSearchResult(parent, params) {
     const newParams = Object.assign({}, params);
     if (params.page - 3 <= 0) {
       newParams.page = 1 + index;
-    }
-    //to-do else if(params.page +2 >= searchResult.count){
-    else if (params.page + 2 >= 5) {
-      newParams.page = searchResult.count - 4 + index;
+    } else if (params.page + 2 >= pagesCount) {
+      newParams.page = pagesCount - 4 + index;
     } else {
       newParams.page = newParams.page + pageRelativelyIndex[index];
     }
     button.addEventListener("click", () => {
+      window.scrollTo(0, 0);
       renderSearchResult(parent, newParams);
     });
   });
@@ -111,10 +108,7 @@ export async function renderSearchResult(parent, params) {
     });
   }
 
-  //TODO ждет реализации поля кол-ва запросов на беке
-  //if (params.page === searchResult.count){
-
-  if (params.page === 1) {
+  if (params.page === pagesCount) {
     rightPageButtons.forEach((button) => {
       button.classList.add("inactive");
     });
@@ -126,7 +120,7 @@ export async function renderSearchResult(parent, params) {
     });
     rightPageButtons[1].addEventListener("click", () => {
       const newParams = Object.assign({}, params);
-      newParams.page = searchResult[count];
+      newParams.page = pagesCount;
       renderSearchResult(parent, newParams);
     });
   }
@@ -134,9 +128,9 @@ export async function renderSearchResult(parent, params) {
 
 /**
  * Рендерит список элементов на указанном родительском элементе с использованием заданного шаблона.
- * @param {HTMLElement} parent - Родительский элемент, на котором будет отображен список.
+ * @param {ChildNode} parent - Родительский элемент, на котором будет отображен список.
  * @param {Array} items - Элементы для отображения в списке.
- * @param {Function} itemTemplate - Функция-шаблон для формирования HTML элемента списка на основе данных элементов.
+ * @param {{}} itemTemplate - Функция-шаблон для формирования HTML элемента списка на основе данных элементов.
  */
 export function renderSearchList(parent, items, itemTemplate) {
   items.forEach((element) => {

@@ -152,17 +152,23 @@ export class Router {
    * @param {string} uuid Идентификатор фильма.
    * @param {string} title Заголовок страницы.
    * @param {string} link Ссылка на видеофайл фильма.
+   * @param {Array} series - все серии
+   * @param {int} index - индекс серии
    */
-  goToPlayerPage(uuid, title, link) {
+  goToPlayerPage(uuid, title, link, series = null, index = 0) {
     const state = {};
     state.path = `/player/${uuid}`;
     state.title = title;
     document.title = state.title;
 
     window.history.pushState(state, state.title, state.path);
-    renderPlayer(uuid, title, link);
+    if (series) {
+      renderPlayer(uuid, title, link, series, index);
+    } else {
+      renderPlayer(uuid, title, link);
+    }
   }
-
+  F;
   /**
    * Переход на страницу поиска.
    */
