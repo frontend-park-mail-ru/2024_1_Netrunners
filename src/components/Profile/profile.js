@@ -106,7 +106,7 @@ export async function renderEditForm(profileId) {
     if (await profileApi.editProfile(profileId, data)) {
       showNotification("Аватар пользователя обновлен", "success");
       renderProfile(profileId);
-      menu.renderAuth();
+      menu.renderAuth(true);
     }
   });
 

@@ -77,6 +77,7 @@
     </button>
     <ul class="films-section__carousel">
       {{#each filmData}}
+      {{#unless this.isSerial}}
       <li class="films-section__carousel-card">
         <div
           class="films-section__film-card"
@@ -112,6 +113,7 @@
           </div>
         </div>
       </li>
+      {{/unless}}
       {{/each}}
     </ul>
     <button class="films-section__carousel-button next" id="right">
@@ -127,6 +129,7 @@
     </button>
     <ul class="films-section__carousel">
       {{#each filmData}}
+      {{#unless this.isSerial}}
       <li class="films-section__carousel-card">
         <div
           class="films-section__film-card"
@@ -162,6 +165,7 @@
           </div>
         </div>
       </li>
+      {{/unless}}
       {{/each}}
     </ul>
     <button class="films-section__carousel-button next" id="right">
@@ -177,6 +181,7 @@
     </button>
     <ul class="films-section__carousel">
       {{#each filmData}}
+      {{#unless this.isSerial}}
       <li class="films-section__carousel-card">
         <div
           class="films-section__film-card"
@@ -212,6 +217,7 @@
           </div>
         </div>
       </li>
+      {{/unless}}
       {{/each}}
     </ul>
     <button class="films-section__carousel-button next" id="right">
@@ -263,6 +269,7 @@
     </button>
     <ul class="films-section__carousel">
       {{#each filmData}}
+      {{#if this.isSerial}}
       <li class="films-section__carousel-card">
         <div
           class="films-section__film-card"
@@ -298,6 +305,7 @@
           </div>
         </div>
       </li>
+      {{/if}}
       {{/each}}
     </ul>
     <button class="films-section__carousel-button next" id="right">
@@ -313,6 +321,7 @@
     </button>
     <ul class="films-section__carousel">
       {{#each filmData}}
+      {{#if this.isSerial}}
       <li class="films-section__carousel-card">
         <div
           class="films-section__film-card"
@@ -348,6 +357,7 @@
           </div>
         </div>
       </li>
+      {{/if}}
       {{/each}}
     </ul>
     <button class="films-section__carousel-button next" id="right">
@@ -363,6 +373,7 @@
     </button>
     <ul class="films-section__carousel">
       {{#each filmData}}
+      {{#if this.isSerial}}
       <li class="films-section__carousel-card">
         <div
           class="films-section__film-card"
@@ -398,6 +409,7 @@
           </div>
         </div>
       </li>
+      {{/if}}
       {{/each}}
     </ul>
     <button class="films-section__carousel-button next" id="right">

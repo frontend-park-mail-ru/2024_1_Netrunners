@@ -141,6 +141,7 @@
 }
 
 .dropdown {
+  cursor: pointer;
   position: relative;
   padding-top: clamp(3px, 1vw, 8px);
   padding-left: 8px;
