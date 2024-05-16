@@ -47,5 +47,5 @@ jobs:
               source /root/.nvm/nvm.sh;
               nvm use 21.6.2;
               cd /root/front/2024_1_Netrunners;
-              npm run dev &
+              npm run build;
             "
