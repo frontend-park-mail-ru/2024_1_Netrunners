@@ -69,6 +69,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: clamp(320px, 70vw, 1344px);
+  padding-bottom: 32px;
 
   &__genre {
     cursor: pointer;
@@ -332,5 +333,29 @@
       background-color: var(--neon-main);
       border: none;
     }
+  }
+}
+
+.comments-block{
+  color: var(--white);
+  border: 2px solid var(--neon-secondary);
+  background-color: var(--hover-color);
+}
+
+.comment-element{
+  background-color: var(--neutral-dark);
+  border-radius: 16px;
+
+}
+
+.add-comment-form{
+
+}
+
+.star{
+  font-size: var(--header-300);
+  cursor: pointer;
+  &:hover, &.active{
+    color: var(--neon-main)
   }
 }
