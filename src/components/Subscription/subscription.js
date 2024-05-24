@@ -1,4 +1,7 @@
 import template from "./subscription.hbs";
+import { buyMonthlySubscription } from "../../api/subscription.js";
+import * as authApi from "../../api/auth.js";
+import { showNotification } from "../Notification/notification.js";
 
 /**
  * Отображает страницу подписок.
@@ -10,13 +13,23 @@ export function renderSubscriptionPage() {
   const monthlyButton = document.querySelector("#monthly");
   const yearlyButton = document.querySelector("#yearly");
 
-  monthlyButton.addEventListener("click", () => {
+  monthlyButton.addEventListener("click", async () => {
     console.log("месяц");
-    // TODO оплата ежемесячной подписки
+    const isAuthorized = await authApi.check();
+    if (isAuthorized) {
+      await buyMonthlySubscription();
+    } else {
+      showNotification("Для этого нужно быть авторизованным", "danger");
+    }
   });
 
-  yearlyButton.addEventListener("click", () => {
+  yearlyButton.addEventListener("click", async () => {
     console.log("год");
-    // TODO оплата ежегодной подписки
+    const isAuthorized = await authApi.check();
+    if (isAuthorized) {
+      // TODO оплата ежегодной подписки
+    } else {
+      showNotification("Для этого нужно быть авторизованным", "danger");
+    }
   });
 }

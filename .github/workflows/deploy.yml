@@ -1,51 +1,51 @@
-name: deploy
-
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
-
-jobs:
-  linters:
-    name: Run eslint and prettier scanning
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install ESLint
-        run: |
-          npm install eslint
-          npm i eslint-config-prettier
-
-      - name: Run linters
-        run: npm run linters
-  deploy:
-    runs-on: ubuntu-latest
-    needs:
-      - linters
-    steps:
-      - name: Pull code
-        uses: appleboy/ssh-action@master
-        with:
-          host: 94.139.247.246
-          username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
-          run: sudo bash
-          script: sudo bash -c "cd /root/front/2024_1_Netrunners && git pull"
-      - name: Build containers
-        uses: appleboy/ssh-action@master
-        with:
-          timeout: 30m
-          host: 94.139.247.246
-          username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
-          run: sudo bash
-          script: |
-            sudo bash -c "
-              source /root/.nvm/nvm.sh;
-              nvm use 21.6.2;
-              cd /root/front/2024_1_Netrunners;
-              npm run build;
-            "
+#name: deploy
+#
+#on:
+#  push:
+#    branches: ["main"]
+#  pull_request:
+#    branches: ["main"]
+#
+#jobs:
+#  linters:
+#    name: Run eslint and prettier scanning
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Install ESLint
+#        run: |
+#          npm install eslint
+#          npm i eslint-config-prettier
+#
+#      - name: Run linters
+#        run: npm run linters
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs:
+#      - linters
+#    steps:
+#      - name: Pull code
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: 90.156.218.166
+#          username: ubuntu
+#          key: ${{ secrets.PRIVATE_KEY }}
+#          run: sudo bash
+#          script: sudo bash -c "cd /root/front/2024_1_Netrunners && git pull"
+#      - name: Build containers
+#        uses: appleboy/ssh-action@master
+#        with:
+#          timeout: 30m
+#          host: 90.156.218.166
+#          username: ubuntu
+#          key: ${{ secrets.PRIVATE_KEY }}
+#          run: sudo bash
+#          script: |
+#            sudo bash -c "
+#              source /root/.nvm/nvm.sh;
+#              nvm use 21.6.2;
+#              cd /root/front/2024_1_Netrunners;
+#              npm run build;
+#            "

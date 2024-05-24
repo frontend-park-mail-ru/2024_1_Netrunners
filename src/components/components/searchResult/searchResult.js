@@ -137,13 +137,16 @@ export function renderSearchList(parent, items, itemTemplate) {
     const filmElement = itemTemplate(element);
     parent.insertAdjacentHTML("beforeend", filmElement);
   });
+
   const searchItems = parent.querySelectorAll(".search-item-block");
   let goToFunction;
+
   if (items[0].hasOwnProperty("isSerial")) {
     goToFunction = Router.goToFilmPage;
   } else {
     goToFunction = Router.goToActorPage;
   }
+
   searchItems.forEach((element) => {
     element.addEventListener("click", () => {
       goToFunction(element.dataset.elementId, element.dataset.elementTitle);

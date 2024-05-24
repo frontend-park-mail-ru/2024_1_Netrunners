@@ -3,7 +3,7 @@ import { fetchRequest, IP } from "./fetch.js";
 /**
  * проверка валидности сессии
  * @function
- * @return {Promise}
+ * @return {boolean}
  */
 export async function check() {
   try {

@@ -90,8 +90,8 @@ export async function renderMenu() {
 
     if (target.tagName.toLowerCase() === "a") {
       e.preventDefault();
-      // changeActiveButton(target.href.replace("http://94.139.247.246:8080", ""));
-      changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
+      changeActiveButton(target.href.replace("https://netrunnerflix.ru", ""));
+      // changeActiveButton(target.href.replace("http://127.0.0.1:8080", ""));
     }
   });
 }
