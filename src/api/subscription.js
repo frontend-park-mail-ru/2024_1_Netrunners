@@ -33,7 +33,7 @@ export async function buySubscription(uuid, body) {
  */
 export async function getSubscriptions() {
   try {
-    const url = IP + "/";
+    const url = IP + "/subscriptions/get";
     const response = await fetchRequest(url, "POST");
     const responseData = await response.json();
     if (!responseData || typeof responseData !== "object") {
