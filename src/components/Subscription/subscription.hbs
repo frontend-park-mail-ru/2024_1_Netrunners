@@ -3,15 +3,14 @@
   <div class="subscriptions__cards">
     <div class="subscriptions__card">
       <div class="subscriptions__top">
-        <p class="subscriptions__name">Ежемесячный платеж</p>
+        <p class="subscriptions__name">{{ monthlySubscription.title }}</p>
         <p class="subscriptions__features">
-          Наслаждайтесь обширной библиотекой фильмов и сериалов с разнообразным
-          контентом.
+          {{ monthlySubscription.description }}
         </p>
       </div>
       <div class="subscriptions__bottom">
         <div class="subscriptions__plan">
-          <p class="subscriptions__price">299₽</p>
+          <p class="subscriptions__price">{{ monthlySubscription.price }}₽</p>
           <p class="subscriptions__month">/месяц</p>
         </div>
         <div class="subscriptions__button" id="monthly">Выбрать план</div>
@@ -19,15 +18,14 @@
     </div>
     <div class="subscriptions__card">
       <div class="subscriptions__top">
-        <p class="subscriptions__name">Ежегодный платеж</p>
+        <p class="subscriptions__name">{{ yearlySubscription.title }}</p>
         <p class="subscriptions__features">
-          Покупка на 12 месяцев без продления. Выгоднее на 30%: 208₽ в месяц
-          вместо 299₽ в месяц за ежемесячную подписку
+          {{ yearlySubscription.description }}
         </p>
       </div>
       <div class="subscriptions__bottom">
         <div class="subscriptions__plan">
-          <p class="subscriptions__price">2490₽</p>
+          <p class="subscriptions__price">{{ yearlySubscription.price }}₽</p>
           <p class="subscriptions__month">/год</p>
         </div>
         <div class="subscriptions__button" id="yearly">Выбрать план</div>

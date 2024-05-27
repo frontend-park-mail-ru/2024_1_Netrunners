@@ -121,14 +121,14 @@
     </button>
   </div>
   <div class="films-section__upper-block">
-    <div class="films-section__title">Новые релизы</div>
+    <div class="films-section__title">Фильмы по подписке</div>
   </div>
   <div class="films-section__films-container">
     <button class="films-section__carousel-button prev" id="left">
       <img src="/icons/arrow.svg" alt="" />
     </button>
     <ul class="films-section__carousel">
-      {{#each filmData}}
+      {{#each subscriptionFilms}}
       {{#unless this.isSerial}}
       <li class="films-section__carousel-card">
         <div

@@ -14,7 +14,7 @@ import {
 export async function getCommentData(uuid) {
   try {
     store.dispatch(CommentRequest());
-    // const response = await fetchRequest(`${IP}/api/${uuid}/comments`, "GET");
+    // const response = await fetchRequest(`${IP}/${uuid}/comments`, "GET");
     const data = {
       status: 200,
       comments: [

@@ -8,7 +8,7 @@ import { toFilmDataWithDuration } from "../utils/transformers/filmDataWithDurati
  */
 export async function getAll() {
   try {
-    const url = IP + "/api/films/all";
+    const url = IP + "/films/all";
     const response = await fetchRequest(url, "GET");
 
     const filmsData = await response.json();
@@ -30,7 +30,29 @@ export async function getAll() {
  */
 export async function getTopFour() {
   try {
-    const url = IP + "/api/films/top";
+    const url = IP + "/films/top";
+    const response = await fetchRequest(url, "GET");
+
+    const filmsData = await response.json();
+    if (!filmsData || !filmsData.films || !Array.isArray(filmsData.films)) {
+      throw new Error("Ошибка: ответ не содержит массив фильмов");
+    }
+
+    return toFilmDataWithDuration(filmsData.films);
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
+}
+
+/**
+ * Получает информацию о четырех лучших фильмах.
+ * @async
+ * @return {Promise<Array<Object>>} Промис, который разрешается массивом объектов с данными о фильмах.
+ * @throws {Error} Если происходит ошибка при получении данных.
+ */
+export async function getFilmsWithSubscription() {
+  try {
+    const url = IP + "/films/all_sub";
     const response = await fetchRequest(url, "GET");
 
     const filmsData = await response.json();
@@ -52,7 +74,7 @@ export async function getTopFour() {
  */
 export async function getGenres() {
   try {
-    const url = IP + "/api/films/genres/preview";
+    const url = IP + "/films/genres/preview";
     const response = await fetchRequest(url, "GET");
 
     const genresData = await response.json();
@@ -74,7 +96,7 @@ export async function getGenres() {
  */
 export async function getFilmsOfGenre(genreUuid) {
   try {
-    const url = IP + `/api/films/genres/${genreUuid}/all`;
+    const url = IP + `/films/genres/${genreUuid}/all`;
     const response = await fetchRequest(url, "GET");
 
     const filmsData = await response.json();
