@@ -34,7 +34,7 @@ export async function buySubscription(uuid, body) {
 export async function getSubscriptions() {
   try {
     const url = IP + "/subscriptions/get";
-    const response = await fetchRequest(url, "POST");
+    const response = await fetchRequest(url, "GET");
     const responseData = await response.json();
     if (!responseData || typeof responseData !== "object") {
       throw new Error("Ошибка: полученные данные не являются объектом");
