@@ -11,7 +11,7 @@ export async function buySubscription(uuid, body) {
   try {
     const response = await fetchRequest(
       `${IP}/profile/${uuid}/subscriptions/pay`,
-      "GET",
+      "POST",
       body,
     );
     const data = await response.json();
@@ -20,7 +20,7 @@ export async function buySubscription(uuid, body) {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
 
-    return data.confirmation.confirmation_url;
+    return data.link;
   } catch (error) {
     console.error("Произошла ошибка: ", error.message);
   }
@@ -33,14 +33,14 @@ export async function buySubscription(uuid, body) {
  */
 export async function getSubscriptions() {
   try {
-    const url = IP + "/";
-    const response = await fetchRequest(url, "POST");
+    const url = IP + "/subscriptions/get";
+    const response = await fetchRequest(url, "GET");
     const responseData = await response.json();
     if (!responseData || typeof responseData !== "object") {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
 
-    return responseData.subscriptions;
+    return responseData.subsctiptions;
   } catch (error) {
     console.error("Произошла ошибка в logout:", error.message);
   }
