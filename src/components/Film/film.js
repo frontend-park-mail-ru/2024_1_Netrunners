@@ -13,7 +13,8 @@ import {
 import { IN_FAVOUTITES, NOT_IN_FAVOUTITES } from "../../img/imgConstants.js";
 import { renderSeriesBlock } from "../components/episodesBlock/seriesBlock";
 import * as authApi from "../../api/auth";
-import {renderCommentsBlock} from "../components/commentsBlock/commentsBlock";
+import { renderCommentsBlock } from "../components/commentsBlock/commentsBlock";
+import * as profileApi from "../../api/profile.js";
 
 /**
  * Отображает страницу фильма с указанным идентификатором.
@@ -96,7 +97,11 @@ export async function renderFilmPage(filmId) {
   if (!filmData.isSerial) {
     playerButton.addEventListener("click", async (e) => {
       const isAuthorized = await authApi.check();
-      if (isAuthorized) {
+      const isSubscribed = profileApi.isSubscribed;
+
+      if (filmData.withSubscription && !isSubscribed) {
+        Router.goToSubcriptionPage();
+      } else if (isAuthorized) {
         e.preventDefault();
         Router.goToPlayerPage(filmId, filmData.title, filmData.link);
       } else {

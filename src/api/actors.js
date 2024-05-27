@@ -8,10 +8,7 @@ import { fetchRequest, IP } from "./fetch.js";
  */
 export async function getActorData(actorId) {
   try {
-    const response = await fetchRequest(
-      `${IP}/api/actors/${actorId}/data`,
-      "GET",
-    );
+    const response = await fetchRequest(`${IP}/actors/${actorId}/data`, "GET");
     const data = await response.json();
 
     if (!data || typeof data !== "object") {

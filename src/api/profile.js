@@ -16,10 +16,7 @@ export const CHANGE_AVATAR_ACTION = "chAvatar";
  */
 export async function getProfileData(uuid) {
   try {
-    const response = await fetchRequest(
-      `${IP}/api/profile/${uuid}/data`,
-      "GET",
-    );
+    const response = await fetchRequest(`${IP}/profile/${uuid}/data`, "GET");
     const data = await response.json();
 
     if (!data || typeof data !== "object") {
@@ -33,6 +30,26 @@ export async function getProfileData(uuid) {
 }
 
 /**
+ * проверка валидности сессии
+ * @function
+ * @param {string} uuid - Идентификатор пользователя.
+ * @return {boolean}
+ */
+export async function isSubscribed(uuid) {
+  try {
+    const response = await fetchRequest(
+      IP + `/profile/${uuid}/subscription/check`,
+      "POST",
+    );
+    const responseData = await response.json();
+
+    return responseData.status === 200 || responseData.status === 400;
+  } catch (error) {
+    console.error("Произошла ошибка в check:", error.message);
+  }
+}
+
+/**
  * Отправляет запрос на изменение профиля пользователя.
  * @param {string} uuid - Идентификатор пользователя.
  * @param {object} editData - Данные для изменения профиля.
@@ -41,7 +58,7 @@ export async function getProfileData(uuid) {
 export async function editProfile(uuid, editData) {
   try {
     const response = await fetchRequest(
-      `${IP}/api/profile/${uuid}/edit`,
+      `${IP}/profile/${uuid}/edit`,
       "POST",
       editData,
       {},
@@ -62,10 +79,7 @@ export async function editProfile(uuid, editData) {
  */
 export async function getProfilePreview(uuid) {
   try {
-    const response = await fetchRequest(
-      `${IP}/api/profile/${uuid}/preview`,
-      "GET",
-    );
+    const response = await fetchRequest(`${IP}/profile/${uuid}/preview`, "GET");
     const data = await response.json();
     data.user.Avatar = `data:image/png;base64,${data.user.Avatar}`;
     if (!data || typeof data !== "object") {
@@ -86,7 +100,7 @@ export async function getProfilePreview(uuid) {
 export async function addToFavorite(requestData) {
   try {
     const response = await fetchRequest(
-      `${IP}/api/films/put_favorite`,
+      `${IP}/films/put_favorite`,
       "POST",
       requestData,
     );
@@ -105,7 +119,7 @@ export async function addToFavorite(requestData) {
 export async function removeFromFavorite(requestData) {
   try {
     const response = await fetchRequest(
-      `${IP}/api/films/remove_favorite`,
+      `${IP}/films/remove_favorite`,
       "POST",
       requestData,
     );
@@ -125,7 +139,7 @@ export async function removeFromFavorite(requestData) {
  */
 export async function getFavouritesFilms(uuid) {
   try {
-    const url = IP + `/api/films/${uuid}/all_favorite`;
+    const url = IP + `/films/${uuid}/all_favorite`;
     const response = await fetchRequest(url, "GET");
 
     const filmsData = await response.json();

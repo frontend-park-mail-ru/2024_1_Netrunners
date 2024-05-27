@@ -9,6 +9,7 @@ import { renderLogout } from "../components/Logout/logout.js";
 import { renderGenrePage } from "../components/Genre/genre.js";
 import { changeActiveButton, getCookie } from "../index.js";
 import { renderSearchPage } from "../components/SearchPage/searchPage.js";
+import { renderSubscriptionPage } from "../components/Subscription/subscription.js";
 
 /**
  * Класс для управления навигацией и отображением различных страниц.
@@ -24,6 +25,7 @@ export class Router {
       "/login": renderLogin,
       "/logout": renderLogout,
       "/search": renderSearchPage,
+      "/subscription": renderSubscriptionPage,
     };
   }
 
@@ -179,6 +181,18 @@ export class Router {
     document.title = state.title;
     window.history.pushState(state, state.title, state.path);
     renderSearchPage();
+  }
+
+  /**
+   * Переход на страницу подписок.
+   */
+  goToSubcriptionPage() {
+    const state = {};
+    state.path = "/subscription";
+    state.title = "Подписки";
+    document.title = state.title;
+    window.history.pushState(state, state.title, state.path);
+    renderSubscriptionPage();
   }
 
   /**

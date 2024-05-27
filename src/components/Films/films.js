@@ -16,9 +16,10 @@ import { addSliderHandler } from "../../utils/slider.js";
  */
 export async function renderFilms() {
   try {
-    const [topFourFilms, filmsGenres] = await Promise.all([
+    const [topFourFilms, filmsGenres, subscriptionFilms] = await Promise.all([
       filmsApi.getTopFour(),
       filmsApi.getGenres(),
+      filmsApi.getFilmsWithSubscription(),
     ]);
     store.clearSubscribes();
 
@@ -34,6 +35,7 @@ export async function renderFilms() {
       filmData,
       topFourFilms,
       filmsGenres,
+      subscriptionFilms,
     });
     renderSlider();
 

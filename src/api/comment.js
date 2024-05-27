@@ -7,7 +7,7 @@ import { fetchRequest, IP } from "./fetch.js";
  */
 export async function sendComment(data) {
   try {
-    const url = IP + "/api/films/comments/add";
+    const url = IP + "/films/comments/add";
     const response = await fetchRequest(url, "POST", data);
     const responseData = await response.json();
 
@@ -24,10 +24,7 @@ export async function sendComment(data) {
  */
 export async function getCommentData(uuid) {
   try {
-    const response = await fetchRequest(
-      `${IP}/api/films/${uuid}/comments`,
-      "GET",
-    );
+    const response = await fetchRequest(`${IP}/films/${uuid}/comments`, "GET");
     const data = await response.json();
     console.log(data);
     if (!data.comments || !Array.isArray(data.comments)) {
@@ -46,7 +43,7 @@ export async function getCommentData(uuid) {
  */
 export async function deleteComment(requestData) {
   try {
-    const url = IP + "/api/films/comments/remove";
+    const url = IP + "/films/comments/remove";
     const response = await fetchRequest(url, "POST", requestData);
     const responseData = await response.json();
 

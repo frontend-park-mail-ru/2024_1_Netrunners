@@ -13,7 +13,7 @@ const menuRoutes = {
   login: Router.goToLoginPage,
   signup: Router.goToSignupPage,
   logout: Router.goToLogout,
-  subscription: Router.goToHomePage, // временно
+  subscription: Router.goToSubcriptionPage,
 };
 
 /**

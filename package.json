@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "eslint": "npx eslint src --fix",
+    "linters": "npm run eslint && npm run prettier",
+    "eslint": "npx eslint src --fix --config .eslintrc.json",
     "prettier": "npx prettier . --write",
     "build": "npx webpack --mode production",
     "dev": "webpack-dev-server --mode development"
@@ -38,7 +39,8 @@
     "prettier": "^3.2.5",
     "sass": "^1.75.0",
     "sass-loader": "^14.2.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",

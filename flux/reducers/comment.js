@@ -1,4 +1,8 @@
-import { COMMENT_ERROR, COMMENT_REQUEST, COMMENT_SUCCESS } from "../actions/comment.js";
+import {
+  COMMENT_ERROR,
+  COMMENT_REQUEST,
+  COMMENT_SUCCESS,
+} from "../actions/comment.js";
 
 const initialState = {
   commentRequest: false,

@@ -46,7 +46,7 @@ export async function renderSearchPage() {
     const dropdownIndex = SEARCH_TYPE_OPTION.indexOf(dropdownElements[0].value);
     renderSearchResult(searchResultBlock, {
       page: 1,
-      string: searchInputField.value,
+      string: searchInputField.value.toLowerCase(),
       findBy: SEARCH_TYPE_OPTION_VALUE[dropdownIndex],
     });
   });
@@ -63,7 +63,7 @@ export async function renderSearchPage() {
       const dropdownIndex = SEARCH_TYPE_OPTION.indexOf(element.value);
       renderSearchResult(searchResultBlock, {
         page: 1,
-        string: searchInputField.value,
+        string: searchInputField.value.toLowerCase(),
         findBy: SEARCH_TYPE_OPTION_VALUE[dropdownIndex],
       });
     });
