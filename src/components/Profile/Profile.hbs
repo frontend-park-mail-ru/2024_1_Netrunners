@@ -16,6 +16,9 @@
         <li class="profile-info__information">
           Дата регистрации: {{ registeredAt }}
         </li>
+        <li class="profile-info__information">
+          Подписка: {{#if hasSubscription }} Активна {{else}} Не активна {{/if}}
+        </li>
       </ul>
     </div>
   </div>
