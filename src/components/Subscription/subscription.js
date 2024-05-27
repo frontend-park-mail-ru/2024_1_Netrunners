@@ -2,6 +2,7 @@ import template from "./subscription.hbs";
 import { buyMonthlySubscription } from "../../api/subscription.js";
 import * as authApi from "../../api/auth.js";
 import { showNotification } from "../Notification/notification.js";
+import { getCookie } from "../../index.js";
 
 /**
  * Отображает страницу подписок.
@@ -14,18 +15,19 @@ export function renderSubscriptionPage() {
   const yearlyButton = document.querySelector("#yearly");
 
   monthlyButton.addEventListener("click", async () => {
-    console.log("месяц");
-    const isAuthorized = await authApi.check();
-    if (isAuthorized) {
-      await buyMonthlySubscription();
-    } else {
+    const isAuthorized = authApi.check();
+    if (!isAuthorized) {
       showNotification("Для этого нужно быть авторизованным", "danger");
+    } else {
+      window.location.href = await buyMonthlySubscription(
+        getCookie("user_uuid"),
+      );
     }
   });
 
   yearlyButton.addEventListener("click", async () => {
     console.log("год");
-    const isAuthorized = await authApi.check();
+    const isAuthorized = authApi.check();
     if (isAuthorized) {
       // TODO оплата ежегодной подписки
     } else {

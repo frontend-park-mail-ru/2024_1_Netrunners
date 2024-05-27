@@ -91,7 +91,8 @@ export async function renderFilmPage(filmId) {
   const playerButton = document.querySelector(".accent-button");
   if (!filmData.isSerial) {
     playerButton.addEventListener("click", async (e) => {
-      const isAuthorized = await authApi.check();
+      const isAuthorized = authApi.check();
+      // if (filmData.withSubscription && authApi.isSubscribed) {}
       if (isAuthorized) {
         e.preventDefault();
         Router.goToPlayerPage(filmId, filmData.title, filmData.link);
@@ -106,7 +107,7 @@ export async function renderFilmPage(filmId) {
   renderSeriesBlock(seriesBlockParent, filmData.seasons, filmId);
 
   playerButton.addEventListener("click", async (e) => {
-    const isAuthorized = await authApi.check();
+    const isAuthorized = authApi.check();
     if (isAuthorized) {
       e.preventDefault();
       Router.goToPlayerPage(

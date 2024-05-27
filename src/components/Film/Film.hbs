@@ -9,7 +9,11 @@
       <a> {{ data }} </a>
     </div>
     <div class="film-page-poster-block__poster-actions">
+      {{#if withSubscription}}
+      <div class="accent-button with-subscription">Оформить подписку</div>
+      {{else}}
       <div class="accent-button">Смотреть</div>
+      {{/if}}
       <div class="film-page-poster-block__buttons" id="favourites-button">
         {{#if inFavorites}}
         <img src="/icons/full-heart.svg" />

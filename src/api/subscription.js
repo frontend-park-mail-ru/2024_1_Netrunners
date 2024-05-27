@@ -1,49 +1,25 @@
-import { v4 as uuidv4 } from "uuid";
-import { fetchRequest } from "./fetch";
-
-const AUTH =
-  "Basic MzkzMDYzOnRlc3RfcWFHOGJfZm1KTURIUC1IdGRxN2Ffa0N3aG5BS1RFTTlaV0FPQTBPZ0RKMA==";
-const RETURN_URL = "https://netrunnerflix.ru/profile";
-// const RETURN_URL = "http://127.0.0.1:8080/profile";
+import { fetchRequest, IP } from "./fetch";
 
 /**
  * Запрос на покупку ежемесячной подписки
  * @function
  * @return {Object} - Объект запроса
+ * @param {string} uuid - uuid профиля
  */
-export async function buyMonthlySubscription() {
+export async function buyMonthlySubscription(uuid) {
   try {
-    const url = "https://api.yookassa.ru/v3/payments";
-
-    const requestBody = {
-      amount: {
-        value: "299.00",
-        currency: "RUB",
-      },
-      capture: true,
-      confirmation: {
-        type: "redirect",
-        return_url: RETURN_URL,
-      },
-      description: "Ежемесячная подписка на фильмы и сериалы",
-    };
-
-    const requestHeaders = {
-      Authorization: AUTH,
-      "Idempotence-Key": uuidv4().toString(),
-      "Content-Type": "application/json",
-    };
     const response = await fetchRequest(
-      url,
-      "POST",
-      requestBody,
-      requestHeaders,
-      "application/json",
-      "no-cors",
+      `${IP}/profile/${uuid}/monthlySubscription`,
+      "GET",
     );
+    const data = await response.json();
 
-    return await response.json();
+    if (!data || typeof data !== "object") {
+      throw new Error("Ошибка: полученные данные не являются объектом");
+    }
+
+    return data.confirmation.confirmation_url;
   } catch (error) {
-    console.error("Произошла ошибка:", error.message);
+    console.error("Произошла ошибка: ", error.message);
   }
 }
