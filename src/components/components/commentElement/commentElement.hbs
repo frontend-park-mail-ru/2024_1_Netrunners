@@ -1,4 +1,10 @@
 <div class="comment-element">
-    <h2>{{login}}</h2>
-    <p>{{data}}</p>
+  <div class="comment-element__header">
+    <h2>{{ author }}</h2>
+    <div class="comment-element__rate">
+      <p>{{ score }}</p>
+      <span class="star active">&#9733;</span>
+    </div>
+  </div>
+  <div class="comment-element__text">{{ text }}</div>
 </div>

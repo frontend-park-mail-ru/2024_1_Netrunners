@@ -336,26 +336,112 @@
   }
 }
 
-.comments-block{
+.comments-block {
   color: var(--white);
-  border: 2px solid var(--neon-secondary);
+  padding: 32px;
+  border-radius: 16px;
   background-color: var(--hover-color);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
-.comment-element{
+.comment-element {
   background-color: var(--neutral-dark);
   border-radius: 16px;
+  padding: 24px;
+  margin: 16px;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    & > h2 {
+      margin-block-start: 0;
+    }
+  }
+  &__rate {
+    display: flex;
+    align-items: start;
+
+    & > .star {
+      cursor: default;
+    }
+    & > p {
+      margin-block-start: 0;
+      font-size: var(--header-300);
+    }
+  }
+  &__text {
+    font-size: clamp(14px, 4vw, var(--main-text));
+  }
+
+  & > span {
+    float: right;
+    color: var(--grey-secondary);
+    cursor: pointer;
+  }
 }
 
-.add-comment-form{
+.add-comment-form {
+  &__top-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+  }
 
+  &__rating-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__textarea {
+    width: 100%;
+    height: clamp(50px, 15vw, 120px);
+    border-radius: 8px;
+    resize: none;
+  }
 }
 
-.star{
+#rate-button {
+  margin: auto;
+}
+
+.star {
   font-size: var(--header-300);
   cursor: pointer;
-  &:hover, &.active{
-    color: var(--neon-main)
+  &:hover,
+  &.active {
+    color: var(--neon-main);
   }
+}
+
+#add-comment {
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+#return-button {
+  color: var(--white);
+  align-self: center;
+  border-radius: 8px;
+  padding: clamp(8px, 2vw, 16px);
+  display: block;
+  width: fit-content;
+  background-color: var(--neutral-main);
+  font-size: clamp(12px, 3vw, var(--main-text));
+  cursor: pointer;
+  &:hover {
+    background-color: var(--grey-main);
+  }
+}
+
+.accent-button__inactive {
+  cursor: none;
+  background-color: var(--neutral-main);
+  pointer-events: none;
 }

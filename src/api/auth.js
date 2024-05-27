@@ -7,7 +7,7 @@ import { fetchRequest, IP } from "./fetch.js";
  */
 export async function check() {
   try {
-    const response = await fetchRequest(IP + "/auth/check", "POST");
+    const response = await fetchRequest(IP + "/api/auth/check", "POST");
     const responseData = await response.json();
 
     return responseData.status === 200 || responseData.status === 400;
@@ -24,7 +24,7 @@ export async function check() {
  */
 export async function login(user) {
   try {
-    const url = IP + "/auth/login";
+    const url = IP + "/api/auth/login";
     const response = await fetchRequest(url, "POST", user);
     const responseData = await response.json();
 
@@ -42,7 +42,7 @@ export async function login(user) {
  */
 export async function signup(user) {
   try {
-    const url = IP + "/auth/signup";
+    const url = IP + "/api/auth/signup";
     const response = await fetchRequest(url, "POST", user);
     const responseData = await response.json();
 
@@ -59,7 +59,7 @@ export async function signup(user) {
  */
 export async function logout() {
   try {
-    const url = IP + "/auth/logout";
+    const url = IP + "/api/auth/logout";
     const response = await fetchRequest(url, "POST");
     const responseData = await response.json();
 
