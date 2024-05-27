@@ -11,7 +11,7 @@ import { timeConvert } from "../utils/timeConvert.js";
 export async function searchRequest(params) {
   try {
     const response = await fetchRequest(
-      `${IP}/films/find/long?p=${params.page}&s=${params.string}&fb=${params.findBy}`,
+      `${IP}/api/films/find/long?p=${params.page}&s=${params.string}&fb=${params.findBy}`,
       "GET",
     );
     const searchData = await response.json();

@@ -8,7 +8,6 @@ export const IP = "https://netrunnerflix.ru/api";
  * @param {Object} body - тело запроса (при наличии)
  * @param {Object} headers - Заголовки запроса (при наличии)
  * @param {string} contentType - Формат данных
- * @param {string} mode
  * @return {Promise} promise - Объект запроса
  */
 export const fetchRequest = async (
@@ -16,8 +15,7 @@ export const fetchRequest = async (
   method = "GET",
   body = null,
   headers = {},
-  contentType = null,
-  mode,
+  contentType,
 ) => {
   try {
     const options = {
@@ -25,7 +23,6 @@ export const fetchRequest = async (
       headers: {
         ...headers,
       },
-      mode: mode ? mode : "cors",
       credentials: "include",
     };
     if (body instanceof FormData || contentType === "multipart/form-data") {

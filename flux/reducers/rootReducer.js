@@ -4,6 +4,7 @@ import { filmsReducer } from "./filmsAll.js";
 import { filmReducer } from "./film.js";
 import { loginReducer } from "./auth.js";
 import { actorReducer } from "./actor.js";
+import { commentReducer } from "./comment.js";
 
 /**
  * Объединенный редюсер для управления состоянием всего приложения.
@@ -16,4 +17,5 @@ export const rootReducer = combineReducers({
   film: filmReducer,
   login: loginReducer,
   actor: actorReducer,
+  comment: commentReducer,
 });

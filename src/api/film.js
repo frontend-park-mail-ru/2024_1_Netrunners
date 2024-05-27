@@ -8,7 +8,10 @@ import { timeConvert } from "../utils/timeConvert.js";
  */
 export async function getFilmData(filmId) {
   try {
-    const response = await fetchRequest(`${IP}/films/${filmId}/data`, "GET");
+    const response = await fetchRequest(
+      `${IP}/api/films/${filmId}/data`,
+      "GET",
+    );
     const filmData = await response.json();
 
     if (!filmData || typeof filmData !== "object") {
@@ -31,7 +34,10 @@ export async function getFilmData(filmId) {
  */
 export async function getActors(filmId) {
   try {
-    const response = await fetchRequest(`${IP}/films/${filmId}/actors`, "GET");
+    const response = await fetchRequest(
+      `${IP}/api/films/${filmId}/actors`,
+      "GET",
+    );
     const filmActors = await response.json();
 
     if (!filmActors || typeof filmActors !== "object") {
