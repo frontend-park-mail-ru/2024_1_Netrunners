@@ -20,7 +20,7 @@ export async function buySubscription(uuid, body) {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
 
-    return data.confirmation.link;
+    return data.link;
   } catch (error) {
     console.error("Произошла ошибка: ", error.message);
   }
