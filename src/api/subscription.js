@@ -11,7 +11,7 @@ export async function buySubscription(uuid, body) {
   try {
     const response = await fetchRequest(
       `${IP}/profile/${uuid}/subscriptions/pay`,
-      "GET",
+      "POST",
       body,
     );
     const data = await response.json();
