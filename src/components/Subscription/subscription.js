@@ -14,23 +14,6 @@ export async function renderSubscriptionPage() {
   const monthlySubscription = subscriptionsData[0];
   const yearlySubscription = subscriptionsData[1];
 
-  // const monthlySubscription = {
-  //   uuid: 1,
-  //   title: "Ежемесячный платеж",
-  //   description:
-  //     "Наслаждайтесь обширной библиотекой фильмов и сериалов с разнообразным контентом.",
-  //   amount: 299,
-  //   duration: 0,
-  // };
-  //
-  // const yearlySubscription = {
-  //   uuid: 2,
-  //   title: "Ежегодный платеж",
-  //   description:
-  //     "Покупка на 12 месяцев без продления. Выгоднее на 30%: 208₽ в месяц вместо 299₽ в месяц за ежемесячную подписку",
-  //   amount: 2490,
-  //   duration: 0,
-  // };
   document.querySelector("main").innerHTML = template({
     monthlySubscription,
     yearlySubscription,

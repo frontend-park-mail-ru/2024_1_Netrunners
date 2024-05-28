@@ -34,8 +34,6 @@ button.custom-toast {
   font-size: 1rem;
   background-color: transparent;
   outline: none;
-  background: #3498db;
-  color: #fff;
 }
 
 button.custom-toast:hover {
@@ -52,9 +50,10 @@ button.danger-toast {
 
 .toast {
   position: fixed;
-  top: 25px;
-  right: 25px;
-  max-width: 300px;
+  top: clamp(8px, 1vw, 25px);
+  right: clamp(8px, 1vw, 25px);
+  height: clamp(28px, 8vw, 64px);
+  max-width: clamp(150px, 46vw, 300px);
   background: #fff;
   padding: 0.5rem;
   border-radius: 4px;
@@ -88,15 +87,18 @@ button.danger-toast {
 }
 
 .toast-icon {
-  padding: 0.35rem 0.5rem;
-  font-size: 1.5rem;
+  padding: 5.6px clamp(4px, 1vw, 8px);
+
+  & > img {
+    width: clamp(15px, 4vw, 24px);
+  }
 }
 
 .toast-message {
   flex: 1;
-  font-size: 0.9rem;
+  font-size: clamp(10px, 3vw, 14px);
   color: #000000;
-  padding: 0.5rem;
+  padding: clamp(2px, 1vw, 8px);
 }
 
 .toast.toast-success {
