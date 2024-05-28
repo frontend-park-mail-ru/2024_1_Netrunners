@@ -19,7 +19,7 @@ export async function renderSubscriptionPage() {
   //   title: "Ежемесячный платеж",
   //   description:
   //     "Наслаждайтесь обширной библиотекой фильмов и сериалов с разнообразным контентом.",
-  //   price: 299,
+  //   amount: 299,
   //   duration: 0,
   // };
   //
@@ -28,7 +28,7 @@ export async function renderSubscriptionPage() {
   //   title: "Ежегодный платеж",
   //   description:
   //     "Покупка на 12 месяцев без продления. Выгоднее на 30%: 208₽ в месяц вместо 299₽ в месяц за ежемесячную подписку",
-  //   price: 2490,
+  //   amount: 2490,
   //   duration: 0,
   // };
   document.querySelector("main").innerHTML = template({

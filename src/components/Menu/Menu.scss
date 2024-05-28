@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: clamp(8px, 1vw, 16px) clamp(10px, 1vw, 24px);
+  padding: clamp(8px, 1vw, 16px) clamp(9px, 1vw, 24px);
 
   &__menu {
     display: flex;
@@ -20,7 +20,7 @@
     color: var(--grey-secondary);
     display: block;
     text-decoration: none;
-    font-size: clamp(7px, 1.4vw, 15px);
+    font-size: clamp(9px, 1.4vw, 16px);
     padding: clamp(4px, 1.4vw, 16px);
 
     &.active {
@@ -89,7 +89,7 @@
   color: var(--grey-secondary);
   display: block;
   text-decoration: none;
-  font-size: clamp(7px, 1.4vw, 15px);
+  font-size: clamp(9px, 1.4vw, 16px);
   padding: clamp(4px, 1.4vw, 16px);
 
   &.active {
