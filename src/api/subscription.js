@@ -40,7 +40,7 @@ export async function getSubscriptions() {
       throw new Error("Ошибка: полученные данные не являются объектом");
     }
 
-    return responseData.subsctiptions;
+    return responseData.subscriptions;
   } catch (error) {
     console.error("Произошла ошибка в logout:", error.message);
   }

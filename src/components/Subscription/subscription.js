@@ -1,7 +1,7 @@
 import template from "./subscription.hbs";
 import { buySubscription } from "../../api/subscription.js";
 import * as authApi from "../../api/auth.js";
-import { showNotification } from "../Notification/notification.js";
+import {NOTIFICATION_TYPES, showNotification} from "../Notification/notification.js";
 import { getCookie } from "../../index.js";
 import * as subscriptionsApi from "../../api/subscription.js";
 
@@ -14,23 +14,6 @@ export async function renderSubscriptionPage() {
   const monthlySubscription = subscriptionsData[0];
   const yearlySubscription = subscriptionsData[1];
 
-  // const monthlySubscription = {
-  //   uuid: 1,
-  //   title: "Ежемесячный платеж",
-  //   description:
-  //     "Наслаждайтесь обширной библиотекой фильмов и сериалов с разнообразным контентом.",
-  //   price: 299,
-  //   duration: 0,
-  // };
-  //
-  // const yearlySubscription = {
-  //   uuid: 2,
-  //   title: "Ежегодный платеж",
-  //   description:
-  //     "Покупка на 12 месяцев без продления. Выгоднее на 30%: 208₽ в месяц вместо 299₽ в месяц за ежемесячную подписку",
-  //   price: 2490,
-  //   duration: 0,
-  // };
   document.querySelector("main").innerHTML = template({
     monthlySubscription,
     yearlySubscription,
@@ -42,7 +25,7 @@ export async function renderSubscriptionPage() {
   monthlyButton.addEventListener("click", async () => {
     const isAuthorized = await authApi.check();
     if (!isAuthorized) {
-      showNotification("Для этого нужно быть авторизованным", "danger");
+      showNotification({message: "Для этого нужно быть авторизованным",toastType: NOTIFICATION_TYPES.DANGER});
     } else {
       const monthlyBody = {
         subId: monthlySubscription.uuid,
@@ -56,7 +39,7 @@ export async function renderSubscriptionPage() {
   yearlyButton.addEventListener("click", async () => {
     const isAuthorized = await authApi.check();
     if (!isAuthorized) {
-      showNotification("Для этого нужно быть авторизованным", "danger");
+      showNotification({message: "Для этого нужно быть авторизованным",toastType: NOTIFICATION_TYPES.DANGER});
     } else {
       const yearlyBody = {
         subId: yearlySubscription.uuid,

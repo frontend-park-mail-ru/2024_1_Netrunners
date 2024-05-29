@@ -39,7 +39,7 @@ const config = {
   menu: {
     films: {
       href: "/",
-      text: "Фильмы и сериалы",
+      text: "Главная",
       render: renderFilms,
     },
     subscription: {

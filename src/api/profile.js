@@ -38,12 +38,12 @@ export async function getProfileData(uuid) {
 export async function isSubscribed(uuid) {
   try {
     const response = await fetchRequest(
-      IP + `/profile/${uuid}/subscription/check`,
+      IP + `/profile/${uuid}/subscriptions/check`,
       "POST",
     );
     const responseData = await response.json();
 
-    return responseData.status === 200 || responseData.status === 400;
+    return responseData.status === 200;
   } catch (error) {
     console.error("Произошла ошибка в check:", error.message);
   }
