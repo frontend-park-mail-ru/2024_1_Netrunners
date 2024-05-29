@@ -1,7 +1,7 @@
 import addCommentTemplate from "./commentsBlockTemplates/addCommentForm.hbs";
 import commentsListTemplate from "./commentsBlockTemplates/commentsList.hbs";
 import { renderCommentElement } from "../commentElement/commentElement";
-import { showNotification } from "../../Notification/notification.js";
+import {NOTIFICATION_TYPES, showNotification} from "../../Notification/notification.js";
 import {
   sendComment,
   getCommentData,
@@ -30,7 +30,7 @@ export async function renderCommentsBlock(parent, filmId) {
   if (!comments) {
     mainSection.insertAdjacentHTML("beforeend", "Отзывов еще нет");
   }
-  comments.forEach((comment) => {
+  comments?.forEach((comment) => {
     mainSection.insertAdjacentHTML("beforeend", renderCommentElement(comment));
     if (comment.authorUuid == uuid) {
       const deleteButton = document.createElement("span");
@@ -42,7 +42,7 @@ export async function renderCommentsBlock(parent, filmId) {
         e.preventDefault();
         deleteComment({ authorUuid: uuid, filmUuid: filmId });
         htmlComments[htmlComments.length - 1].style.opacity = "0.5";
-        showNotification("Отзыв успешно удален", "success");
+        showNotification({message: "Отзыв успешно удален", toastType: NOTIFICATION_TYPES.SUCCESS});
         setTimeout(async () => {
           renderCommentsBlock(parent, filmId);
         }, 50);
@@ -96,27 +96,26 @@ export async function renderCommentForm(parent, userUuid, filmId) {
       .querySelector(".add-comment-form__textarea")
       .value.replace(/[\r\n\s]+/g, " ");
     if (rateData === 0) {
-      showNotification("Оценка не может быть пустой", "danger");
+      showNotification({ message: "Оценка не может быть пустой", toastType: NOTIFICATION_TYPES.DANGER});
       return;
     }
 
-    if (userUuid === undefined) {
-      showNotification("Для этого нужно быть авторизованным", "danger");
+    if (userUuid === null) {
+      showNotification({message: "Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
       return;
     }
 
     if (commentData.length > 100) {
-      showNotification("Отзыв не должен превышать 100 символов", "danger");
+      showNotification({ message: "Отзыв не должен превышать 100 символов", toastType: NOTIFICATION_TYPES.DANGER});
       return;
     }
-    console.log(commentData);
     sendComment({
       authorUuid: userUuid,
       filmUuid: filmId,
       score: rateData,
       text: commentData,
     });
-    showNotification("Отзыв успешно добавлен", "success");
+    showNotification({message: "Отзыв успешно добавлен", toastType: NOTIFICATION_TYPES.SUCCESS});
     setTimeout(async () => {
       renderCommentsBlock(parent, filmId);
     }, 50);

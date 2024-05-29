@@ -26,10 +26,6 @@ export async function getCommentData(uuid) {
   try {
     const response = await fetchRequest(`${IP}/films/${uuid}/comments`, "GET");
     const data = await response.json();
-    console.log(data);
-    if (!data.comments || !Array.isArray(data.comments)) {
-      throw new Error("Ошибка: полученные данные не являются массивом");
-    }
     return data.comments;
   } catch (error) {
     console.error("Произошла ошибка: ", error.message);
