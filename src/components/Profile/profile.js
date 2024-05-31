@@ -7,7 +7,10 @@ import store, { menu } from "../../index.js";
 import { getProfileData } from "../../../use-cases/profile.js";
 import { PROFILE_REDUCER } from "../../../flux/actions/profile.js";
 import { addSliderHandler } from "../../utils/slider.js";
-import {NOTIFICATION_TYPES, showNotification} from "../Notification/notification.js";
+import {
+  NOTIFICATION_TYPES,
+  showNotification,
+} from "../Notification/notification.js";
 import { getFavouritesFilms } from "../../api/profile.js";
 
 /**
@@ -64,7 +67,10 @@ export async function renderEditForm(profileId) {
   usernameButton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (!validators.username(usernameInput.value)) {
-      showNotification({ message: "Имя пользователя слишком короткое", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Имя пользователя слишком короткое",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       return;
     }
 
@@ -81,9 +87,10 @@ export async function renderEditForm(profileId) {
     const file = e.target.files[0];
     if (!file.type.startsWith("image/") || file.type.startsWith("image/svg")) {
       showNotification({
-        message: "Неправильный формат файла. Пожалуйста, выберите изображение (например, JPEG или PNG).",
-        toastType: NOTIFICATION_TYPES.DANGER}
-      );
+        message:
+          "Неправильный формат файла. Пожалуйста, выберите изображение (например, JPEG или PNG).",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       avatarInput.value = "";
       return;
     }
@@ -104,7 +111,10 @@ export async function renderEditForm(profileId) {
     }
 
     if (await profileApi.editProfile(profileId, data)) {
-      showNotification({message: "Аватар пользователя обновлен", toastType: NOTIFICATION_TYPES.SUCCESS});
+      showNotification({
+        message: "Аватар пользователя обновлен",
+        toastType: NOTIFICATION_TYPES.SUCCESS,
+      });
       renderProfile(profileId);
       menu.renderAuth(true);
     }
@@ -113,12 +123,18 @@ export async function renderEditForm(profileId) {
   passwordButton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (!validators.password(passwordInput.value)) {
-      showNotification({message: "Пароль слишком короткий", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Пароль слишком короткий",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       return;
     }
 
     if (!validators.passwordConf(passwordInput.value, passConfInput.value)) {
-      showNotification({message: "Пароли не совпадают", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Пароли не совпадают",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       return;
     }
 

@@ -4,10 +4,14 @@ import Router from "../../utils/router.js";
 import store, { getCookie } from "../../index.js";
 import { getFilmData } from "../../../use-cases/film.js";
 import { FILM_REDUCER } from "../../../flux/actions/film.js";
-import {NOTIFICATION_TYPES, showNotification} from "../Notification/notification.js";
+import {
+  NOTIFICATION_TYPES,
+  showNotification,
+} from "../Notification/notification.js";
 import {
   addToFavorite,
-  getFavouritesFilms, isSubscribed,
+  getFavouritesFilms,
+  isSubscribed,
   removeFromFavorite,
 } from "../../api/profile.js";
 import { IN_FAVOUTITES, NOT_IN_FAVOUTITES } from "../../img/imgConstants.js";
@@ -46,7 +50,7 @@ export async function renderFilmPage(filmId) {
     }
   }
   const isUserSub = await isSubscribed(profileId);
-  if (isUserSub){
+  if (isUserSub) {
     filmData.withSubscription = false;
   }
   document.querySelector("main").innerHTML = template({
@@ -79,7 +83,10 @@ export async function renderFilmPage(filmId) {
         favouritesButton.innerHTML = IN_FAVOUTITES;
       }
     } else {
-      showNotification({message: "Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Для этого нужно быть авторизованным",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
     }
   });
 
@@ -109,7 +116,10 @@ export async function renderFilmPage(filmId) {
         e.preventDefault();
         Router.goToPlayerPage(filmId, filmData.title, filmData.link);
       } else {
-        showNotification({message:"Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+        showNotification({
+          message: "Для этого нужно быть авторизованным",
+          toastType: NOTIFICATION_TYPES.DANGER,
+        });
       }
     });
     return;
@@ -129,7 +139,10 @@ export async function renderFilmPage(filmId) {
         filmData.seasons[0]?.series,
       );
     } else {
-      showNotification({message: "Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Для этого нужно быть авторизованным",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
     }
   });
 }

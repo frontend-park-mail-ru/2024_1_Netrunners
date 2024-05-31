@@ -511,7 +511,11 @@
     bottom: clamp(32px, 7vw, 61px);
     left: clamp(12px, 3vw, 23px);
     height: 60%;
-    background-image: linear-gradient(to top, var(--neutral-light), transparent);
+    background-image: linear-gradient(
+      to top,
+      var(--neutral-light),
+      transparent
+    );
     border-radius: 8px;
   }
 }

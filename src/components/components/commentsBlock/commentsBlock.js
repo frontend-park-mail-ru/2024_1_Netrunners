@@ -1,7 +1,10 @@
 import addCommentTemplate from "./commentsBlockTemplates/addCommentForm.hbs";
 import commentsListTemplate from "./commentsBlockTemplates/commentsList.hbs";
 import { renderCommentElement } from "../commentElement/commentElement";
-import {NOTIFICATION_TYPES, showNotification} from "../../Notification/notification.js";
+import {
+  NOTIFICATION_TYPES,
+  showNotification,
+} from "../../Notification/notification.js";
 import {
   sendComment,
   getCommentData,
@@ -42,7 +45,10 @@ export async function renderCommentsBlock(parent, filmId) {
         e.preventDefault();
         deleteComment({ authorUuid: uuid, filmUuid: filmId });
         htmlComments[htmlComments.length - 1].style.opacity = "0.5";
-        showNotification({message: "Отзыв успешно удален", toastType: NOTIFICATION_TYPES.SUCCESS});
+        showNotification({
+          message: "Отзыв успешно удален",
+          toastType: NOTIFICATION_TYPES.SUCCESS,
+        });
         setTimeout(async () => {
           renderCommentsBlock(parent, filmId);
         }, 50);
@@ -88,6 +94,14 @@ export async function renderCommentForm(parent, userUuid, filmId) {
     renderCommentsBlock(parent, filmId);
   });
 
+  const commentTextarea = parent.querySelector(".add-comment-form__textarea");
+  commentTextarea.addEventListener("input", (e) => {
+    commentTextarea.value = commentTextarea.value.replace(
+      /[^a-zA-Z0-9 .,?!@#%&()-_=+;:'"]/g,
+      "",
+    );
+  });
+
   const submitButton = parent.querySelector(".accent-button");
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -96,17 +110,26 @@ export async function renderCommentForm(parent, userUuid, filmId) {
       .querySelector(".add-comment-form__textarea")
       .value.replace(/[\r\n\s]+/g, " ");
     if (rateData === 0) {
-      showNotification({ message: "Оценка не может быть пустой", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Оценка не может быть пустой",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       return;
     }
 
     if (userUuid === null) {
-      showNotification({message: "Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Для этого нужно быть авторизованным",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       return;
     }
 
     if (commentData.length > 100) {
-      showNotification({ message: "Отзыв не должен превышать 100 символов", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Отзыв не должен превышать 100 символов",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
       return;
     }
     sendComment({
@@ -115,7 +138,10 @@ export async function renderCommentForm(parent, userUuid, filmId) {
       score: rateData,
       text: commentData,
     });
-    showNotification({message: "Отзыв успешно добавлен", toastType: NOTIFICATION_TYPES.SUCCESS});
+    showNotification({
+      message: "Отзыв успешно добавлен",
+      toastType: NOTIFICATION_TYPES.SUCCESS,
+    });
     setTimeout(async () => {
       renderCommentsBlock(parent, filmId);
     }, 50);
