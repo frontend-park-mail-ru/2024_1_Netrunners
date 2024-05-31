@@ -494,8 +494,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: clamp(15px, 2vw, 16px);
-    padding-bottom: clamp(20px, 2vw, 16px);
+    padding-top: clamp(7px, 2vw, 16px);
+    padding-bottom: clamp(7px, 2vw, 16px);
   }
 
   &__name {
@@ -506,16 +506,12 @@
   }
 
   &__overlay {
-    width: clamp(89px, 28vw, 184px);
+    width: clamp(97px, 33vw, 184px);
     position: absolute;
-    bottom: clamp(31px, 9vw, 66px);
-    left: clamp(13px, 4vw, 23px);
+    bottom: clamp(32px, 7vw, 61px);
+    left: clamp(12px, 3vw, 23px);
     height: 60%;
-    background-image: linear-gradient(
-      to top,
-      var(--neutral-light),
-      transparent
-    );
+    background-image: linear-gradient(to top, var(--neutral-light), transparent);
     border-radius: 8px;
   }
 }
