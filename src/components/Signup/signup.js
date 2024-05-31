@@ -24,6 +24,14 @@ export async function renderSignup() {
     "form-section__error-signup",
   );
 
+  emailInput.addEventListener("input", (e) => {
+    emailInput.value = emailInput.value.replace(/[^a-zA-Z0-9@._-]/g, "");
+  });
+
+  usernameInput.addEventListener("input", (e) => {
+    usernameInput.value = usernameInput.value.replace(/[^a-zA-Z0-9]/g, "");
+  });
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const login = emailInput.value.trim();
@@ -40,7 +48,7 @@ export async function renderSignup() {
     }
 
     if (!validators.username(username)) {
-      errorFields[1].innerText = "Имя пользователя слишком короткое";
+      errorFields[1].innerText = "Имя пользователя слишком короткое ";
       return;
     } else {
       errorFields[1].innerText = "";

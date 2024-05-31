@@ -30,9 +30,12 @@ export async function renderFilms() {
       filmData = store.getState().films.films;
     });
     await FilmsAllRequest();
+    const recommendFilmData = [...filmData];
+    recommendFilmData.sort((a, b) => b.average_score - a.average_score);
 
     document.querySelector("main").innerHTML = template({
       filmData,
+      recommendFilmData,
       topFourFilms,
       filmsGenres,
       subscriptionFilms,

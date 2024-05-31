@@ -4,10 +4,14 @@ import Router from "../../utils/router.js";
 import store, { getCookie } from "../../index.js";
 import { getFilmData } from "../../../use-cases/film.js";
 import { FILM_REDUCER } from "../../../flux/actions/film.js";
-import {NOTIFICATION_TYPES, showNotification} from "../Notification/notification.js";
+import {
+  NOTIFICATION_TYPES,
+  showNotification,
+} from "../Notification/notification.js";
 import {
   addToFavorite,
-  getFavouritesFilms, isSubscribed,
+  getFavouritesFilms,
+  isSubscribed,
   removeFromFavorite,
 } from "../../api/profile.js";
 import { IN_FAVOUTITES, NOT_IN_FAVOUTITES } from "../../img/imgConstants.js";
@@ -22,8 +26,11 @@ import * as profileApi from "../../api/profile.js";
  * @return {void}
  */
 export async function renderFilmPage(filmId) {
-  const [filmActors] = await Promise.all([filmApi.getActors(filmId)]);
-
+  const profileId = getCookie("user_uuid");
+  const [filmActors, isUserSub] = await Promise.all([
+    filmApi.getActors(filmId),
+    isSubscribed(profileId),
+  ]);
   store.clearSubscribes();
   const actorSection = document.createElement("section");
   actorSection.classList.add("actor-section");
@@ -34,7 +41,6 @@ export async function renderFilmPage(filmId) {
   });
   await getFilmData(filmId);
   let inFavorites;
-  const profileId = getCookie("user_uuid");
   if (profileId !== undefined) {
     const filmsData = await getFavouritesFilms(profileId);
     if (filmsData) {
@@ -45,14 +51,13 @@ export async function renderFilmPage(filmId) {
       });
     }
   }
-  const isUserSub = await isSubscribed(profileId);
-  if (isUserSub){
-    filmData.withSubscription = false;
-  }
+
+  const showSubButton = filmData.withSubscription && !isUserSub;
   document.querySelector("main").innerHTML = template({
     ...filmData,
     filmActors,
     inFavorites,
+    showSubButton,
   });
 
   const actorCards = document.querySelectorAll("[data-actor-id]");
@@ -79,7 +84,10 @@ export async function renderFilmPage(filmId) {
         favouritesButton.innerHTML = IN_FAVOUTITES;
       }
     } else {
-      showNotification({message: "Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Для этого нужно быть авторизованным",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
     }
   });
 
@@ -97,11 +105,13 @@ export async function renderFilmPage(filmId) {
   const commentsBlock = document.querySelector(".comments-block");
   renderCommentsBlock(commentsBlock, filmId);
 
-  const playerButton = document.querySelector(".accent-button");
+  const playerButton = document.querySelector(
+    ".film-page-poster-block__button",
+  );
   if (!filmData.isSerial) {
     playerButton.addEventListener("click", async (e) => {
       const isAuthorized = await authApi.check();
-      const isSubscribed = profileApi.isSubscribed;
+      const isSubscribed = await profileApi.isSubscribed(profileId);
 
       if (filmData.withSubscription && !isSubscribed) {
         Router.goToSubcriptionPage();
@@ -109,7 +119,10 @@ export async function renderFilmPage(filmId) {
         e.preventDefault();
         Router.goToPlayerPage(filmId, filmData.title, filmData.link);
       } else {
-        showNotification({message:"Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+        showNotification({
+          message: "Для этого нужно быть авторизованным",
+          toastType: NOTIFICATION_TYPES.DANGER,
+        });
       }
     });
     return;
@@ -129,7 +142,10 @@ export async function renderFilmPage(filmId) {
         filmData.seasons[0]?.series,
       );
     } else {
-      showNotification({message: "Для этого нужно быть авторизованным", toastType: NOTIFICATION_TYPES.DANGER});
+      showNotification({
+        message: "Для этого нужно быть авторизованным",
+        toastType: NOTIFICATION_TYPES.DANGER,
+      });
     }
   });
 }
