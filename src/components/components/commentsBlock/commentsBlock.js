@@ -97,7 +97,7 @@ export async function renderCommentForm(parent, userUuid, filmId) {
   const commentTextarea = parent.querySelector(".add-comment-form__textarea");
   commentTextarea.addEventListener("input", (e) => {
     commentTextarea.value = commentTextarea.value.replace(
-      /[^a-zA-Z0-9 .,?!@#%&()-_=+;:'"]/g,
+      /[^a-zA-Zа-яА-Я0-9 .,?!@#%&()-_=+;:'"]/g,
       "",
     );
   });
