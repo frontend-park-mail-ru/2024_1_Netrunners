@@ -11,6 +11,21 @@
     position: relative;
   }
 
+  &__button {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    font-size: clamp(8px, 1.3vw, 15px);
+    height: clamp(25px, 4vw, 50px);
+    border-radius: clamp(4px, 1vw, 8px);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--neon-main);
+    cursor: pointer;
+  }
+
   &__poster-data {
     z-index: var(--first-layer);
     margin-top: calc(-16% + 2.5rem);
